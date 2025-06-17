@@ -2,7 +2,6 @@
 
 namespace App\Modules\Todoist\Clients;
 
-
 use Illuminate\Support\Facades\Http;
 
 class TodoistClient
@@ -15,7 +14,8 @@ class TodoistClient
 
     private string $taskId;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->token = config('services.todoist.token');
         $this->hostName = config('services.todoist.host_name');
         $this->commentsEndpoint = config('services.todoist.comments_endpoint');
@@ -26,8 +26,8 @@ class TodoistClient
     {
         Http::withToken($this->token)
             ->post($this->hostName.$this->commentsEndpoint, [
-                "content"=> "I am a comment",
-                "task_id"=> $this->taskId
+                "content" => "I am a comment",
+                "task_id" => $this->taskId
             ]);
     }
 }

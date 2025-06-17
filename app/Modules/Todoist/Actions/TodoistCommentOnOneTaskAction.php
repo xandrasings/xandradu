@@ -4,11 +4,12 @@ namespace App\Modules\Todoist\Actions;
 
 use App\Modules\Todoist\Clients\TodoistClient;
 
-class TodoistCommentOnOneTaskAction {
-
+class TodoistCommentOnOneTaskAction
+{
     protected TodoistClient $todoistClient;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->todoistClient = app(TodoistClient::class);
     }
 

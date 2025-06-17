@@ -12,7 +12,8 @@ class TodoistCommentOnOneTaskJob implements ShouldQueue
 
     protected TodoistCommentOnOneTaskAction $todoistCommentOnOneTaskAction;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->todoistCommentOnOneTaskAction = app(TodoistCommentOnOneTaskAction::class);
     }
 
