@@ -55,7 +55,7 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily', 'logtail'],
+            'channels' => ['daily', 'betterstack'],
             'ignore_exceptions' => false,
         ],
 
@@ -127,13 +127,13 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
-
-        'logtail'    => [
-            'driver'  => 'monolog',
-            'level'   => env('LOG_LEVEL', 'debug'),
+        'betterstack' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
             'handler' => LogtailHandler::class,
-            'with'    => [
-                'sourceToken' => env('LOGTAIL_SOURCE_TOKEN'),
+            'handler_with' => [
+                'sourceToken' => env('BETTER_STACK_SOURCE_TOKEN'),
+                'endpoint' => env('BETTER_STACK_SOURCE_ENDPOINT'),
             ],
         ],
 
