@@ -55,7 +55,7 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily', 'betterstack'],
+            'channels' => ['single', 'daily','betterstack'],
             'ignore_exceptions' => false,
         ],
 
@@ -138,5 +138,4 @@ return [
         ],
 
     ],
-
 ];
