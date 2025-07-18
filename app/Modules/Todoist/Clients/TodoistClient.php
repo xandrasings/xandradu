@@ -3,6 +3,7 @@
 namespace App\Modules\Todoist\Clients;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class TodoistClient
 {
@@ -24,6 +25,12 @@ class TodoistClient
 
     public function addCommentToTask(): void
     {
+        Log::debug("debug log");
+        Log::info("info log");
+        Log::notice("notice log");
+        Log::warning("warning log");
+        Log::error("error log");
+
         Http::withToken($this->token)
             ->post($this->hostName.$this->commentsEndpoint, [
                 "content" => "I am a comment",
