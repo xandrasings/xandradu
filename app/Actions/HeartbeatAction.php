@@ -2,12 +2,17 @@
 
 namespace App\Actions;
 
+use DateTimeImmutable;
 use Illuminate\Support\Facades\Log;
 
 class HeartbeatAction
 {
     public function handle(): void
     {
-        Log::notice("heartbeat!");
+        $datetime = new DateTimeImmutable();
+
+        $datetimeString =  $datetime->format('Y-m-d H:i:s');
+
+        Log::notice("heartbeat! Alive at $datetimeString");
     }
 }
