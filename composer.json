@@ -12,6 +12,7 @@
         "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "logtail/monolog-logtail": "^3.3",
         "symfony/http-foundation": "7.2.0",
         "symfony/http-kernel": "7.2.0"
     },
