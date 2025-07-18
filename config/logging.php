@@ -55,7 +55,7 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single', 'daily','betterstack'],
+            'channels' => ['daily','betterstack'],
             'ignore_exceptions' => false,
         ],
 
@@ -129,7 +129,7 @@ return [
         ],
         'betterstack' => [
             'driver' => 'monolog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => env('LOG_LEVEL', 'notice'),
             'handler' => LogtailHandler::class,
             'handler_with' => [
                 'sourceToken' => env('BETTER_STACK_SOURCE_TOKEN'),
