@@ -30,6 +30,7 @@ class TodoistClient
         Log::notice("notice log");
         Log::warning("warning log");
         Log::error("error log");
+        error_log("This is a runtime error log message");
 
         Http::withToken($this->token)
             ->post($this->hostName.$this->commentsEndpoint, [
