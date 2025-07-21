@@ -5,7 +5,7 @@ namespace App\Actions;
 use App\Models\Person;
 use Illuminate\Support\Facades\Log;
 
-class CreatePersonAction
+class PersonRegisterAction
 {
     public function handle(string $firstName, string $lastName): void
     {
