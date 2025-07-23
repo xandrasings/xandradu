@@ -20,9 +20,6 @@ class PersonRegisterCommand extends Command
         $this->personRegisterAction = app(PersonRegisterAction::class);
     }
 
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
         $firstName = $this->argument('firstName');
