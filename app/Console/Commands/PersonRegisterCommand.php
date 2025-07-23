@@ -10,15 +10,15 @@ class PersonRegisterCommand extends Command
 {
     protected PersonRegisterAction $personRegisterAction;
 
+    protected $signature = 'app:person-register {firstName} {lastName}';
+
+    protected $description = 'Register a person record if no such record exists';
+
     public function __construct()
     {
         parent::__construct();
         $this->personRegisterAction = app(PersonRegisterAction::class);
     }
-
-    protected $signature = 'app:person-register {firstName} {lastName}';
-
-    protected $description = 'Register a person record if no such record exists';
 
     /**
      * Execute the console command.
