@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Log;
 
 class PersonRegisterCommand extends Command
 {
-    protected PersonRegisterAction $personRegisterAction;
-
     protected $signature = 'app:person-register {firstName} {lastName}';
 
     protected $description = 'Register a person record if no such record exists';
+
+    protected PersonRegisterAction $personRegisterAction;
 
     public function __construct()
     {
