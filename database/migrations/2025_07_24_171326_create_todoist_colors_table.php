@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('todoist_colors', function (Blueprint $table) {
             $table->id();
+            $table->string('code',16);
             $table->string('name',16);
             $table->timestamps();
             $table->softDeletes();
