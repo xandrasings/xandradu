@@ -24,6 +24,6 @@ class TodoistUser extends Model
 
     public function todoistAccount(): HasOne
     {
-        return $this->hasOne(TodoistAccount::class);
+        return $this->hasOne(TodoistAccount::class, 'user_id');
     }
 }
