@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -22,8 +23,13 @@ class TodoistUser extends Model
         return $this->belongsTo(EmailAddress::class);
     }
 
-    public function todoistAccount(): HasOne
+    public function account(): HasOne
     {
         return $this->hasOne(TodoistAccount::class, 'user_id');
+    }
+
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(TodoistProject::class, 'todoist_project_user');
     }
 }

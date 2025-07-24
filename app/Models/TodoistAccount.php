@@ -16,7 +16,7 @@ class TodoistAccount extends Model
         'sync_token'
     ];
 
-    public function todoistUser(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(TodoistUser::class, 'user_id');
     }
