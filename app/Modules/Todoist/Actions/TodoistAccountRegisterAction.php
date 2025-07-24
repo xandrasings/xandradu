@@ -108,7 +108,7 @@ class TodoistAccountRegisterAction
 
         if(is_null($todoistAccount)) {
             $todoistAccount = TodoistAccount::create([
-                'todoist_user_id' => $todoistUser->id,
+                'user_id' => $todoistUser->id,
                 'access_token' => Crypt::encryptString($token),
                 'sync_token' => null,
             ]);
