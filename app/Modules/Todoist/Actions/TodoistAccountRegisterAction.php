@@ -40,8 +40,6 @@ class TodoistAccountRegisterAction
 
         $response = $this->todoistClient->getUser($token);
 
-        print_r($response);
-
         $email = data_get($response, 'email');
         $name = data_get($response, 'full_name');
         $externalId = data_get($response, 'id');
