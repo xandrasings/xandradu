@@ -37,9 +37,7 @@ return [
 
     'todoist' => [
         'host_name' => env('TODOIST_HOST_NAME'),
-        'comments_endpoint' => env('TODOIST_COMMENTS_ENDPOINT'),
-        'token' => env('TODOIST_TOKEN'),
-        'task_id' => env('TODOIST_TASK_ID')
+        'user_endpoint' => env('TODOIST_USER_ENDPOINT')
     ]
 
 ];

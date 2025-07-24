@@ -4,38 +4,37 @@ namespace App\Modules\Todoist\Clients;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class TodoistClient
 {
     private string $hostName;
 
-    private string $commentsEndpoint;
-
-    private string $token;
-
-    private string $taskId;
+    private string $userEndpoint;
 
     public function __construct()
     {
-        $this->token = config('services.todoist.token');
         $this->hostName = config('services.todoist.host_name');
-        $this->commentsEndpoint = config('services.todoist.comments_endpoint');
-        $this->taskId = config('services.todoist.task_id');
+        $this->userEndpoint = config('services.todoist.user_endpoint');
     }
 
-    public function addCommentToTask(): void
+    public function getUser(string $token): ?array
     {
-        Log::debug("debug log");
-        Log::info("info log");
-        Log::notice("notice log");
-        Log::warning("warning log");
-        Log::error("error log");
-        error_log("This is a runtime error log message");
+        $url = "$this->hostName$this->userEndpoint";
 
-        Http::withToken($this->token)
-            ->post($this->hostName.$this->commentsEndpoint, [
-                "content" => "I am a comment",
-                "task_id" => $this->taskId
-            ]);
+        try {
+            Log::notice("Calling todoist endpoint $url.");
+            $response = Http::withToken($token)
+                ->get($url);
+        } catch (Throwable $exception) {
+            Log::error("Call to todoist endpoint $url failed with exception {$exception->getMessage()}");
+            return null;
+        }
+
+        if ($response->failed()) {
+            Log::error("Call to todoist endpoint $url failed with response {$response->getStatusCode()}");
+        }
+
+        return $response->json();
     }
 }
