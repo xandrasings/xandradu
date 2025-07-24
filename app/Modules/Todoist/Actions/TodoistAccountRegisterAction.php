@@ -104,7 +104,7 @@ class TodoistAccountRegisterAction
             // TODO alert about matchiness
         }
 
-        $todoistAccount = $todoistUser->todoistAccount;
+        $todoistAccount = $todoistUser->account;
 
         if(is_null($todoistAccount)) {
             $todoistAccount = TodoistAccount::create([
