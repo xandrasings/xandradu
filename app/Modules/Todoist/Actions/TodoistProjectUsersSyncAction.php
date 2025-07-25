@@ -34,7 +34,7 @@ class TodoistProjectUsersSyncAction
         $shared = data_get($projectPayload, 'shared');
 
         if (! $this->validationUtility->containsNoNulls([$shared])) {
-            Log::error("TodoistProjectUsersSyncAction couldn't proceed due to a missing non-nullable variable.");
+            Log::warning("TodoistProjectUsersSyncAction couldn't proceed due to a missing non-nullable variable.");
             return false;
         }
 
@@ -83,7 +83,7 @@ class TodoistProjectUsersSyncAction
             $name = data_get($projectUserPayload, 'name');
 
             if (! $this->validationUtility->containsNoNulls([$id, $emailAddress, $name])) {
-                Log::error("TodoistProjectUsersSyncAction couldn't proceed due to a missing non-nullable variable.");
+                Log::warning("TodoistProjectUsersSyncAction couldn't proceed due to a missing non-nullable variable.");
                 return false;
             }
 

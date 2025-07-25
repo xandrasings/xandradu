@@ -17,7 +17,7 @@ class TodoistProjectUserAssociateAction
                 $user->projects()->attach($project->id);
             }
         } catch (Throwable $exception) {
-            Log::error("TodoistProjectUserAssociateAction failed with exception {$exception->getMessage()}");
+            Log::warning("TodoistProjectUserAssociateAction failed with exception {$exception->getMessage()}");
             return false;
         }
         return true;
