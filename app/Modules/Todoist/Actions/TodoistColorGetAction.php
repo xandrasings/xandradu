@@ -21,8 +21,8 @@ class TodoistColorGetAction
         }
 
         if ($todoistColors->isEmpty()) {
-            Log::notice("TodoistColorGetAction creating TodoistColor $color $name");
             try {
+                Log::notice("TodoistColorGetAction creating TodoistColor $color $name");
                 return TodoistColor::create([
                     'code' => $color,
                     'name' => $name
