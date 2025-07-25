@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Modules\Todoist\Actions;
+
+use App\Models\TodoistColor;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Throwable;
+
+class TodoistColorGetAction
+{
+    public function handle(string $color): ?TodoistColor
+    {
+        $name = Str::apa(str_replace('_', ' ', $color));
+
+        $todoistColors = TodoistColor::where(['code' => $color])->get();
+
+        if (count($todoistColors) > 1) {
+            Log::warning("Found too many TodoistColor records matching code $todoistColors.");
+            return null;
+        }
+
+        if ($todoistColors->isEmpty()) {
+            Log::notice("Creating TodoistColor $color $name");
+            try {
+                return TodoistColor::create([
+                    'code' => $color,
+                    'name' => $name
+                ]);
+            } catch (Throwable $exception) {
+                Log::error("TodoistColorGetAction failed with exception {$exception->getMessage()}");
+                return null;
+            }
+        } else {
+            $todoistColor = $todoistColors->first();
+
+            if ($todoistColor->name === $name) {
+                Log::warning("TodoistColor name $todoistColor->name does not match value $name");
+            }
+
+            return $todoistColor;
+        }
+    }
+}
