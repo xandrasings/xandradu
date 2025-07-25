@@ -14,7 +14,7 @@ class TodoistProjectCreateAction
 
     protected TodoistTaskLocationCreateAction $taskLocationCreateAction;
 
-    protected TodoistProjectSelectAction $projectGetAction;
+    protected TodoistProjectSelectAction $projectSelectAction;
 
     protected TodoistColorGetAction $colorGetAction;
 
@@ -24,7 +24,7 @@ class TodoistProjectCreateAction
     {
         $this->validationUtility = new ValidationUtility();
         $this->taskLocationCreateAction = new TodoistTaskLocationCreateAction();
-        $this->projectGetAction = new TodoistProjectSelectAction();
+        $this->projectSelectAction = new TodoistProjectSelectAction();
         $this->colorGetAction = new TodoistColorGetAction();
         $this->projectUsersSyncAction = new TodoistProjectUsersSyncAction();
     }
@@ -33,30 +33,27 @@ class TodoistProjectCreateAction
     {
         $childOrder = data_get($projectPayload, 'child_order');
         $color = data_get($projectPayload, 'color');
-        $isArchived = data_get($projectPayload, 'is_archived');
-        $isDeleted = data_get($projectPayload, 'is_deleted');
         $isFavorite = data_get($projectPayload, 'is_favorite');
         $name = data_get($projectPayload, 'name');
-        $shared = data_get($projectPayload, 'shared');
         $id = data_get($projectPayload, 'v2_id');
         $parentId = data_get($projectPayload, 'v2_parent_id');
 
-        if (! $this->validationUtility->containsNoNulls([$childOrder, $color, $isArchived, $isDeleted, $isFavorite, $name, $shared, $id])) {
-            Log::error("TodoistProjectCreateAction couldn't proceed due to a missing non-nullable variable.");
+        if (! $this->validationUtility->containsNoNulls([$childOrder, $color, $isFavorite, $name, $id])) {
+            Log::warning("TodoistProjectCreateAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         $todoistColor = $this->colorGetAction->handle($color);
 
         if (is_null($todoistColor)) {
-            Log::error("TodoistProjectCreateAction couldn't proceed due to color not being successfully created.");
+            Log::warning("TodoistProjectCreateAction couldn't proceed due to color not being successfully created.");
             return null;
         }
 
         $taskLocation = $this->taskLocationCreateAction->handle();
 
         if (is_null($taskLocation)) {
-            Log::error("TodoistProjectCreateAction couldn't proceed due to task location not being successfully created.");
+            Log::warning("TodoistProjectCreateAction couldn't proceed due to task location not being successfully created.");
             return null;
         }
 
@@ -78,7 +75,8 @@ class TodoistProjectCreateAction
             return null;
         }
 
-        if (!$this->projectUsersSyncAction->handle($account, $project, $projectPayload)) {
+        $result = $this->projectUsersSyncAction->handle($account, $project, $projectPayload);
+        if (!$result) {
             Log::warning("TodoistProjectCreateAction couldn't proceed due unsuccessful assignment of users to project.");
             return null;
         }
@@ -86,13 +84,13 @@ class TodoistProjectCreateAction
         return $project;
     }
 
-    private function getParentProjectId(mixed $parentId): ?int
+    private function getParentProjectId(?string $parentId): ?int
     {
         if (is_null($parentId)) {
             return null;
         }
 
-        $parentProject = $this->projectGetAction->handle($parentId);
+        $parentProject = $this->projectSelectAction->handle($parentId);
 
         if (is_null($parentProject)) {
             Log::warning("TodoistProjectCreateAction was not able to identify the parent project from its id $parentId.");
@@ -100,6 +98,5 @@ class TodoistProjectCreateAction
         }
 
         return $parentProject->id;
-
     }
 }
