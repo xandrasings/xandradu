@@ -34,7 +34,7 @@ class TodoistColorGetAction
         } else {
             $todoistColor = $todoistColors->first();
 
-            if ($todoistColor->name === $name) {
+            if ($todoistColor->name !== $name) {
                 Log::warning("TodoistColorGetAction found TodoistColor name $todoistColor->name does not match value $name");
             }
 
