@@ -16,7 +16,7 @@ class TodoistColorGetAction
         $todoistColors = TodoistColor::where(['code' => $color])->get();
 
         if (count($todoistColors) > 1) {
-            Log::warning("Found too many TodoistColor records matching code $todoistColors.");
+            Log::warning("TodoistColorGetAction failed, found too many TodoistColor records matching code $todoistColors.");
             return null;
         }
 
@@ -28,14 +28,14 @@ class TodoistColorGetAction
                     'name' => $name
                 ]);
             } catch (Throwable $exception) {
-                Log::error("TodoistColorGetAction failed with exception {$exception->getMessage()}");
+                Log::warning("TodoistColorGetAction failed with exception {$exception->getMessage()}");
                 return null;
             }
         } else {
             $todoistColor = $todoistColors->first();
 
             if ($todoistColor->name === $name) {
-                Log::warning("TodoistColor name $todoistColor->name does not match value $name");
+                Log::warning("TodoistColorGetAction found TodoistColor name $todoistColor->name does not match value $name");
             }
 
             return $todoistColor;
