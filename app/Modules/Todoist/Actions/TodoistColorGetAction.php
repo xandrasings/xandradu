@@ -16,12 +16,12 @@ class TodoistColorGetAction
         $todoistColors = TodoistColor::where(['code' => $color])->get();
 
         if (count($todoistColors) > 1) {
-            Log::warning("TodoistColorGetAction failed, found too many TodoistColor records matching code $todoistColors.");
+            Log::warning("TodoistColorGetAction failed, found too many TodoistColor records matching code $color.");
             return null;
         }
 
         if ($todoistColors->isEmpty()) {
-            Log::notice("Creating TodoistColor $color $name");
+            Log::notice("TodoistColorGetAction creating TodoistColor $color $name");
             try {
                 return TodoistColor::create([
                     'code' => $color,
