@@ -91,7 +91,6 @@ class TodoistProjectUsersSyncAction
                 return true;
             }
 
-            print_r("\nwe gotta get user $id and attach to this project\n");
             $user = $this->userGetAction->handle($id, $emailAddress, $name);
             if (is_null($user)) {
                 Log::warning("TodoistProjectUsersSyncAction failed due to failed call to TodoistUserGetAction.");
