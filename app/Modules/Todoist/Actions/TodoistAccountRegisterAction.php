@@ -2,7 +2,7 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\EmailAddress;
+use App\Actions\EmailAddressGetAction;
 use App\Models\Person;
 use App\Models\TodoistAccount;
 use App\Models\TodoistUser;
@@ -14,9 +14,12 @@ class TodoistAccountRegisterAction
 {
     protected TodoistClient $todoistClient;
 
+    protected EmailAddressGetAction $emailAddressGetAction;
+
     public function __construct()
     {
         $this->todoistClient = app(TodoistClient::class);
+        $this->emailAddressGetAction = app(EmailAddressGetAction::class);
     }
 
     public function handle(string $firstName, string $lastName, string $token): void
@@ -59,22 +62,7 @@ class TodoistAccountRegisterAction
             return;
         }
 
-        $emailAddresses = EmailAddress::where([
-            'full_value' =>  $email,
-        ])->get();
-
-        if ($emailAddresses->count() > 1) {
-            Log::warning("Multiple email addresses found for $email.");
-            return;
-        }
-
-        if($emailAddresses->isEmpty()) {
-            $emailAddress = EmailAddress::create([
-                'full_value' => $email,
-            ]);
-        } else {
-            $emailAddress = $emailAddresses->first();
-        }
+        $emailAddress = $this->emailAddressGetAction->handle($email);
 
         $todoistEmailAddresses = $person->emailAddresses()->wherePivot('label', 'todoist')->get();
 
@@ -94,6 +82,7 @@ class TodoistAccountRegisterAction
 
         $todoistUser = $emailAddress->todoistUser;
 
+        // TODO use my functionality
         if(is_null($todoistUser)) {
             $todoistUser = TodoistUser::create([
                 'external_id' => $externalId,
