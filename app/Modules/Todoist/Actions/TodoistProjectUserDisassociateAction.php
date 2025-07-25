@@ -13,6 +13,7 @@ class TodoistProjectUserDisassociateAction
     {
         try {
             if ($user->projects->contains($project)) {
+                Log::notice("TodoistProjectUserDisassociateAction disassociating TodoistProject $project->id from TodoistUser $user->id.");
                 $user->projects()->detach($project->id);
             }
         } catch (Throwable $exception) {

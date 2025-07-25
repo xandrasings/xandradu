@@ -13,6 +13,7 @@ class TodoistProjectUserAssociateAction
     {
         try {
             if (!$user->projects->contains($project)) {
+                Log::notice("TodoistProjectUserAssociateAction associating TodoistProject $project->id with TodoistUser $user->id.");
                 $user->projects()->attach($project->id);
             }
         } catch (Throwable $exception) {
