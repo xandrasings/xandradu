@@ -33,8 +33,8 @@ class TodoistUserGetAction
         }
 
         if ($users->isEmpty()) {
-            Log::notice("TodoistUserGetAction creating TodoistUser $id $email $name");
             try {
+                Log::notice("TodoistUserGetAction creating TodoistUser $id $email $name");
                 return TodoistUser::create([
                     'external_id' => $id,
                     'email_address_id' => $emailAddress->id,
@@ -47,7 +47,7 @@ class TodoistUserGetAction
         } else {
             $user = $users->first();
 
-            if ($user->email->id !== $emailAddress->id) {
+            if ($user->emailAddress->id !== $emailAddress->id) {
                 Log::warning("TodoistUserGetAction found TodoistUser EmailAddress id {$user->email->id} does not match value $emailAddress->id");
             }
 
