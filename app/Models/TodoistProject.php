@@ -28,6 +28,6 @@ class TodoistProject extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(TodoistUser::class, 'todoist_project_user');
+        return $this->belongsToMany(TodoistUser::class, 'todoist_project_user')->withTimestamps();
     }
 }

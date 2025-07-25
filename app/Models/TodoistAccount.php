@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TodoistAccount extends Model
 {
     use SoftDeletes;
-
     protected $fillable = [
         'user_id',
         'access_token',

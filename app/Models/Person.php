@@ -17,6 +17,6 @@ class Person extends Model
 
     public function emailAddresses(): BelongsToMany
     {
-        return $this->belongsToMany(EmailAddress::class)->withPivot('label');
+        return $this->belongsToMany(EmailAddress::class)->withPivot('label')->withTimestamps();
     }
 }
