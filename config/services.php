@@ -37,7 +37,8 @@ return [
 
     'todoist' => [
         'host_name' => env('TODOIST_HOST_NAME'),
-        'user_endpoint' => env('TODOIST_USER_ENDPOINT')
+        'user_endpoint' => env('TODOIST_USER_ENDPOINT'),
+        'sync_endpoint' => env('TODOIST_SYNC_ENDPOINT'),
+        'project_endpoint' => env('TODOIST_PROJECT_ENDPOINT'),
     ]
-
 ];
