@@ -3,10 +3,12 @@
 namespace App\Modules\Todoist\Actions;
 
 use App\Actions\EmailAddressGetAction;
+use App\Actions\EmailAddressPersonAssociateAction;
 use App\Models\Person;
 use App\Models\TodoistAccount;
 use App\Models\TodoistUser;
 use App\Modules\Todoist\Clients\TodoistClient;
+use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
 
@@ -14,16 +16,23 @@ class TodoistAccountRegisterAction
 {
     protected TodoistClient $todoistClient;
 
+    protected ValidationUtility $validationUtility;
+
     protected EmailAddressGetAction $emailAddressGetAction;
+
+    protected EmailAddressPersonAssociateAction $emailAddressPersonAssociateAction;
 
     public function __construct()
     {
         $this->todoistClient = app(TodoistClient::class);
+        $this->validationUtility = app(ValidationUtility::class);
         $this->emailAddressGetAction = app(EmailAddressGetAction::class);
+        $this->emailAddressPersonAssociateAction = app(EmailAddressPersonAssociateAction::class);
     }
 
-    public function handle(string $firstName, string $lastName, string $token): void
+    public function handle(string $firstName, string $lastName, string $token): bool
     {
+        // TODO select action
         $people = Person::where([
             'first_name' => $firstName,
             'last_name' => $lastName,
@@ -31,12 +40,12 @@ class TodoistAccountRegisterAction
 
         if ($people->count() > 1) {
             Log::warning("Multiple people named $firstName $lastName exist.");
-            return;
+            return false;
         }
 
         if($people->isEmpty()) {
             Log::warning("No person named $firstName $lastName exists.");
-            return;
+            return false;
         }
 
         $person = $people->first();
@@ -47,37 +56,21 @@ class TodoistAccountRegisterAction
         $name = data_get($response, 'full_name');
         $externalId = data_get($response, 'id');
 
-        if (is_null($email)) {
-            Log::warning("Todoist did not provide an email address for the user.");
-            return;
-        }
-
-        if (is_null($name)) {
-            Log::warning("Todoist did not provide a name for the user.");
-            return;
-        }
-
-        if (is_null($externalId)) {
-            Log::warning("Todoist did not provide an external id for the user.");
-            return;
+        if (! $this->validationUtility->containsNoNulls([$email, $name, $externalId])) {
+            Log::error("TodoistAccountRegisterAction couldn't proceed due to a missing non-nullable variable");
+            return false;
         }
 
         $emailAddress = $this->emailAddressGetAction->handle($email);
-
-        $todoistEmailAddresses = $person->emailAddresses()->wherePivot('label', 'todoist')->get();
-
-        if ($todoistEmailAddresses->count() > 1) {
-            Log::warning("Person $person has multiple email addresses labeled todoist");
-            return;
+        if(is_null($emailAddress)) {
+            Log::warning("TodoistAccountRegisterAction failed due to unsuccessful call to EmailAddressGetAction.");
+            return false;
         }
 
-        if ($todoistEmailAddresses->count() === 1) {
-            if ($todoistEmailAddresses->first()->id !== $emailAddress->id) {
-                Log::warning("Person $person has a pre-existing todoist email address that does not match this one");
-                return;
-            }
-        } else {
-            $person->emailAddresses()->save($emailAddress, array('label' => 'todoist'));
+        $result = $this->emailAddressPersonAssociateAction->handle($emailAddress, $person, 'todoist');
+        if(! $result) {
+            Log::warning("TodoistAccountRegisterAction failed due to unsuccessful call to EmailAddressPersonAssociateAction.");
+            return false;
         }
 
         $todoistUser = $emailAddress->todoistUser;
@@ -105,5 +98,6 @@ class TodoistAccountRegisterAction
             // TODO alert about matchiness
         }
 
+        return true;
     }
 }
