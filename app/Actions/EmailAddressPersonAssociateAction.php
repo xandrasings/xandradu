@@ -22,7 +22,7 @@ class EmailAddressPersonAssociateAction
             Log::notice("TodoistProjectUserAssociateAction creating TodoistProjectUser $emailAddress->full_value $person->first_name $person->last_name $label");
             $person->emailAddresses()->save($emailAddress, array('label' => $label));
         } catch (Throwable $exception) {
-            Log::error("TodoistProjectUserAssociateAction failed with exception {$exception->getMessage()}");
+            Log::warning("TodoistProjectUserAssociateAction failed with exception {$exception->getMessage()}");
             return false;
         }
 
