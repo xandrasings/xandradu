@@ -4,6 +4,7 @@ namespace App\Modules\Todoist\Clients;
 
 use App\Models\TodoistAccount;
 use App\Models\TodoistProject;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -36,19 +37,19 @@ class TodoistClient
             $response = Http::withToken($token)
                 ->get($url);
         } catch (Throwable $exception) {
-            Log::error("Call to todoist endpoint $url failed with exception {$exception->getMessage()}");
+            Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}");
             return null;
         }
 
         if ($response->failed()) {
-            Log::error("Call to todoist endpoint $url failed with response {$response->getStatusCode()}");
+            Log::warning("Call to todoist endpoint $url failed with response {$response->getStatusCode()}");
             return null;
         }
 
         return $response->json();
     }
 
-    public function getProjectUsers(TodoistProject $project, TodoistAccount $account): ?array
+    public function getProjectUsers(TodoistProject $project, TodoistAccount $account): ?Collection
     {
         $url = "{$this->hostName}{$this->projectEndpoint}/{$project->external_id}/collaborators";
         $token = Crypt::decryptString($account->access_token);
@@ -58,12 +59,12 @@ class TodoistClient
             $response = Http::withToken($token)
                 ->get($url);
         } catch (Throwable $exception) {
-            Log::error("Call to todoist endpoint $url failed with exception {$exception->getMessage()}.");
+            Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}.");
             return null;
         }
 
         if ($response->failed()) {
-            Log::error("Call to todoist endpoint $url failed with response {$response->getStatusCode()}.");
+            Log::warning("Call to todoist endpoint $url failed with response {$response->getStatusCode()}.");
             return null;
         }
 
@@ -72,11 +73,11 @@ class TodoistClient
         $projectUsersPayload = data_get($response->json(),'results');
 
         if (is_null($projectUsersPayload)) {
-            Log::error("getProjectUsers failed due to lack of result in response.");
+            Log::warning("getProjectUsers failed due to lack of result in response.");
             return null;
         }
 
-        return $projectUsersPayload;
+        return collect($projectUsersPayload);
     }
 
     public function getLatestChanges(TodoistAccount $account): ?array
@@ -94,12 +95,12 @@ class TodoistClient
                     'resource_types'=>'["projects"]'
                 ]);
         } catch (Throwable $exception) {
-            Log::error("Call to todoist endpoint $url failed with exception {$exception->getMessage()}");
+            Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}");
             return null;
         }
 
         if ($response->failed()) {
-            Log::error("Call to todoist endpoint $url failed with response {$response->getStatusCode()}");
+            Log::warning("Call to todoist endpoint $url failed with response {$response->getStatusCode()}");
             return null;
         }
 
