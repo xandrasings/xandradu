@@ -38,6 +38,7 @@ class TodoistAccountRegisterCommand extends Command
             Log::error("TodoistAccountCreateAction failed due to failure of PersonSelectAction.");
             print_r("CONSOLE COMMAND ABORTED: $this->signature $firstName $lastName\n");
             Log::notice("CONSOLE COMMAND ABORTED: $this->signature $firstName $lastName");
+            return;
         }
 
         $this->accountCreateAction->handle($person, $token);
