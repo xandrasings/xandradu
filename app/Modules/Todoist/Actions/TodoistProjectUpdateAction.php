@@ -49,7 +49,7 @@ class TodoistProjectUpdateAction
         }
 
         try {
-            Log::notice("TodoistProjectUpdateAction updating TodoistProject $project->id $name $id");
+            Log::notice("TodoistProjectUpdateAction updating TodoistProject $id");
             $project->update([
                 'name' => $name,
                 'color_id' => $todoistColor->id,
