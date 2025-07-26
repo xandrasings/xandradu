@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('todoist_project_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('todoist_project_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('todoist_user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('project_id')->constrained(table: 'todoist_projects')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained(table: 'todoist_users')->cascadeOnDelete();
             $table->foreignId('parent_project_id')->nullable()->constrained(table: 'todoist_projects')->cascadeOnDelete();
-            $table->integer('parent_project_rank')->default(0);
+            $table->integer('rank')->default(0);
             $table->timestamps();
         });
     }

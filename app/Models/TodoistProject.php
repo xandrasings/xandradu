@@ -26,6 +26,6 @@ class TodoistProject extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(TodoistUser::class, 'todoist_project_user')->withPivot('parent_project_id', 'parent_project_rank')->withTimestamps();
+        return $this->belongsToMany(TodoistUser::class, 'todoist_project_user', 'project_id', 'user_id')->withPivot('parent_project_id', 'rank')->withTimestamps();
     }
 }

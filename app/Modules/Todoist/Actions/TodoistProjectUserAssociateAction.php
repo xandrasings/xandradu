@@ -16,7 +16,7 @@ class TodoistProjectUserAssociateAction
             // TODO alter this logic to still update the intermediate table values even if the relationship is already in place
             if (!$user->projects->contains($project)) {
                 Log::notice("TodoistProjectUserAssociateAction associating TodoistProject $project->id with TodoistUser $user->id.");
-                $user->projects()->attach($project->id, ['parent_project_id' => $parentProjectId, 'parent_project_rank' => $childOrder]);
+                $user->projects()->attach($project->id, ['parent_project_id' => $parentProjectId, 'rank' => $childOrder]);
             }
         } catch (Throwable $exception) {
             Log::warning("TodoistProjectUserAssociateAction failed with exception {$exception->getMessage()}");
