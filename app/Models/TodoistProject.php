@@ -15,8 +15,6 @@ class TodoistProject extends Model
         'location_reference_id',
         'external_id',
         'name',
-        'parent_project_id',
-        'parent_project_rank',
         'color_id',
         'is_favorite'
     ];
@@ -28,6 +26,6 @@ class TodoistProject extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(TodoistUser::class, 'todoist_project_user')->withTimestamps();
+        return $this->belongsToMany(TodoistUser::class, 'todoist_project_user')->withPivot('parent_project_id', 'parent_project_rank')->withTimestamps();
     }
 }

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('todoist_project_id')->constrained()->cascadeOnDelete();
             $table->foreignId('todoist_user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('parent_project_id')->nullable()->constrained(table: 'todoist_projects')->cascadeOnDelete();
+            $table->integer('parent_project_rank')->default(0);
             $table->timestamps();
         });
     }
