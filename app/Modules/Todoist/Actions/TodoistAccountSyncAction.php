@@ -11,10 +11,13 @@ class TodoistAccountSyncAction
 
     protected TodoistProjectsSyncAction $projectsSyncAction;
 
+    protected TodoistSectionsSyncAction $sectionsSyncAction;
+
     public function __construct()
     {
         $this->client = app(TodoistClient::class);
         $this->projectsSyncAction = app(TodoistProjectsSyncAction::class);
+        $this->sectionsSyncAction = app(TodoistSectionsSyncAction::class);
     }
 
 
@@ -26,5 +29,8 @@ class TodoistAccountSyncAction
 
         $projectsPayload = data_get($response, 'projects', []);
         $this->projectsSyncAction->handle($todoistAccount, $projectsPayload);
+
+        $sectionsPayload = data_get($response, 'sections', []);
+        $this->sectionsSyncAction->handle($sectionsPayload);
     }
 }

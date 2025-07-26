@@ -92,7 +92,7 @@ class TodoistClient
             $response = Http::withToken($token)
                 ->get($url, [
                     'sync_token'=>'*',
-                    'resource_types'=>'["projects"]'
+                    'resource_types'=>'["projects","sections"]' // TODO generate this better
                 ]);
         } catch (Throwable $exception) {
             Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}");
