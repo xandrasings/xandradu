@@ -19,6 +19,10 @@ class TodoistProject extends Model
         'is_favorite'
     ];
 
+    protected $casts = [
+        'is_favorite' => 'boolean',
+    ];
+
     public function locationReference(): BelongsTo
     {
         return $this->belongsTo(TodoistTaskLocation::class, 'location_reference_id');
