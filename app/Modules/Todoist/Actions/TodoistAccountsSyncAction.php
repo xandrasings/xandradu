@@ -6,11 +6,11 @@ use App\Models\TodoistAccount;
 
 class TodoistAccountsSyncAction
 {
-    protected TodoistAccountSyncAction $todoistAccountSyncAction;
+    protected TodoistAccountSyncAction $accountSyncAction;
 
     public function __construct()
     {
-        $this->todoistAccountSyncAction = app(TodoistAccountSyncAction::class);
+        $this->accountSyncAction = app(TodoistAccountSyncAction::class);
     }
 
 
@@ -19,7 +19,7 @@ class TodoistAccountsSyncAction
         $todoistAccounts = TodoistAccount::get();
 
         $todoistAccounts->each(function ($todoistAccount) {
-            $this->todoistAccountSyncAction->handle($todoistAccount);
+            $this->accountSyncAction->handle($todoistAccount);
         });
     }
 }

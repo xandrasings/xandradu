@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Actions\PersonSelectAction;
 use App\Modules\Todoist\Actions\TodoistAccountCreateAction;
+use App\Modules\Todoist\Services\TodoistService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -15,13 +16,13 @@ class TodoistAccountRegisterCommand extends Command
 
     protected PersonSelectAction $personSelectAction;
 
-    protected TodoistAccountCreateAction $accountCreateAction;
+    protected TodoistService $service;
 
     public function __construct()
     {
         parent::__construct();
         $this->personSelectAction = app(PersonSelectAction::class);
-        $this->accountCreateAction = app(TodoistAccountCreateAction::class);
+        $this->service = app(TodoistService::class);
     }
 
     public function handle()
@@ -41,7 +42,7 @@ class TodoistAccountRegisterCommand extends Command
             return;
         }
 
-        $this->accountCreateAction->handle($person, $token);
+        $this->service->createAccount($person, $token);
 
         print_r("CONSOLE COMMAND COMPLETED: $this->signature $firstName $lastName\n");
         Log::notice("CONSOLE COMMAND COMPLETED: $this->signature $firstName $lastName");
