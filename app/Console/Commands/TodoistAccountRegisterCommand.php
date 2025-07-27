@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Actions\PersonSelectAction;
-use App\Modules\Todoist\Actions\TodoistAccountCreateAction;
 use App\Modules\Todoist\Services\TodoistService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
