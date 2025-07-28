@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('location_reference_id')->constrained(table: 'todoist_task_locations')->cascadeOnDelete();
             $table->foreignId('project_id')->nullable()->constrained(table: 'todoist_projects')->cascadeOnDelete();
             $table->integer('rank')->default(0);
-            $table->string('external_id', 16);
+            $table->string('external_id', 16)->nullable();
             $table->string('name', 32);
             $table->timestamps();
             $table->softDeletes();
