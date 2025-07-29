@@ -10,16 +10,16 @@ class TodoistAccountsSyncJob implements ShouldQueue
 {
     use Queueable;
 
-    protected TodoistAccountsSyncAction $todoistAccountsSyncAction;
+    protected TodoistAccountsSyncAction $accountSyncAction;
 
     public function __construct()
     {
-        $this->todoistAccountsSyncAction = app(TodoistAccountsSyncAction::class);
+        $this->accountSyncAction = app(TodoistAccountsSyncAction::class);
     }
 
     public function handle(): void
     {
-        $this->todoistAccountsSyncAction->handle();
+        $this->accountSyncAction->handle();
     }
 
 }

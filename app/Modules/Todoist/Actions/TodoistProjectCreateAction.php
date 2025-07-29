@@ -28,19 +28,19 @@ class TodoistProjectCreateAction
 
     public function handle(TodoistAccount $account, array $projectPayload): ?TodoistProject
     {
-        $color = data_get($projectPayload, 'color');
+        $colorCode = data_get($projectPayload, 'color');
         $isFavorite = data_get($projectPayload, 'is_favorite');
         $name = data_get($projectPayload, 'name');
         $id = data_get($projectPayload, 'v2_id');
 
-        if (! $this->validationUtility->containsNoNulls([$color, $isFavorite, $name, $id])) {
+        if (! $this->validationUtility->containsNoNulls([$colorCode, $isFavorite, $name, $id])) {
             Log::warning("TodoistProjectCreateAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
-        $todoistColor = $this->colorGetAction->handle($color);
+        $color = $this->colorGetAction->handle($colorCode);
 
-        if (is_null($todoistColor)) {
+        if (is_null($color)) {
             Log::warning("TodoistProjectCreateAction couldn't proceed due to color not being successfully created.");
             return null;
         }
@@ -58,7 +58,7 @@ class TodoistProjectCreateAction
                 'location_reference_id' => $taskLocation->id,
                 'external_id' => $id,
                 'name' => $name,
-                'color_id' => $todoistColor->id,
+                'color_id' => $color->id,
                 'is_favorite' => $isFavorite,
             ]);
         } catch (Throwable $exception) {

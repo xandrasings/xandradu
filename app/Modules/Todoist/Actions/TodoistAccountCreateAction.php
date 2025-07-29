@@ -14,7 +14,7 @@ use Throwable;
 
 class TodoistAccountCreateAction
 {
-    protected TodoistClient $todoistClient;
+    protected TodoistClient $client;
 
     protected ValidationUtility $validationUtility;
 
@@ -26,7 +26,7 @@ class TodoistAccountCreateAction
 
     public function __construct()
     {
-        $this->todoistClient = app(TodoistClient::class);
+        $this->client = app(TodoistClient::class);
         $this->validationUtility = app(ValidationUtility::class);
         $this->emailAddressGetAction = app(EmailAddressGetAction::class);
         $this->emailAddressPersonAssociateAction = app(EmailAddressPersonAssociateAction::class);
@@ -35,7 +35,7 @@ class TodoistAccountCreateAction
 
     public function handle(Person $person, string $token): ?TodoistAccount
     {
-        $response = $this->todoistClient->getUser($token);
+        $response = $this->client->getUser($token);
         if (is_null($response)) {
             Log::warning("TodoistAccountCreateAction failed due to unsuccessful client call.");
             return null;
@@ -50,27 +50,27 @@ class TodoistAccountCreateAction
             return null;
         }
 
-        $todoistUser = $this->userGetAction->handle($externalId, $email, $name);
-        if(is_null($todoistUser)) {
+        $user = $this->userGetAction->handle($externalId, $email, $name);
+        if(is_null($user)) {
             Log::warning("TodoistAccountCreateAction failed due to unsuccessful call to TodoistUserGetAction.");
             return null;
         }
 
-        $result = $this->emailAddressPersonAssociateAction->handle($todoistUser->emailAddress, $person, 'todoist');
+        $result = $this->emailAddressPersonAssociateAction->handle($user->emailAddress, $person, 'todoist');
         if(! $result) {
             Log::warning("TodoistAccountCreateAction failed due to unsuccessful call to EmailAddressPersonAssociateAction.");
             return null;
         }
 
-        if (! is_null($todoistUser->account)) {
-            Log::warning("TodoistAccountCreateAction failed due to account already existing for user {$todoistUser->emailAddress->full_value}.");
+        if (! is_null($user->account)) {
+            Log::warning("TodoistAccountCreateAction failed due to account already existing for user {$user->emailAddress->full_value}.");
             return null;
         }
 
         try {
-            Log::notice("TodoistAccountCreateAction creating TodoistAccount for user $todoistUser->id");
+            Log::notice("TodoistAccountCreateAction creating TodoistAccount for user $user->id");
             return TodoistAccount::create([
-                'user_id' => $todoistUser->id,
+                'user_id' => $user->id,
                 'access_token' => Crypt::encryptString($token),
                 'sync_token' => null,
             ]);

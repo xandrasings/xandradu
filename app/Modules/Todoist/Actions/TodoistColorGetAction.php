@@ -9,22 +9,22 @@ use Throwable;
 
 class TodoistColorGetAction
 {
-    public function handle(string $color): ?TodoistColor
+    public function handle(string $colorCode): ?TodoistColor
     {
-        $name = Str::apa(str_replace('_', ' ', $color));
+        $name = Str::apa(str_replace('_', ' ', $colorCode));
 
-        $todoistColors = TodoistColor::where(['code' => $color])->get();
+        $colors = TodoistColor::where(['code' => $colorCode])->get();
 
-        if (count($todoistColors) > 1) {
-            Log::warning("TodoistColorGetAction failed, found too many TodoistColor records matching code $color.");
+        if (count($colors) > 1) {
+            Log::warning("TodoistColorGetAction failed, found too many TodoistColor records matching code $colorCode.");
             return null;
         }
 
-        if ($todoistColors->isEmpty()) {
+        if ($colors->isEmpty()) {
             try {
-                Log::notice("TodoistColorGetAction creating TodoistColor $color $name");
+                Log::notice("TodoistColorGetAction creating TodoistColor $colorCode $name");
                 return TodoistColor::create([
-                    'code' => $color,
+                    'code' => $colorCode,
                     'name' => $name
                 ]);
             } catch (Throwable $exception) {
@@ -32,13 +32,13 @@ class TodoistColorGetAction
                 return null;
             }
         } else {
-            $todoistColor = $todoistColors->first();
+            $color = $colors->first();
 
-            if ($todoistColor->name !== $name) {
-                Log::warning("TodoistColorGetAction found TodoistColor name $todoistColor->name does not match value $name");
+            if ($color->name !== $name) {
+                Log::warning("TodoistColorGetAction found TodoistColor name $color->name does not match value $name");
             }
 
-            return $todoistColor;
+            return $color;
         }
     }
 }

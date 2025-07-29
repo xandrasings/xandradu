@@ -16,10 +16,10 @@ class TodoistAccountsSyncAction
 
     public function handle(): void
     {
-        $todoistAccounts = TodoistAccount::get();
+        $accounts = TodoistAccount::get();
 
-        $todoistAccounts->each(function ($todoistAccount) {
-            $this->accountSyncAction->handle($todoistAccount);
+        $accounts->each(function ($account) {
+            $this->accountSyncAction->handle($account);
         });
     }
 }

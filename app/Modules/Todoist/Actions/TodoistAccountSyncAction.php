@@ -21,14 +21,14 @@ class TodoistAccountSyncAction
     }
 
 
-    public function handle(TodoistAccount $todoistAccount): void
+    public function handle(TodoistAccount $account): void
     {
-        $response =  $this->client->getLatestChanges($todoistAccount);
+        $response =  $this->client->getLatestChanges($account);
 
         // TODO update account w sync token
 
         $projectsPayload = data_get($response, 'projects', []);
-        $this->projectsSyncAction->handle($todoistAccount, $projectsPayload);
+        $this->projectsSyncAction->handle($account, $projectsPayload);
 
         $sectionsPayload = data_get($response, 'sections', []);
         $this->sectionsSyncAction->handle($sectionsPayload);
