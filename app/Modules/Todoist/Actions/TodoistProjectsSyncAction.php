@@ -11,7 +11,7 @@ class TodoistProjectsSyncAction
 
     public function __construct()
     {
-        $this->projectSyncAction = new TodoistProjectSyncAction();
+        $this->projectSyncAction = app(TodoistProjectSyncAction::class);
     }
 
 

@@ -22,11 +22,11 @@ class TodoistProjectUpdateAction
 
     public function __construct()
     {
-        $this->validationUtility = new ValidationUtility();
-        $this->taskLocationCreateAction = new TodoistTaskLocationCreateAction();
-        $this->projectSelectAction = new TodoistProjectSelectAction();
-        $this->colorGetAction = new TodoistColorGetAction();
-        $this->projectUsersSyncAction = new TodoistProjectUsersSyncAction();
+        $this->validationUtility = app(ValidationUtility::class);
+        $this->taskLocationCreateAction = app(TodoistTaskLocationCreateAction::class);
+        $this->projectSelectAction = app(TodoistProjectSelectAction::class);
+        $this->colorGetAction = app(TodoistColorGetAction::class);
+        $this->projectUsersSyncAction = app(TodoistProjectUsersSyncAction::class);
     }
 
     public function handle(TodoistAccount $account, TodoistProject $project, array $projectPayload): ?TodoistProject

@@ -18,10 +18,10 @@ class TodoistSectionSyncAction
 
     public function __construct()
     {
-        $this->validationUtility = new ValidationUtility();
-        $this->sectionDeleteAction = new TodoistSectionDeleteAction();
-        $this->sectionCreateAction = new TodoistSectionCreateAction();
-        $this->sectionUpdateAction = new TodoistSectionUpdateAction();
+        $this->validationUtility = app(ValidationUtility::class);
+        $this->sectionDeleteAction = app(TodoistSectionDeleteAction::class);
+        $this->sectionCreateAction = app(TodoistSectionCreateAction::class);
+        $this->sectionUpdateAction = app(TodoistSectionUpdateAction::class);
     }
 
     public function handle(array $sectionPayload): ?TodoistSection

@@ -13,7 +13,7 @@ class TodoistUserGetAction
 
     public function __construct()
     {
-        $this->emailAddressGetAction = new EmailAddressGetAction();
+        $this->emailAddressGetAction = app(EmailAddressGetAction::class);
     }
 
     public function handle(string $id, string $email, string $name): ?TodoistUser

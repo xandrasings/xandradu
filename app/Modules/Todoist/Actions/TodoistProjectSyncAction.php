@@ -19,10 +19,10 @@ class TodoistProjectSyncAction
 
     public function __construct()
     {
-        $this->validationUtility = new ValidationUtility();
-        $this->projectDeleteAction = new TodoistProjectDeleteAction();
-        $this->projectCreateAction = new TodoistProjectCreateAction();
-        $this->projectUpdateAction = new TodoistProjectUpdateAction();
+        $this->validationUtility = app(ValidationUtility::class);
+        $this->projectDeleteAction = app(TodoistProjectDeleteAction::class);
+        $this->projectCreateAction = app(TodoistProjectCreateAction::class);
+        $this->projectUpdateAction = app(TodoistProjectUpdateAction::class);
     }
 
     public function handle(TodoistAccount $account, array $projectPayload): ?TodoistProject

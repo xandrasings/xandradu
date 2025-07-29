@@ -24,12 +24,12 @@ class TodoistProjectUsersSyncAction
 
     public function __construct()
     {
-        $this->validationUtility = new ValidationUtility();
-        $this->projectSelectAction = new TodoistProjectSelectAction();
-        $this->client = new TodoistClient();
-        $this->projectUserAssociateAction = new TodoistProjectUserAssociateAction();
-        $this->userGetAction = new TodoistUserGetAction();
-        $this->projectUserDisassociateAction = new TodoistProjectUserDisassociateAction();
+        $this->validationUtility = app(ValidationUtility::class);
+        $this->projectSelectAction = app(TodoistProjectSelectAction::class);
+        $this->client = app(TodoistClient::class);
+        $this->projectUserAssociateAction = app(TodoistProjectUserAssociateAction::class);
+        $this->userGetAction = app(TodoistUserGetAction::class);
+        $this->projectUserDisassociateAction = app(TodoistProjectUserDisassociateAction::class);
     }
 
     public function handle(TodoistAccount $account, TodoistProject $project, array $projectPayload): bool

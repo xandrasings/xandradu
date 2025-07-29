@@ -20,10 +20,10 @@ class TodoistProjectCreateAction
 
     public function __construct()
     {
-        $this->validationUtility = new ValidationUtility();
-        $this->taskLocationCreateAction = new TodoistTaskLocationCreateAction();
-        $this->colorGetAction = new TodoistColorGetAction();
-        $this->projectUsersSyncAction = new TodoistProjectUsersSyncAction();
+        $this->validationUtility = app(ValidationUtility::class);
+        $this->taskLocationCreateAction = app(TodoistTaskLocationCreateAction::class);
+        $this->colorGetAction = app(TodoistColorGetAction::class);
+        $this->projectUsersSyncAction = app(TodoistProjectUsersSyncAction::class);
     }
 
     public function handle(TodoistAccount $account, array $projectPayload): ?TodoistProject

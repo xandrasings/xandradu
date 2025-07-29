@@ -2,7 +2,6 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\TodoistAccount;
 use App\Models\TodoistSection;
 use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Log;
@@ -18,9 +17,9 @@ class TodoistSectionCreateAction
 
     public function __construct()
     {
-        $this->validationUtility = new ValidationUtility();
-        $this->projectSelectAction = new TodoistProjectSelectAction();
-        $this->taskLocationCreateAction = new TodoistTaskLocationCreateAction();
+        $this->validationUtility = app(ValidationUtility::class);
+        $this->projectSelectAction = app(TodoistProjectSelectAction::class);
+        $this->taskLocationCreateAction = app(TodoistTaskLocationCreateAction::class);
     }
 
     public function handle(array $sectionPayload): ?TodoistSection

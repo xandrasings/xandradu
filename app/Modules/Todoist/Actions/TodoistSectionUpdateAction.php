@@ -16,8 +16,8 @@ class TodoistSectionUpdateAction
 
     public function __construct()
     {
-        $this->validationUtility = new ValidationUtility();
-        $this->projectSelectAction = new TodoistProjectSelectAction();
+        $this->validationUtility = app(ValidationUtility::class);
+        $this->projectSelectAction = app(TodoistProjectSelectAction::class);
     }
 
     public function handle(TodoistSection $section, array $sectionPayload): ?TodoistSection
