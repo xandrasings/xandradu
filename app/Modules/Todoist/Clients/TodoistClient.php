@@ -4,6 +4,7 @@ namespace App\Modules\Todoist\Clients;
 
 use App\Models\TodoistAccount;
 use App\Models\TodoistProject;
+use App\Models\TodoistSection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
@@ -18,14 +19,17 @@ class TodoistClient
 
     private string $syncEndpoint;
 
-    private string $projectEndpoint;
+    private string $sectionsEndpoint;
+
+    private string $projectsEndpoint;
 
     public function __construct()
     {
         $this->hostName = config('services.todoist.host_name');
         $this->userEndpoint = config('services.todoist.user_endpoint');
         $this->syncEndpoint = config('services.todoist.sync_endpoint');
-        $this->projectEndpoint = config('services.todoist.project_endpoint');
+        $this->sectionsEndpoint = config('services.todoist.sections_endpoint');
+        $this->projectsEndpoint = config('services.todoist.projects_endpoint');
     }
 
     public function getUser(string $token): ?array
@@ -51,7 +55,7 @@ class TodoistClient
 
     public function getProjectUsers(TodoistProject $project, TodoistAccount $account): ?Collection
     {
-        $url = "{$this->hostName}{$this->projectEndpoint}/{$project->external_id}/collaborators";
+        $url = "{$this->hostName}{$this->projectsEndpoint}/{$project->external_id}/collaborators";
         $token = Crypt::decryptString($account->access_token);
 
         try {
@@ -94,6 +98,33 @@ class TodoistClient
                     'sync_token'=>'*',
                     'resource_types'=>'["projects","sections"]' // TODO generate this better
                 ]);
+        } catch (Throwable $exception) {
+            Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}");
+            return null;
+        }
+
+        if ($response->failed()) {
+            Log::warning("Call to todoist endpoint $url failed with response {$response->getStatusCode()}");
+            return null;
+        }
+
+        return $response->json();
+    }
+
+    public function createSection(TodoistAccount $account, TodoistSection $section): ?array
+    {
+
+        $url = "{$this->hostName}{$this->sectionsEndpoint}";
+        $token = Crypt::decryptString($account->access_token);
+        $body = [
+            'name'=>$section->name,
+            'project_id'=>$section->project->external_id
+        ];
+
+        try {
+            Log::notice("Calling todoist endpoint $url.", ['body'=>$body]);
+            $response = Http::withToken($token)
+                ->post($url, $body);
         } catch (Throwable $exception) {
             Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}");
             return null;
