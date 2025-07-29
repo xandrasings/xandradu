@@ -25,6 +25,6 @@ class TodoistSection extends Model
 
     public function project(): BelongsTo
     {
-        return $this->belongsTo(TodoistProject::class, 'todoist_project_user')->withPivot('parent_project_id', 'rank')->withTimestamps();
+        return $this->belongsTo(TodoistProject::class, 'project_id');
     }
 }
