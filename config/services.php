@@ -35,6 +35,12 @@ return [
         ],
     ],
 
+    'notion' => [
+        'version' => env('NOTION_VERSION'),
+        'host_name' => env('NOTION_HOST_NAME'),
+        'users_endpoint' => env('NOTION_USERS_ENDPOINT'),
+    ],
+
     'todoist' => [
         'host_name' => env('TODOIST_HOST_NAME'),
         'user_endpoint' => env('TODOIST_USER_ENDPOINT'),
