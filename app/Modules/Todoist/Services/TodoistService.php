@@ -37,6 +37,5 @@ class TodoistService
     public function createSection(TodoistAccount $account, TodoistSection $section): void
     {
         $this->sectionRealizeAction->handle($account, $section);
-
     }
 }
