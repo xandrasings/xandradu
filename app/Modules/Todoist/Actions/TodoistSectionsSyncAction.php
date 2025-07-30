@@ -2,8 +2,6 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\TodoistAccount;
-
 class TodoistSectionsSyncAction
 {
 
@@ -11,7 +9,7 @@ class TodoistSectionsSyncAction
 
     public function __construct()
     {
-        $this->sectionSyncAction = new TodoistSectionSyncAction();
+        $this->sectionSyncAction = app(TodoistSectionSyncAction::class);
     }
 
 
