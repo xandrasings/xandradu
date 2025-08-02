@@ -25,7 +25,11 @@ class TodoistAccountSyncAction
     {
         $response =  $this->client->getLatestChanges($account);
 
+        // TODO null check
+
         // TODO update account w sync token
+
+        // TODO sync becomes apply
 
         $projectsPayload = data_get($response, 'projects', []);
         $this->projectsSyncAction->handle($account, $projectsPayload);
