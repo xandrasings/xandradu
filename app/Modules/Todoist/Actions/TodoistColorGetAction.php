@@ -31,14 +31,14 @@ class TodoistColorGetAction
                 Log::warning("TodoistColorGetAction failed with exception {$exception->getMessage()}");
                 return null;
             }
-        } else {
-            $color = $colors->first();
-
-            if ($color->name !== $name) {
-                Log::warning("TodoistColorGetAction found TodoistColor name $color->name does not match value $name");
-            }
-
-            return $color;
         }
+
+        $color = $colors->first();
+
+        if ($color->name !== $name) {
+            Log::warning("TodoistColorGetAction found TodoistColor name $color->name does not match value $name");
+        }
+
+        return $color;
     }
 }
