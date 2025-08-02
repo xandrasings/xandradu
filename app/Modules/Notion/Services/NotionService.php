@@ -2,20 +2,20 @@
 
 namespace App\Modules\Notion\Services;
 
-use App\Models\NotionWorkspace;
-use App\Modules\Notion\Actions\NotionWorkspaceInstantiateAction;
+use App\Models\NotionBot;
+use App\Modules\Notion\Actions\NotionBotCreateAction;
 
 class NotionService
 {
-    protected NotionWorkspaceInstantiateAction $workspaceInstantiateAction;
+    protected NotionBotCreateAction $botCreateAction;
 
     public function __construct()
     {
-        $this->workspaceInstantiateAction = app(NotionWorkspaceInstantiateAction::class);
+        $this->botCreateAction = app(NotionBotCreateAction::class);
     }
 
-    public function instantiateNotionWorkspace(string $token): ?NotionWorkspace
+    public function createBot(string $label, string $token): ?NotionBot
     {
-        return $this->workspaceInstantiateAction->handle($token);
+        return $this->botCreateAction->handle($label, $token);
     }
 }
