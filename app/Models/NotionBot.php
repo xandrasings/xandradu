@@ -11,9 +11,9 @@ class NotionBot extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name',
         'workspace_id',
         'external_id',
+        'name',
     ];
 
     public function workspace(): BelongsTo
