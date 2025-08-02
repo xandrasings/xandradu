@@ -14,6 +14,8 @@ class NotionBot extends Model
         'workspace_id',
         'external_id',
         'name',
+        'label',
+        'token'
     ];
 
     public function workspace(): BelongsTo

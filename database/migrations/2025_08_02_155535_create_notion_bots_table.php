@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('external_id', 64);
             $table->string('name', 32);
             $table->string('label', 32);
+            $table->string('token', 512);
             $table->timestamps();
             $table->softDeletes();
         });
