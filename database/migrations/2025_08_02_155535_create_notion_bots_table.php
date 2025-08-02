@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('workspace_id')->constrained(table: 'notion_workspaces')->cascadeOnDelete();
             $table->string('external_id', 64);
             $table->string('name', 32);
+            $table->string('label', 32);
             $table->timestamps();
             $table->softDeletes();
         });
