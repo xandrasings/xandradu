@@ -5,6 +5,7 @@ namespace App\Modules\Notion\Actions;
 use App\Models\NotionBot;
 use App\Modules\Notion\Clients\NotionClient;
 use App\Utilities\ValidationUtility;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -47,7 +48,7 @@ class NotionBotInstantiateAction
                 'external_id' => $id,
                 'name' => $name,
                 'label' => $label,
-                'token' => $token,
+                'token' => Crypt::encryptString($token),
             ]);
         } catch (Throwable $exception) {
             Log::warning("NotionWorkspaceSyncAction failed with exception {$exception->getMessage()}");
