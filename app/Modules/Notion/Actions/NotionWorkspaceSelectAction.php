@@ -9,20 +9,18 @@ class NotionWorkspaceSelectAction
 {
     public function handle(string $name): ?NotionWorkspace
     {
-        $workspace = NotionWorkspace::where([
-            'name' => $name,
-        ])->get();
+        $workspaces = NotionWorkspace::where(['name' => $name])->get();
 
-        if ($workspace->count() > 1) {
-            Log::warning("NotionWorkspaceSelectAction failed because multiple NotionWorkspace records exist with name $name.");
+        if (count($workspaces) > 1) {
+            Log::warning("NotionWorkspaceSelectAction failed because too many workspaces with name $name exist.");
             return null;
         }
 
-        if($workspace->isEmpty()) {
-            Log::warning("NotionWorkspaceSelectAction failed because no NotionWorkspace records exist with name $name.");
+        if ($workspaces->isEmpty()) {
+            Log::warning("NotionWorkspaceSelectAction failed because no workspaces with external id $name exist.");
             return null;
         }
 
-        return $workspace->first();
+        return $workspaces->first();
     }
 }
