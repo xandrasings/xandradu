@@ -12,39 +12,40 @@ class TodoistProjectUpdateAction
 {
     protected ValidationUtility $validationUtility;
 
-    protected TodoistTaskLocationCreateAction $taskLocationCreateAction;
+    protected TodoistNodeInstantiateAction $nodeInstantiateAction;
 
     protected TodoistProjectSelectAction $projectSelectAction;
 
     protected TodoistColorGetAction $colorGetAction;
 
-    protected TodoistProjectUsersSyncAction $projectUsersSyncAction;
+    protected TodoistProjectUserApplyAllAction $projectUserApplyAllAction;
 
     public function __construct()
     {
         $this->validationUtility = app(ValidationUtility::class);
-        $this->taskLocationCreateAction = app(TodoistTaskLocationCreateAction::class);
+        $this->nodeInstantiateAction = app(TodoistNodeInstantiateAction::class);
         $this->projectSelectAction = app(TodoistProjectSelectAction::class);
         $this->colorGetAction = app(TodoistColorGetAction::class);
-        $this->projectUsersSyncAction = app(TodoistProjectUsersSyncAction::class);
+        $this->projectUserApplyAllAction = app(TodoistProjectUserApplyAllAction::class);
     }
 
-    public function handle(TodoistAccount $account, TodoistProject $project, array $projectPayload): ?TodoistProject
+    public function handle(TodoistAccount $account, TodoistProject $project, array $payload): ?TodoistProject
     {
-        $colorCode = data_get($projectPayload, 'color');
-        $isFavorite = data_get($projectPayload, 'is_favorite');
-        $name = data_get($projectPayload, 'name');
-        $id = data_get($projectPayload, 'v2_id');
-
+        $colorCode = data_get($payload, 'color');
+        $isFavorite = data_get($payload, 'is_favorite');
+        $name = data_get($payload, 'name');
+        $id = data_get($payload, 'v2_id');
+        $isArchived = data_get($payload, 'is_archived');
+        $isDeleted = data_get($payload, 'is_deleted');
+        // TODO deal with is_archived and is_deleted
         if (!$this->validationUtility->containsNoNulls([$colorCode, $isFavorite, $name, $id])) {
-            Log::warning("TodoistProjectUpdateAction couldn't proceed due to a missing non-nullable variable");
+            Log::warning("TodoistProjectUpdateAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         $color = $this->colorGetAction->handle($colorCode);
-
-        if (is_null($color)) {
-            Log::warning("TodoistProjectUpdateAction couldn't proceed due to color not being successfully created.");
+        if (!$this->validationUtility->containsNoNulls([$colorCode])) {
+            Log::warning("TodoistProjectUpdateAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
@@ -56,11 +57,11 @@ class TodoistProjectUpdateAction
                 'is_favorite' => $isFavorite,
             ]);
         } catch (Throwable $exception) {
-            Log::warning("TodoistProjectUpdateAction failed with exception {$exception->getMessage()}");
+            Log::warning("TodoistProjectUpdateAction failed with exception {$exception->getMessage()}.");
             return null;
         }
 
-        $result = $this->projectUsersSyncAction->handle($account, $project, $projectPayload);
+        $result = $this->projectUserApplyAllAction->handle($account, $project, $payload);
         if (!$result) {
             Log::warning("TodoistProjectUpdateAction couldn't proceed due unsuccessful assignment of users to project.");
             return null;
