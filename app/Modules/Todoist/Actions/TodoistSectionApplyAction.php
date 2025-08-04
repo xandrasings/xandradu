@@ -14,7 +14,7 @@ class TodoistSectionApplyAction
 
     protected TodoistSectionSelectAction $sectionSelectAction;
 
-    protected TodoistSectionInitializeAction $sectionInitializeAction;
+    protected TodoistSectionInstantiateAction $sectionInstantiateAction;
 
     protected TodoistSectionUpdateAction $sectionUpdateAction;
 
@@ -23,7 +23,7 @@ class TodoistSectionApplyAction
         $this->validationUtility = app(ValidationUtility::class);
         $this->sectionExistsAction = app(TodoistSectionExistsAction::class);
         $this->sectionSelectAction = app(TodoistSectionSelectAction::class);
-        $this->sectionInitializeAction = app(TodoistSectionInitializeAction::class);
+        $this->sectionInstantiateAction = app(TodoistSectionInstantiateAction::class);
         $this->sectionUpdateAction = app(TodoistSectionUpdateAction::class);
     }
 
@@ -45,6 +45,6 @@ class TodoistSectionApplyAction
             return $this->sectionUpdateAction->handle($section, $payload);
         }
 
-        return $this->sectionInitializeAction->handle($payload);
+        return $this->sectionInstantiateAction->handle($payload);
     }
 }

@@ -7,7 +7,7 @@ use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class TodoistSectionInitializeAction
+class TodoistSectionInstantiateAction
 {
     protected ValidationUtility $validationUtility;
 
