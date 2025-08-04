@@ -7,19 +7,19 @@ use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class TodoistSectionCreateAction
+class TodoistSectionInitializeAction
 {
     protected ValidationUtility $validationUtility;
 
     protected TodoistProjectSelectAction $projectSelectAction;
 
-    protected TodoistTaskLocationCreateAction $taskLocationCreateAction;
+    protected TodoistNodeInitiateAction $nodeInitializeAction;
 
     public function __construct()
     {
         $this->validationUtility = app(ValidationUtility::class);
         $this->projectSelectAction = app(TodoistProjectSelectAction::class);
-        $this->taskLocationCreateAction = app(TodoistTaskLocationCreateAction::class);
+        $this->nodeInitializeAction = app(TodoistNodeInitiateAction::class);
     }
 
     public function handle(array $sectionPayload): ?TodoistSection
@@ -28,39 +28,35 @@ class TodoistSectionCreateAction
         $projectId = data_get($sectionPayload, 'v2_project_id');
         $rank = data_get($sectionPayload, 'section_order');
         $id = data_get($sectionPayload, 'v2_id');
-
         if (! $this->validationUtility->containsNoNulls([$name, $projectId, $rank, $id])) {
-            Log::warning("TodoistSectionCreateAction couldn't proceed due to a missing non-nullable variable.");
+            Log::warning("TodoistSectionInitializeAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         $project = $this->projectSelectAction->handle($projectId);
-        if (is_null($project)) {
-            Log::warning("TodoistSectionUpdateAction failed due to missing project.}");
+        if (! $this->validationUtility->containsNoNulls([$project])) {
+            Log::warning("TodoistSectionInitializeAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
-        $taskLocation = $this->taskLocationCreateAction->handle();
-
-        if (is_null($taskLocation)) {
-            Log::warning("TodoistSectionCreateAction failed due to task location not being successfully created.");
+        $node = $this->nodeInitializeAction->handle();
+        if (! $this->validationUtility->containsNoNulls([$node])) {
+            Log::warning("TodoistSectionInitializeAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         try {
-            Log::notice("TodoistSectionCreateAction creating TodoistSection from $name $id");
-            $section = TodoistSection::create([
-                'location_reference_id' => $taskLocation->id,
+            Log::notice("TodoistSectionInitializeAction creating TodoistSection from TodoistNode $node->id, TodoistProject $project->id, rank $rank, external id $id, name $name.");
+            return TodoistSection::create([
+                'location_reference_id' => $node->id,
                 'project_id' => $project->id,
                 'rank' => $rank,
                 'external_id' => $id,
                 'name' => $name
             ]);
         } catch (Throwable $exception) {
-            Log::warning("TodoistSectionCreateAction failed with exception {$exception->getMessage()}");
+            Log::warning("TodoistSectionInitializeAction failed with exception {$exception->getMessage()}.");
             return null;
         }
-
-        return $section;
     }
 }
