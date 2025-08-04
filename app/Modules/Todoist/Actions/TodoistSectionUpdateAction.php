@@ -24,28 +24,27 @@ class TodoistSectionUpdateAction
         $name = data_get($payload, 'name');
         $projectId = data_get($payload, 'v2_project_id');
         $rank = data_get($payload, 'section_order');
-        $id = data_get($payload, 'v2_id');
 
-        if (!$this->validationUtility->containsNoNulls([$name, $projectId, $rank, $id])) {
-            Log::warning("TodoistSectionUpdateAction couldn't proceed due to a missing non-nullable variable");
+        if (!$this->validationUtility->containsNoNulls([$name, $projectId, $rank])) {
+            Log::warning("TodoistSectionUpdateAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         $project = $this->projectSelectAction->handle($projectId);
-        if (is_null($project)) {
-            Log::warning("TodoistSectionUpdateAction failed due to missing project.}");
+        if (!$this->validationUtility->containsNoNulls([$project])) {
+            Log::warning("TodoistSectionUpdateAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         try {
-            Log::notice("TodoistSectionUpdateAction updating TodoistSection $section->id");
+            Log::notice("TodoistSectionUpdateAction updating TodoistSection $section->id.");
             $section->update([
                 'project_id' => $project->id,
                 'rank' => $rank,
                 'name' => $name,
             ]);
         } catch (Throwable $exception) {
-            Log::warning("TodoistSectionUpdateAction failed with exception {$exception->getMessage()}");
+            Log::warning("TodoistSectionUpdateAction failed with exception {$exception->getMessage()}.");
             return null;
         }
 
