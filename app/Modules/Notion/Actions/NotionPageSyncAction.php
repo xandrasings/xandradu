@@ -25,9 +25,7 @@ class NotionPageSyncAction
 
     public function handle(string $id, NotionBot $bot): ?NotionPage
     {
-        $payload =$this->client->getPage($id, $bot); // TODO rename and refactor
-
-        // TODO check for [] and respond as appropriate
+        $payload =$this->client->getPage($id, $bot);
 
         if (! $this->validationUtility->containsNoNulls([$payload])) {
             Log::warning("NotionPageSyncAction couldn't proceed due to failure from NotionClient");
