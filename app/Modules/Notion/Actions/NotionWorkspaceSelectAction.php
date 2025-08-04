@@ -9,7 +9,9 @@ class NotionWorkspaceSelectAction
 {
     public function handle(string $name): ?NotionWorkspace
     {
-        $workspaces = NotionWorkspace::where(['name' => $name])->get();
+        $workspaces = NotionWorkspace::where([
+            'name' => $name
+        ])->get();
 
         if (count($workspaces) > 1) {
             Log::warning("NotionWorkspaceSelectAction failed because too many workspaces with name $name exist.");
