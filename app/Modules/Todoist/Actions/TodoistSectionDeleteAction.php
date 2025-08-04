@@ -12,10 +12,10 @@ class TodoistSectionDeleteAction
     public function handle(TodoistSection $section): ?TodoistSection
     {
         try {
-            Log::notice("TodoistSectionDeleteAction deleting TodoistSection $section->id");
+            Log::notice("TodoistSectionDeleteAction deleting TodoistSection $section->id.");
             $section->delete();
         } catch (Throwable $exception) {
-            Log::warning("TodoistSectionDeleteAction failed with exception {$exception->getMessage()}");
+            Log::warning("TodoistSectionDeleteAction failed with exception {$exception->getMessage()}.");
             return null;
         }
         return $section;
