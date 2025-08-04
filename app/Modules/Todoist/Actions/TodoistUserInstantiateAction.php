@@ -2,6 +2,7 @@
 
 namespace App\Modules\Todoist\Actions;
 
+use App\Models\EmailAddress;
 use App\Models\TodoistUser;
 use Illuminate\Support\Facades\Log;
 use Throwable;
