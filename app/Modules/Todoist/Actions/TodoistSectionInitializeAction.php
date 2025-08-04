@@ -22,12 +22,14 @@ class TodoistSectionInitializeAction
         $this->nodeInitializeAction = app(TodoistNodeInitiateAction::class);
     }
 
-    public function handle(array $sectionPayload): ?TodoistSection
+    public function handle(array $payload): ?TodoistSection
     {
-        $name = data_get($sectionPayload, 'name');
-        $projectId = data_get($sectionPayload, 'v2_project_id');
-        $rank = data_get($sectionPayload, 'section_order');
-        $id = data_get($sectionPayload, 'v2_id');
+        $name = data_get($payload, 'name');
+        $projectId = data_get($payload, 'v2_project_id');
+        $rank = data_get($payload, 'section_order');
+        $id = data_get($payload, 'v2_id');
+        $isArchived = data_get($payload, 'is_archived');
+        $isDeleted = data_get($payload, 'is_deleted');
         // TODO deal with is_archived and is_deleted
         if (! $this->validationUtility->containsNoNulls([$name, $projectId, $rank, $id])) {
             Log::warning("TodoistSectionInitializeAction couldn't proceed due to a missing non-nullable variable.");
