@@ -16,14 +16,14 @@ class TodoistProjectInstantiateAction
 
     protected TodoistColorGetAction $colorGetAction;
 
-    protected TodoistProjectUsersSyncAction $projectUsersSyncAction;
+    protected TodoistProjectUserApplyAllAction $projectUserApplyAllAction;
 
     public function __construct()
     {
         $this->validationUtility = app(ValidationUtility::class);
         $this->nodeInstantiateAction = app(TodoistNodeInstantiateAction::class);
         $this->colorGetAction = app(TodoistColorGetAction::class);
-        $this->projectUsersSyncAction = app(TodoistProjectUsersSyncAction::class);
+        $this->projectUserApplyAllAction = app(TodoistProjectUserApplyAllAction::class);
     }
 
     public function handle(TodoistAccount $account, array $payload): ?TodoistProject
@@ -66,7 +66,7 @@ class TodoistProjectInstantiateAction
             return null;
         }
 
-        $result = $this->projectUsersSyncAction->handle($account, $project, $payload);
+        $result = $this->projectUserApplyAllAction->handle($account, $project, $payload);
         if (! $result) {
             Log::warning("TodoistProjectInstantiateAction couldn't proceed due unsuccessful assignment of users to project.");
             return null;
