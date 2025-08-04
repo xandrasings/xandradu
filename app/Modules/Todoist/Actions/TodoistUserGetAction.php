@@ -11,9 +11,12 @@ class TodoistUserGetAction
 {
     protected EmailAddressGetAction $emailAddressGetAction;
 
+    protected TodoistUserInstantiateAction $userInstantiateAction;
+
     public function __construct()
     {
         $this->emailAddressGetAction = app(EmailAddressGetAction::class);
+        $this->userInstantiateAction = app(TodoistUserInstantiateAction::class);
     }
 
     public function handle(string $id, string $email, string $name): ?TodoistUser
@@ -35,11 +38,8 @@ class TodoistUserGetAction
         if ($users->isEmpty()) {
             try {
                 Log::notice("TodoistUserGetAction creating TodoistUser $id $email $name");
-                return TodoistUser::create([
-                    'external_id' => $id,
-                    'email_address_id' => $emailAddress->id,
-                    'name' => $name,
-                ]);
+
+                return $this->userInstantiateAction->handle($id, $email, $name);
             } catch (Throwable $exception) {
                 Log::warning("TodoistUserGetAction failed with exception {$exception->getMessage()}");
                 return null;
