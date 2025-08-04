@@ -26,4 +26,9 @@ class NotionDatabase extends Model
     {
         return $this->belongsTo(NotionNode::class, 'node_id');
     }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(NotionNode::class, 'location_id');
+    }
 }
