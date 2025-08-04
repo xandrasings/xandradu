@@ -6,15 +6,15 @@ use App\Models\TodoistTaskLocation;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class TodoistTaskLocationCreateAction
+class TodoistNodeInitiateAction
 {
     public function handle(): ?TodoistTaskLocation
     {
         try {
-            Log::notice("TodoistTaskLocationCreateAction creating TodoistTaskLocation");
+            Log::notice("TodoistNodeInitiateAction creating TodoistNode");
             return TodoistTaskLocation::create([]);
         } catch (Throwable $exception) {
-            Log::warning("TodoistTaskLocationCreateAction failed with exception {$exception->getMessage()}");
+            Log::warning("TodoistNodeInitiateAction failed with exception {$exception->getMessage()}.");
             return null;
         }
     }
