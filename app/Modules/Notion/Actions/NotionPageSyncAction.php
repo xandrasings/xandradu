@@ -30,7 +30,10 @@ class NotionPageSyncAction
     {
         $bot = $this->botSelectAction->handle($workspace,  'xandradu');
 
-        // TODO null check
+        if (! $this->validationUtility->containsNoNulls([$bot])) {
+            Log::warning("NotionPageSyncAction couldn't proceed due to a missing non-nullable variable");
+            return null;
+        }
 
         $payload =$this->client->getPage($id, $bot);
 
