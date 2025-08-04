@@ -2,7 +2,6 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\TodoistAccount;
 use App\Models\TodoistSection;
 use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Log;
@@ -20,12 +19,12 @@ class TodoistSectionUpdateAction
         $this->projectSelectAction = app(TodoistProjectSelectAction::class);
     }
 
-    public function handle(TodoistSection $section, array $sectionPayload): ?TodoistSection
+    public function handle(TodoistSection $section, array $payload): ?TodoistSection
     {
-        $name = data_get($sectionPayload, 'name');
-        $projectId = data_get($sectionPayload, 'v2_project_id');
-        $rank = data_get($sectionPayload, 'section_order');
-        $id = data_get($sectionPayload, 'v2_id');
+        $name = data_get($payload, 'name');
+        $projectId = data_get($payload, 'v2_project_id');
+        $rank = data_get($payload, 'section_order');
+        $id = data_get($payload, 'v2_id');
 
         if (!$this->validationUtility->containsNoNulls([$name, $projectId, $rank, $id])) {
             Log::warning("TodoistSectionUpdateAction couldn't proceed due to a missing non-nullable variable");
@@ -39,7 +38,7 @@ class TodoistSectionUpdateAction
         }
 
         try {
-            Log::notice("TodoistSectionUpdateAction updating TodoistSection $id");
+            Log::notice("TodoistSectionUpdateAction updating TodoistSection $section->id");
             $section->update([
                 'project_id' => $project->id,
                 'rank' => $rank,
