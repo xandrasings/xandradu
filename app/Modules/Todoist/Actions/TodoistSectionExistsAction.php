@@ -10,6 +10,6 @@ class TodoistSectionExistsAction
     {
         return TodoistSection::where([
             'external_id' => $id
-        ])->get()->count() > 0;
+        ])->withTrashed()->get()->count() > 0;
     }
 }
