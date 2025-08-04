@@ -13,13 +13,13 @@ class TodoistSectionInitializeAction
 
     protected TodoistProjectSelectAction $projectSelectAction;
 
-    protected TodoistNodeInitiateAction $nodeInitializeAction;
+    protected TodoistNodeInstantiateAction $nodeInitializeAction;
 
     public function __construct()
     {
         $this->validationUtility = app(ValidationUtility::class);
         $this->projectSelectAction = app(TodoistProjectSelectAction::class);
-        $this->nodeInitializeAction = app(TodoistNodeInitiateAction::class);
+        $this->nodeInitializeAction = app(TodoistNodeInstantiateAction::class);
     }
 
     public function handle(array $payload): ?TodoistSection
