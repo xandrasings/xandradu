@@ -23,4 +23,9 @@ class NotionNode extends Model
     {
         return $this->hasOne(NotionPage::class, 'node_id');
     }
+
+    public function bandWiki(): HasOne
+    {
+        return $this->hasOne(BandWiki::class);
+    }
 }
