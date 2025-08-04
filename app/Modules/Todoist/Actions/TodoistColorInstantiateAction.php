@@ -8,12 +8,12 @@ use Throwable;
 
 class TodoistColorInstantiateAction
 {
-    public function handle(string $colorCode, string $name): ?TodoistColor
+    public function handle(string $code, string $name): ?TodoistColor
     {
         try {
-            Log::notice("TodoistColorInstantiateAction creating TodoistColor with code $colorCode and name $name.");
+            Log::notice("TodoistColorInstantiateAction creating TodoistColor with code $code and name $name.");
             return TodoistColor::create([
-                'code' => $colorCode,
+                'code' => $code,
                 'name' => $name
             ]);
         } catch (Throwable $exception) {
