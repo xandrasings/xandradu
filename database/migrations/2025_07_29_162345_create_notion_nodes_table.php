@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notion_workspaces', function (Blueprint $table) {
+        Schema::create('notion_nodes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('node_id')->constrained(table: 'notion_nodes')->cascadeOnDelete();
-            $table->string('name', 32);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notion_workspaces');
+        Schema::dropIfExists('notion_nodes');
     }
 };

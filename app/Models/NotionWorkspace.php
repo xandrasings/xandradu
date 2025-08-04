@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -11,10 +12,16 @@ class NotionWorkspace extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'node_id',
         'name',
     ];
 
-    public function workspace(): HasMany
+    public function node(): BelongsTo
+    {
+        return $this->belongsTo(NotionNode::class, 'node_id');
+    }
+
+    public function bots(): HasMany
     {
         return $this->hasMany(NotionBot::class, 'workspace_id');
     }
