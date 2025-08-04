@@ -13,13 +13,13 @@ class TodoistSectionInitializeAction
 
     protected TodoistProjectSelectAction $projectSelectAction;
 
-    protected TodoistNodeInstantiateAction $nodeInitializeAction;
+    protected TodoistNodeInstantiateAction $nodeInstantiateAction;
 
     public function __construct()
     {
         $this->validationUtility = app(ValidationUtility::class);
         $this->projectSelectAction = app(TodoistProjectSelectAction::class);
-        $this->nodeInitializeAction = app(TodoistNodeInstantiateAction::class);
+        $this->nodeInstantiateAction = app(TodoistNodeInstantiateAction::class);
     }
 
     public function handle(array $payload): ?TodoistSection
@@ -42,7 +42,7 @@ class TodoistSectionInitializeAction
             return null;
         }
 
-        $node = $this->nodeInitializeAction->handle();
+        $node = $this->nodeInstantiateAction->handle();
         if (! $this->validationUtility->containsNoNulls([$node])) {
             Log::warning("TodoistSectionInitializeAction couldn't proceed due to a missing non-nullable variable.");
             return null;
