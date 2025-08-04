@@ -7,19 +7,19 @@ use Illuminate\Support\Facades\Log;
 
 class TodoistProjectSelectAction
 {
-    public function handle(string $externalId): ?TodoistProject
+    public function handle(string $id): ?TodoistProject
     {
         $projects = TodoistProject::where([
-            'external_id' => $externalId
+            'external_id' => $id
         ])->get();
 
         if ($projects->count() > 1) {
-            Log::warning("TodoistProjectSelectAction failed because multiple projects with external id $externalId exist.");
+            Log::warning("TodoistProjectSelectAction failed because multiple TodoistProjects with external id $id exist.");
             return null;
         }
 
         if ($projects->isEmpty()) {
-            Log::warning("TodoistProjectSelectAction failed because no projects with external id $externalId exist.");
+            Log::warning("TodoistProjectSelectAction failed because no TodoistProjects with external id $id exist.");
             return null;
         }
 
