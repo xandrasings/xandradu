@@ -73,7 +73,8 @@ class NotionClient
         if ($response->failed()) {
             $message = data_get($response->json(), 'message');
             if (str_contains($message, 'is a database, not a page.')) {
-                return [];
+                Log::info("Call to notion endpoint $url indicated wrong node type.");
+                return null;
             }
 
             Log::warning("Call to notion endpoint $url failed with response {$response->getStatusCode()}");
@@ -103,7 +104,8 @@ class NotionClient
         if ($response->failed()) {
             $message = data_get($response->json(), 'message');
             if (str_contains($message, 'is a page, not a database.')) {
-                return [];
+                Log::info("Call to notion endpoint $url indicated wrong node type.");
+                return null;
             }
 
             Log::warning("Call to notion endpoint $url failed with response {$response->getStatusCode()}");
