@@ -24,6 +24,9 @@ class TodoistSectionUpdateAction
         $name = data_get($payload, 'name');
         $projectId = data_get($payload, 'v2_project_id');
         $rank = data_get($payload, 'section_order');
+        $isArchived = data_get($payload, 'is_archived');
+        $isDeleted = data_get($payload, 'is_deleted');
+        // TODO deal with is_archived and is_deleted
 
         if (!$this->validationUtility->containsNoNulls([$name, $projectId, $rank])) {
             Log::warning("TodoistSectionUpdateAction couldn't proceed due to a missing non-nullable variable.");
