@@ -19,7 +19,9 @@ class TodoistColorGetAction
     {
         $name = Str::apa(str_replace('_', ' ', $code));
 
-        $colors = TodoistColor::where(['code' => $code])->get();
+        $colors = TodoistColor::where([
+            'code' => $code
+        ])->get();
 
         if (count($colors) > 1) {
             Log::warning("TodoistColorGetAction failed, found too many TodoistColor records matching code $code.");
