@@ -17,7 +17,7 @@ class EmailAddress extends Model
 
     public function people(): BelongsToMany
     {
-        return $this->belongsToMany(Person::class)->withTimestamps();
+        return $this->belongsToMany(Person::class)->withPivot('label')->withTimestamps();
     }
 
     public function todoistUser(): HasOne
