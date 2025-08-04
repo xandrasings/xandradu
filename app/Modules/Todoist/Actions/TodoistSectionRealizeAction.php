@@ -21,30 +21,31 @@ class TodoistSectionRealizeAction
         $this->validationUtility = app(ValidationUtility::class);
     }
 
-    public function handle(TodoistAccount $account, TodoistSection $section): bool
+    public function handle(TodoistAccount $account, TodoistSection $section): ?TodoistSection
     {
         $response = $this->client->createSection($account, $section);
         if (is_null($response)) {
             Log::warning("TodoistSectionRealizeAction failed due to unsuccessful client call.");
-            return false;
+            return null;
         }
 
         $id = data_get($response, 'id');
 
         if (! $this->validationUtility->containsNoNulls([$id])) {
             Log::critical("TodoistSectionRealizeAction failed due to a missing non-nullable variable");
-            return false;
+            return null;
         }
 
         try {
+            Log::notice("TodoistSectionRealizeAction updating TodoistSection $section->id with external id $id.");
             $section->update([
                 'external_id' => $id,
             ]);
         } catch (Throwable $exception) {
-            Log::critical("TodoistSectionRealizeAction failed with exception {$exception->getMessage()}");
-            return false;
+            Log::critical("TodoistSectionRealizeAction failed with exception {$exception->getMessage()}.");
+            return null;
         }
 
-        return true;
+        return $section;
     }
 }
