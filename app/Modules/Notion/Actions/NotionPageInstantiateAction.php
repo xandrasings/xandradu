@@ -4,6 +4,7 @@ namespace App\Modules\Notion\Actions;
 
 use App\Models\NotionNode;
 use App\Models\NotionPage;
+use App\Models\NotionWorkspace;
 use App\Modules\Todoist\Actions\TodoistProjectSelectAction;
 use App\Modules\Todoist\Actions\TodoistTaskLocationCreateAction;
 use App\Utilities\ValidationUtility;
@@ -25,10 +26,12 @@ class NotionPageInstantiateAction
         $this->taskLocationCreateAction = app(TodoistTaskLocationCreateAction::class);
     }
 
-    public function handle(array $payload): ?NotionPage
+    public function handle(array $payload, NotionWorkspace $workspace): ?NotionPage
     {
         $id = data_get($payload, 'id');
         $title = data_get($payload, 'properties.title.title.0.plain_text');
+
+        print_r($payload);
 
         if (! $this->validationUtility->containsNoNulls([$id, $title])) {
             Log::warning("NotionPageInstantiateAction couldn't proceed due to a missing non-nullable variable");
@@ -41,8 +44,9 @@ class NotionPageInstantiateAction
 
             Log::notice("NotionPageInstantiateAction creating NotionPage from $title $id");
             return NotionPage::create([
-                'external_id' => $id,
                 'node_id' => $node->id,
+                'location_id' => $workspace->node->id,
+                'external_id' => $id,
                 'title' => $title
             ]);
         } catch (Throwable $exception) {

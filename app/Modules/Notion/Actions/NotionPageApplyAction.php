@@ -3,6 +3,7 @@
 namespace App\Modules\Notion\Actions;
 
 use App\Models\NotionPage;
+use App\Models\NotionWorkspace;
 use App\Modules\Notion\Clients\NotionClient;
 use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Log;
@@ -28,7 +29,7 @@ class NotionPageApplyAction
         $this->pageUpdateAction = app(NotionPageUpdateAction::class);
     }
 
-    public function handle(array $payload): ?NotionPage
+    public function handle(array $payload, NotionWorkspace $workspace): ?NotionPage
     {
         $id = data_get($payload, 'id');
 
@@ -49,7 +50,7 @@ class NotionPageApplyAction
         }
 
         if ($pages->isEmpty()) {
-            return $this->pageInstantiateAction->handle($payload);
+            return $this->pageInstantiateAction->handle($payload, $workspace);
         }
 
         $page = $pages->first();

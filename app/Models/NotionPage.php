@@ -11,8 +11,9 @@ class NotionPage extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'external_id',
         'node_id',
+        'location_id',
+        'external_id',
         'title',
     ];
 
