@@ -15,7 +15,7 @@ class TodoistProjectDeleteAction
             Log::notice("TodoistProjectDeleteAction deleting TodoistProject $project->id");
             $project->delete();
         } catch (Throwable $exception) {
-            Log::warning("TodoistProjectDeleteAction failed with exception {$exception->getMessage()}");
+            Log::warning("TodoistProjectDeleteAction failed with exception {$exception->getMessage()}.");
             return null;
         }
         return $project;
