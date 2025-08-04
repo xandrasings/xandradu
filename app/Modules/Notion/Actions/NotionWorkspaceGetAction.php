@@ -2,6 +2,7 @@
 
 namespace App\Modules\Notion\Actions;
 
+use App\Models\NotionNode;
 use App\Models\NotionWorkspace;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -20,7 +21,12 @@ class NotionWorkspaceGetAction
         if ($workspaces->isEmpty()) {
             try {
                 Log::notice("NotionWorkspaceGetAction creating NotionWorkspace $name");
+
+                // TODO move as appropriate
+                $node = NotionNode::create([]);
+
                 return NotionWorkspace::create([
+                    'node_id' => $node->id,
                     'name' => $name
                 ]);
             } catch (Throwable $exception) {
