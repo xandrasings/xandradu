@@ -26,12 +26,6 @@ class BandWikiCreateAction
 
         $page = $this->notionPageSyncAction->handle($rootNodeId, $workspace);
 
-        $bandWiki = $this->wikiInstantiateAction->handle($band, $page->node);
-
-        // TODO null check
-
-        // TODO build up the wiki
-
-        return $bandWiki;
+        return $this->wikiInstantiateAction->handle($band, $page->node);
     }
 }

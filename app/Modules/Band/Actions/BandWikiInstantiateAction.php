@@ -22,5 +22,9 @@ class BandWikiInstantiateAction
             Log::warning("BandWikiInstantiateAction failed with exception {$exception->getMessage()}.");
             return null;
         }
+
+        // TODO null check
+
+        // TODO build up the wiki
     }
 }
