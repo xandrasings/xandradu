@@ -4,37 +4,47 @@ namespace App\Modules\Todoist\Actions;
 
 use App\Models\TodoistAccount;
 use App\Modules\Todoist\Clients\TodoistClient;
+use App\Utilities\ValidationUtility;
+use Illuminate\Support\Facades\Log;
 
 class TodoistAccountSyncAction
 {
     protected TodoistClient $client;
 
-    protected TodoistProjectsSyncAction $projectsSyncAction;
+    protected ValidationUtility $validationUtility;
 
-    protected TodoistSectionsSyncAction $sectionsSyncAction;
+    protected TodoistProjectApplyAllAction $projectApplyAllAction;
+
+    protected TodoistSectionApplyAllAction $sectionApplyAllAction;
 
     public function __construct()
     {
         $this->client = app(TodoistClient::class);
-        $this->projectsSyncAction = app(TodoistProjectsSyncAction::class);
-        $this->sectionsSyncAction = app(TodoistSectionsSyncAction::class);
+        $this->validationUtility = app(ValidationUtility::class);
+        $this->projectApplyAllAction = app(TodoistProjectApplyAllAction::class);
+        $this->sectionApplyAllAction = app(TodoistSectionApplyAllAction::class);
     }
 
-
-    public function handle(TodoistAccount $account): void
+    public function handle(TodoistAccount $account): bool
     {
-        $response =  $this->client->getLatestChanges($account);
+        $payload = $this->client->getLatestChanges($account);
+        if (!$this->validationUtility->containsNoNulls([$payload])) {
+            Log::warning("TodoistAccountSyncAction couldn't proceed due to a missing non-nullable variable.");
+            return;
+        }
 
-        // TODO null check
+        $result = $this->projectApplyAllAction->handle($account, data_get($payload, 'projects', []));
+        if (!$result) {
+            Log::warning("TodoistAccountSyncAction failed due to failure of ProjectApplyAllAction.");
+            return false;
+        }
 
-        // TODO update account w sync token
+        $this->sectionApplyAllAction->handle(data_get($payload, 'sections', []));
+        if (!$result) {
+            Log::warning("TodoistAccountSyncAction failed due to failure of SectionApplyAllAction.");
+            return false;
+        }
 
-        // TODO sync becomes apply
-
-        $projectsPayload = data_get($response, 'projects', []);
-        $this->projectsSyncAction->handle($account, $projectsPayload);
-
-        $sectionsPayload = data_get($response, 'sections', []);
-        $this->sectionsSyncAction->handle($sectionsPayload);
+        return true;
     }
 }

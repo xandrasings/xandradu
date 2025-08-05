@@ -38,7 +38,6 @@ class TodoistProjectUserAssociateAllAction
         $payloads = $this->client->getProjectUsers($project, $account);
         if (!$this->validationUtility->containsNoNulls([$payloads])) {
             Log::warning("TodoistProjectUserAssociateAllAction couldn't proceed due to a missing non-nullable variable.");
-
             return false;
         }
 

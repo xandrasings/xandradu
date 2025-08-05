@@ -9,7 +9,7 @@ use Throwable;
 
 class TodoistProjectUserAssociateAction
 {
-    public function handle(TodoistProject $project, TodoistUser $user, ?TodoistProject $parentProject = null, int $childOrder = 0): bool
+    public function handle(TodoistProject $project, TodoistUser $user, ?TodoistProject $parentProject, int $childOrder): bool
     {
         $parentProjectId = is_null($parentProject) ? null : $parentProject->id;
 
