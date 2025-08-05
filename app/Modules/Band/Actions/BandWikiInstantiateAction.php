@@ -19,7 +19,7 @@ class BandWikiInstantiateAction
                 'notion_node_id' => $rootNode->id,
             ]);
         } catch (Throwable $exception) {
-            Log::warning("BandWikiInstantiateAction failed with exception {$exception->getMessage()}");
+            Log::warning("BandWikiInstantiateAction failed with exception {$exception->getMessage()}.");
             return null;
         }
     }
