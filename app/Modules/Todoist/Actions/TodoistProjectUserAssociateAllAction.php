@@ -59,7 +59,7 @@ class TodoistProjectUserAssociateAllAction
             return false;
         }
 
-        $result = $payloads->map(function ($payload) use ($accountChildOrder, $accountParentProject, $account, $project) {
+        $result = $payloads->map(function ($payload) use ($account, $accountParentProject, $accountChildOrder, $project) {
             $id = data_get($payload, 'id');
             $email = data_get($payload, 'email');
             $name = data_get($payload, 'name');
