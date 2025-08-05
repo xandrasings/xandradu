@@ -25,9 +25,9 @@ class NotionBotCreateAction
 
     public function handle(string $label, string $token): ?NotionBot
     {
-        $botPayload =$this->client->getUser($token); // TODO rename and refactor
+        $botPayload = $this->client->getUser($token); // TODO rename and refactor
 
-        if (! $this->validationUtility->containsNoNulls([$botPayload])) {
+        if (!$this->validationUtility->containsNoNulls([$botPayload])) {
             Log::warning("NotionWorkspaceInstantiateAction couldn't proceed due to failure from NotionClient");
             return null;
         }
