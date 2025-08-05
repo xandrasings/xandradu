@@ -24,6 +24,7 @@ class NotionPageInstantiateAction
     {
         $id = data_get($payload, 'id');
         $title = data_get($payload, 'properties.title.title.0.plain_text');
+        // TODO considerations for deleted and archived
         if (!$this->validationUtility->containsNoNulls([$id])) {
             Log::warning("NotionPageInstantiateAction couldn't proceed due to a missing non-nullable variable.");
             return null;

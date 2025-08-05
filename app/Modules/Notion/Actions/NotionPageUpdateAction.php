@@ -23,6 +23,7 @@ class NotionPageUpdateAction
     public function handle(NotionPage $page, array $payload): ?NotionPage
     {
         $title = data_get($payload, 'properties.title.title.0.plain_text');
+        // TODO considerations for deleted and archived
 
         try {
             Log::notice("NotionPageUpdateAction updating NotionPage $page->id");
