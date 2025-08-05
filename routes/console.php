@@ -1,6 +1,6 @@
 <?php
 
-use App\Jobs\HeartbeatJob;
+use App\Modules\Core\Jobs\HeartbeatJob;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;

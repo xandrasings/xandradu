@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Modules\Core\Jobs;
 
 use App\Modules\Core\Actions\HeartbeatAction;
 use Illuminate\Contracts\Queue\ShouldQueue;
