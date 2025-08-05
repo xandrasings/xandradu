@@ -41,7 +41,7 @@ class TodoistClient
             $response = Http::withToken($token)
                 ->get($url);
         } catch (Throwable $exception) {
-            Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}");
+            Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}.");
             return null;
         }
 
@@ -99,7 +99,7 @@ class TodoistClient
                     'resource_types'=>'["projects","sections"]' // TODO generate this better
                 ]);
         } catch (Throwable $exception) {
-            Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}");
+            Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}.");
             return null;
         }
 
@@ -126,7 +126,7 @@ class TodoistClient
             $response = Http::withToken($token)
                 ->post($url, $body);
         } catch (Throwable $exception) {
-            Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}");
+            Log::warning("Call to todoist endpoint $url failed with exception {$exception->getMessage()}.");
             return null;
         }
 
