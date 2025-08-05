@@ -3,9 +3,11 @@
 namespace App\Modules\Notion\Clients;
 
 use App\Models\NotionBot;
+use App\Models\NotionDatabase;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use stdClass;
 use Throwable;
 
 class NotionClient
@@ -41,12 +43,12 @@ class NotionClient
                 ])
                 ->get($url);
         } catch (Throwable $exception) {
-            Log::warning("Call to notion endpoint $url failed with exception {$exception->getMessage()}");
+            Log::warning("Call to notion endpoint $url failed with exception {$exception->getMessage()}.");
             return null;
         }
 
         if ($response->failed()) {
-            Log::warning("Call to notion endpoint $url failed with response {$response->getStatusCode()}");
+            Log::warning("Call to notion endpoint $url failed with response {$response->getStatusCode()}.");
             return null;
         }
 
@@ -66,7 +68,7 @@ class NotionClient
                 ])
                 ->get($url);
         } catch (Throwable $exception) {
-            Log::warning("Call to notion endpoint $url failed with exception {$exception->getMessage()}");
+            Log::warning("Call to notion endpoint $url failed with exception {$exception->getMessage()}.");
             return null;
         }
 
@@ -84,30 +86,44 @@ class NotionClient
         return $response->json();
     }
 
-    public function getDatabase(string $id, NotionBot $bot): ?array
+    public function createDatabase(NotionDatabase $database, NotionBot $bot): ?array
     {
-        $url = "$this->hostName/$this->databasesEndpoint/$id";
+        $url = "$this->hostName/$this->databasesEndpoint";
         $token = Crypt::decryptString($bot->token);
+        $body = [
+            'parent' => [
+                'type' => 'page_id',
+                'page_id' => $database->location->page->external_id, // TODO xan this has to be a page, right? maybe verification?
+            ],
+            'title' => [
+                [
+                    'type' => 'text',
+                    'text' => [
+                        'content' => $database->title,
+                        'link' => null
+                    ]
+                ]
+            ],
+            'properties' => [
+                'Column 1' => [
+                    'title' => new stdClass()
+                ],
+            ],
+        ];
 
         try {
-            Log::notice("Calling notion endpoint $url.");
+            Log::notice("Calling notion endpoint $url.", ['body'=>$body]);
             $response = Http::withToken($token)
                 ->withHeaders([
                     'Notion-Version' => $this->version,
                 ])
-                ->get($url);
+                ->post($url, $body);
         } catch (Throwable $exception) {
-            Log::warning("Call to notion endpoint $url failed with exception {$exception->getMessage()}");
+            Log::warning("Call to notion endpoint $url failed with exception {$exception->getMessage()}.");
             return null;
         }
 
         if ($response->failed()) {
-            $message = data_get($response->json(), 'message');
-            if (str_contains($message, 'is a page, not a database.')) {
-                Log::info("Call to notion endpoint $url indicated wrong node type.");
-                return null;
-            }
-
             Log::warning("Call to notion endpoint $url failed with response {$response->getStatusCode()}");
             return null;
         }
