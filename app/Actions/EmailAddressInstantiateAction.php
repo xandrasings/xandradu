@@ -11,12 +11,12 @@ class EmailAddressInstantiateAction
     public function handle(string $fullValue): ?EmailAddress
     {
         try {
-            Log::notice("EmailAddressInstantiateAction creating EmailAddress from $fullValue");
+            Log::notice("EmailAddressInstantiateAction creating EmailAddress from $fullValue.");
             return EmailAddress::create([
                 'full_value' => $fullValue,
             ]);
         } catch (Throwable $exception) {
-            Log::warning("BandWikiInstantiateAction failed with exception {$exception->getMessage()}");
+            Log::warning("BandWikiInstantiateAction failed with exception {$exception->getMessage()}.");
             return null;
         }
     }
