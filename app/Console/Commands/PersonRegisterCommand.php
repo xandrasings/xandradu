@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\PersonRegisterAction;
+use App\Modules\Core\Actions\PersonRegisterAction;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 

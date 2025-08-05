@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions;
+namespace App\Modules\Core\Actions;
 
 use App\Models\EmailAddress;
 use App\Models\Person;

@@ -2,9 +2,9 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Actions\EmailAddressGetAction;
 use App\Models\TodoistAccount;
 use App\Models\TodoistProject;
+use App\Modules\Core\Actions\EmailAddressGetAction;
 use App\Modules\Todoist\Clients\TodoistClient;
 use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Log;

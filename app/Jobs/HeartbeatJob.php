@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Actions\HeartbeatAction;
+use App\Modules\Core\Actions\HeartbeatAction;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
