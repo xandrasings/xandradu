@@ -49,7 +49,13 @@ class BandWikiRegisterCommand extends Command
             return;
         }
 
-        $this->service->createWiki($band, $notionWorkspace, $rootNodeId);
+        $bandWiki = $this->service->createWiki($band, $notionWorkspace, $rootNodeId);
+        if (is_null($bandWiki)) {
+            Log::error("BandWikiRegisterCommand failed due to failure of BandWikiCreateAction.");
+            print_r("CONSOLE COMMAND ABORTED: $this->signature $bandName $notionWorkspaceName\n");
+            Log::notice("CONSOLE COMMAND ABORTED: $this->signature $bandName $notionWorkspaceName");
+            return;
+        }
 
         print_r("CONSOLE COMMAND COMPLETED: $this->signature $bandName $notionWorkspaceName\n");
         Log::notice("CONSOLE COMMAND COMPLETED: $this->signature $bandName $notionWorkspaceName");
