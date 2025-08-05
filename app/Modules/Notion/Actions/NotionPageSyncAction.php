@@ -28,16 +28,16 @@ class NotionPageSyncAction
 
     public function handle(string $id, NotionWorkspace $workspace): ?NotionPage
     {
-        $bot = $this->botSelectAction->handle($workspace,  'xandradu');
+        $bot = $this->botSelectAction->handle($workspace, 'xandradu');
 
-        if (! $this->validationUtility->containsNoNulls([$bot])) {
-            Log::warning("NotionPageSyncAction couldn't proceed due to a missing non-nullable variable");
+        if (!$this->validationUtility->containsNoNulls([$bot])) {
+            Log::warning("NotionPageSyncAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
-        $payload =$this->client->getPage($id, $bot);
+        $payload = $this->client->getPage($id, $bot);
 
-        if (! $this->validationUtility->containsNoNulls([$payload])) {
+        if (!$this->validationUtility->containsNoNulls([$payload])) {
             Log::warning("NotionPageSyncAction couldn't proceed due to failure from NotionClient");
             return null;
         }
