@@ -2,9 +2,9 @@
 
 namespace App\Modules\Band\Actions;
 
-use App\Models\Band;
-use App\Models\BandWiki;
-use App\Models\NotionNode;
+use App\Modules\Band\Models\Band;
+use App\Modules\Band\Models\BandWiki;
+use App\Modules\Notion\Models\NotionNode;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 

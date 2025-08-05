@@ -2,8 +2,8 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\TodoistAccount;
 use App\Modules\Todoist\Clients\TodoistClient;
+use App\Modules\Todoist\Models\TodoistAccount;
 use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Log;
 

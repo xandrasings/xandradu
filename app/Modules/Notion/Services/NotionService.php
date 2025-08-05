@@ -2,10 +2,10 @@
 
 namespace App\Modules\Notion\Services;
 
-use App\Models\NotionBot;
-use App\Models\NotionWorkspace;
 use App\Modules\Notion\Actions\NotionBotCreateAction;
 use App\Modules\Notion\Actions\NotionWorkspaceSelectAction;
+use App\Modules\Notion\Models\NotionBot;
+use App\Modules\Notion\Models\NotionWorkspace;
 
 class NotionService
 {

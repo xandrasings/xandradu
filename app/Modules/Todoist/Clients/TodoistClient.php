@@ -2,9 +2,9 @@
 
 namespace App\Modules\Todoist\Clients;
 
-use App\Models\TodoistAccount;
-use App\Models\TodoistProject;
-use App\Models\TodoistSection;
+use App\Modules\Todoist\Models\TodoistAccount;
+use App\Modules\Todoist\Models\TodoistProject;
+use App\Modules\Todoist\Models\TodoistSection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;

@@ -2,9 +2,9 @@
 
 namespace App\Modules\Notion\Actions;
 
-use App\Models\NotionBot;
-use App\Models\NotionDatabase;
 use App\Modules\Notion\Clients\NotionClient;
+use App\Modules\Notion\Models\NotionBot;
+use App\Modules\Notion\Models\NotionDatabase;
 use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Log;
 use Throwable;

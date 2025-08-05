@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Todoist\Models;
 
+use App\Modules\Core\Models\EmailAddress;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

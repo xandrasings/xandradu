@@ -2,8 +2,8 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\EmailAddress;
-use App\Models\TodoistUser;
+use App\Modules\Core\Models\EmailAddress;
+use App\Modules\Todoist\Models\TodoistUser;
 use Illuminate\Support\Facades\Log;
 
 class TodoistUserGetAction

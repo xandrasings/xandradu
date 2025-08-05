@@ -2,7 +2,7 @@
 
 namespace App\Modules\Notion\Actions;
 
-use App\Models\NotionWorkspace;
+use App\Modules\Notion\Models\NotionWorkspace;
 use Illuminate\Support\Facades\Log;
 
 class NotionWorkspaceSelectAction

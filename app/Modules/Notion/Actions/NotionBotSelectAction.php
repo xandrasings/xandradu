@@ -2,8 +2,8 @@
 
 namespace App\Modules\Notion\Actions;
 
-use App\Models\NotionBot;
-use App\Models\NotionWorkspace;
+use App\Modules\Notion\Models\NotionBot;
+use App\Modules\Notion\Models\NotionWorkspace;
 use Illuminate\Support\Facades\Log;
 
 class NotionBotSelectAction

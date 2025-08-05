@@ -2,12 +2,12 @@
 
 namespace App\Modules\Todoist\Services;
 
-use App\Models\Person;
-use App\Models\TodoistAccount;
-use App\Models\TodoistSection;
+use App\Modules\Core\Models\Person;
 use App\Modules\Todoist\Actions\TodoistAccountCreateAction;
 use App\Modules\Todoist\Actions\TodoistAccountSyncAllAction;
 use App\Modules\Todoist\Actions\TodoistSectionRealizeAction;
+use App\Modules\Todoist\Models\TodoistAccount;
+use App\Modules\Todoist\Models\TodoistSection;
 
 class TodoistService
 {

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Notion\Models;
 
+use App\Modules\Band\Models\BandWiki;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 

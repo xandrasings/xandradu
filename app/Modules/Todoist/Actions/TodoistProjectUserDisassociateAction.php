@@ -2,8 +2,8 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\TodoistProject;
-use App\Models\TodoistUser;
+use App\Modules\Todoist\Models\TodoistProject;
+use App\Modules\Todoist\Models\TodoistUser;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 

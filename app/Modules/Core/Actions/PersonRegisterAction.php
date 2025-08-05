@@ -2,7 +2,7 @@
 
 namespace App\Modules\Core\Actions;
 
-use App\Models\Person;
+use App\Modules\Core\Models\Person;
 use Illuminate\Support\Facades\Log;
 
 class PersonRegisterAction

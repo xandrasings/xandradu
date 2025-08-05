@@ -2,8 +2,8 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\TodoistAccount;
-use App\Models\TodoistProject;
+use App\Modules\Todoist\Models\TodoistAccount;
+use App\Modules\Todoist\Models\TodoistProject;
 use Illuminate\Support\Facades\Log;
 
 class TodoistProjectUserDisassociateAllAction

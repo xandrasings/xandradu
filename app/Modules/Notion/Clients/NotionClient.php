@@ -2,8 +2,8 @@
 
 namespace App\Modules\Notion\Clients;
 
-use App\Models\NotionBot;
-use App\Models\NotionDatabase;
+use App\Modules\Notion\Models\NotionBot;
+use App\Modules\Notion\Models\NotionDatabase;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;

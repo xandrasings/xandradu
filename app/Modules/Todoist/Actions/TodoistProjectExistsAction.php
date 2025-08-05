@@ -2,7 +2,7 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\TodoistProject;
+use App\Modules\Todoist\Models\TodoistProject;
 
 class TodoistProjectExistsAction
 {

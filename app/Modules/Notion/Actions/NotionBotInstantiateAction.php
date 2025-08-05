@@ -2,7 +2,7 @@
 
 namespace App\Modules\Notion\Actions;
 
-use App\Models\NotionBot;
+use App\Modules\Notion\Models\NotionBot;
 use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;

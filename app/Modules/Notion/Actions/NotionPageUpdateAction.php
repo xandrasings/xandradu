@@ -2,7 +2,7 @@
 
 namespace App\Modules\Notion\Actions;
 
-use App\Models\NotionPage;
+use App\Modules\Notion\Models\NotionPage;
 use App\Modules\Todoist\Actions\TodoistProjectSelectAction;
 use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Log;

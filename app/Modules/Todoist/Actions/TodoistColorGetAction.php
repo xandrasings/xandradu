@@ -2,7 +2,7 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\TodoistColor;
+use App\Modules\Todoist\Models\TodoistColor;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 

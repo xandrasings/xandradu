@@ -2,13 +2,13 @@
 
 namespace App\Modules\Band\Services;
 
-use App\Models\Band;
-use App\Models\BandWiki;
-use App\Models\NotionWorkspace;
 use App\Modules\Band\Actions\BandCreateAction;
 use App\Modules\Band\Actions\BandExistsAction;
 use App\Modules\Band\Actions\BandSelectAction;
 use App\Modules\Band\Actions\BandWikiCreateAction;
+use App\Modules\Band\Models\Band;
+use App\Modules\Band\Models\BandWiki;
+use App\Modules\Notion\Models\NotionWorkspace;
 
 class BandService
 {

@@ -2,7 +2,7 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\TodoistNode;
+use App\Modules\Todoist\Models\TodoistNode;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 

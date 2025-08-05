@@ -2,7 +2,7 @@
 
 namespace App\Modules\Band\Actions;
 
-use App\Models\Band;
+use App\Modules\Band\Models\Band;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 

@@ -2,7 +2,7 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\TodoistAccount;
+use App\Modules\Todoist\Models\TodoistAccount;
 
 class TodoistAccountSyncAllAction
 {

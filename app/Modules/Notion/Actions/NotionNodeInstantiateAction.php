@@ -2,7 +2,7 @@
 
 namespace App\Modules\Notion\Actions;
 
-use App\Models\NotionNode;
+use App\Modules\Notion\Models\NotionNode;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 

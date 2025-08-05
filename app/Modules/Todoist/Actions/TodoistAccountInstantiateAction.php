@@ -2,11 +2,11 @@
 
 namespace App\Modules\Todoist\Actions;
 
-use App\Models\Person;
-use App\Models\TodoistAccount;
 use App\Modules\Core\Actions\EmailAddressGetAction;
 use App\Modules\Core\Actions\EmailAddressPersonAssociateAction;
+use App\Modules\Core\Models\Person;
 use App\Modules\Todoist\Clients\TodoistClient;
+use App\Modules\Todoist\Models\TodoistAccount;
 use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;

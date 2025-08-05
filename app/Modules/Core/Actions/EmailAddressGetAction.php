@@ -2,7 +2,7 @@
 
 namespace App\Modules\Core\Actions;
 
-use App\Models\EmailAddress;
+use App\Modules\Core\Models\EmailAddress;
 use Illuminate\Support\Facades\Log;
 
 class EmailAddressGetAction

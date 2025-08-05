@@ -2,10 +2,10 @@
 
 namespace App\Modules\Band\Actions;
 
-use App\Models\Band;
-use App\Models\BandWiki;
-use App\Models\NotionWorkspace;
+use App\Modules\Band\Models\Band;
+use App\Modules\Band\Models\BandWiki;
 use App\Modules\Notion\Actions\NotionPageSyncAction;
+use App\Modules\Notion\Models\NotionWorkspace;
 
 class BandWikiCreateAction
 {
