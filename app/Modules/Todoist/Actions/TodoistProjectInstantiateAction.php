@@ -55,7 +55,7 @@ class TodoistProjectInstantiateAction
         try {
             Log::notice("TodoistProjectInstantiateAction creating TodoistProject with TodoistNode $node->id, external id $id, name $name, TodoistColor $color->id, isFavorite $isFavorite");
             $project = TodoistProject::create([
-                'location_reference_id' => $node->id,
+                'node_id' => $node->id,
                 'external_id' => $id,
                 'name' => $name,
                 'color_id' => $color->id,

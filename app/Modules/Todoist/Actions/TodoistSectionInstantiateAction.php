@@ -51,7 +51,7 @@ class TodoistSectionInstantiateAction
         try {
             Log::notice("TodoistSectionInitializeAction creating TodoistSection from TodoistNode $node->id, TodoistProject $project->id, rank $rank, external id $id, name $name.");
             return TodoistSection::create([
-                'location_reference_id' => $node->id,
+                'node_id' => $node->id,
                 'project_id' => $project->id,
                 'rank' => $rank,
                 'external_id' => $id,
