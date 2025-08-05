@@ -18,12 +18,12 @@ class TodoistSectionApplyAllAction
     public function handle(array $payloads): bool
     {
         $result = collect($payloads)->map(function ($payload) {
-            return ! is_null($this->sectionApplyAction->handle($payload));
+            return !is_null($this->sectionApplyAction->handle($payload));
         })->reduce(function (bool $carry, bool $result) {
             return $carry && $result;
         }, true);
 
-        if (! $result) {
+        if (!$result) {
             Log::warning("TodoistSectionApplyAllAction failed.");
         }
 

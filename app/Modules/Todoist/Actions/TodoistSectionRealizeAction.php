@@ -31,7 +31,7 @@ class TodoistSectionRealizeAction
 
         $id = data_get($response, 'id');
 
-        if (! $this->validationUtility->containsNoNulls([$id])) {
+        if (!$this->validationUtility->containsNoNulls([$id])) {
             Log::critical("TodoistSectionRealizeAction failed due to a missing non-nullable variable");
             return null;
         }

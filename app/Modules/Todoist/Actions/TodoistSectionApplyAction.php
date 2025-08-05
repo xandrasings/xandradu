@@ -30,14 +30,14 @@ class TodoistSectionApplyAction
     public function handle(array $payload): ?TodoistSection
     {
         $id = data_get($payload, 'v2_id');
-        if (! $this->validationUtility->containsNoNulls([$id])) {
+        if (!$this->validationUtility->containsNoNulls([$id])) {
             Log::warning("TodoistSectionApplyAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         if ($this->sectionExistsAction->handle($id)) {
             $section = $this->sectionSelectAction->handle($id);
-            if (! $this->validationUtility->containsNoNulls([$section])) {
+            if (!$this->validationUtility->containsNoNulls([$section])) {
                 Log::warning("TodoistSectionApplyAction couldn't proceed due to a missing non-nullable variable.");
                 return null;
             }

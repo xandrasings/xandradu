@@ -35,19 +35,19 @@ class TodoistProjectInstantiateAction
         $isArchived = data_get($payload, 'is_archived');
         $isDeleted = data_get($payload, 'is_deleted');
         // TODO deal with is_archived and is_deleted
-        if (! $this->validationUtility->containsNoNulls([$colorCode, $isFavorite, $name, $id])) {
+        if (!$this->validationUtility->containsNoNulls([$colorCode, $isFavorite, $name, $id])) {
             Log::warning("TodoistProjectInstantiateAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         $color = $this->colorGetAction->handle($colorCode);
-        if (! $this->validationUtility->containsNoNulls([$color])) {
+        if (!$this->validationUtility->containsNoNulls([$color])) {
             Log::warning("TodoistProjectInstantiateAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         $node = $this->nodeInstantiateAction->handle();
-        if (! $this->validationUtility->containsNoNulls([$node])) {
+        if (!$this->validationUtility->containsNoNulls([$node])) {
             Log::warning("TodoistProjectInstantiateAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
@@ -67,7 +67,7 @@ class TodoistProjectInstantiateAction
         }
 
         $result = $this->projectUserApplyAllAction->handle($account, $project, $payload);
-        if (! $result) {
+        if (!$result) {
             Log::warning("TodoistProjectInstantiateAction couldn't proceed due unsuccessful assignment of users to project.");
             return null;
         }

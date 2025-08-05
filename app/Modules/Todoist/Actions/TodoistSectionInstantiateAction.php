@@ -31,19 +31,19 @@ class TodoistSectionInstantiateAction
         $isArchived = data_get($payload, 'is_archived');
         $isDeleted = data_get($payload, 'is_deleted');
         // TODO deal with is_archived and is_deleted
-        if (! $this->validationUtility->containsNoNulls([$name, $projectId, $rank, $id])) {
+        if (!$this->validationUtility->containsNoNulls([$name, $projectId, $rank, $id])) {
             Log::warning("TodoistSectionInitializeAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         $project = $this->projectSelectAction->handle($projectId);
-        if (! $this->validationUtility->containsNoNulls([$project])) {
+        if (!$this->validationUtility->containsNoNulls([$project])) {
             Log::warning("TodoistSectionInitializeAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         $node = $this->nodeInstantiateAction->handle();
-        if (! $this->validationUtility->containsNoNulls([$node])) {
+        if (!$this->validationUtility->containsNoNulls([$node])) {
             Log::warning("TodoistSectionInitializeAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }

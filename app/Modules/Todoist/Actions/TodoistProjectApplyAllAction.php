@@ -17,15 +17,16 @@ class TodoistProjectApplyAllAction
     public function handle(TodoistAccount $account, array $payloads): bool
     {
         $result = collect($payloads)->map(function ($payload) use ($account) {
-            return ! is_null($this->projectApplyAction->handle($account, $payload));
+            return !is_null($this->projectApplyAction->handle($account, $payload));
         })->reduce(function (bool $carry, bool $result) {
             return $carry && $result;
         }, true);
 
-        if (! $result) {
+        if (!$result) {
             Log::warning("TodoistProjectApplyAllAction failed.");
+            return false;
         }
 
-        return $result;
+        return true;
     }
 }

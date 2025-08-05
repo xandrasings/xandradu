@@ -31,14 +31,14 @@ class TodoistProjectApplyAction
     public function handle(TodoistAccount $account, array $payload): ?TodoistProject
     {
         $id = data_get($payload, 'v2_id');
-        if (! $this->validationUtility->containsNoNulls([$id])) {
+        if (!$this->validationUtility->containsNoNulls([$id])) {
             Log::warning("TodoistProjectApplyAction couldn't proceed due to a missing non-nullable variable.");
             return null;
         }
 
         if ($this->projectExistsAction->handle($id)) {
             $project = $this->projectSelectAction->handle($id);
-            if (! $this->validationUtility->containsNoNulls([$project])) {
+            if (!$this->validationUtility->containsNoNulls([$project])) {
                 Log::warning("TodoistProjectApplyAction couldn't proceed due to a missing non-nullable variable.");
                 return null;
             }
