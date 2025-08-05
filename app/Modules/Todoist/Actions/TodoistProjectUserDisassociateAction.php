@@ -17,7 +17,7 @@ class TodoistProjectUserDisassociateAction
                 $user->projects()->detach($project->id);
             }
         } catch (Throwable $exception) {
-            Log::warning("TodoistProjectUserDisassociateAction failed with exception {$exception->getMessage()}");
+            Log::warning("TodoistProjectUserDisassociateAction failed with exception {$exception->getMessage()}.");
             return false;
         }
         return true;
