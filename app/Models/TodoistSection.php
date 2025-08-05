@@ -11,16 +11,16 @@ class TodoistSection extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'location_reference_id',
+        'node_id',
         'project_id',
         'rank',
         'external_id',
         'name'
     ];
 
-    public function locationReference(): BelongsTo
+    public function node(): BelongsTo
     {
-        return $this->belongsTo(TodoistTaskLocation::class, 'location_reference_id');
+        return $this->belongsTo(TodoistNode::class, 'node_id');
     }
 
     public function project(): BelongsTo

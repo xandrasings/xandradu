@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('todoist_sections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('location_reference_id')->constrained(table: 'todoist_task_locations')->cascadeOnDelete();
+            $table->foreignId('node_id')->constrained(table: 'todoist_nodes')->cascadeOnDelete();
             $table->foreignId('project_id')->nullable()->constrained(table: 'todoist_projects')->cascadeOnDelete();
             $table->integer('rank')->default(0);
             $table->string('external_id', 16)->nullable();

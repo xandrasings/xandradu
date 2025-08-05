@@ -13,7 +13,7 @@ class TodoistProject extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'location_reference_id',
+        'node_id',
         'external_id',
         'name',
         'color_id',
@@ -24,9 +24,9 @@ class TodoistProject extends Model
         'is_favorite' => 'boolean',
     ];
 
-    public function locationReference(): BelongsTo
+    public function node(): BelongsTo
     {
-        return $this->belongsTo(TodoistTaskLocation::class, 'location_reference_id');
+        return $this->belongsTo(TodoistNode::class, 'node_id');
     }
 
     public function users(): BelongsToMany
