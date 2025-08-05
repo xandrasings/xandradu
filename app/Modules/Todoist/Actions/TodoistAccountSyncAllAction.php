@@ -4,7 +4,7 @@ namespace App\Modules\Todoist\Actions;
 
 use App\Models\TodoistAccount;
 
-class TodoistAccountsSyncAction
+class TodoistAccountSyncAllAction
 {
     protected TodoistAccountSyncAction $accountSyncAction;
 

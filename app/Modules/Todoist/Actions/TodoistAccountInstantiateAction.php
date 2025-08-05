@@ -38,30 +38,30 @@ class TodoistAccountInstantiateAction
         $email = data_get($payload, 'email');
         $name = data_get($payload, 'full_name');
         $externalId = data_get($payload, 'id');
-        if (! $this->validationUtility->containsNoNulls([$email, $name, $externalId])) {
+        if (!$this->validationUtility->containsNoNulls([$email, $name, $externalId])) {
             Log::warning("TodoistAccountInstantiateAction failed due to a missing non-nullable variable");
             return null;
         }
 
         $emailAddress = $this->emailAddressGetAction->handle($email);
-        if (! $this->validationUtility->containsNoNulls([$emailAddress])) {
+        if (!$this->validationUtility->containsNoNulls([$emailAddress])) {
             Log::warning("TodoistAccountInstantiateAction failed due to a missing non-nullable variable");
             return null;
         }
 
         $user = $this->userGetAction->handle($externalId, $emailAddress, $name);
-        if (! $this->validationUtility->containsNoNulls([$user])) {
+        if (!$this->validationUtility->containsNoNulls([$user])) {
             Log::warning("TodoistAccountInstantiateAction failed due to a missing non-nullable variable");
             return null;
         }
 
         $result = $this->emailAddressPersonAssociateAction->handle($user->emailAddress, $person, 'todoist');
-        if(! $result) {
+        if (!$result) {
             Log::warning("TodoistAccountInstantiateAction failed due to unsuccessful call to EmailAddressPersonAssociateAction.");
             return null;
         }
 
-        if (! is_null($user->account)) {
+        if (!is_null($user->account)) {
             Log::warning("TodoistAccountInstantiateAction failed due to account already existing for user {$user->emailAddress->full_value}.");
             return null;
         }

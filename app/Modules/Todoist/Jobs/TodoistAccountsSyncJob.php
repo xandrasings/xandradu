@@ -2,7 +2,7 @@
 
 namespace App\Modules\Todoist\Jobs;
 
-use App\Modules\Todoist\Actions\TodoistAccountsSyncAction;
+use App\Modules\Todoist\Actions\TodoistAccountSyncAllAction;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
@@ -10,16 +10,16 @@ class TodoistAccountsSyncJob implements ShouldQueue
 {
     use Queueable;
 
-    protected TodoistAccountsSyncAction $accountSyncAction;
+    protected TodoistAccountSyncAllAction $accountSyncAllAction;
 
     public function __construct()
     {
-        $this->accountSyncAction = app(TodoistAccountsSyncAction::class);
+        $this->accountSyncAllAction = app(TodoistAccountSyncAllAction::class);
     }
 
     public function handle(): void
     {
-        $this->accountSyncAction->handle();
+        $this->accountSyncAllAction->handle();
     }
 
 }
