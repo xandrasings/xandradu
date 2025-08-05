@@ -30,7 +30,7 @@ class TodoistAccountSyncAction
         $payload = $this->client->getLatestChanges($account);
         if (!$this->validationUtility->containsNoNulls([$payload])) {
             Log::warning("TodoistAccountSyncAction couldn't proceed due to a missing non-nullable variable.");
-            return;
+            return false;
         }
 
         $result = $this->projectApplyAllAction->handle($account, data_get($payload, 'projects', []));
