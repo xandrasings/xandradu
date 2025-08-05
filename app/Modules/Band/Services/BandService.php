@@ -3,6 +3,7 @@
 namespace App\Modules\Band\Services;
 
 use App\Models\Band;
+use App\Models\BandWiki;
 use App\Models\NotionWorkspace;
 use App\Modules\Band\Actions\BandCreateAction;
 use App\Modules\Band\Actions\BandExistsAction;
@@ -44,7 +45,7 @@ class BandService
         return $this->selectAction->handle($name);
     }
 
-    public function createWiki(Band $band, NotionWorkspace $workspace, string $rootNodeId): ?Band
+    public function createWiki(Band $band, NotionWorkspace $workspace, string $rootNodeId): ?BandWiki
     {
         return $this->wikiCreateAction->handle($band, $workspace, $rootNodeId);
     }
