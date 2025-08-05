@@ -19,7 +19,7 @@ class NotionWorkspaceSelectAction
         }
 
         if ($workspaces->isEmpty()) {
-            Log::warning("NotionWorkspaceSelectAction failed because no workspaces with external id $name exist.");
+            Log::warning("NotionWorkspaceSelectAction failed because no workspaces with name $name exist.");
             return null;
         }
 
