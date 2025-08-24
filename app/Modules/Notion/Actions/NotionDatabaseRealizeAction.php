@@ -25,13 +25,13 @@ class NotionDatabaseRealizeAction
     {
         $response = $this->client->createDatabase($database, $bot);
         if (is_null($response)) {
-            Log::warning("TodoistSectionRealizeAction failed due to unsuccessful client call.");
+            Log::warning("NotionDatabaseRealizeAction failed due to unsuccessful client call.");
             return false;
         }
 
         $id = data_get($response, 'id');
         if (! $this->validationUtility->containsNoNulls([$id])) {
-            Log::critical("TodoistSectionRealizeAction failed due to a missing non-nullable variable");
+            Log::critical("NotionDatabaseRealizeAction failed due to a missing non-nullable variable");
             return false;
         }
 
@@ -40,7 +40,7 @@ class NotionDatabaseRealizeAction
                 'external_id' => $id,
             ]);
         } catch (Throwable $exception) {
-            Log::critical("TodoistSectionRealizeAction failed with exception {$exception->getMessage()}.");
+            Log::critical("NotionDatabaseRealizeAction failed with exception {$exception->getMessage()}.");
             return false;
         }
 
