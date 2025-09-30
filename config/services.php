@@ -49,5 +49,9 @@ return [
         'sync_endpoint' => env('TODOIST_SYNC_ENDPOINT'),
         'sections_endpoint' => env('TODOIST_SECTIONS_ENDPOINT'),
         'projects_endpoint' => env('TODOIST_PROJECTS_ENDPOINT'),
+    ],
+
+    'spaces' => [
+        'endpoint' => env('SPACES_ENDPOINT'),
     ]
 ];

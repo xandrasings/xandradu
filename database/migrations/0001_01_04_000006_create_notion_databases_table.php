@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('location_id')->constrained(table: 'notion_nodes')->cascadeOnDelete();
             $table->string('external_id', 32)->nullable();
             $table->string('title', 32)->nullable();
+            $table->foreignId('icon_id')->nullable()->constrained(table: 'stored_files')->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Notion\Models;
 
+use App\Modules\Core\Models\StoredFile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,6 +16,7 @@ class NotionDatabase extends Model
         'location_id',
         'external_id',
         'title',
+        'icon_id'
     ];
 
     public function setExternalIdAttribute($value)
@@ -30,5 +32,10 @@ class NotionDatabase extends Model
     public function location(): BelongsTo
     {
         return $this->belongsTo(NotionNode::class, 'location_id');
+    }
+
+    public function icon(): BelongsTo
+    {
+        return $this->belongsTo(StoredFile::class, 'icon_id');
     }
 }
