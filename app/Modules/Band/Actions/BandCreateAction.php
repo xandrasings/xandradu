@@ -3,12 +3,16 @@
 namespace App\Modules\Band\Actions;
 
 use App\Modules\Band\Models\Band;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class BandCreateAction
 {
-    public function handle(string $name): ?Band
+    /**
+     * @throws Exception
+     */
+    public function handle(string $name): Band
     {
         try {
             Log::notice("BandCreateAction creating Band with name $name.");
@@ -17,7 +21,7 @@ class BandCreateAction
             ]);
         } catch (Throwable $exception) {
             Log::warning("BandCreateAction failed with exception {$exception->getMessage()}.");
-            return null;
+            throw new Exception("Unable to create band.");
         }
     }
 }

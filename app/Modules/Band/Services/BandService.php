@@ -9,6 +9,7 @@ use App\Modules\Band\Actions\BandWikiCreateAction;
 use App\Modules\Band\Models\Band;
 use App\Modules\Band\Models\BandWiki;
 use App\Modules\Notion\Models\NotionWorkspace;
+use Exception;
 
 class BandService
 {
@@ -35,7 +36,10 @@ class BandService
         return $this->existsAction->handle($name);
     }
 
-    public function createBand(string $name): ?Band
+    /**
+     * @throws Exception
+     */
+    public function createBand(string $name): Band
     {
         return $this->createAction->handle($name);
     }
