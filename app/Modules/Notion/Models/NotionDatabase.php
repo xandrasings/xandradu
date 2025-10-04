@@ -5,15 +5,11 @@ namespace App\Modules\Notion\Models;
 use App\Modules\Core\Models\StoredFile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class NotionDatabase extends Model
 {
-    use SoftDeletes;
-
     protected $fillable = [
         'node_id',
-        'location_id',
         'external_id',
         'title',
         'icon_id'

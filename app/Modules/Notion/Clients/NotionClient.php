@@ -56,32 +56,24 @@ class NotionClient
         return $response->json();
     }
 
+    /**
+     * @throws Exception
+     */
     public function getPage(string $id, NotionBot $bot): ?array
     {
         $url = "$this->hostName/$this->pagesEndpoint/$id";
         $token = Crypt::decryptString($bot->token);
 
-        try {
-            Log::notice("Calling notion endpoint $url.");
-            $response = Http::withToken($token)
-                ->withHeaders([
-                    'Notion-Version' => $this->version,
-                ])
-                ->get($url);
-        } catch (Throwable $exception) {
-            Log::warning("Call to notion endpoint $url failed with exception {$exception->getMessage()}.");
-            return null;
-        }
+        Log::notice("Calling notion endpoint $url.");
+        $response = Http::withToken($token)
+            ->withHeaders([
+                'Notion-Version' => $this->version,
+            ])
+            ->get($url);
 
         if ($response->failed()) {
             $message = data_get($response->json(), 'message');
-            if (str_contains($message, 'is a database, not a page.')) {
-                Log::info("Call to notion endpoint $url indicated wrong node type.");
-                return null;
-            }
-
-            Log::warning("Call to notion endpoint $url failed with response {$response->getStatusCode()}");
-            return null;
+            throw new Exception("Call to notion endpoint $url failed with response {$response->getStatusCode()} and message $message}.",);
         }
 
         return $response->json();
@@ -125,7 +117,7 @@ class NotionClient
         // TODO correctly choose the parent type and generate appropriate array
         return [
             'type' => 'page_id',
-            'page_id' => $database->location->page->external_id,
+            'page_id' => $database->node->parent->page->external_id,
         ];
     }
 

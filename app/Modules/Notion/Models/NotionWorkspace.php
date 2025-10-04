@@ -5,12 +5,9 @@ namespace App\Modules\Notion\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class NotionWorkspace extends Model
 {
-    use SoftDeletes;
-
     protected $fillable = [
         'node_id',
         'name',

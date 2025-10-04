@@ -4,12 +4,23 @@ namespace App\Modules\Notion\Models;
 
 use App\Modules\Band\Models\BandWiki;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class NotionNode extends Model
 {
-    protected $fillable = [];
+    use SoftDeletes;
+
+    protected $fillable = [
+        'parent_id'
+    ];
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(NotionNode::class, 'parent_id');
+    }
 
     public function workspace(): HasOne
     {
@@ -31,8 +42,15 @@ class NotionNode extends Model
         return $this->hasOne(BandWiki::class);
     }
 
-    public function databases(): HasMany
+    public function children(): HasMany
+    {
+        return $this->hasMany(NotionNode::class, 'parent_id');
+    }
+
+    public function childPages(): HasMany
     {
         return $this->hasMany(NotionDatabase::class, 'location_id');
     }
+
+    // TODO childblocks
 }

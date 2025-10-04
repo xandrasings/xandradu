@@ -21,9 +21,10 @@ class BandWikiRealizeAction
     public function handle(BandWiki $wiki): BandWiki
     {
         // TODO make this find the bot from any node of any type
-        $bot = $wiki->node->page->location->workspace->bots->first();
-        $wiki->node->databases->each(function ($database) use ($bot) {
-            $this->notionDatabaseRealizeAction->handle($database, $bot);
+        $bot = $wiki->node->parent->workspace->bots->first();
+        $wiki->node->children->each(function ($node) use ($bot) {
+            // TODO deal with non db cases
+            $this->notionDatabaseRealizeAction->handle($node->database, $bot);
         });
 
         return $wiki;

@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('notion_nodes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('parent_id')->nullable()->constrained(table: 'notion_nodes')->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

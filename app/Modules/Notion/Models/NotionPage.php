@@ -4,15 +4,11 @@ namespace App\Modules\Notion\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class NotionPage extends Model
 {
-    use SoftDeletes;
-
     protected $fillable = [
         'node_id',
-        'location_id',
         'external_id',
         'title',
     ];

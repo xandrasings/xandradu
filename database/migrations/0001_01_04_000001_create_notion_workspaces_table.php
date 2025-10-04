@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('node_id')->constrained(table: 'notion_nodes')->cascadeOnDelete();
             $table->string('name', 32);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

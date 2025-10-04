@@ -5,6 +5,7 @@ namespace App\Modules\Notion\Actions;
 use App\Modules\Notion\Models\NotionPage;
 use App\Modules\Notion\Models\NotionWorkspace;
 use App\Utilities\ValidationUtility;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -20,6 +21,9 @@ class NotionPageInstantiateAction
         $this->nodeInstantiateAction = app(NotionNodeInstantiateAction::class);
     }
 
+    /**
+     * @throws Exception
+     */
     public function handle(array $payload, NotionWorkspace $workspace): ?NotionPage
     {
         $id = data_get($payload, 'id');
@@ -30,17 +34,12 @@ class NotionPageInstantiateAction
             return null;
         }
 
-        $node = $this->nodeInstantiateAction->handle();
-        if (!$this->validationUtility->containsNoNulls([$node])) {
-            Log::warning("NotionPageInstantiateAction couldn't proceed due to a missing non-nullable variable.");
-            return null;
-        }
+        $node = $this->nodeInstantiateAction->handle($workspace->node);
 
         try {
-            Log::notice("NotionPageInstantiateAction creating NotionPage from NotionNode $node->id, location $workspace->node->id, external id $id, title $title.");
+            Log::notice("NotionPageInstantiateAction creating NotionPage from NotionNode $node->id, external id $id, title $title.");
             return NotionPage::create([
                 'node_id' => $node->id,
-                'location_id' => $workspace->node->id,
                 'external_id' => $id,
                 'title' => $title
             ]);

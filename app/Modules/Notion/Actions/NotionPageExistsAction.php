@@ -10,6 +10,6 @@ class NotionPageExistsAction
     {
         return NotionPage::where([
             'external_id' => $id
-        ])->withTrashed()->get()->count() > 0;
+        ])->get()->count() > 0;
     }
 }

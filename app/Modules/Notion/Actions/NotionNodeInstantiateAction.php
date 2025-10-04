@@ -11,9 +11,13 @@ use Illuminate\Support\Facades\Log;
  */
 class NotionNodeInstantiateAction
 {
-    public function handle(): NotionNode
+    public function handle(?NotionNode $parent = null): NotionNode
     {
-        Log::notice("NotionNodeInstantiateAction creating NotionNode.");
-        return NotionNode::create([]);
+        $parentId = is_null($parent) ? null : $parent->id;
+        Log::notice("NotionNodeInstantiateAction creating NotionNode with parent NotionNode $parentId.");
+
+        return NotionNode::create([
+            'parent_id' => $parentId,
+        ]);
     }
 }
