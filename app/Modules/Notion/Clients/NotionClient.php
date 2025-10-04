@@ -96,12 +96,12 @@ class NotionClient
         $token = Crypt::decryptString($bot->token);
         $body = $this->generateCreateDatabaseBody($database);
 
-            Log::notice("Calling notion endpoint $url.", ['body'=>$body]);
-            $response = Http::withToken($token)
-                ->withHeaders([
-                    'Notion-Version' => $this->version,
-                ])
-                ->post($url, $body);
+        Log::notice("Calling notion endpoint $url.", ['body' => $body]);
+        $response = Http::withToken($token)
+            ->withHeaders([
+                'Notion-Version' => $this->version,
+            ])
+            ->post($url, $body);
 
         if ($response->failed()) {
             throw new Exception("Call to notion endpoint $url failed with response {$response->getStatusCode()}");
@@ -112,35 +112,54 @@ class NotionClient
 
     private function generateCreateDatabaseBody(NotionDatabase $database): array
     {
-        // TODO generate parent programmatically
-        // TODO generate icon programmatically
-        // TODO generate title programmatically
-        // TODO generate properties programmatically
-
         return [
-            'parent' => [
-                'type' => 'page_id',
-                'page_id' => $database->location->page->external_id, // TODO xan this has to be a page, right? maybe verification?
-            ],
-            'icon' => [
-                'type' => 'external',
-                'external' => [
-                    'url' => "$this->spacesEndpoint{$database->icon->path}",
+            'parent' => $this->generateBodyParent($database),
+            'icon' => $this->generateBodyIcon($database),
+            'title' => $this->generateBodyTitle($database),
+            'properties' => $this->generateBodyProperties($database),
+        ];
+    }
+
+    private function generateBodyParent(NotionDatabase $database): array
+    {
+        // TODO correctly choose the parent type and generate appropriate array
+        return [
+            'type' => 'page_id',
+            'page_id' => $database->location->page->external_id,
+        ];
+    }
+
+    private function generateBodyIcon(NotionDatabase $database): array
+    {
+        // TODO generate icon programmatically
+        return [
+            'type' => 'external',
+            'external' => [
+                'url' => "$this->spacesEndpoint{$database->icon->path}",
+            ]
+        ];
+    }
+
+    private function generateBodyTitle(NotionDatabase $database): array
+    {
+        // TODO generate title programmatically
+        return [
+            [
+                'type' => 'text',
+                'text' => [
+                    'content' => $database->title,
+                    'link' => null
                 ]
-            ],
-            'title' => [
-                [
-                    'type' => 'text',
-                    'text' => [
-                        'content' => $database->title,
-                        'link' => null
-                    ]
-                ]
-            ],
-            'properties' => [
-                'Column 1' => [
-                    'title' => new stdClass()
-                ],
+            ]
+        ];
+    }
+
+    private function generateBodyProperties(NotionDatabase $database): array
+    {
+        // TODO generate properties programmatically
+        return  [
+            'Column 1' => [
+                'title' => new stdClass()
             ],
         ];
     }
