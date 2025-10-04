@@ -37,7 +37,7 @@ class BandRegisterCommand extends Command
         }
 
         try {
-            $this->service->createBand($name);
+            $this->service->instantiateBand($name);
         } catch (Throwable) {
             Log::error("BandRegisterCommand failed due to a thrown exception.");
             print_r("CONSOLE COMMAND ABORTED: $this->signature $name\n");

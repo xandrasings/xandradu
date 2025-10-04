@@ -6,7 +6,7 @@ use App\Modules\Band\Models\Band;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
-class BandCreateAction
+class BandInstantiateAction
 {
     /**
      * @throws Exception

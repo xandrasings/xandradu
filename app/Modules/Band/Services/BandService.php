@@ -2,7 +2,7 @@
 
 namespace App\Modules\Band\Services;
 
-use App\Modules\Band\Actions\BandCreateAction;
+use App\Modules\Band\Actions\BandInstantiateAction;
 use App\Modules\Band\Actions\BandExistsAction;
 use App\Modules\Band\Actions\BandSelectAction;
 use App\Modules\Band\Actions\BandWikiCreateAction;
@@ -17,7 +17,7 @@ class BandService
 
     protected BandExistsAction $existsAction;
 
-    protected BandCreateAction $createAction;
+    protected BandInstantiateAction $instantiateAction;
 
     protected BandSelectAction $selectAction;
 
@@ -28,7 +28,7 @@ class BandService
     public function __construct()
     {
         $this->existsAction = app(BandExistsAction::class);
-        $this->createAction = app (BandCreateAction::class);
+        $this->instantiateAction = app (BandInstantiateAction::class);
         $this->selectAction = app (BandSelectAction::class);
         $this->wikiCreateAction = app (BandWikiCreateAction::class);
         $this->wikiRealizeAction = app(BandWikiRealizeAction::class);
@@ -43,9 +43,9 @@ class BandService
     /**
      * @throws Exception
      */
-    public function createBand(string $name): Band
+    public function instantiateBand(string $name): Band
     {
-        return $this->createAction->handle($name);
+        return $this->instantiateAction->handle($name);
     }
 
     public function selectBand(string $name): ?Band
