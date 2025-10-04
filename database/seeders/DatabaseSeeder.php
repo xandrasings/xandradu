@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Modules\Core\Models\User;
+use App\Modules\Core\Models\StoredFile;
 use Illuminate\Database\Seeder;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +12,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        StoredFile::updateOrCreate([
+            'type' => 'icon',
+            'name' => 'instruments',
+        ],[
+            'path' => '/icons/instruments.svg'
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        StoredFile::updateOrCreate([
+            'type' => 'icon',
+            'name' => 'people',
+        ],[
+            'path' => '/icons/people.svg'
         ]);
     }
 }
