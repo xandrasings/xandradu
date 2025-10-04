@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Modules\Band\Services\BandService;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use Throwable;
 
 class BandRegisterCommand extends Command
 {
@@ -22,24 +22,17 @@ class BandRegisterCommand extends Command
 
     }
 
-    public function handle()
+    public function handle(): void
     {
         $name = $this->argument('name');
 
         print_r("CONSOLE COMMAND INITIATED: $this->signature $name\n");
         Log::notice("CONSOLE COMMAND INITIATED: $this->signature $name");
 
-        if ($this->service->bandExists($name)) {
-            Log::error("BandRegisterCommand failed due to band already existing.");
-            print_r("CONSOLE COMMAND ABORTED: $this->signature $name\n");
-            Log::notice("CONSOLE COMMAND ABORTED: $this->signature $name");
-            return;
-        }
-
         try {
             $this->service->instantiateBand($name);
-        } catch (Throwable) {
-            Log::error("BandRegisterCommand failed due to a thrown exception.");
+        } catch (Exception $exception) {
+            Log::error("BandRegisterCommand failed due to a thrown exception.", ['trace' => $exception->getTrace()]);
             print_r("CONSOLE COMMAND ABORTED: $this->signature $name\n");
             Log::notice("CONSOLE COMMAND ABORTED: $this->signature $name");
             return;
