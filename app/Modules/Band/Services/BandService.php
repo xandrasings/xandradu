@@ -62,4 +62,12 @@ class BandService
         $this->wikiRealizeAction->handle($wiki);
         return $wiki;
     }
+
+    /**
+     * @throws Exception
+     */
+    public function syncUpWiki(BandWiki $wiki): void
+    {
+
+    }
 }

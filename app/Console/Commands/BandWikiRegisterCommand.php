@@ -7,7 +7,6 @@ use App\Modules\Notion\Services\NotionService;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use Throwable;
 
 class BandWikiRegisterCommand extends Command
 {
@@ -41,7 +40,8 @@ class BandWikiRegisterCommand extends Command
         try {
             $band = $this->service->selectBand($bandName);
             $notionWorkspace = $this->notionService->selectWorkspace($notionWorkspaceName);
-            $this->service->manifestWiki($band, $notionWorkspace, $rootNodeId);
+            $wiki = $this->service->manifestWiki($band, $notionWorkspace, $rootNodeId);
+            $this->service->syncUpWiki($wiki);
         } catch (Exception $exception) {
             print_r("CONSOLE COMMAND ABORTED: $this->signature $bandName $notionWorkspaceName $rootNodeId\n");
             Log::error("BandWikiRegisterCommand failed due to exception.", ["trace", $exception->getTrace()]);
