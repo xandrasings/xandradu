@@ -4,6 +4,7 @@ namespace App\Modules\Notion\Models;
 
 use App\Modules\Band\Models\BandWiki;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class NotionNode extends Model
@@ -28,5 +29,10 @@ class NotionNode extends Model
     public function bandWiki(): HasOne
     {
         return $this->hasOne(BandWiki::class);
+    }
+
+    public function databases(): HasMany
+    {
+        return $this->hasMany(NotionDatabase::class, 'location_id');
     }
 }

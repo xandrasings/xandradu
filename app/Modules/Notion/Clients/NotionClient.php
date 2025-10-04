@@ -4,6 +4,7 @@ namespace App\Modules\Notion\Clients;
 
 use App\Modules\Notion\Models\NotionBot;
 use App\Modules\Notion\Models\NotionDatabase;
+use Exception;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -12,6 +13,8 @@ use Throwable;
 
 class NotionClient
 {
+    private string $spacesEndpoint;
+
     private string $version;
 
     private string $hostName;
@@ -24,6 +27,7 @@ class NotionClient
 
     public function __construct()
     {
+        $this->spacesEndpoint = config('services.spaces.endpoint');
         $this->version = config('services.notion.version');
         $this->hostName = config('services.notion.host_name');
         $this->usersEndpoint = config('services.notion.users_endpoint');
@@ -31,25 +35,22 @@ class NotionClient
         $this->pagesEndpoint = config('services.notion.pages_endpoint');
     }
 
-    public function getUser(string $token): ?array
+    /**
+     * @throws Exception
+     */
+    public function getUser(string $token): array
     {
         $url = "$this->hostName/$this->usersEndpoint/me";
 
-        try {
-            Log::notice("Calling notion endpoint $url.");
-            $response = Http::withToken($token)
-                ->withHeaders([
-                    'Notion-Version' => $this->version,
-                ])
-                ->get($url);
-        } catch (Throwable $exception) {
-            Log::warning("Call to notion endpoint $url failed with exception {$exception->getMessage()}.");
-            return null;
-        }
+        Log::notice("Calling notion endpoint $url.");
+        $response = Http::withToken($token)
+            ->withHeaders([
+                'Notion-Version' => $this->version,
+            ])
+            ->get($url);
 
         if ($response->failed()) {
-            Log::warning("Call to notion endpoint $url failed with response {$response->getStatusCode()}.");
-            return null;
+            throw new Exception("Call to notion endpoint $url failed with response {$response->getStatusCode()}.");
         }
 
         return $response->json();
@@ -86,14 +87,46 @@ class NotionClient
         return $response->json();
     }
 
-    public function createDatabase(NotionDatabase $database, NotionBot $bot): ?array
+    /**
+     * @throws Exception
+     */
+    public function createDatabase(NotionDatabase $database, NotionBot $bot): array
     {
         $url = "$this->hostName/$this->databasesEndpoint";
         $token = Crypt::decryptString($bot->token);
-        $body = [
+        $body = $this->generateCreateDatabaseBody($database);
+
+            Log::notice("Calling notion endpoint $url.", ['body'=>$body]);
+            $response = Http::withToken($token)
+                ->withHeaders([
+                    'Notion-Version' => $this->version,
+                ])
+                ->post($url, $body);
+
+        if ($response->failed()) {
+            throw new Exception("Call to notion endpoint $url failed with response {$response->getStatusCode()}");
+        }
+
+        return $response->json();
+    }
+
+    private function generateCreateDatabaseBody(NotionDatabase $database): array
+    {
+        // TODO generate parent programmatically
+        // TODO generate icon programmatically
+        // TODO generate title programmatically
+        // TODO generate properties programmatically
+
+        return [
             'parent' => [
                 'type' => 'page_id',
                 'page_id' => $database->location->page->external_id, // TODO xan this has to be a page, right? maybe verification?
+            ],
+            'icon' => [
+                'type' => 'external',
+                'external' => [
+                    'url' => "$this->spacesEndpoint{$database->icon->path}",
+                ]
             ],
             'title' => [
                 [
@@ -110,24 +143,5 @@ class NotionClient
                 ],
             ],
         ];
-
-        try {
-            Log::notice("Calling notion endpoint $url.", ['body'=>$body]);
-            $response = Http::withToken($token)
-                ->withHeaders([
-                    'Notion-Version' => $this->version,
-                ])
-                ->post($url, $body);
-        } catch (Throwable $exception) {
-            Log::warning("Call to notion endpoint $url failed with exception {$exception->getMessage()}.");
-            return null;
-        }
-
-        if ($response->failed()) {
-            Log::warning("Call to notion endpoint $url failed with response {$response->getStatusCode()}");
-            return null;
-        }
-
-        return $response->json();
     }
 }

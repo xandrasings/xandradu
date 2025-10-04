@@ -5,7 +5,6 @@ namespace App\Modules\Todoist\Actions;
 use App\Modules\Core\Actions\EmailAddressGetAction;
 use App\Modules\Core\Actions\EmailAddressPersonAssociateAction;
 use App\Modules\Core\Models\Person;
-use App\Modules\Todoist\Clients\TodoistClient;
 use App\Modules\Todoist\Models\TodoistAccount;
 use App\Utilities\ValidationUtility;
 use Illuminate\Support\Facades\Crypt;
@@ -14,8 +13,6 @@ use Throwable;
 
 class TodoistAccountInstantiateAction
 {
-    protected TodoistClient $client;
-
     protected ValidationUtility $validationUtility;
 
     protected EmailAddressGetAction $emailAddressGetAction;
@@ -26,7 +23,6 @@ class TodoistAccountInstantiateAction
 
     public function __construct()
     {
-        $this->client = app(TodoistClient::class);
         $this->validationUtility = app(ValidationUtility::class);
         $this->emailAddressGetAction = app(EmailAddressGetAction::class);
         $this->emailAddressPersonAssociateAction = app(EmailAddressPersonAssociateAction::class);

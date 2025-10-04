@@ -5,26 +5,26 @@ namespace App\Modules\Band\Actions;
 use App\Modules\Band\Models\Band;
 use App\Modules\Band\Models\BandWiki;
 use App\Modules\Notion\Models\NotionNode;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class BandWikiInstantiateAction
 {
-    public function handle(Band $band, NotionNode $rootNode): ?BandWiki
+    /**
+     * @throws Exception
+     */
+    public function handle(Band $band, NotionNode $node): BandWiki
     {
         try {
-            Log::notice("BandWikiInstantiateAction creating BandWiki from Band $band->id and NotionNode $rootNode->id");
+            Log::notice("BandWikiCreateAction creating BandWiki from Band $band->id and NotionNode $node->id");
             return BandWiki::create([
                 'band_id' => $band->id,
-                'notion_node_id' => $rootNode->id,
+                'notion_node_id' => $node->id,
             ]);
         } catch (Throwable $exception) {
-            Log::warning("BandWikiInstantiateAction failed with exception {$exception->getMessage()}.");
-            return null;
+            Log::warning("BandWikiCreateAction failed with exception {$exception->getMessage()}.");
+            throw new Exception("Unable to create BandWiki.");
         }
-
-        // TODO null check
-
-        // TODO build up the wiki
     }
 }

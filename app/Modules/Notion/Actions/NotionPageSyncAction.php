@@ -6,6 +6,7 @@ use App\Modules\Notion\Clients\NotionClient;
 use App\Modules\Notion\Models\NotionPage;
 use App\Modules\Notion\Models\NotionWorkspace;
 use App\Utilities\ValidationUtility;
+use Exception;
 use Illuminate\Support\Facades\Log;
 
 class NotionPageSyncAction
@@ -26,20 +27,21 @@ class NotionPageSyncAction
         $this->pageApplyAction = app(NotionPageApplyAction::class);
     }
 
-    public function handle(string $id, NotionWorkspace $workspace): ?NotionPage
+    /**
+     * @throws Exception
+     */
+    public function handle(string $id, NotionWorkspace $workspace): NotionPage
     {
         $bot = $this->botSelectAction->handle($workspace, 'xandradu');
 
         if (!$this->validationUtility->containsNoNulls([$bot])) {
-            Log::warning("NotionPageSyncAction couldn't proceed due to a missing non-nullable variable.");
-            return null;
+            throw new Exception("NotionPageSyncAction couldn't proceed due to a missing non-nullable variable.");
         }
 
         $payload = $this->client->getPage($id, $bot);
 
         if (!$this->validationUtility->containsNoNulls([$payload])) {
-            Log::warning("NotionPageSyncAction couldn't proceed due to failure from NotionClient");
-            return null;
+            throw new Exception("NotionPageSyncAction couldn't proceed due to failure from NotionClient");
         }
 
         return $this->pageApplyAction->handle($payload, $workspace);

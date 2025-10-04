@@ -4,8 +4,10 @@ namespace App\Console\Commands;
 
 use App\Modules\Band\Services\BandService;
 use App\Modules\Notion\Services\NotionService;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class BandWikiRegisterCommand extends Command
 {
@@ -24,7 +26,10 @@ class BandWikiRegisterCommand extends Command
         $this->notionService = app(NotionService::class);
     }
 
-    public function handle()
+    /**
+     * @throws Exception
+     */
+    public function handle(): void
     {
         $bandName = $this->argument('bandName');
         $notionWorkspaceName = $this->argument('notionWorkspaceName');
@@ -33,31 +38,17 @@ class BandWikiRegisterCommand extends Command
         print_r("CONSOLE COMMAND INITIATED: $this->signature $bandName $notionWorkspaceName $rootNodeId\n");
         Log::notice("CONSOLE COMMAND INITIATED: $this->signature $bandName $notionWorkspaceName $rootNodeId");
 
-        $band = $this->service->selectBand($bandName);
-        if (is_null($band)) {
-            Log::error("BandWikiRegisterCommand failed due to failure of BandSelectAction.");
+        try {
+            $band = $this->service->selectBand($bandName);
+            $notionWorkspace = $this->notionService->selectWorkspace($notionWorkspaceName);
+            $this->service->manifestWiki($band, $notionWorkspace, $rootNodeId);
+        } catch (Exception $exception) {
             print_r("CONSOLE COMMAND ABORTED: $this->signature $bandName $notionWorkspaceName $rootNodeId\n");
-            Log::notice("CONSOLE COMMAND ABORTED: $this->signature $bandName $notionWorkspaceName $rootNodeId");
+            Log::error("BandWikiRegisterCommand failed due to exception.", ["trace", $exception->getTrace()]);
             return;
         }
 
-        $notionWorkspace = $this->notionService->selectWorkspace($notionWorkspaceName);
-        if (is_null($notionWorkspace)) {
-            Log::error("BandWikiRegisterCommand failed due to failure of NotionWorkspaceSelectAction.");
-            print_r("CONSOLE COMMAND ABORTED: $this->signature $bandName $notionWorkspaceName\n");
-            Log::notice("CONSOLE COMMAND ABORTED: $this->signature $bandName $notionWorkspaceName");
-            return;
-        }
-
-        $bandWiki = $this->service->createWiki($band, $notionWorkspace, $rootNodeId);
-        if (is_null($bandWiki)) {
-            Log::error("BandWikiRegisterCommand failed due to failure of BandWikiCreateAction.");
-            print_r("CONSOLE COMMAND ABORTED: $this->signature $bandName $notionWorkspaceName\n");
-            Log::notice("CONSOLE COMMAND ABORTED: $this->signature $bandName $notionWorkspaceName");
-            return;
-        }
-
-        print_r("CONSOLE COMMAND COMPLETED: $this->signature $bandName $notionWorkspaceName\n");
-        Log::notice("CONSOLE COMMAND COMPLETED: $this->signature $bandName $notionWorkspaceName");
+        print_r("CONSOLE COMMAND COMPLETED: $this->signature $bandName $notionWorkspaceName $rootNodeId\n");
+        Log::notice("CONSOLE COMMAND COMPLETED: $this->signature $bandName $notionWorkspaceName $rootNodeId");
     }
 }
