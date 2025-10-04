@@ -21,7 +21,7 @@ class BandCreateAction
             ]);
         } catch (Throwable $exception) {
             Log::warning("BandCreateAction failed with exception {$exception->getMessage()}.");
-            throw new Exception("Unable to create band.");
+            throw new Exception("Unable to create Band.");
         }
     }
 }
