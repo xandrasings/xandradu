@@ -21,8 +21,8 @@ class BandWiki extends Model
         return $this->belongsTo(Band::class);
     }
 
-    public function rootNode(): BelongsTo
+    public function node(): BelongsTo
     {
-        return $this->belongsTo(NotionNode::class);
+        return $this->belongsTo(NotionNode::class, 'notion_node_id');
     }
 }
