@@ -4,6 +4,7 @@ namespace App\Modules\Notion\Actions;
 
 use App\Modules\Notion\Models\NotionWorkspace;
 use App\Utilities\ValidationUtility;
+use Exception;
 use Illuminate\Support\Facades\Log;
 
 class NotionWorkspaceGetAction
@@ -18,15 +19,17 @@ class NotionWorkspaceGetAction
         $this->workspaceInstantiateAction = app(NotionWorkspaceInstantiateAction::class);
     }
 
-    public function handle(string $name): ?NotionWorkspace
+    /**
+     * @throws Exception
+     */
+    public function handle(string $name): NotionWorkspace
     {
         $workspaces = NotionWorkspace::where([
             'name' => $name
         ])->get();
 
         if (count($workspaces) > 1) {
-            Log::warning("NotionWorkspaceGetAction failed, found too many NotionWorkspace records matching name $name.");
-            return null;
+            throw new Exception("NotionWorkspaceGetAction failed, found too many NotionWorkspace records matching name $name.");
         }
 
         if ($workspaces->isEmpty()) {

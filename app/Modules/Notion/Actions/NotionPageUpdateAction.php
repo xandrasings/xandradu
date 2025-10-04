@@ -5,6 +5,7 @@ namespace App\Modules\Notion\Actions;
 use App\Modules\Notion\Models\NotionPage;
 use App\Modules\Todoist\Actions\TodoistProjectSelectAction;
 use App\Utilities\ValidationUtility;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -20,20 +21,18 @@ class NotionPageUpdateAction
         $this->projectSelectAction = app(TodoistProjectSelectAction::class);
     }
 
-    public function handle(NotionPage $page, array $payload): ?NotionPage
+    /**
+     * @throws Exception
+     */
+    public function handle(NotionPage $page, array $payload): NotionPage
     {
         $title = data_get($payload, 'properties.title.title.0.plain_text');
         // TODO considerations for deleted and archived
 
-        try {
-            Log::notice("NotionPageUpdateAction updating NotionPage $page->id");
-            $page->update([
-                'title' => $title,
-            ]);
-        } catch (Throwable $exception) {
-            Log::warning("NotionPageUpdateAction failed with exception {$exception->getMessage()}.");
-            return null;
-        }
+        Log::notice("NotionPageUpdateAction updating NotionPage $page->id");
+        $page->update([
+            'title' => $title,
+        ]);
 
         return $page;
     }
