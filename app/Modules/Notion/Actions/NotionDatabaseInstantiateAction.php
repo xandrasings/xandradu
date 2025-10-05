@@ -23,16 +23,16 @@ class NotionDatabaseInstantiateAction
     /**
      * @throws Exception
      */
-    public function handle(NotionNode $parent, string $title, string $iconName): NotionDatabase
+    public function handle(NotionNode $parent, string $title, ?string $iconName = null): NotionDatabase
     {
-        $icon = $this->iconSelectAction->handle($iconName);
+        $iconId = is_null($iconName) ? null : $this->iconSelectAction->handle($iconName)->id;
         $node = $this->nodeInstantiateAction->handle($parent);
 
         Log::notice("NotionDatabaseInstantiateAction creating NotionDatabase from NotionNode $node->id, title $title, and icon $iconName.");
         return NotionDatabase::create([
             'node_id' => $node->id,
             'title' => $title,
-            'icon_id' => $icon->id,
+            'icon_id' => $iconId,
         ]);
     }
 }
