@@ -4,11 +4,8 @@ namespace App\Modules\Band\Actions;
 
 use App\Modules\Band\Models\Band;
 use App\Modules\Band\Models\BandWiki;
-use App\Modules\Core\Models\StoredFile;
 use App\Modules\Notion\Actions\NotionDatabaseInstantiateAction;
-use App\Modules\Notion\Actions\NotionDatabaseRealizeAction;
 use App\Modules\Notion\Actions\NotionPageSyncAction;
-use App\Modules\Notion\Models\NotionDatabase;
 use App\Modules\Notion\Models\NotionWorkspace;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -47,6 +44,20 @@ class BandWikiCreateAction
 
         $this->notionDatabaseInstantiateAction->handle($node, 'Instruments', 'instruments');
         $this->notionDatabaseInstantiateAction->handle($node, 'Members', 'people');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Configurations', 'people_configuration');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Gigs');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Shows');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Tunes');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Songs');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Venues');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Bookers');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Rehearsals');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Revenue');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Splits');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Payments');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Incidentals');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Splits');
+        $this->notionDatabaseInstantiateAction->handle($node, 'Payouts');
 
         return $wiki;
     }
