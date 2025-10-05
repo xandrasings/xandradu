@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use stdClass;
-use Throwable;
 
 class NotionClient
 {
@@ -123,7 +122,13 @@ class NotionClient
 
     private function generateBodyIcon(NotionDatabase $database): array
     {
-        // TODO generate icon programmatically
+        if (is_null($database->icon)) {
+            return [
+                'type' => 'emoji',
+                'emoji' => "❌"
+            ];
+        }
+
         return [
             'type' => 'external',
             'external' => [
