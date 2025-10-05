@@ -2,6 +2,7 @@
 
 namespace App\Utilities;
 
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
@@ -16,6 +17,16 @@ class ValidationUtility
             }
         }
         return true;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function isNotNull($variable): void
+    {
+        if (is_null($variable)) {
+            throw new Exception("encountered a null variable while validating no null variable.");
+        }
     }
 
     public function containsNoMoreThanOne(Collection $collection): bool
