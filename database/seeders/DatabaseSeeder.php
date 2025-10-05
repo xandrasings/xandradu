@@ -25,5 +25,12 @@ class DatabaseSeeder extends Seeder
         ],[
             'path' => '/icons/people.svg'
         ]);
+
+        StoredFile::updateOrCreate([
+            'type' => 'icon',
+            'name' => 'people_configuration',
+        ],[
+            'path' => '/icons/people_configuration.svg'
+        ]);
     }
 }
