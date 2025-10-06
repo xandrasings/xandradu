@@ -22,10 +22,10 @@ class BandWikiRealizeAction
     {
         // TODO make this find the bot from any node of any type
         $bot = $wiki->node->parent->workspace->bots->first();
-        $wiki->node->children->each(function ($node) use ($bot) {
-            // TODO deal with non db cases
-            $this->notionDatabaseRealizeAction->handle($node->database, $bot);
-        });
+//        $wiki->node->children->each(function ($node) use ($bot) {
+//            // TODO deal with non db cases
+//            $this->notionDatabaseRealizeAction->handle($node->database, $bot);
+//        });
 
         return $wiki;
     }

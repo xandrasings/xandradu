@@ -25,13 +25,13 @@ class NotionDatabaseRealizeAction
      */
     public function handle(NotionDatabase $database, NotionBot $bot): void
     {
-        $response = $this->client->createDatabase($database, $bot);
-
-        $id = data_get($response, 'id');
-        $this->validationUtility->isNotNull($id);
-
-        $database->update([
-            'external_id' => $id,
-        ]);
+//        $response = $this->client->createDatabase($database, $bot);
+//
+//        $id = data_get($response, 'id');
+//        $this->validationUtility->isNotNull($id);
+//
+//        $database->update([
+//            'external_id' => $id,
+//        ]);
     }
 }
