@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notion_nodes', function (Blueprint $table) {
+        Schema::create('notion_columns', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('parent_id')->nullable()->constrained(table: 'notion_nodes')->cascadeOnDelete();
+            $table->foreignId('data_source_id')->constrained(table: 'notion_data_sources')->cascadeOnDelete();
             $table->integer('rank')->default(0);
             $table->timestamps();
             $table->softDeletes();
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notion_nodes');
+        Schema::dropIfExists('notion_columns');
     }
 };

@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notion_nodes', function (Blueprint $table) {
+        Schema::create('notion_data_sources', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('parent_id')->nullable()->constrained(table: 'notion_nodes')->cascadeOnDelete();
+            $table->foreignId('database_id')->constrained(table: 'notion_databases')->cascadeOnDelete();
             $table->integer('rank')->default(0);
+            $table->string('external_id', 32)->nullable();
+            $table->string('title', 32)->nullable();
+            $table->foreignId('icon_id')->nullable()->constrained(table: 'stored_files')->cascadeOnDelete();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notion_nodes');
+        Schema::dropIfExists('notion_data_sources');
     }
 };
