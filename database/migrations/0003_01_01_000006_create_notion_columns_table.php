@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('data_source_id')->constrained(table: 'notion_data_sources')->cascadeOnDelete();
             $table->integer('rank')->default(0);
+            $table->string('name', 32);
+            $table->string('external_id', 32)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

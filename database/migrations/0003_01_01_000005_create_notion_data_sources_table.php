@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title', 32)->nullable();
             $table->foreignId('icon_id')->nullable()->constrained(table: 'stored_files')->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

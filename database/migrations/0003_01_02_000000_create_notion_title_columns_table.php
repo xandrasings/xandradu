@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notion_title_column', function (Blueprint $table) {
+        Schema::create('notion_title_columns', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 32);
             $table->foreignId('column_id')->constrained(table: 'notion_columns')->cascadeOnDelete();
             $table->timestamps();
         });
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notion_title_column');
+        Schema::dropIfExists('notion_title_columns');
     }
 };
