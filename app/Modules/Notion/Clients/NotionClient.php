@@ -3,6 +3,7 @@
 namespace App\Modules\Notion\Clients;
 
 use App\Modules\Notion\Models\NotionBot;
+use App\Modules\Notion\Models\NotionColumn;
 use App\Modules\Notion\Models\NotionDatabase;
 use Exception;
 use Illuminate\Support\Facades\Crypt;
@@ -107,7 +108,7 @@ class NotionClient
             'parent' => $this->generateBodyParent($database),
             'icon' => $this->generateBodyIcon($database),
             'title' => $this->generateBodyTitle($database),
-            'properties' => $this->generateBodyProperties($database),
+            'initial_data_source' => $this->generateBodyInitialDataSource($database),
         ];
     }
 
@@ -139,7 +140,6 @@ class NotionClient
 
     private function generateBodyTitle(NotionDatabase $database): array
     {
-        // TODO generate title programmatically
         return [
             [
                 'type' => 'text',
@@ -147,6 +147,26 @@ class NotionClient
                     'content' => $database->title,
                     'link' => null
                 ]
+            ]
+        ];
+    }
+
+    private function generateBodyInitialDataSource(NotionDatabase $database): array
+    {
+        $dataSource = $database->dataSources->sortBy('rank')->first();
+        // TODO search based on column type
+
+        // TODO debug use of relation here
+        $column = NotionColumn::where([
+            'data_source_id' => $dataSource->id,
+            'rank' => 0,
+        ])->first();
+
+        return [
+            'properties' => [
+                $column->name => [
+                    'title' => new stdClass()
+                ],
             ]
         ];
     }
