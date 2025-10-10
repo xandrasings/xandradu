@@ -5,6 +5,7 @@ namespace App\Modules\Notion\Models;
 use App\Modules\Core\Models\StoredFile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class NotionDatabase extends Model
 {
@@ -25,9 +26,9 @@ class NotionDatabase extends Model
         return $this->belongsTo(NotionNode::class, 'node_id');
     }
 
-    public function location(): BelongsTo
+    public function dataSources(): HasMany
     {
-        return $this->belongsTo(NotionNode::class, 'location_id');
+        return $this->hasMany(NotionDataSource::class, 'database_id');
     }
 
     public function icon(): BelongsTo
