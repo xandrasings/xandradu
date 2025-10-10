@@ -29,6 +29,16 @@ class ValidationUtility
         }
     }
 
+    /**
+     * @throws Exception
+     */
+    public function areNotNull(Collection $variables): void
+    {
+        $variables->each(function ($variable) {
+            $this->isNotNull($variable);
+        });
+    }
+
     public function containsNoMoreThanOne(Collection $collection): bool
     {
         $count = $collection->count();
