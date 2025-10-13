@@ -126,8 +126,7 @@ class NotionClient
         }
 
         if ($response->failed()) {
-            print_r($response->json());
-            throw new Exception("Call to notion endpoint $url failed with response {$response->getStatusCode()}");
+            throw new Exception("Call to notion endpoint $url failed with response {$response->getStatusCode()}.");
         }
 
         return $response->json();
