@@ -2,6 +2,7 @@
 
 namespace App\Modules\Notion\Models;
 
+use App\Modules\Core\Models\StoredFile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -32,5 +33,10 @@ class NotionDataSource extends Model
     public function columns(): HasMany
     {
         return $this->hasMany(NotionColumn::class, 'data_source_id');
+    }
+
+    public function icon(): BelongsTo
+    {
+        return $this->belongsTo(StoredFile::class, 'icon_id');
     }
 }

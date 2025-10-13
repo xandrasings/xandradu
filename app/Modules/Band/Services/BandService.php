@@ -6,7 +6,7 @@ use App\Modules\Band\Actions\BandInstantiateAction;
 use App\Modules\Band\Actions\BandExistsAction;
 use App\Modules\Band\Actions\BandSelectAction;
 use App\Modules\Band\Actions\BandWikiCreateAction;
-use App\Modules\Band\Actions\BandWikiRealizeAction;
+use App\Modules\Band\Actions\BandWikiSyncUpAction;
 use App\Modules\Band\Models\Band;
 use App\Modules\Band\Models\BandWiki;
 use App\Modules\Notion\Models\NotionWorkspace;
@@ -23,7 +23,7 @@ class BandService
 
     protected BandWikiCreateAction $wikiCreateAction;
 
-    protected BandWikiRealizeAction $wikiRealizeAction;
+    protected BandWikiSyncUpAction $wikiSyncUpAction;
 
     public function __construct()
     {
@@ -31,7 +31,7 @@ class BandService
         $this->instantiateAction = app (BandInstantiateAction::class);
         $this->selectAction = app (BandSelectAction::class);
         $this->wikiCreateAction = app (BandWikiCreateAction::class);
-        $this->wikiRealizeAction = app(BandWikiRealizeAction::class);
+        $this->wikiSyncUpAction = app(BandWikiSyncUpAction::class);
 
     }
 
@@ -59,7 +59,7 @@ class BandService
     public function manifestWiki(Band $band, NotionWorkspace $workspace, string $rootNodeId): BandWiki
     {
         $wiki = $this->wikiCreateAction->handle($band, $workspace, $rootNodeId);
-        $this->wikiRealizeAction->handle($wiki);
+        $this->wikiSyncUpAction->handle($wiki);
         return $wiki;
     }
 

@@ -14,7 +14,9 @@ class NotionNode extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'parent_id'
+        'parent_id',
+        'rank',
+        'step'
     ];
 
     public function parent(): BelongsTo
@@ -46,11 +48,4 @@ class NotionNode extends Model
     {
         return $this->hasMany(NotionNode::class, 'parent_id');
     }
-
-    public function childPages(): HasMany
-    {
-        return $this->hasMany(NotionDatabase::class, 'location_id');
-    }
-
-    // TODO childblocks
 }

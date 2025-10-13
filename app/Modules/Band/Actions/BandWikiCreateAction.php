@@ -46,8 +46,11 @@ class BandWikiCreateAction
             throw new Exception("Unable to create Band Wiki.");
         }
 
-        $database = $this->notionDatabaseInstantiateAction->handle($node, 'Instruments', 'instruments');
+        $database = $this->notionDatabaseInstantiateAction->handle($node, 'Instruments', 2, 1, 'instruments');
         $this->notionDataSourceInstantiateAction->handle($database, 'Instruments', "Name", 1, 'instruments');
+        $this->notionDataSourceInstantiateAction->handle($database, 'Instrument Owners', "Name", 2, 'people');
+        $database = $this->notionDatabaseInstantiateAction->handle($node, 'Musicians', 1, 2, 'people');
+        $this->notionDataSourceInstantiateAction->handle($database, 'Members', "Name", 1, 'people');
 //        $this->notionDatabaseInstantiateAction->handle($node, 'Members', 'people');
 //        $this->notionDatabaseInstantiateAction->handle($node, 'Configurations', 'people_configuration');
 //        $this->notionDatabaseInstantiateAction->handle($node, 'Gigs');

@@ -40,6 +40,7 @@ return [
         'host_name' => env('NOTION_HOST_NAME'),
         'users_endpoint' => env('NOTION_USERS_ENDPOINT'),
         'databases_endpoint' => env('NOTION_DATABASES_ENDPOINT'),
+        'data_sources_endpoint' => env('NOTION_DATA_SOURCES_ENDPOINT'),
         'pages_endpoint' => env('NOTION_PAGES_ENDPOINT'),
     ],
 
