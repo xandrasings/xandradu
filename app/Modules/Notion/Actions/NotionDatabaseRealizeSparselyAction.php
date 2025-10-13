@@ -4,7 +4,6 @@ namespace App\Modules\Notion\Actions;
 
 use App\Modules\Notion\Clients\NotionClient;
 use App\Modules\Notion\Models\NotionBot;
-use App\Modules\Notion\Models\NotionColumn;
 use App\Modules\Notion\Models\NotionDatabase;
 use App\Utilities\ValidationUtility;
 use Exception;
@@ -42,11 +41,8 @@ class NotionDatabaseRealizeSparselyAction
             'external_id' => $dataSourceId,
         ]);
 
-        // TODO why can't this be done as a relation?
-        $titleColumn = NotionColumn::where([
-            'data_source_id' => $dataSource->id,
-            'name' => 'Name',
-        ])->first();
+        // TODO use column type
+        $titleColumn = $dataSource->columns->sortBy('rank')->first();
 
         $titleColumn->update([
             'external_id' => 'title',

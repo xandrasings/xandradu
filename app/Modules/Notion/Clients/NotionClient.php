@@ -156,11 +156,8 @@ class NotionClient
         $dataSource = $database->dataSources->sortBy('rank')->first();
         // TODO search based on column type
 
-        // TODO debug use of relation here
-        $column = NotionColumn::where([
-            'data_source_id' => $dataSource->id,
-            'rank' => 0,
-        ])->first();
+        // TODO deal select column based on column type
+        $column = $dataSource->columns->sortBy('rank')->first();
 
         return [
             'properties' => [
