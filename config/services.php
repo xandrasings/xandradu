@@ -35,6 +35,13 @@ return [
         ],
     ],
 
+    'airtable' => [
+        'base_url' => env('AIRTABLE_BASE_URL'),
+        'bearer_token' => env('AIRTABLE_BEARER_TOKEN'),
+        'workspace_id' => env('AIRTABLE_WORKSPACE_ID'),
+        'bases_path' => env('AIRTABLE_BASES_PATH'),
+    ],
+
     'notion' => [
         'version' => env('NOTION_VERSION'),
         'host_name' => env('NOTION_HOST_NAME'),
