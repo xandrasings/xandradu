@@ -8,6 +8,28 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int $id
+ * @property string $full_value
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Core\Models\Person> $people
+ * @property-read int|null $people_count
+ * @property-read TodoistUser|null $todoistUser
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailAddress newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailAddress newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailAddress onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailAddress query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailAddress whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailAddress whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailAddress whereFullValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailAddress whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailAddress whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailAddress withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailAddress withoutTrashed()
+ * @mixin \Eloquent
+ */
 class EmailAddress extends Model
 {
     use SoftDeletes;

@@ -8,6 +8,37 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int $id
+ * @property int $database_id
+ * @property int $rank
+ * @property string|null $external_id
+ * @property string|null $title
+ * @property int|null $icon_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Notion\Models\NotionColumn> $columns
+ * @property-read int|null $columns_count
+ * @property-read \App\Modules\Notion\Models\NotionDatabase $database
+ * @property-read StoredFile|null $icon
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource whereDatabaseId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource whereExternalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource whereIconId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource whereRank($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotionDataSource withoutTrashed()
+ * @mixin \Eloquent
+ */
 class NotionDataSource extends Model
 {
     use SoftDeletes;
