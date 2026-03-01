@@ -29,11 +29,10 @@ class AirtableBaseCreateAction
         Log::info('executing AirtableBaseCreateAction', ['base' => $base]);
 
         $baseCreateRequestDto = AirtableBaseCreateRequestDto::from($base);
-        $baseCreateResponseDto = $this->client->createBase(AirtableBaseCreateRequestDto::from($baseCreateRequestDto));
+        $baseCreateResponseDto = $this->client->createBase($baseCreateRequestDto);
 
-        Log::notice('updating AirtableBase with external_id', ['base' => $base, 'baseCreateResponseDto' => $baseCreateResponseDto]);
-        $base->external_id = $baseCreateResponseDto->id;
-        $base->save();
+        $base->update($baseCreateResponseDto->only('id')->toArray());
+        Log::notice('updated AirtableBase with external_id', ['base' => $base, 'baseCreateResponseDto' => $baseCreateResponseDto]);
 
         // TODO deal with tables attribute
     }

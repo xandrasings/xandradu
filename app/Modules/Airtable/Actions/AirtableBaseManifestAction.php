@@ -30,7 +30,7 @@ class AirtableBaseManifestAction
                 $this->baseCreateAction->handle($base);
                 break;
             default:
-                Log::warning('Unable to update base - airtable lacks this public API functionality.');
+                Log::warning('Unable to update base - airtable lacks this public API functionality.', ['base' => $base]);
                 break;
         }
     }

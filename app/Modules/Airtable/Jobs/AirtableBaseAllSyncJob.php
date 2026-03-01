@@ -2,20 +2,20 @@
 
 namespace App\Modules\Airtable\Jobs;
 
-use App\Modules\Airtable\Actions\AirtableBaseSyncUpAllAction;
+use App\Modules\Airtable\Services\AirtableService;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
-class AirtableSyncTablesJob implements ShouldQueue
+class AirtableBaseAllSyncJob implements ShouldQueue
 {
     use Queueable;
 
-    protected AirtableBaseSyncUpAllAction $baseSyncUpAllAction;
+    protected AirtableService $service;
 
     public function __construct()
     {
-        $this->baseSyncUpAllAction = app(AirtableBaseSyncUpAllAction::class);
+        $this->service = app(AirtableService::class);
     }
 
     /**
@@ -23,6 +23,6 @@ class AirtableSyncTablesJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $this->baseSyncUpAllAction->handle();
+        $this->service->baseAllSync();
     }
 }

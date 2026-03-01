@@ -1,17 +1,18 @@
 <?php
 
 namespace App\Modules\Airtable\Dtos;
+
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Data;
 
-class AirtableBaseCreateResponseDto extends Data
+final class AirtableBaseResourceResponseDto extends Data
 {
     public function __construct(
 
         #[MapOutputName('external_id')]
         public string $id,
 
-        // TODO relate this to a table DTO
-        public array $tables
-    ) {}
+        public string $name,
+    )
+    {}
 }

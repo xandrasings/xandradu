@@ -4,15 +4,10 @@ namespace App\Modules\Airtable\Clients;
 
 use App\Modules\Airtable\Dtos\AirtableBaseCreateRequestDto;
 use App\Modules\Airtable\Dtos\AirtableBaseCreateResponseDto;
-use App\Modules\Notion\Models\NotionBot;
-use App\Modules\Notion\Models\NotionDatabase;
-use App\Modules\Notion\Models\NotionDataSource;
+use App\Modules\Airtable\Dtos\AirtableBaseListResponseDto;
 use Exception;
-use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use stdClass;
 
 class AirtableClient
 {
@@ -31,12 +26,30 @@ class AirtableClient
     /**
      * @throws Exception
      */
+    public function listBases(): AirtableBaseListResponseDto
+    {
+        $url = $this->baseUrl.$this->basesPath;
+        $token = $this->bearerToken;
+
+        Log::notice("GET call to $url");
+        $response = Http::withToken($token)->get($url);
+
+        if ($response->failed()) {
+            throw new Exception("api to airtable endpoint $url failed with response {$response->getStatusCode()}", ['response body', $response->body()]);
+        }
+
+        return AirtableBaseListResponseDto::from($response->json());
+    }
+
+    /**
+     * @throws Exception
+     */
     public function createBase(AirtableBaseCreateRequestDto $baseCreateRequestDto): AirtableBaseCreateResponseDto
     {
         $url = $this->baseUrl.$this->basesPath;
         $token = $this->bearerToken;
 
-        Log::notice('api call to $url', ['baseRequest' => $baseCreateRequestDto]);
+        Log::notice("POST call to $url", ['baseRequest' => $baseCreateRequestDto]);
         $response = Http::withToken($token)->post($url, $baseCreateRequestDto);
 
         if ($response->failed()) {

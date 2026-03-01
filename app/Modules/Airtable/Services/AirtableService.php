@@ -2,23 +2,28 @@
 
 namespace App\Modules\Airtable\Services;
 
-use App\Modules\Airtable\Actions\AirtableBaseSyncUpAllAction;
-use App\Modules\Band\Models\Band;
-use App\Modules\Band\Models\BandWiki;
-use App\Modules\Notion\Models\NotionWorkspace;
+use App\Modules\Airtable\Actions\AirtableBaseAllSyncDownAction;
+use App\Modules\Airtable\Actions\AirtableBaseAllSyncUpAction;
 use Exception;
 
 class AirtableService
 {
-    protected AirtableBaseSyncUpAllAction $tablesSyncUpAction;
+    protected AirtableBaseAllSyncDownAction $baseAllSyncDownAction;
+
+    protected AirtableBaseAllSyncUpAction $baseAllSyncUpAction;
 
     public function __construct()
     {
-        $this->tablesSyncUpAction = app(AirtableBaseSyncUpAllAction::class);
+        $this->baseAllSyncDownAction = app(AirtableBaseAllSyncDownAction::class);
+        $this->baseAllSyncUpAction = app(AirtableBaseAllSyncUpAction::class);
     }
 
-    public function syncUpTables(): void
+    /**
+     * @throws Exception
+     */
+    public function baseAllSync(): void
     {
-        $this->tablesSyncUpAction->handle();
+        $this->baseAllSyncDownAction->handle();
+        $this->baseAllSyncUpAction->handle();
     }
 }

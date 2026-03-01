@@ -3,9 +3,10 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Models\AirtableBase;
+use Exception;
 use Illuminate\Support\Facades\Log;
 
-class AirtableBaseSyncUpAllAction
+class AirtableBaseAllSyncUpAction
 {
     protected AirtableBaseManifestAction $baseManifestAction;
 
@@ -14,17 +15,16 @@ class AirtableBaseSyncUpAllAction
         $this->baseManifestAction = app(AirtableBaseManifestAction::class);
     }
 
+    /**
+     * @throws Exception
+     */
     public function handle(): void
     {
         Log::info('executing AirtableBaseSyncUpAllAction');
 
         AirtableBase::withTrashed()->get()
-            ->each(/**
-             * @throws \Exception
-             */ function (AirtableBase $base) {
+            ->each( function (AirtableBase $base) {
                 $this->baseManifestAction->handle($base);
-
-                Log::notice("Table syncing up", ['base' => $base]);
             });
     }
 }

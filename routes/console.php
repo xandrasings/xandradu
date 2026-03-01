@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Airtable\Jobs\AirtableBaseAllSyncJob;
 use App\Modules\Core\Jobs\HeartbeatJob;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
@@ -10,3 +11,5 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::job(new HeartbeatJob())->everyMinute();
+
+Schedule::job(new AirtableBaseAllSyncJob())->daily();
