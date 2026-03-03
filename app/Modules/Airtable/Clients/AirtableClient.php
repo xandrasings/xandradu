@@ -5,6 +5,7 @@ namespace App\Modules\Airtable\Clients;
 use App\Modules\Airtable\Dtos\AirtableBaseCreateRequestDto;
 use App\Modules\Airtable\Dtos\AirtableBaseCreateResponseDto;
 use App\Modules\Airtable\Dtos\AirtableBaseListResponseDto;
+use App\Modules\Airtable\Dtos\AirtableTableListResponseDto;
 use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -14,13 +15,17 @@ class AirtableClient
     private string $baseUrl;
 
     private string $bearerToken;
+
     private string $basesPath;
+
+    private string $tablesPath;
 
     public function __construct()
     {
         $this->baseUrl = config('services.airtable.base_url');
         $this->bearerToken = config('services.airtable.bearer_token');
         $this->basesPath = config('services.airtable.bases_path');
+        $this->tablesPath = config('services.airtable.tables_path');
     }
 
     /**
@@ -57,5 +62,23 @@ class AirtableClient
         }
 
         return AirtableBaseCreateResponseDto::from($response->json());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function listTables(string $baseExternalId): AirtableTableListResponseDto
+    {
+        $url = "$this->baseUrl$this->basesPath/$baseExternalId$this->tablesPath";
+        $token = $this->bearerToken;
+
+        Log::notice("GET call to $url");
+        $response = Http::withToken($token)->get($url);
+
+        if ($response->failed()) {
+            throw new Exception("api to airtable endpoint $url failed with response {$response->getStatusCode()}", ['response body', $response->body()]);
+        }
+
+        return AirtableTableListResponseDto::from($response->json());
     }
 }

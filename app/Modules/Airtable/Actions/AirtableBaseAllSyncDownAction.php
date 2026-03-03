@@ -14,11 +14,15 @@ class AirtableBaseAllSyncDownAction
 
     protected AirtableBaseReconcileAction $baseReconcileAction;
 
+    protected AirtableTableAllSyncDownAction $tableAllSyncDownAction;
+
     public function __construct()
     {
         $this->client = app(AirtableClient::class);
 
         $this->baseReconcileAction = app(AirtableBaseReconcileAction::class);
+
+        $this->tableAllSyncDownAction = app(AirtableTableAllSyncDownAction::class);
     }
 
     /**
@@ -30,10 +34,10 @@ class AirtableBaseAllSyncDownAction
 
         $baseListResponseDto = $this->client->listBases();
 
-        Log::info('listing Bases', ['$baseListResponseDto'=>$baseListResponseDto]);
+        $baseListResponseDto->bases->each(function ($baseResourceResponseDto) {
+            $base = $this->baseReconcileAction->handle($baseResourceResponseDto);
 
-        $baseListResponseDto->bases->each(function ($base) {
-            $this->baseReconcileAction->handle($base);
+            $this->tableAllSyncDownAction->handle($base);
         });
         // TODO currently assumes no need for calling for additional because the offset is so high at 1000
 

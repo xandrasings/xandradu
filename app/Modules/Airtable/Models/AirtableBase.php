@@ -3,6 +3,7 @@
 namespace App\Modules\Airtable\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Airtable\Models\AirtableTable> $tables
+ * @property-read int|null $tables_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBase newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBase newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBase onlyTrashed()
@@ -33,6 +36,10 @@ class AirtableBase extends Model
     protected $fillable = [
         'external_id',
         'name',
-        'description',
     ];
+
+    public function tables(): HasMany
+    {
+        return $this->hasMany(AirtableTable::class, 'base_id');
+    }
 }

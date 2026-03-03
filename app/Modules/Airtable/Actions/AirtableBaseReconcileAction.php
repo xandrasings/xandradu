@@ -13,15 +13,17 @@ class AirtableBaseReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableBaseResourceResponseDto $baseResourceResponseDto): void
+    public function handle(AirtableBaseResourceResponseDto $baseResourceResponseDto): AirtableBase
     {
-        Log::info('executing AirtableBaseResourceResponseDto', ['$baseResourceResponseDto' => $baseResourceResponseDto]);
+        Log::info('executing AirtableBaseResourceResponseDto', ['baseResourceResponseDto' => $baseResourceResponseDto]);
 
         $base = AirtableBase::updateOrCreate(
             $baseResourceResponseDto->only('id')->toArray(),
             $baseResourceResponseDto->except('id')->toArray(),
         );
         Log::notice('created or updated AirtableBase', ['base' => $base, 'baseResourceResponseDto' => $baseResourceResponseDto]);
+
+        return $base;
     }
 
 }

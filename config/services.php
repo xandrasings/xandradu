@@ -40,6 +40,7 @@ return [
         'bearer_token' => env('AIRTABLE_BEARER_TOKEN'),
         'workspace_id' => env('AIRTABLE_WORKSPACE_ID'),
         'bases_path' => env('AIRTABLE_BASES_PATH'),
+        'tables_path' => env('AIRTABLE_TABLES_PATH'),
     ],
 
     'notion' => [
