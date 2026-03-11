@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableBaseReconcileAction
 {
-
     /**
      * @throws Exception
      */

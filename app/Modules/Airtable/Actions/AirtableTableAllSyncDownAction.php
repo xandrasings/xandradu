@@ -4,6 +4,7 @@ namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Clients\AirtableClient;
 use App\Modules\Airtable\Models\AirtableBase;
+use App\Modules\Airtable\Models\AirtableTable;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -12,13 +13,17 @@ class AirtableTableAllSyncDownAction
 
     protected AirtableClient $client;
 
-    protected AirtableTableReconcileAction $tableReconcileAction;
+    protected AirtableTableAllReconcileAction $tableAllReconcileAction;
+
+//    protected AirtableFieldAllReconcileAction $fieldAllReconcileAction;
 
     public function __construct()
     {
         $this->client = app(AirtableClient::class);
 
-        $this->tableReconcileAction = app(AirtableTableReconcileAction::class);
+        $this->tableAllReconcileAction = app(AirtableTableAllReconcileAction::class);
+
+//        $this->fieldAllReconcileAction = app(AirtableFieldAllReconcileAction::class);
     }
 
     /**
@@ -30,18 +35,7 @@ class AirtableTableAllSyncDownAction
 
         $tableListResponseDto = $this->client->listTables($base->external_id);
 
-        $tableListResponseDto->tables->each(function ($tableResourceResponseDto) use ($base) {
-            $this->tableReconcileAction->handle($base, $tableResourceResponseDto);
-        });
-
-        Log::notice('xan', ['assoc tables' =>$base->tables()->get()]);
-
-        $deletedTables = $base
-            ->tables()
-            ->whereNotNull('external_id')
-            ->whereNotIn('external_id', $tableListResponseDto->tables->pluck('id'))
-            ->delete();
-        Log::notice('deleted AirtableTables.', ['tables' => $deletedTables]);
+        $activeExternalTables = $this->tableAllReconcileAction->handle($tableListResponseDto->tables, $base);
 
     }
 }

@@ -12,4 +12,4 @@ Artisan::command('inspire', function () {
 
 Schedule::job(new HeartbeatJob())->everyMinute();
 
-Schedule::job(new AirtableBaseAllSyncJob())->daily();
+Schedule::job(new AirtableBaseAllSyncJob())->everyMinute();

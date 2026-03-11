@@ -12,7 +12,7 @@ class AirtableBaseAllSyncDownAction
 
     protected AirtableClient $client;
 
-    protected AirtableBaseReconcileAction $baseReconcileAction;
+    protected AirtableBaseAllReconcileAction $baseAllReconcileAction;
 
     protected AirtableTableAllSyncDownAction $tableAllSyncDownAction;
 
@@ -20,7 +20,7 @@ class AirtableBaseAllSyncDownAction
     {
         $this->client = app(AirtableClient::class);
 
-        $this->baseReconcileAction = app(AirtableBaseReconcileAction::class);
+        $this->baseAllReconcileAction = app(AirtableBaseAllReconcileAction::class);
 
         $this->tableAllSyncDownAction = app(AirtableTableAllSyncDownAction::class);
     }
@@ -33,19 +33,12 @@ class AirtableBaseAllSyncDownAction
         Log::info('executing AirtableBaseAllSyncDownAction');
 
         $baseListResponseDto = $this->client->listBases();
+        // TODO deal with offsets so allreconcile is really all
 
-        $baseListResponseDto->bases->each(function ($baseResourceResponseDto) {
-            $base = $this->baseReconcileAction->handle($baseResourceResponseDto);
+        $activeExternalBases = $this->baseAllReconcileAction->handle($baseListResponseDto->bases);
 
+        $activeExternalBases->each(function ($base) {
             $this->tableAllSyncDownAction->handle($base);
         });
-        // TODO currently assumes no need for calling for additional because the offset is so high at 1000
-
-        $deletedBases = AirtableBase::query()
-            ->whereNotNull('external_id')
-            ->whereNotIn('external_id', $baseListResponseDto->bases->pluck('id'))
-            ->delete();
-        Log::notice('deleted AirtableBases.', ['bases' => $deletedBases]);
-
     }
 }

@@ -4,6 +4,7 @@ namespace App\Modules\Airtable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read AirtableTable|null $base
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Airtable\Models\AirtableField> $fields
+ * @property-read int|null $fields_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableTable newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableTable newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableTable onlyTrashed()
@@ -42,5 +45,10 @@ class AirtableTable extends Model
     public function base(): BelongsTo
     {
         return $this->belongsTo(AirtableTable::class, 'base_id');
+    }
+
+    public function fields(): HasMany
+    {
+        return $this->hasMany(AirtableField::class, 'table_id');
     }
 }
