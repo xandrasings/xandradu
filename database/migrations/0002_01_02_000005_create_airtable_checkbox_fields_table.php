@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('airtable_tables', function (Blueprint $table) {
+        Schema::create('airtable_checkbox_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('base_id')->nullable()->constrained(table: 'airtable_bases')->cascadeOnDelete();
-            $table->string('external_id', 32)->nullable();
-            $table->string('name', 32);
-            $table->string('type', 32);
+            $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->cascadeOnDelete();
+            $table->string('color', 16);
+            $table->string('icon', 16);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('airtable_tables');
+        Schema::dropIfExists('airtable_checkbox_fields');
     }
 };

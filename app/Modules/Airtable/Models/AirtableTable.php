@@ -44,7 +44,7 @@ class AirtableTable extends Model
 
     public function base(): BelongsTo
     {
-        return $this->belongsTo(AirtableTable::class, 'base_id');
+        return $this->belongsTo(AirtableBase::class, 'base_id');
     }
 
     public function fields(): HasMany

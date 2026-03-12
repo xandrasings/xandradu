@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('table_id')->nullable()->constrained(table: 'airtable_tables')->cascadeOnDelete();
             $table->string('external_id', 32)->nullable();
             $table->string('name', 32);
+            $table->string('description', 256)->nullable();
+            $table->string('type', 32);
             $table->timestamps();
             $table->softDeletes();
         });
