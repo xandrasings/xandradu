@@ -11,10 +11,14 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableFieldReconcileAction
 {
+    protected AirtableAttachmentsFieldReconcileAction $attachmentsFieldReconcileAction;
+
     protected AirtableCheckboxFieldReconcileAction $checkboxFieldReconcileAction;
 
     public function __construct()
     {
+        $this->attachmentsFieldReconcileAction = app(AirtableAttachmentsFieldReconcileAction::class);
+
         $this->checkboxFieldReconcileAction = app(AirtableCheckboxFieldReconcileAction::class);
     }
 
@@ -27,14 +31,14 @@ class AirtableFieldReconcileAction
 
         $field = $table->fields()->updateOrCreate(
             $fieldResourceResponseDto->only('id')->toArray(),
-            $fieldResourceResponseDto->except('id')->toArray(),
+            $fieldResourceResponseDto->except('id', 'options')->toArray(), // TODO investigate options functionality?
         );
         Log::notice('created or updated AirtableField', ['field' => $field, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
 
         match ($fieldResourceResponseDto->type) {
+            AirtableFieldResourceTypeEnum::ATTACHMENTS => $this->attachmentsFieldReconcileAction->handle($fieldResourceResponseDto->options, $field),
             AirtableFieldResourceTypeEnum::CHECKBOX => $this->checkboxFieldReconcileAction->handle($fieldResourceResponseDto->options, $field),
             AirtableFieldResourceTypeEnum::AI_TEXT,
-            AirtableFieldResourceTypeEnum::ATTACHMENT,
             AirtableFieldResourceTypeEnum::AUTO_NUMBER,
             AirtableFieldResourceTypeEnum::BARCODE,
             AirtableFieldResourceTypeEnum::BUTTON,

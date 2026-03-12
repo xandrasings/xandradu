@@ -5,7 +5,7 @@ namespace App\Modules\Airtable\Enums;
 enum AirtableFieldResourceTypeEnum: string {
     case AI_TEXT = 'aiText';
 
-    case ATTACHMENT = 'multipleAttachments';
+    case ATTACHMENTS = 'multipleAttachments';
 
     case AUTO_NUMBER = 'autoNumber';
 

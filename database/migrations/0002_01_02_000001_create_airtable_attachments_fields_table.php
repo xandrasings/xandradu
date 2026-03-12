@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('airtable_tables', function (Blueprint $table) {
+        Schema::create('airtable_attachments_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('base_id')->nullable()->constrained(table: 'airtable_bases')->cascadeOnDelete();
-            $table->string('external_id', 32)->nullable();
-            $table->string('name', 32);
+            $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->cascadeOnDelete();
+            $table->boolean('is_reversed');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('airtable_tables');
+        Schema::dropIfExists('airtable_attachments_fields');
     }
 };

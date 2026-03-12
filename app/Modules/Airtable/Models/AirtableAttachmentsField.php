@@ -4,8 +4,6 @@ namespace App\Modules\Airtable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,29 +16,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField withoutTrashed()
  * @mixin \Eloquent
  */
-class AirtableField extends Model
+class AirtableAttachmentsField extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'external_id',
-        'name',
-        'description',
-        'type',
+        'is_reversed',
     ];
 
-    public function table(): BelongsTo
+    public function field(): BelongsTo
     {
-        return $this->belongsTo(AirtableTable::class, 'table_id');
-    }
-
-    public function attachmentsField(): HasOne
-    {
-        return $this->hasOne(AirtableAttachmentsField::class, 'field_id');
-    }
-
-    public function checkboxField(): HasOne
-    {
-        return $this->hasOne(AirtableCheckboxField::class, 'field_id');
+        return $this->belongsTo(AirtableField::class, 'field_id');
     }
 }
