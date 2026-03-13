@@ -7,11 +7,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
+ * @property int $id
+ * @property int|null $field_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBarcodeField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBarcodeField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBarcodeField onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBarcodeField query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBarcodeField whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBarcodeField whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBarcodeField whereFieldId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBarcodeField whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBarcodeField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBarcodeField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBarcodeField withoutTrashed()
  * @mixin \Eloquent
