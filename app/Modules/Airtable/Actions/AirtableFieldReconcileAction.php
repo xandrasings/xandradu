@@ -15,11 +15,15 @@ class AirtableFieldReconcileAction
 
     protected AirtableCheckboxFieldReconcileAction $checkboxFieldReconcileAction;
 
+    protected AirtableSingleLineFieldReconcileAction $singleLineFieldReconcileAction;
+
     public function __construct()
     {
         $this->attachmentsFieldReconcileAction = app(AirtableAttachmentsFieldReconcileAction::class);
 
         $this->checkboxFieldReconcileAction = app(AirtableCheckboxFieldReconcileAction::class);
+
+        $this->singleLineFieldReconcileAction = app(AirtableSingleLineFieldReconcileAction::class);
     }
 
     /**
@@ -38,6 +42,7 @@ class AirtableFieldReconcileAction
         match ($fieldResourceResponseDto->type) {
             AirtableFieldResourceTypeEnum::ATTACHMENTS => $this->attachmentsFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldResourceTypeEnum::CHECKBOX => $this->checkboxFieldReconcileAction->handle($fieldResourceResponseDto, $field),
+            AirtableFieldResourceTypeEnum::SINGLE_LINE_TEXT => $this->singleLineFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldResourceTypeEnum::AI_TEXT,
             AirtableFieldResourceTypeEnum::AUTO_NUMBER,
             AirtableFieldResourceTypeEnum::BARCODE,
@@ -63,7 +68,6 @@ class AirtableFieldReconcileAction
             AirtableFieldResourceTypeEnum::RATING,
             AirtableFieldResourceTypeEnum::RICH_TEXT,
             AirtableFieldResourceTypeEnum::ROLLUP,
-            AirtableFieldResourceTypeEnum::SINGLE_LINE_TEXT,
             AirtableFieldResourceTypeEnum::SINGLE_SELECT,
             AirtableFieldResourceTypeEnum::SYNC_SOURCE,
             AirtableFieldResourceTypeEnum::URL => Log::error('Encountered an unsupported Airtable field type.', ['field' => $field, 'fieldResourceResponseDto' => $fieldResourceResponseDto]),
