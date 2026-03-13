@@ -2,29 +2,31 @@
 
 namespace App\Modules\Airtable\Actions;
 
-use App\Modules\Airtable\Dtos\AirtableOptionsResourceResponseDto;
+use App\Modules\Airtable\Dtos\AirtableAttachmentsFieldResourceResponseDto;
+use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableAttachmentsField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
 use Illuminate\Support\Facades\Log;
-use Spatie\LaravelData\Optional;
 
 class AirtableAttachmentsFieldReconcileAction
 {
     /**
      * @throws Exception
      */
-    public function handle(AirtableOptionsResourceResponseDto|Optional $optionResourceResponseDto, AirtableField $field):  AirtableAttachmentsField
+    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableAttachmentsField
     {
-        Log::info('executing AirtableAttachmentsFieldReconcileAction', ['optionResourceResponseDto' => $optionResourceResponseDto, 'field' => $field]);
+        Log::info('executing AirtableAttachmentsFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
 
-        // TODO arg&field validation
+        if (!($fieldResourceResponseDto instanceof AirtableAttachmentsFieldResourceResponseDto)) {
+            throw new Exception('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        }
 
         $attachmentsField = $field->attachmentsField()->updateOrCreate(
             [],
-            $optionResourceResponseDto->toArray(),
+            $fieldResourceResponseDto->options->toArray(),
         );
-        Log::notice('created or updated AirtableAttachmentsField', ['field' => $field, 'attachmentsFieldOptionsResourceResponseDto' => $optionResourceResponseDto]);
+        Log::notice('created or updated AirtableAttachmentsField', ['attachmentsField' => $attachmentsField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
 
         return $attachmentsField;
     }

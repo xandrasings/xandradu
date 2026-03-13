@@ -31,13 +31,13 @@ class AirtableFieldReconcileAction
 
         $field = $table->fields()->updateOrCreate(
             $fieldResourceResponseDto->only('id')->toArray(),
-            $fieldResourceResponseDto->except('id', 'options')->toArray(), // TODO investigate options functionality?
+            $fieldResourceResponseDto->except('id', 'options')->toArray(),
         );
         Log::notice('created or updated AirtableField', ['field' => $field, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
 
         match ($fieldResourceResponseDto->type) {
-            AirtableFieldResourceTypeEnum::ATTACHMENTS => $this->attachmentsFieldReconcileAction->handle($fieldResourceResponseDto->options, $field),
-            AirtableFieldResourceTypeEnum::CHECKBOX => $this->checkboxFieldReconcileAction->handle($fieldResourceResponseDto->options, $field),
+            AirtableFieldResourceTypeEnum::ATTACHMENTS => $this->attachmentsFieldReconcileAction->handle($fieldResourceResponseDto, $field),
+            AirtableFieldResourceTypeEnum::CHECKBOX => $this->checkboxFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldResourceTypeEnum::AI_TEXT,
             AirtableFieldResourceTypeEnum::AUTO_NUMBER,
             AirtableFieldResourceTypeEnum::BARCODE,

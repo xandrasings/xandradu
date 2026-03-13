@@ -5,7 +5,7 @@ namespace App\Modules\Airtable\Dtos;
 use App\Modules\Airtable\Models\AirtableBase;
 use Spatie\LaravelData\Data;
 
-final class AirtableBaseCreateRequestDto extends Data
+class AirtableBaseCreateRequestDto extends Data
 {
     public function __construct(
 

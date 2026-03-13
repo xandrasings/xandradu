@@ -7,10 +7,6 @@ use Illuminate\Support\Collection;
 
 class AirtableBaseListResponseDto extends Data
 {
-    public function __construct(
-
-        #[DataCollectionOf(AirtableBaseResourceResponseDto::class)]
-        public Collection $bases,
-    )
-    {}
+    #[DataCollectionOf(AirtableBaseResourceResponseDto::class)]
+    public Collection $bases;
 }

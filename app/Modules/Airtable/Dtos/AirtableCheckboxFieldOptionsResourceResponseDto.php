@@ -12,13 +12,14 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 use Spatie\LaravelData\Optional;
 
 #[MapName(SnakeCaseMapper::class)]
-class AirtableOptionsResourceResponseDto extends Data
+class AirtableCheckboxFieldOptionsResourceResponseDto extends Data
 {
-    #[WithCast(EnumCast::class, type: AirtableOptionsResourceIconEnum::class)]
-    public AirtableOptionsResourceIconEnum|Optional $icon;
+    public function __construct(
+        #[WithCast(EnumCast::class, type: AirtableOptionsResourceIconEnum::class)]
+        public AirtableOptionsResourceIconEnum|Optional $icon,
 
-    #[WithCast(EnumCast::class, type: AirtableOptionsResourceColorEnum::class)]
-    public AirtableOptionsResourceColorEnum|Optional $color;
-
-    public bool|Optional $isReversed;
+        #[WithCast(EnumCast::class, type: AirtableOptionsResourceColorEnum::class)]
+        public AirtableOptionsResourceColorEnum|Optional $color,
+    )
+    {}
 }

@@ -2,29 +2,32 @@
 
 namespace App\Modules\Airtable\Actions;
 
-use App\Modules\Airtable\Dtos\AirtableOptionsResourceResponseDto;
+use App\Modules\Airtable\Dtos\AirtableCheckboxFieldResourceResponseDto;
+use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableCheckboxField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
 use Illuminate\Support\Facades\Log;
-use Spatie\LaravelData\Optional;
 
 class AirtableCheckboxFieldReconcileAction
 {
     /**
      * @throws Exception
      */
-    public function handle(AirtableOptionsResourceResponseDto|Optional $optionResourceResponseDto, AirtableField $field):  AirtableCheckboxField
+    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableCheckboxField
     {
-        Log::info('executing AirtableCheckboxFieldReconcileAction', ['optionResourceResponseDto' => $optionResourceResponseDto, 'field' => $field]);
+        Log::info('executing AirtableCheckboxFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
 
-        // TODO arg&field validation
+
+        if (!($fieldResourceResponseDto instanceof AirtableCheckboxFieldResourceResponseDto)) {
+            throw new Exception('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        }
 
         $checkboxField = $field->checkboxField()->updateOrCreate(
             [],
-            $optionResourceResponseDto->only('color', 'icon')->toArray(),
+            $fieldResourceResponseDto->options->toArray(),
         );
-        Log::notice('created or updated AirtableCheckboxField', ['field' => $field, 'optionResourceResponseDto' => $optionResourceResponseDto]);
+        Log::notice('created or updated AirtableCheckboxField', ['field' => $field, 'checkboxFieldResourceResponseDto' => $fieldResourceResponseDto]);
 
         return $checkboxField;
     }
