@@ -21,9 +21,9 @@ enum AirtableFieldResourceTypeEnum: string {
 
     case COUNT = 'count';
 
-    case CREATED_BY = 'createdBy';
+    case CREATED_AT = 'createdTime';
 
-    case CREATED_TIME = 'createdTime';
+    case CREATED_BY = 'createdBy';
 
     case CURRENCY = 'currency';
 
@@ -33,13 +33,9 @@ enum AirtableFieldResourceTypeEnum: string {
 
     case DURATION = 'duration';
 
-    case EMAIL = 'email';
+    case EMAIL_ADDRESS = 'email';
 
     case FORMULA = 'formula';
-
-    case LAST_MODIFIED_BY = 'lastModifiedBy';
-
-    case LAST_MODIFIED_TIME = 'lastModifiedTime';
 
     case LONG_TEXT = 'multilineText';
 
@@ -47,9 +43,9 @@ enum AirtableFieldResourceTypeEnum: string {
 
     case NUMBER = 'number';
 
-    case PERCENT = 'percent';
+    case PERCENTAGE = 'percent';
 
-    case PHONE = 'phoneNumber';
+    case PHONE_NUMBER = 'phoneNumber';
 
     case RATING = 'rating';
 
@@ -66,6 +62,10 @@ enum AirtableFieldResourceTypeEnum: string {
     case SHORT_TEXT = 'singleLineText';
 
     case SYNC_SOURCE = 'externalSyncSource';
+
+    case UPDATED_AT = 'lastModifiedTime';
+
+    case UPDATED_BY = 'lastModifiedBy';
 
     case URL = 'url';
 
