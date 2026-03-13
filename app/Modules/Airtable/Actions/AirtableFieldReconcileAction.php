@@ -15,6 +15,8 @@ class AirtableFieldReconcileAction
 
     protected AirtableCheckboxFieldReconcileAction $checkboxFieldReconcileAction;
 
+    protected AirtableMultipleLineFieldReconcileAction $multipleLineFieldReconcileAction;
+
     protected AirtableSingleLineFieldReconcileAction $singleLineFieldReconcileAction;
 
     public function __construct()
@@ -22,6 +24,8 @@ class AirtableFieldReconcileAction
         $this->attachmentsFieldReconcileAction = app(AirtableAttachmentsFieldReconcileAction::class);
 
         $this->checkboxFieldReconcileAction = app(AirtableCheckboxFieldReconcileAction::class);
+
+        $this->multipleLineFieldReconcileAction = app(AirtableMultipleLineFieldReconcileAction::class);
 
         $this->singleLineFieldReconcileAction = app(AirtableSingleLineFieldReconcileAction::class);
     }
@@ -42,6 +46,7 @@ class AirtableFieldReconcileAction
         match ($fieldResourceResponseDto->type) {
             AirtableFieldResourceTypeEnum::ATTACHMENTS => $this->attachmentsFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldResourceTypeEnum::CHECKBOX => $this->checkboxFieldReconcileAction->handle($fieldResourceResponseDto, $field),
+            AirtableFieldResourceTypeEnum::MULTIPLE_LINE_TEXT => $this->multipleLineFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldResourceTypeEnum::SINGLE_LINE_TEXT => $this->singleLineFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldResourceTypeEnum::AI_TEXT,
             AirtableFieldResourceTypeEnum::AUTO_NUMBER,
@@ -59,7 +64,6 @@ class AirtableFieldReconcileAction
             AirtableFieldResourceTypeEnum::LAST_MODIFIED_BY,
             AirtableFieldResourceTypeEnum::LAST_MODIFIED_TIME,
             AirtableFieldResourceTypeEnum::LINK_TO_ANOTHER_RECORD,
-            AirtableFieldResourceTypeEnum::LONG_TEXT,
             AirtableFieldResourceTypeEnum::LOOKUP,
             AirtableFieldResourceTypeEnum::MULTIPLE_COLLABORATORS,
             AirtableFieldResourceTypeEnum::MULTIPLE_SELECT,

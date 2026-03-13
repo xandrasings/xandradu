@@ -41,11 +41,11 @@ enum AirtableFieldResourceTypeEnum: string {
 
     case LINK_TO_ANOTHER_RECORD = 'multipleRecordLinks';
 
-    case LONG_TEXT = 'multilineText';
-
     case LOOKUP = 'multipleLookupValues';
 
     case MULTIPLE_COLLABORATORS = 'multipleCollaborators';
+
+    case MULTIPLE_LINE_TEXT = 'multilineText';
 
     case MULTIPLE_SELECT = 'multipleSelects';
 

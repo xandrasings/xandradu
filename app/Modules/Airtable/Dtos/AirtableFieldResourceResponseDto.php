@@ -29,6 +29,7 @@ abstract class AirtableFieldResourceResponseDto extends Data implements Property
         return match ($properties['type']) {
             AirtableFieldResourceTypeEnum::ATTACHMENTS => AirtableAttachmentsFieldResourceResponseDto::class,
             AirtableFieldResourceTypeEnum::CHECKBOX => AirtableCheckboxFieldResourceResponseDto::class,
+            AirtableFieldResourceTypeEnum::MULTIPLE_LINE_TEXT => AirtableMultipleLineFieldResourceResponseDto::class,
             AirtableFieldResourceTypeEnum::SINGLE_LINE_TEXT => AirtableSingleLineFieldResourceResponseDto::class,
             AirtableFieldResourceTypeEnum::AI_TEXT,
             AirtableFieldResourceTypeEnum::AUTO_NUMBER,
@@ -47,7 +48,6 @@ abstract class AirtableFieldResourceResponseDto extends Data implements Property
             AirtableFieldResourceTypeEnum::LAST_MODIFIED_BY,
             AirtableFieldResourceTypeEnum::LAST_MODIFIED_TIME,
             AirtableFieldResourceTypeEnum::LINK_TO_ANOTHER_RECORD,
-            AirtableFieldResourceTypeEnum::LONG_TEXT,
             AirtableFieldResourceTypeEnum::LOOKUP,
             AirtableFieldResourceTypeEnum::MULTIPLE_COLLABORATORS,
             AirtableFieldResourceTypeEnum::MULTIPLE_SELECT,

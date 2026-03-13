@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableAttachmentsField|null $attachmentsField
  * @property-read \App\Modules\Airtable\Models\AirtableCheckboxField|null $checkboxField
+ * @property-read \App\Modules\Airtable\Models\AirtableMultipleLineField|null $multipleLineField
  * @property-read \App\Modules\Airtable\Models\AirtableSingleLineField|null $singleLineField
  * @property-read \App\Modules\Airtable\Models\AirtableTable|null $table
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField newModelQuery()
@@ -63,6 +64,11 @@ class AirtableField extends Model
     public function checkboxField(): HasOne
     {
         return $this->hasOne(AirtableCheckboxField::class, 'field_id');
+    }
+
+    public function multipleLineField(): HasOne
+    {
+        return $this->hasOne(AirtableMultipleLineField::class, 'field_id');
     }
 
     public function singleLineField(): HasOne
