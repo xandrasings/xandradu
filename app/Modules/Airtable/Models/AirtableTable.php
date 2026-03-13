@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read AirtableTable|null $base
+ * @property-read \App\Modules\Airtable\Models\AirtableBase|null $base
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Airtable\Models\AirtableField> $fields
  * @property-read int|null $fields_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableTable newModelQuery()
