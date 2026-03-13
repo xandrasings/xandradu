@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('airtable_single_line_fields', function (Blueprint $table) {
+        Schema::create('airtable_short_text_fields', function (Blueprint $table) {
             $table->id();
             $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->cascadeOnDelete();
             $table->timestamps();
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('airtable_single_line_fields');
+        Schema::dropIfExists('airtable_short_text_fields');
     }
 };

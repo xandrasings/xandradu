@@ -17,6 +17,8 @@ enum AirtableFieldResourceTypeEnum: string {
 
     case COLLABORATOR = 'singleCollaborator';
 
+    case COLLABORATORS = 'multipleCollaborators';
+
     case COUNT = 'count';
 
     case CREATED_BY = 'createdBy';
@@ -39,15 +41,9 @@ enum AirtableFieldResourceTypeEnum: string {
 
     case LAST_MODIFIED_TIME = 'lastModifiedTime';
 
-    case LINK_TO_ANOTHER_RECORD = 'multipleRecordLinks';
+    case LONG_TEXT = 'multilineText';
 
     case LOOKUP = 'multipleLookupValues';
-
-    case MULTIPLE_COLLABORATORS = 'multipleCollaborators';
-
-    case MULTIPLE_LINE_TEXT = 'multilineText';
-
-    case MULTIPLE_SELECT = 'multipleSelects';
 
     case NUMBER = 'number';
 
@@ -57,13 +53,17 @@ enum AirtableFieldResourceTypeEnum: string {
 
     case RATING = 'rating';
 
+    case RECORD_LINKS = 'multipleRecordLinks';
+
     case RICH_TEXT = 'richText';
 
     case ROLLUP = 'rollup';
 
-    case SINGLE_LINE_TEXT = 'singleLineText';
+    case SELECTION = 'singleSelect';
 
-    case SINGLE_SELECT = 'singleSelect';
+    case SELECTIONS = 'multipleSelects';
+
+    case SHORT_TEXT = 'singleLineText';
 
     case SYNC_SOURCE = 'externalSyncSource';
 

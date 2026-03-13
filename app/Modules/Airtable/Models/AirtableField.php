@@ -20,8 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableAttachmentsField|null $attachmentsField
  * @property-read \App\Modules\Airtable\Models\AirtableCheckboxField|null $checkboxField
- * @property-read \App\Modules\Airtable\Models\AirtableMultipleLineField|null $multipleLineField
- * @property-read \App\Modules\Airtable\Models\AirtableSingleLineField|null $singleLineField
+ * @property-read \App\Modules\Airtable\Models\AirtableLongTextField|null $longTextField
+ * @property-read \App\Modules\Airtable\Models\AirtableShortTextField|null $shortTextField
  * @property-read \App\Modules\Airtable\Models\AirtableTable|null $table
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField newQuery()
@@ -66,13 +66,13 @@ class AirtableField extends Model
         return $this->hasOne(AirtableCheckboxField::class, 'field_id');
     }
 
-    public function multipleLineField(): HasOne
+    public function longTextField(): HasOne
     {
-        return $this->hasOne(AirtableMultipleLineField::class, 'field_id');
+        return $this->hasOne(AirtableLongTextField::class, 'field_id');
     }
 
-    public function singleLineField(): HasOne
+    public function shortTextField(): HasOne
     {
-        return $this->hasOne(AirtableSingleLineField::class, 'field_id');
+        return $this->hasOne(AirtableShortTextField::class, 'field_id');
     }
 }
