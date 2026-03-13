@@ -13,6 +13,8 @@ class AirtableFieldReconcileAction
 {
     protected AirtableAttachmentsFieldReconcileAction $attachmentsFieldReconcileAction;
 
+    protected AirtableBarcodeFieldReconcileAction $barcodeFieldReconcileAction;
+
     protected AirtableCheckboxFieldReconcileAction $checkboxFieldReconcileAction;
 
     protected AirtableLongTextFieldReconcileAction $longTextFieldReconcileAction;
@@ -22,6 +24,8 @@ class AirtableFieldReconcileAction
     public function __construct()
     {
         $this->attachmentsFieldReconcileAction = app(AirtableAttachmentsFieldReconcileAction::class);
+
+        $this->barcodeFieldReconcileAction = app(AirtableBarcodeFieldReconcileAction::class);
 
         $this->checkboxFieldReconcileAction = app(AirtableCheckboxFieldReconcileAction::class);
 
@@ -45,12 +49,12 @@ class AirtableFieldReconcileAction
 
         match ($fieldResourceResponseDto->type) {
             AirtableFieldResourceTypeEnum::ATTACHMENTS => $this->attachmentsFieldReconcileAction->handle($fieldResourceResponseDto, $field),
+            AirtableFieldResourceTypeEnum::BARCODE => $this->barcodeFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldResourceTypeEnum::CHECKBOX => $this->checkboxFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldResourceTypeEnum::LONG_TEXT => $this->longTextFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldResourceTypeEnum::SHORT_TEXT => $this->shortTextFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldResourceTypeEnum::AI_TEXT,
             AirtableFieldResourceTypeEnum::AUTO_NUMBER,
-            AirtableFieldResourceTypeEnum::BARCODE,
             AirtableFieldResourceTypeEnum::BUTTON,
             AirtableFieldResourceTypeEnum::COLLABORATOR,
             AirtableFieldResourceTypeEnum::COLLABORATORS,

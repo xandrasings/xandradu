@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableAttachmentsField|null $attachmentsField
+ * @property-read \App\Modules\Airtable\Models\AirtableBarcodeField|null $barcodeField
  * @property-read \App\Modules\Airtable\Models\AirtableCheckboxField|null $checkboxField
  * @property-read \App\Modules\Airtable\Models\AirtableLongTextField|null $longTextField
  * @property-read \App\Modules\Airtable\Models\AirtableShortTextField|null $shortTextField
@@ -59,6 +60,11 @@ class AirtableField extends Model
     public function attachmentsField(): HasOne
     {
         return $this->hasOne(AirtableAttachmentsField::class, 'field_id');
+    }
+
+    public function barcodeField(): HasOne
+    {
+        return $this->hasOne(AirtableBarcodeField::class, 'field_id');
     }
 
     public function checkboxField(): HasOne

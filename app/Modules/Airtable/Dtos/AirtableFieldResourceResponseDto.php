@@ -28,12 +28,12 @@ abstract class AirtableFieldResourceResponseDto extends Data implements Property
     {
         return match ($properties['type']) {
             AirtableFieldResourceTypeEnum::ATTACHMENTS => AirtableAttachmentsFieldResourceResponseDto::class,
+            AirtableFieldResourceTypeEnum::BARCODE => AirtableBarcodeFieldResourceResponseDto::class,
             AirtableFieldResourceTypeEnum::CHECKBOX => AirtableCheckboxFieldResourceResponseDto::class,
             AirtableFieldResourceTypeEnum::LONG_TEXT => AirtableLongTextFieldResourceResponseDto::class,
             AirtableFieldResourceTypeEnum::SHORT_TEXT => AirtableShortTextFieldResourceResponseDto::class,
             AirtableFieldResourceTypeEnum::AI_TEXT,
             AirtableFieldResourceTypeEnum::AUTO_NUMBER,
-            AirtableFieldResourceTypeEnum::BARCODE,
             AirtableFieldResourceTypeEnum::BUTTON,
             AirtableFieldResourceTypeEnum::COLLABORATOR,
             AirtableFieldResourceTypeEnum::COLLABORATORS,
