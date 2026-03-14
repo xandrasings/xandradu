@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableSelectionsFieldReconcileAction
 {
+    protected AirtableSelectionsFieldOptionsChoiceAllReconcileAction $selectionsFieldOptionsChoiceAllReconcileAction;
+
+    public function __construct()
+    {
+        $this->selectionsFieldOptionsChoiceAllReconcileAction = app(AirtableSelectionsFieldOptionsChoiceAllReconcileAction::class);
+    }
+
     /**
      * @throws Exception
      */
@@ -25,9 +32,10 @@ class AirtableSelectionsFieldReconcileAction
 
         $selectionsField = $field->selectionsField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->toArray(),
         );
         Log::notice('created or updated AirtableSelectionsField', ['selectionsField' => $selectionsField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+
+        $this->selectionsFieldOptionsChoiceAllReconcileAction->handle($fieldResourceResponseDto->options->choices, $selectionsField);
 
         return $selectionsField;
     }

@@ -28,9 +28,9 @@ class AirtableTableAllSyncDownAction
     {
         Log::info('executing AirtableTableAllSyncDownAction');
 
-        $tableListResponseDto = $this->client->listTables($base->external_id);
+        $tableResourceListResponseDto = $this->client->listTables($base->external_id);
 
-        $this->tableAllReconcileAction->handle($tableListResponseDto->tables, $base);
+        $this->tableAllReconcileAction->handle($tableResourceListResponseDto->tables, $base);
 
     }
 }

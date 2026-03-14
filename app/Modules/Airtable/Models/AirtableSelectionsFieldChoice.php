@@ -4,7 +4,6 @@ namespace App\Modules\Airtable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -27,19 +26,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField withoutTrashed()
  * @mixin \Eloquent
  */
-class AirtableSelectionsField extends Model
+class AirtableSelectionsFieldChoice extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'external_id',
+        'name',
+        'color',
+    ];
 
-    public function field(): BelongsTo
+    public function selectionsField(): BelongsTo
     {
-        return $this->belongsTo(AirtableField::class, 'field_id');
-    }
-
-    public function choices(): HasMany
-    {
-        return $this->hasMany(AirtableSelectionsFieldChoice::class, 'selections_field_id');
+        return $this->belongsTo(AirtableSelectionsField::class, 'selections_field_id');
     }
 }

@@ -2,24 +2,20 @@
 
 namespace App\Modules\Airtable\Dtos;
 
-use App\Modules\Airtable\Enums\AirtableOptionsResourceColorEnum;
-use App\Modules\Airtable\Enums\AirtableOptionsResourceIconEnum;
+use App\Modules\Airtable\Enums\AirtableCheckboxFieldOptionsResourceColorEnum;
+use App\Modules\Airtable\Enums\AirtableCheckboxFieldOptionsResourceIconEnum;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\EnumCast;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
-use Spatie\LaravelData\Optional;
 
 #[MapName(SnakeCaseMapper::class)]
 class AirtableCheckboxFieldOptionsResourceResponseDto extends Data
 {
-    public function __construct(
-        #[WithCast(EnumCast::class, type: AirtableOptionsResourceIconEnum::class)]
-        public AirtableOptionsResourceIconEnum|Optional $icon,
+    #[WithCast(EnumCast::class, type: AirtableCheckboxFieldOptionsResourceIconEnum::class)]
+    public AirtableCheckboxFieldOptionsResourceIconEnum $icon;
 
-        #[WithCast(EnumCast::class, type: AirtableOptionsResourceColorEnum::class)]
-        public AirtableOptionsResourceColorEnum|Optional $color,
-    )
-    {}
+    #[WithCast(EnumCast::class, type: AirtableCheckboxFieldOptionsResourceColorEnum::class)]
+    public AirtableCheckboxFieldOptionsResourceColorEnum $color;
 }

@@ -5,7 +5,7 @@ use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Illuminate\Support\Collection;
 
-class AirtableTableListResponseDto extends Data
+class AirtableTableResourceListResponseDto extends Data
 {
     #[DataCollectionOf(AirtableTableResourceResponseDto::class)]
     public Collection $tables;

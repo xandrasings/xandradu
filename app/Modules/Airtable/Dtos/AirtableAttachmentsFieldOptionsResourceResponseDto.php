@@ -9,8 +9,5 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 #[MapName(SnakeCaseMapper::class)]
 class AirtableAttachmentsFieldOptionsResourceResponseDto extends Data
 {
-    public function __construct(
-        public bool $isReversed,
-    )
-    {}
+    public bool $isReversed;
 }
