@@ -24,7 +24,7 @@ class AirtableBarcodeFieldReconcileAction
         }
 
         $barcodeField = $field->barcodeField()->updateOrCreate(
-            []
+            [],
         );
         Log::notice('created or updated AirtableBarcodeField', ['barcodeField' => $barcodeField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
 

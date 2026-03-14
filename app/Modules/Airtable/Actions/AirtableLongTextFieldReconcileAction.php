@@ -24,7 +24,7 @@ class AirtableLongTextFieldReconcileAction
         }
 
         $longTextField = $field->longTextField()->updateOrCreate(
-            []
+            [],
         );
         Log::notice('created or updated AirtableLongTextField', ['longTextField' => $longTextField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
 

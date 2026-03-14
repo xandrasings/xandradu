@@ -20,7 +20,8 @@ class AirtableCheckboxFieldReconcileAction
 
 
         if (!($fieldResourceResponseDto instanceof AirtableCheckboxFieldResourceResponseDto)) {
-            throw new Exception('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
+            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
+            throw new Exception('Wrong field type encountered.');
         }
 
         $checkboxField = $field->checkboxField()->updateOrCreate(

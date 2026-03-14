@@ -19,7 +19,8 @@ class AirtableAttachmentsFieldReconcileAction
         Log::info('executing AirtableAttachmentsFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
 
         if (!($fieldResourceResponseDto instanceof AirtableAttachmentsFieldResourceResponseDto)) {
-            throw new Exception('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
+            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
+            throw new Exception('Wrong field type encountered.');
         }
 
         $attachmentsField = $field->attachmentsField()->updateOrCreate(
