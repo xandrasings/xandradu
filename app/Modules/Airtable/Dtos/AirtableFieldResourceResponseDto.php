@@ -3,22 +3,28 @@
 namespace App\Modules\Airtable\Dtos;
 
 use App\Modules\Airtable\Enums\AirtableFieldResourceTypeEnum;
+use App\Transformers\LengthyStringTransformer;
+use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Attributes\PropertyForMorph;
 use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Attributes\WithTransformer;
 use Spatie\LaravelData\Casts\EnumCast;
 use Spatie\LaravelData\Contracts\PropertyMorphableData;
 use Spatie\LaravelData\Data;
-use Spatie\LaravelData\Optional;
+use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
+#[MapName(SnakeCaseMapper::class)]
 abstract class AirtableFieldResourceResponseDto extends Data implements PropertyMorphableData
 {
     #[MapOutputName('external_id')]
     public string $id;
 
+    #[WithTransformer(LengthyStringTransformer::class, length: 32)]
     public string $name;
 
-    public string|Optional $description;
+    #[WithTransformer(LengthyStringTransformer::class, length: 256)]
+    public ?string $description;
 
     #[PropertyForMorph]
     #[WithCast(EnumCast::class, type: AirtableFieldResourceTypeEnum::class)]
