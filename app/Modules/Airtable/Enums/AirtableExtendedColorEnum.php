@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Enums;
 
-enum AirtableSelectionFieldOptionsChoiceResourceColorEnum: string
+enum AirtableExtendedColorEnum: string
 {
     case PALE_BLUE = 'blueLight2';
 

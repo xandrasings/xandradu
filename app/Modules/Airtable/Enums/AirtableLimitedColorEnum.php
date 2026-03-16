@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Enums;
 
-enum AirtableCheckboxFieldOptionsResourceColorEnum: string
+enum AirtableLimitedColorEnum: string
 {
     case BRIGHT_GREEN = 'greenBright';
 

@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('airtable_rating_fields', function (Blueprint $table) {
             $table->id();
             $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->cascadeOnDelete();
+            $table->string('color', 16);
+            $table->string('icon', 16);
+            $table->unsignedTinyInteger('max');
             $table->timestamps();
             $table->softDeletes();
         });

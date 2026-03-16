@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Dtos;
 
-use App\Modules\Airtable\Enums\AirtableCreatedAtFieldOptionsResultResourceTypeEnum;
+use App\Modules\Airtable\Enums\AirtableDateTimeTypeEnum;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\PropertyForMorph;
 use Spatie\LaravelData\Attributes\WithCast;
@@ -15,14 +15,14 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 abstract class AirtableCreatedAtFieldOptionsResultResourceResponseDto extends Data implements PropertyMorphableData
 {
     #[PropertyForMorph]
-    #[WithCast(EnumCast::class, type: AirtableCreatedAtFieldOptionsResultResourceTypeEnum::class)]
-    public AirtableCreatedAtFieldOptionsResultResourceTypeEnum $type;
+    #[WithCast(EnumCast::class, type: AirtableDateTimeTypeEnum::class)]
+    public AirtableDateTimeTypeEnum $type;
 
     public static function morph(array $properties): ?string
     {
         return match ($properties['type']) {
-            AirtableCreatedAtFieldOptionsResultResourceTypeEnum::DATE => AirtableCreatedAtFieldOptionsDateResultResourceResponseDto::class,
-            AirtableCreatedAtFieldOptionsResultResourceTypeEnum::DATE_TIME => AirtableCreatedAtFieldOptionsDateTimeResultResourceResponseDto::class
+            AirtableDateTimeTypeEnum::DATE => AirtableCreatedAtFieldOptionsDateResultResourceResponseDto::class,
+            AirtableDateTimeTypeEnum::DATE_TIME => AirtableCreatedAtFieldOptionsDateTimeResultResourceResponseDto::class
         };
     }
 }

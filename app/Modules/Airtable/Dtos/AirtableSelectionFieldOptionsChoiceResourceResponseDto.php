@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Dtos;
 
-use App\Modules\Airtable\Enums\AirtableSelectionFieldOptionsChoiceResourceColorEnum;
+use App\Modules\Airtable\Enums\AirtableExtendedColorEnum;
 use App\Transformers\LengthyStringTransformer;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MapOutputName;
@@ -20,6 +20,6 @@ class AirtableSelectionFieldOptionsChoiceResourceResponseDto extends AirtableFie
     #[WithTransformer(LengthyStringTransformer::class, length: 64)]
     public string $name;
 
-    #[WithCast(EnumCast::class, type: AirtableSelectionFieldOptionsChoiceResourceColorEnum::class)]
-    public ?AirtableSelectionFieldOptionsChoiceResourceColorEnum $color;
+    #[WithCast(EnumCast::class, type: AirtableExtendedColorEnum::class)]
+    public ?AirtableExtendedColorEnum $color;
 }

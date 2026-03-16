@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Enums;
 
-enum AirtableCheckboxFieldOptionsResourceIconEnum: string
+enum AirtableCheckboxIconEnum: string
 {
     case CHECK = 'check';
 

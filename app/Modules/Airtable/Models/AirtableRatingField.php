@@ -30,7 +30,11 @@ class AirtableRatingField extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'color',
+        'icon',
+        'max',
+        ];
 
     public function field(): BelongsTo
     {

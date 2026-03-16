@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Enums;
 
-enum AirtableCreatedAtFieldOptionsResultResourceTypeEnum: string
+enum AirtableDateTimeTypeEnum: string
 {
     case DATE = 'date';
 
