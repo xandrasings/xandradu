@@ -174,6 +174,7 @@ class AirtableFieldReconcileAction
             AirtableFieldTypeEnum::CURRENCY => $this->currencyFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldTypeEnum::DATE => $this->dateFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldTypeEnum::DATE_AND_TIME => $this->dateAndTimeFieldReconcileAction->handle($fieldResourceResponseDto, $field),
+            AirtableFieldTypeEnum::DURATION => $this->durationFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldTypeEnum::EMAIL_ADDRESS => $this->emailAddressFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldTypeEnum::FORMULA => $this->formulaFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldTypeEnum::LONG_TEXT => $this->longTextFieldReconcileAction->handle($fieldResourceResponseDto, $field),
