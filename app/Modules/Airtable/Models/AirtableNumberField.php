@@ -30,7 +30,9 @@ class AirtableNumberField extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'precision'
+    ];
 
     public function field(): BelongsTo
     {
