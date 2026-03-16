@@ -30,7 +30,10 @@ class AirtableCurrencyField extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'precision',
+        'symbol'
+    ];
 
     public function field(): BelongsTo
     {

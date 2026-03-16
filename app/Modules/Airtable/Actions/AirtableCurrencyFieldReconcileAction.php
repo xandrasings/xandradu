@@ -25,6 +25,7 @@ class AirtableCurrencyFieldReconcileAction
 
         $currencyField = $field->currencyField()->updateOrCreate(
             [],
+            $fieldResourceResponseDto->options->toArray(),
         );
         Log::notice('created or updated AirtableCurrencyField', ['currencyField' => $currencyField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
 
