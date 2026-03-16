@@ -35,7 +35,7 @@ class AirtableCreatedAtField extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'date_format',
+        'format',
     ];
 
     public function field(): BelongsTo

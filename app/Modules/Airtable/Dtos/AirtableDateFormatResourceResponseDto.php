@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Modules\Airtable\Dtos;
-use App\Modules\Airtable\Enums\AirtableDateFormatFormatEnum;
+use App\Modules\Airtable\Enums\AirtableDateFormatEnum;
 use App\Modules\Airtable\Enums\AirtableDateFormatNameEnum;
 use Spatie\LaravelData\Attributes\MapName;
-use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\EnumCast;
 use Spatie\LaravelData\Data;
@@ -17,7 +16,6 @@ class AirtableDateFormatResourceResponseDto extends Data
     public AirtableDateFormatNameEnum $name;
 
 
-    #[MapOutputName('date_format')]
-    #[WithCast(EnumCast::class, type: AirtableDateFormatFormatEnum::class)]
-    public AirtableDateFormatFormatEnum $format;
+    #[WithCast(EnumCast::class, type: AirtableDateFormatEnum::class)]
+    public AirtableDateFormatEnum $format;
 }

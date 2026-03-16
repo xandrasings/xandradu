@@ -25,7 +25,7 @@ class AirtableDateFieldReconcileAction
 
         $dateField = $field->dateField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->toArray(),
+            $fieldResourceResponseDto->options->dateFormat->only('format')->toArray(),
         );
         Log::notice('created or updated AirtableDateField', ['dateField' => $dateField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
 

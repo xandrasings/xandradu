@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Enums;
 
-enum AirtableDateFormatFormatEnum: string
+enum AirtableDateFormatEnum: string
 {
     case LOCAL = 'l';
 

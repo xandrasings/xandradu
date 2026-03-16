@@ -30,7 +30,9 @@ class AirtableDateField extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'format'
+    ];
 
     public function field(): BelongsTo
     {

@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Enums;
 
-enum AirtableTimeFormatFormatEnum: string
+enum AirtableTimeFormatEnum: string
 {
     case TWELVE_HOUR = 'h:mma';
 

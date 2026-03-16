@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Modules\Airtable\Dtos;
-use App\Modules\Airtable\Enums\AirtableTimeFormatFormatEnum;
+use App\Modules\Airtable\Enums\AirtableTimeFormatEnum;
 use App\Modules\Airtable\enums\AirtableTimeFormatNameEnum;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MapOutputName;
@@ -17,6 +17,6 @@ class AirtableTimeFormatResourceResponseDto extends Data
     public AirtableTimeFormatNameEnum $name;
 
     #[MapOutputName('time_format')]
-    #[WithCast(EnumCast::class, type: AirtableTimeFormatFormatEnum::class)]
-    public AirtableTimeFormatFormatEnum $format;
+    #[WithCast(EnumCast::class, type: AirtableTimeFormatEnum::class)]
+    public AirtableTimeFormatEnum $format;
 }

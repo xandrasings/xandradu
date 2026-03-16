@@ -9,4 +9,5 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 #[MapName(SnakeCaseMapper::class)]
 class AirtableDateFieldOptionsResourceResponseDto extends Data
 {
+    public AirtableDateFormatResourceResponseDto $dateFormat;
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('airtable_created_at_fields', function (Blueprint $table) {
             $table->id();
             $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->cascadeOnDelete();
-            $table->string('date_format', 16);
+            $table->string('format', 16);
             $table->timestamps();
             $table->softDeletes();
         });
