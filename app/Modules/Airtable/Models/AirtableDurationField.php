@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
  * @property int|null $field_id
+ * @property string $format
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -20,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField whereFieldId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField whereFormat($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField withTrashed(bool $withTrashed = true)

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
  * @property int|null $field_id
- * @property string $date_format
+ * @property string $format
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -21,9 +21,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereDateFormat($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereFieldId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereFormat($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField withTrashed(bool $withTrashed = true)

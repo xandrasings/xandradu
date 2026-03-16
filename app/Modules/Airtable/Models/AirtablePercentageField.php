@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
  * @property int|null $field_id
+ * @property int $precision
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -21,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField whereFieldId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField wherePrecision($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField withoutTrashed()
