@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('airtable_created_at_fields', function (Blueprint $table) {
+        Schema::create('airtable_date_time_created_at_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->cascadeOnDelete();
-            $table->string('date_format', 16);
+            $table->foreignId('created_at_field_id')->nullable()->constrained(table: 'airtable_created_at_fields')->cascadeOnDelete();
+            $table->string('time_format', 8);
+            $table->string('time_zone', 32);
             $table->timestamps();
             $table->softDeletes();
         });

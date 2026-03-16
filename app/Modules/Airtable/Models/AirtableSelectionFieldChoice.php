@@ -8,22 +8,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
- * @property int|null $field_id
+ * @property int|null $selection_field_id
+ * @property string|null $external_id
+ * @property string $name
+ * @property string|null $color
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionField newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionField newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionField onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionField query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionField whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionField whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionField whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionField whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionField whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionField withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionField withoutTrashed()
+ * @property-read \App\Modules\Airtable\Models\AirtableSelectionField|null $selectionField
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereExternalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereSelectionFieldId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice withoutTrashed()
  * @mixin \Eloquent
  */
 class AirtableSelectionFieldChoice extends Model
