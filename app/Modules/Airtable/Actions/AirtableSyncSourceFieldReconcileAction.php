@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableSyncSourceFieldReconcileAction
 {
+    protected AirtableSyncSourceFieldOptionsChoiceAllReconcileAction $syncSourceFieldOptionsChoiceAllReconcileAction;
+
+    public function __construct()
+    {
+        $this->syncSourceFieldOptionsChoiceAllReconcileAction = app(AirtableSyncSourceFieldOptionsChoiceAllReconcileAction::class);
+    }
+
     /**
      * @throws Exception
      */
@@ -19,9 +26,10 @@ class AirtableSyncSourceFieldReconcileAction
 
         $syncSourceField = $field->syncSourceField()->updateOrCreate(
             [],
-            $syncSourceFieldResourceResponseDto->options->toArray(),
         );
         Log::notice('created or updated AirtableSyncSourceField', ['syncSourceField' => $syncSourceField, 'syncSourceFieldResourceResponseDto' => $syncSourceFieldResourceResponseDto]);
+
+        $this->syncSourceFieldOptionsChoiceAllReconcileAction->handle($syncSourceFieldResourceResponseDto->options->choices, $syncSourceField);
 
         return $syncSourceField;
     }
