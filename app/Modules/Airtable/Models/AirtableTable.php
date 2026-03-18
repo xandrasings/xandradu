@@ -38,6 +38,7 @@ class AirtableTable extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'rank',
         'external_id',
         'name',
     ];

@@ -27,6 +27,10 @@ class AirtableTableAllReconcileAction
     {
         Log::info('executing AirtableTableAllReconcileAction');
 
+        $tableResourceResponseDtos->each(function (AirtableTableResourceResponseDto $tableResourceResponseDto, int $key) {
+            $tableResourceResponseDto->rank = $key + 1;
+        });
+
         $tables = $tableResourceResponseDtos->map(function (AirtableTableResourceResponseDto $tableResourceResponseDto) use ($base) {
             return $this->tableReconcileAction->handle($tableResourceResponseDto, $base);
         });

@@ -14,18 +14,20 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 #[MapName(SnakeCaseMapper::class)]
 class AirtableTableResourceResponseDto extends Data
 {
+    public int $rank = 0;
+
     #[MapOutputName('external_id')]
     public string $id;
 
     #[WithTransformer(LengthyStringTransformer::class, length: 32)]
     public string $name;
 
-    public string $primaryFieldId;
+    public string $primaryFieldId; // TODO
 
     #[DataCollectionOf(AirtableFieldResourceResponseDto::class)]
     public Collection $fields;
 
-//        #[DataCollectionOf(AirtableViewResourceResponseDto::class)]
+//        #[DataCollectionOf(AirtableViewResourceResponseDto::class)] TODO
 //        public Collection $views,
 
 }
