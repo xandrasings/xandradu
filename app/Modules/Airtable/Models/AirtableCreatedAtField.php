@@ -36,6 +36,7 @@ class AirtableCreatedAtField extends Model
 
     protected $fillable = [
         'format',
+        'type',
     ];
 
     public function field(): BelongsTo

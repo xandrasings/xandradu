@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->cascadeOnDelete();
             $table->string('format', 16);
+            $table->string('type', 16);
             $table->timestamps();
             $table->softDeletes();
         });
