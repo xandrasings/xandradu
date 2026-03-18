@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableCreatedAtFieldReconcileAction
 {
-    protected AirtableDateTimeCreatedAtFieldReconcileAllAction $dateTimeCreatedAtFieldReconcileAllAction;
+    protected AirtableDateTimeCreatedAtFieldAllReconcileAction $dateTimeCreatedAtFieldAllReconcileAction;
 
     public function __construct()
     {
-        $this->dateTimeCreatedAtFieldReconcileAllAction = app(AirtableDateTimeCreatedAtFieldReconcileAllAction::class);
+        $this->dateTimeCreatedAtFieldAllReconcileAction = app(AirtableDateTimeCreatedAtFieldAllReconcileAction::class);
     }
 
     /**
@@ -37,7 +37,7 @@ class AirtableCreatedAtFieldReconcileAction
         );
         Log::notice('created or updated AirtableCreatedAtField', ['createdAtField' => $createdAtField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
 
-        $this->dateTimeCreatedAtFieldReconcileAllAction->handle($fieldResourceResponseDto->options->result, $createdAtField);
+        $this->dateTimeCreatedAtFieldAllReconcileAction->handle($fieldResourceResponseDto->options->result, $createdAtField);
 
         return $createdAtField;
     }

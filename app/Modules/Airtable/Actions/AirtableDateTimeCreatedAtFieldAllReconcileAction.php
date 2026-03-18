@@ -11,7 +11,7 @@ use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
-class AirtableDateTimeCreatedAtFieldReconcileAllAction
+class AirtableDateTimeCreatedAtFieldAllReconcileAction
 {
     /**
      * @return Collection<AirtableDateTimeCreatedAtField>
@@ -19,7 +19,7 @@ class AirtableDateTimeCreatedAtFieldReconcileAllAction
      */
     public function handle(AirtableCreatedAtFieldOptionsResultResourceResponseDto $createdAtFieldOptionsResultResourceResponseDto, AirtableCreatedAtField $createdAtField): Collection
     {
-        Log::info('executing AirtableDateTimeCreatedAtFieldReconcileAllAction', ['createdAtFieldOptionsResultResourceResponseDto' => $createdAtFieldOptionsResultResourceResponseDto, 'createdAtField' => $createdAtField]);
+        Log::info('executing AirtableDateTimeCreatedAtFieldAllReconcileAction', ['createdAtFieldOptionsResultResourceResponseDto' => $createdAtFieldOptionsResultResourceResponseDto, 'createdAtField' => $createdAtField]);
 
         switch (true) {
             case $createdAtFieldOptionsResultResourceResponseDto instanceof AirtableCreatedAtFieldOptionsDateTimeResultResourceResponseDto:
