@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
  * @property int|null $field_id
+ * @property int $precision
+ * @property string $symbol
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -21,6 +23,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereFieldId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField wherePrecision($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereSymbol($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField withoutTrashed()
