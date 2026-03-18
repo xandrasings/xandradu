@@ -37,7 +37,7 @@ class AirtableBaseAllSyncDownAction
 
         $activeExternalBases = $this->baseAllReconcileAction->handle($baseListResponseDto->bases);
 
-        $activeExternalBases->each(function ($base) {
+        $activeExternalBases->each(function (AirtableBase $base) {
             $this->tableAllSyncDownAction->handle($base);
         });
     }
