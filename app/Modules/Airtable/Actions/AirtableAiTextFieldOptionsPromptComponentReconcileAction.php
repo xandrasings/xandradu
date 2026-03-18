@@ -36,11 +36,7 @@ class AirtableAiTextFieldOptionsPromptComponentReconcileAction
         );
         Log::notice('created or updated AirtableAiTextFieldPromptComponent', ['aiTextFieldPromptComponent' => $aiTextFieldPromptComponent, 'aiTextFieldOptionsPromptComponentResourceResponseDto' => $aiTextFieldOptionsPromptComponentResourceResponseDto]);
 
-        match($aiTextFieldOptionsPromptComponentResourceResponseDto->type) {
-            AirtableAiTextFieldOptionsPromptComponentTypeEnum::FIELD => !($aiTextFieldOptionsPromptComponentResourceResponseDto instanceof AirtableAiTextFieldOptionsFieldPromptComponentResourceResponseDto) ? throw new Exception("Dto type doesn't match the discriminator.") : null,
-            AirtableAiTextFieldOptionsPromptComponentTypeEnum::TEXT => !($aiTextFieldOptionsPromptComponentResourceResponseDto instanceof AirtableAiTextFieldOptionsTextPromptComponentResourceResponseDto) ? throw new Exception("Dto type doesn't match the discriminator.") : null,
-        };
-
+        $aiTextFieldOptionsPromptComponentResourceResponseDto->type->validate($aiTextFieldOptionsPromptComponentResourceResponseDto);
         match ($aiTextFieldOptionsPromptComponentResourceResponseDto->type) {
             AirtableAiTextFieldOptionsPromptComponentTypeEnum::FIELD => $this->aiTextFieldOptionsFieldPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextFieldPromptComponent),
             AirtableAiTextFieldOptionsPromptComponentTypeEnum::TEXT => $this->aiTextFieldOptionsTextPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextFieldPromptComponent),
