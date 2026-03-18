@@ -19,15 +19,19 @@ class AirtableSelectionFieldOptionsChoiceAllReconcileAction
     }
 
     /**
-     * @param Collection<AirtableSelectionFieldOptionsChoiceResourceResponseDto> $tableResourceResponseDtos
+     * @param Collection<AirtableSelectionFieldOptionsChoiceResourceResponseDto> $selectionFieldOptionsChoiceResourceResponseDtos
      * @return Collection<AirtableSelectionFieldChoice>
      * @throws Exception
      */
-    public function handle(Collection $tableResourceResponseDtos, AirtableSelectionField $selectionField): Collection
+    public function handle(Collection $selectionFieldOptionsChoiceResourceResponseDtos, AirtableSelectionField $selectionField): Collection
     {
         Log::info('executing AirtableSelectionFieldOptionsChoiceAllReconcileAction');
 
-        $selectionFieldChoices = $tableResourceResponseDtos->map(function (AirtableSelectionFieldOptionsChoiceResourceResponseDto $selectionFieldOptionsChoiceResourceResponseDto) use ($selectionField) {
+        $selectionFieldOptionsChoiceResourceResponseDtos->each(function (AirtableSelectionFieldOptionsChoiceResourceResponseDto $selectionFieldOptionsChoiceResourceResponseDto, int $key) {
+            $selectionFieldOptionsChoiceResourceResponseDto->rank = $key + 1;
+        });
+
+        $selectionFieldChoices = $selectionFieldOptionsChoiceResourceResponseDtos->map(function (AirtableSelectionFieldOptionsChoiceResourceResponseDto $selectionFieldOptionsChoiceResourceResponseDto) use ($selectionField) {
             return $this->selectionFieldOptionsChoiceReconcileAction->handle($selectionFieldOptionsChoiceResourceResponseDto, $selectionField);
         });
 

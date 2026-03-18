@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
  * @property int|null $selection_field_id
+ * @property int $rank
  * @property string|null $external_id
  * @property string $name
  * @property string|null $color
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereExternalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereRank($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereSelectionFieldId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionFieldChoice withTrashed(bool $withTrashed = true)
@@ -37,6 +39,7 @@ class AirtableSelectionFieldChoice extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'rank',
         'external_id',
         'name',
         'color',
