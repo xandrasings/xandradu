@@ -6,7 +6,6 @@ use App\Modules\Airtable\Dtos\AirtableCreatedAtFieldOptionsDateResultResourceRes
 use App\Modules\Airtable\Models\AirtableCreatedAtField;
 use App\Modules\Airtable\Models\AirtableDateCreatedAtField;
 use Exception;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
 class AirtableDateCreatedAtFieldReconcileAction

@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('airtable_updated_at_fields', function (Blueprint $table) {
+        Schema::create('airtable_date_updated_at_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->cascadeOnDelete();
-            $table->string('format', 16)->nullable();
-            $table->string('type', 16)->nullable();
+            $table->foreignId('updated_at_field_id')->nullable()->constrained(table: 'airtable_updated_at_fields')->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('airtable_updated_at_fields');
+        Schema::dropIfExists('airtable_date_updated_at_fields');
     }
 };
