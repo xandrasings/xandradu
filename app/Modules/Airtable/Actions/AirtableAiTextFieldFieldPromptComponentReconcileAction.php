@@ -9,14 +9,14 @@ use App\Modules\Airtable\Models\AirtableField;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
-class AirtableAiTextFieldOptionsFieldPromptComponentReconcileAction
+class AirtableAiTextFieldFieldPromptComponentReconcileAction
 {
     /**
      * @throws Exception
      */
     public function handle(AirtableAiTextFieldOptionsFieldPromptComponentResourceResponseDto $aiTextFieldOptionsFieldPromptComponentResourceResponseDto, AirtableAiTextFieldPromptComponent $aiTextFieldPromptComponent): AirtableAiTextFieldFieldPromptComponent
     {
-        Log::info('executing AirtableAiTextFieldOptionsFieldPromptComponentReconcileAction', ['aiTextFieldOptionsFieldPromptComponentResourceResponseDto' => $aiTextFieldOptionsFieldPromptComponentResourceResponseDto, 'aiTextFieldPromptComponent' => $aiTextFieldPromptComponent]);
+        Log::info('executing AirtableAiTextFieldFieldPromptComponentReconcileAction', ['aiTextFieldOptionsFieldPromptComponentResourceResponseDto' => $aiTextFieldOptionsFieldPromptComponentResourceResponseDto, 'aiTextFieldPromptComponent' => $aiTextFieldPromptComponent]);
 
         $fieldExternalId = $aiTextFieldOptionsFieldPromptComponentResourceResponseDto->fieldId;
 

@@ -9,17 +9,17 @@ use App\Modules\Airtable\Models\AirtableAiTextFieldPromptComponent;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
-class AirtableAiTextFieldOptionsPromptComponentReconcileAction
+class AirtableAiTextFieldPromptComponentReconcileAction
 {
-    protected AirtableAiTextFieldOptionsFieldPromptComponentReconcileAction $aiTextFieldOptionsFieldPromptComponentReconcileAction;
+    protected AirtableAiTextFieldFieldPromptComponentReconcileAction $aiTextFieldFieldPromptComponentReconcileAction;
 
-    protected AirtableAiTextFieldOptionsTextPromptComponentReconcileAction $aiTextFieldOptionsTextPromptComponentReconcileAction;
+    protected AirtableAiTextFieldTextPromptComponentReconcileAction $aiTextFieldTextPromptComponentReconcileAction;
 
     public function __construct()
     {
-        $this->aiTextFieldOptionsFieldPromptComponentReconcileAction = app(AirtableAiTextFieldOptionsFieldPromptComponentReconcileAction::class);
+        $this->aiTextFieldFieldPromptComponentReconcileAction = app(AirtableAiTextFieldFieldPromptComponentReconcileAction::class);
 
-        $this->aiTextFieldOptionsTextPromptComponentReconcileAction = app(AirtableAiTextFieldOptionsTextPromptComponentReconcileAction::class);
+        $this->aiTextFieldTextPromptComponentReconcileAction = app(AirtableAiTextFieldTextPromptComponentReconcileAction::class);
     }
 
     /**
@@ -27,7 +27,7 @@ class AirtableAiTextFieldOptionsPromptComponentReconcileAction
      */
     public function handle(AirtableAiTextFieldOptionsPromptComponentResourceResponseDto $aiTextFieldOptionsPromptComponentResourceResponseDto, AirtableAiTextField $aiTextField): AirtableAiTextFieldPromptComponent
     {
-        Log::info('executing AirtableAiTextFieldOptionsPromptComponentReconcileAction', ['aiTextFieldOptionsPromptComponentResourceResponseDto' => $aiTextFieldOptionsPromptComponentResourceResponseDto, 'aiTextField' => $aiTextField]);
+        Log::info('executing AirtableAiTextFieldPromptComponentReconcileAction', ['aiTextFieldOptionsPromptComponentResourceResponseDto' => $aiTextFieldOptionsPromptComponentResourceResponseDto, 'aiTextField' => $aiTextField]);
 
         $aiTextFieldPromptComponent = $aiTextField->promptComponents()->updateOrCreate(
             $aiTextFieldOptionsPromptComponentResourceResponseDto->only('rank')->toArray(),
@@ -37,8 +37,8 @@ class AirtableAiTextFieldOptionsPromptComponentReconcileAction
 
         $aiTextFieldOptionsPromptComponentResourceResponseDto->type->validate($aiTextFieldOptionsPromptComponentResourceResponseDto);
         match ($aiTextFieldOptionsPromptComponentResourceResponseDto->type) {
-            AirtableAiTextFieldOptionsPromptComponentTypeEnum::FIELD => $this->aiTextFieldOptionsFieldPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextFieldPromptComponent),
-            AirtableAiTextFieldOptionsPromptComponentTypeEnum::TEXT => $this->aiTextFieldOptionsTextPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextFieldPromptComponent),
+            AirtableAiTextFieldOptionsPromptComponentTypeEnum::FIELD => $this->aiTextFieldFieldPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextFieldPromptComponent),
+            AirtableAiTextFieldOptionsPromptComponentTypeEnum::TEXT => $this->aiTextFieldTextPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextFieldPromptComponent),
         };
 
         return $aiTextFieldPromptComponent;

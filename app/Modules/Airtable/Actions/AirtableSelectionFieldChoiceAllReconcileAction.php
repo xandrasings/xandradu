@@ -9,17 +9,17 @@ use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
-class AirtableSelectionFieldOptionsChoiceAllReconcileAction
+class AirtableSelectionFieldChoiceAllReconcileAction
 {
-    protected AirtableSelectionFieldOptionsChoiceReconcileAction $selectionFieldOptionsChoiceReconcileAction;
+    protected AirtableSelectionFieldChoiceReconcileAction $selectionFieldChoiceReconcileAction;
 
-    protected AirtableSelectionFieldChoiceAllTrashAction $selectionFieldOptionsChoiceAllTrashAction;
+    protected AirtableSelectionFieldChoiceAllTrashAction $selectionFieldChoiceAllTrashAction;
 
     public function __construct()
     {
-        $this->selectionFieldOptionsChoiceReconcileAction = app(AirtableSelectionFieldOptionsChoiceReconcileAction::class);
+        $this->selectionFieldChoiceReconcileAction = app(AirtableSelectionFieldChoiceReconcileAction::class);
 
-        $this->selectionFieldOptionsChoiceAllTrashAction = app(AirtableSelectionFieldChoiceAllTrashAction::class);
+        $this->selectionFieldChoiceAllTrashAction = app(AirtableSelectionFieldChoiceAllTrashAction::class);
     }
 
     /**
@@ -29,21 +29,21 @@ class AirtableSelectionFieldOptionsChoiceAllReconcileAction
      */
     public function handle(Collection $selectionFieldOptionsChoiceResourceResponseDtos, AirtableSelectionField $selectionField): Collection
     {
-        Log::info('executing AirtableSelectionFieldOptionsChoiceAllReconcileAction');
+        Log::info('executing AirtableSelectionFieldChoiceAllReconcileAction');
 
         $selectionFieldOptionsChoiceResourceResponseDtos->each(function (AirtableSelectionFieldOptionsChoiceResourceResponseDto $selectionFieldOptionsChoiceResourceResponseDto, int $key) {
             $selectionFieldOptionsChoiceResourceResponseDto->rank = $key + 1;
         });
 
         $selectionFieldChoices = $selectionFieldOptionsChoiceResourceResponseDtos->map(function (AirtableSelectionFieldOptionsChoiceResourceResponseDto $selectionFieldOptionsChoiceResourceResponseDto) use ($selectionField) {
-            return $this->selectionFieldOptionsChoiceReconcileAction->handle($selectionFieldOptionsChoiceResourceResponseDto, $selectionField);
+            return $this->selectionFieldChoiceReconcileAction->handle($selectionFieldOptionsChoiceResourceResponseDto, $selectionField);
         });
 
         $trashableSelectionFieldChoices = $selectionField->choices()
             ->whereNotNull('external_id')
             ->whereNotIn('id', $selectionFieldChoices->pluck('id'))
             ->get();
-        $this->selectionFieldOptionsChoiceAllTrashAction->handle($trashableSelectionFieldChoices);
+        $this->selectionFieldChoiceAllTrashAction->handle($trashableSelectionFieldChoices);
 
         return $selectionFieldChoices;
     }

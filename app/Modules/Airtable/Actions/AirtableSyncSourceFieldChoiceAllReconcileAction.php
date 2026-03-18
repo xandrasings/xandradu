@@ -9,15 +9,15 @@ use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
-class AirtableSyncSourceFieldOptionsChoiceAllReconcileAction
+class AirtableSyncSourceFieldChoiceAllReconcileAction
 {
-    protected AirtableSyncSourceFieldOptionsChoiceReconcileAction $syncSourceFieldOptionsChoiceReconcileAction;
+    protected AirtableSyncSourceFieldChoiceReconcileAction $syncSourceFieldChoiceReconcileAction;
 
     protected AirtableSyncSourceFieldChoiceAllTrashAction $syncSourceFieldChoiceAllTrashAction;
 
     public function __construct()
     {
-        $this->syncSourceFieldOptionsChoiceReconcileAction = app(AirtableSyncSourceFieldOptionsChoiceReconcileAction::class);
+        $this->syncSourceFieldChoiceReconcileAction = app(AirtableSyncSourceFieldChoiceReconcileAction::class);
 
         $this->syncSourceFieldChoiceAllTrashAction = app(AirtableSyncSourceFieldChoiceAllTrashAction::class);
     }
@@ -36,7 +36,7 @@ class AirtableSyncSourceFieldOptionsChoiceAllReconcileAction
         });
 
         $syncSourceFieldChoices = $syncSourceFieldOptionsChoiceResourceResponseDtos->map(function (AirtableSyncSourceFieldOptionsChoiceResourceResponseDto $syncSourceFieldOptionsChoiceResourceResponseDto) use ($syncSourceField) {
-            return $this->syncSourceFieldOptionsChoiceReconcileAction->handle($syncSourceFieldOptionsChoiceResourceResponseDto, $syncSourceField);
+            return $this->syncSourceFieldChoiceReconcileAction->handle($syncSourceFieldOptionsChoiceResourceResponseDto, $syncSourceField);
         });
 
         $trashableSyncSourceFieldChoices = $syncSourceField->choices()

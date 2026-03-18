@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableAiTextFieldReconcileAction
 {
-    protected AirtableAiTextFieldOptionsPromptComponentAllReconcileAction $aiTextFieldOptionsPromptComponentAllReconcileAction;
+    protected AirtableAiTextFieldPromptComponentAllReconcileAction $aiTextFieldPromptComponentAllReconcileAction;
 
     public function __construct()
     {
-        $this->aiTextFieldOptionsPromptComponentAllReconcileAction = app(AirtableAiTextFieldOptionsPromptComponentAllReconcileAction::class);
+        $this->aiTextFieldPromptComponentAllReconcileAction = app(AirtableAiTextFieldPromptComponentAllReconcileAction::class);
     }
 
     /**
@@ -29,7 +29,7 @@ class AirtableAiTextFieldReconcileAction
         );
         Log::notice('created or updated AirtableAiTextField', ['aiTextField' => $aiTextField, 'aiTextFieldResourceResponseDto' => $aiTextFieldResourceResponseDto]);
 
-        $this->aiTextFieldOptionsPromptComponentAllReconcileAction->handle($aiTextFieldResourceResponseDto->options->prompt, $aiTextField);
+        $this->aiTextFieldPromptComponentAllReconcileAction->handle($aiTextFieldResourceResponseDto->options->prompt, $aiTextField);
 
         return $aiTextField;
     }

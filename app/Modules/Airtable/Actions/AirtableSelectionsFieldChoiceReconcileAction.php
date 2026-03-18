@@ -8,14 +8,14 @@ use App\Modules\Airtable\Models\AirtableSelectionsFieldChoice;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
-class AirtableSelectionsFieldOptionsChoiceReconcileAction
+class AirtableSelectionsFieldChoiceReconcileAction
 {
     /**
      * @throws Exception
      */
     public function handle(AirtableSelectionsFieldOptionsChoiceResourceResponseDto $selectionsFieldOptionsChoiceResourceResponseDto, AirtableSelectionsField $selectionsField): AirtableSelectionsFieldChoice
     {
-        Log::info('executing AirtableSelectionsFieldOptionsChoiceReconcileAction', ['selectionsFieldOptionsChoiceResourceResponseDto' => $selectionsFieldOptionsChoiceResourceResponseDto, 'selectionsField' => $selectionsField]);
+        Log::info('executing AirtableSelectionsFieldChoiceReconcileAction', ['selectionsFieldOptionsChoiceResourceResponseDto' => $selectionsFieldOptionsChoiceResourceResponseDto, 'selectionsField' => $selectionsField]);
 
         $selectionsFieldChoice = $selectionsField->choices()->updateOrCreate(
             $selectionsFieldOptionsChoiceResourceResponseDto->only('id')->toArray(),

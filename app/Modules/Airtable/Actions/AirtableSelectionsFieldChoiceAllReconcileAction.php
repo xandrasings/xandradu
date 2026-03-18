@@ -9,15 +9,15 @@ use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
-class AirtableSelectionsFieldOptionsChoiceAllReconcileAction
+class AirtableSelectionsFieldChoiceAllReconcileAction
 {
-    protected AirtableSelectionsFieldOptionsChoiceReconcileAction $selectionsFieldOptionsChoiceReconcileAction;
+    protected AirtableSelectionsFieldChoiceReconcileAction $selectionsFieldChoiceReconcileAction;
 
     protected AirtableSelectionsFieldChoiceAllTrashAction $selectionsFieldChoiceAllTrashAction;
 
     public function __construct()
     {
-        $this->selectionsFieldOptionsChoiceReconcileAction = app(AirtableSelectionsFieldOptionsChoiceReconcileAction::class);
+        $this->selectionsFieldChoiceReconcileAction = app(AirtableSelectionsFieldChoiceReconcileAction::class);
 
         $this->selectionsFieldChoiceAllTrashAction = app(AirtableSelectionsFieldChoiceAllTrashAction::class);
     }
@@ -29,14 +29,14 @@ class AirtableSelectionsFieldOptionsChoiceAllReconcileAction
      */
     public function handle(Collection $selectionsFieldOptionsChoiceResourceResponseDtos, AirtableSelectionsField $selectionsField): Collection
     {
-        Log::info('executing AirtableSelectionsFieldOptionsChoiceAllReconcileAction');
+        Log::info('executing AirtableSelectionsFieldChoiceAllReconcileAction');
 
         $selectionsFieldOptionsChoiceResourceResponseDtos->each(function (AirtableSelectionsFieldOptionsChoiceResourceResponseDto $selectionsFieldOptionsChoiceResourceResponseDto, int $key) {
             $selectionsFieldOptionsChoiceResourceResponseDto->rank = $key + 1;
         });
 
         $selectionsFieldChoices = $selectionsFieldOptionsChoiceResourceResponseDtos->map(function (AirtableSelectionsFieldOptionsChoiceResourceResponseDto $selectionsFieldOptionsChoiceResourceResponseDto) use ($selectionsField) {
-            return $this->selectionsFieldOptionsChoiceReconcileAction->handle($selectionsFieldOptionsChoiceResourceResponseDto, $selectionsField);
+            return $this->selectionsFieldChoiceReconcileAction->handle($selectionsFieldOptionsChoiceResourceResponseDto, $selectionsField);
         });
 
         $trashableSelectionsFieldChoices = $selectionsField->choices()

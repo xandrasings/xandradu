@@ -8,14 +8,14 @@ use App\Modules\Airtable\Models\AirtableSyncSourceFieldChoice;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
-class AirtableSyncSourceFieldOptionsChoiceReconcileAction
+class AirtableSyncSourceFieldChoiceReconcileAction
 {
     /**
      * @throws Exception
      */
     public function handle(AirtableSyncSourceFieldOptionsChoiceResourceResponseDto $syncSourceFieldOptionsChoiceResourceResponseDto, AirtableSyncSourceField $syncSourceField): AirtableSyncSourceFieldChoice
     {
-        Log::info('executing AirtableSyncSourceFieldOptionsChoiceReconcileAction', ['syncSourceFieldOptionsChoiceResourceResponseDto' => $syncSourceFieldOptionsChoiceResourceResponseDto, 'syncSourceField' => $syncSourceField]);
+        Log::info('executing AirtableSyncSourceFieldChoiceReconcileAction', ['syncSourceFieldOptionsChoiceResourceResponseDto' => $syncSourceFieldOptionsChoiceResourceResponseDto, 'syncSourceField' => $syncSourceField]);
 
         $syncSourceFieldChoice = $syncSourceField->choices()->updateOrCreate(
             $syncSourceFieldOptionsChoiceResourceResponseDto->only('id')->toArray(),
