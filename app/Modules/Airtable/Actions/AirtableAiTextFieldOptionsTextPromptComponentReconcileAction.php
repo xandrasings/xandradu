@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Modules\Airtable\Actions;
+
+use App\Modules\Airtable\Dtos\AirtableAiTextFieldOptionsPromptComponentResourceResponseDto;
+use App\Modules\Airtable\Dtos\AirtableAiTextFieldOptionsTextPromptComponentResourceResponseDto;
+use App\Modules\Airtable\Models\AirtableAiTextField;
+use App\Modules\Airtable\Models\AirtableAiTextFieldPromptComponent;
+use App\Modules\Airtable\Models\AirtableAiTextFieldTextPromptComponent;
+use Exception;
+use Illuminate\Support\Facades\Log;
+
+class AirtableAiTextFieldOptionsTextPromptComponentReconcileAction
+{
+    /**
+     * @throws Exception
+     */
+    public function handle(AirtableAiTextFieldOptionsTextPromptComponentResourceResponseDto $aiTextFieldOptionsTextPromptComponentResourceResponseDto, AirtableAiTextFieldPromptComponent $aiTextFieldPromptComponent): AirtableAiTextFieldTextPromptComponent
+    {
+        Log::info('executing AirtableAiTextFieldOptionsTextPromptComponentReconcileAction', ['aiTextFieldOptionsTextPromptComponentResourceResponseDto' => $aiTextFieldOptionsTextPromptComponentResourceResponseDto, 'aiTextFieldPromptComponent' => $aiTextFieldPromptComponent]);
+
+        $aiTextFieldTextPromptComponent = $aiTextFieldPromptComponent->textPromptComponent()->updateOrCreate(
+            [],
+            $aiTextFieldOptionsTextPromptComponentResourceResponseDto->only('text')->toArray(),
+        );
+        Log::notice('created or updated AirtableAiTextFieldTextPromptComponent', ['aiTextFieldPromptComponent' => $aiTextFieldPromptComponent, 'aiTextFieldPromptComponentResourceResponseDto' => $aiTextFieldOptionsTextPromptComponentResourceResponseDto]);
+
+        return $aiTextFieldTextPromptComponent;
+    }
+}
