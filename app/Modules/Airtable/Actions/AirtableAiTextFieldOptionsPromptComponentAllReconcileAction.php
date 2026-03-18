@@ -27,6 +27,10 @@ class AirtableAiTextFieldOptionsPromptComponentAllReconcileAction
     {
         Log::info('executing AirtableAiTextFieldOptionsPromptComponentAllReconcileAction', ['aiTextFieldOptionsPromptComponentResourceResponseDtos' => $aiTextFieldOptionsPromptComponentResourceResponseDtos, 'aiTextField' => $aiTextField]);
 
+        $aiTextFieldOptionsPromptComponentResourceResponseDtos->each(function (AirtableAiTextFieldOptionsPromptComponentResourceResponseDto $aiTextFieldOptionsPromptComponentResourceResponseDto, int $key) {
+            $aiTextFieldOptionsPromptComponentResourceResponseDto->rank = $key + 1;
+        });
+
         $aiTextFieldPromptComponents = $aiTextFieldOptionsPromptComponentResourceResponseDtos->map(function (AirtableAiTextFieldOptionsPromptComponentResourceResponseDto $aiTextFieldOptionsPromptComponentResourceResponseDto) use ($aiTextField) {
             return $this->aiTextFieldOptionsPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextField);
         });

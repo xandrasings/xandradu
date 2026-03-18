@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
  * @property int|null $sync_source_field_id
+ * @property int $rank
  * @property string|null $external_id
  * @property string $name
  * @property string|null $color
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice whereExternalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice whereRank($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice whereSyncSourceFieldId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice withTrashed(bool $withTrashed = true)

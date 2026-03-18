@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
  * @property int|null $ai_text_field_id
+ * @property int $rank
  * @property string $type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -25,6 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldPromptComponent whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldPromptComponent whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldPromptComponent whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldPromptComponent whereRank($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldPromptComponent whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldPromptComponent whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldPromptComponent withTrashed(bool $withTrashed = true)
@@ -36,6 +38,7 @@ class AirtableAiTextFieldPromptComponent extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'rank',
         'type',
     ];
 

@@ -2,9 +2,7 @@
 
 namespace App\Modules\Airtable\Actions;
 
-use App\Modules\Airtable\Dtos\AirtableAiTextFieldOptionsFieldPromptComponentResourceResponseDto;
 use App\Modules\Airtable\Dtos\AirtableAiTextFieldOptionsPromptComponentResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableAiTextFieldOptionsTextPromptComponentResourceResponseDto;
 use App\Modules\Airtable\Enums\AirtableAiTextFieldOptionsPromptComponentTypeEnum;
 use App\Modules\Airtable\Models\AirtableAiTextField;
 use App\Modules\Airtable\Models\AirtableAiTextFieldPromptComponent;
@@ -31,8 +29,9 @@ class AirtableAiTextFieldOptionsPromptComponentReconcileAction
     {
         Log::info('executing AirtableAiTextFieldOptionsPromptComponentReconcileAction', ['aiTextFieldOptionsPromptComponentResourceResponseDto' => $aiTextFieldOptionsPromptComponentResourceResponseDto, 'aiTextField' => $aiTextField]);
 
-        $aiTextFieldPromptComponent = $aiTextField->promptComponents()->create( // TODO turn this into an upsert based on rank since no external id is available
-            $aiTextFieldOptionsPromptComponentResourceResponseDto->only('type')->toArray(),
+        $aiTextFieldPromptComponent = $aiTextField->promptComponents()->updateOrCreate(
+            $aiTextFieldOptionsPromptComponentResourceResponseDto->only('rank')->toArray(),
+            $aiTextFieldOptionsPromptComponentResourceResponseDto->except('rank')->toArray(),
         );
         Log::notice('created or updated AirtableAiTextFieldPromptComponent', ['aiTextFieldPromptComponent' => $aiTextFieldPromptComponent, 'aiTextFieldOptionsPromptComponentResourceResponseDto' => $aiTextFieldOptionsPromptComponentResourceResponseDto]);
 

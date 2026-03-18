@@ -10,5 +10,7 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 #[MapName(SnakeCaseMapper::class)]
 abstract class AirtableAiTextFieldOptionsPromptComponentResourceResponseDto extends Data
 {
+    public int $rank = 0;
+
     public AirtableAiTextFieldOptionsPromptComponentTypeEnum $type;
 }
