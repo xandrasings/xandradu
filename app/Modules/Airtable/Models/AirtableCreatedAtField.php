@@ -47,4 +47,9 @@ class AirtableCreatedAtField extends Model
     {
         return $this->hasOne(AirtableDateTimeCreatedAtField::class, 'created_at_field_id');
     }
+
+    public function dateCreatedAtField(): HasOne
+    {
+        return $this->hasOne(AirtableDateCreatedAtField::class, 'created_at_field_id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableCreatedAtFieldResourceResponseDto;
+use App\Modules\Airtable\Enums\AirtableDateTimeTypeEnum;
 use App\Modules\Airtable\Models\AirtableCreatedAtField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -10,11 +11,15 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableCreatedAtFieldReconcileAction
 {
-    protected AirtableDateTimeCreatedAtFieldAllReconcileAction $dateTimeCreatedAtFieldAllReconcileAction;
+    protected AirtableDateCreatedAtFieldReconcileAction $dateCreatedAtFieldReconcileAction;
+
+    protected AirtableDateTimeCreatedAtFieldReconcileAction $dateTimeCreatedAtFieldReconcileAction;
 
     public function __construct()
     {
-        $this->dateTimeCreatedAtFieldAllReconcileAction = app(AirtableDateTimeCreatedAtFieldAllReconcileAction::class);
+        $this->dateCreatedAtFieldReconcileAction = app(AirtableDateCreatedAtFieldReconcileAction::class);
+
+        $this->dateTimeCreatedAtFieldReconcileAction = app(AirtableDateTimeCreatedAtFieldReconcileAction::class);
     }
 
     /**
@@ -30,7 +35,10 @@ class AirtableCreatedAtFieldReconcileAction
         );
         Log::notice('created or updated AirtableCreatedAtField', ['createdAtField' => $createdAtField, 'createdAtFieldResourceResponseDto' => $createdAtFieldResourceResponseDto]);
 
-        $this->dateTimeCreatedAtFieldAllReconcileAction->handle($createdAtFieldResourceResponseDto->options->result, $createdAtField);
+        match ($createdAtFieldResourceResponseDto->options->result->type) {
+            AirtableDateTimeTypeEnum::DATE => $this->dateCreatedAtFieldReconcileAction->handle($createdAtFieldResourceResponseDto->options->result, $createdAtField),
+            AirtableDateTimeTypeEnum::DATE_TIME => $this->dateTimeCreatedAtFieldReconcileAction->handle($createdAtFieldResourceResponseDto->options->result, $createdAtField),
+        };
 
         return $createdAtField;
     }
