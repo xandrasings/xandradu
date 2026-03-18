@@ -13,9 +13,13 @@ class AirtableSyncSourceFieldOptionsChoiceAllReconcileAction
 {
     protected AirtableSyncSourceFieldOptionsChoiceReconcileAction $syncSourceFieldOptionsChoiceReconcileAction;
 
+    protected AirtableSyncSourceFieldChoiceAllTrashAction $syncSourceFieldChoiceAllTrashAction;
+
     public function __construct()
     {
         $this->syncSourceFieldOptionsChoiceReconcileAction = app(AirtableSyncSourceFieldOptionsChoiceReconcileAction::class);
+
+        $this->syncSourceFieldChoiceAllTrashAction = app(AirtableSyncSourceFieldChoiceAllTrashAction::class);
     }
 
     /**
@@ -35,14 +39,11 @@ class AirtableSyncSourceFieldOptionsChoiceAllReconcileAction
             return $this->syncSourceFieldOptionsChoiceReconcileAction->handle($syncSourceFieldOptionsChoiceResourceResponseDto, $syncSourceField);
         });
 
-        $syncSourceField->choices()
+        $trashableSyncSourceFieldChoices = $syncSourceField->choices()
             ->whereNotNull('external_id')
             ->whereNotIn('id', $syncSourceFieldChoices->pluck('id'))
-            ->get()
-            ->each(function (AirtableSyncSourceFieldChoice $syncSourceFieldChoice) {
-                $syncSourceFieldChoice->delete();
-                Log::notice('deleted AirtableSyncSourceFieldChoice.', ['syncSourceFieldChoice' => $syncSourceFieldChoice]);
-            });
+            ->get();
+        $this->syncSourceFieldChoiceAllTrashAction->handle($trashableSyncSourceFieldChoices);
 
         return $syncSourceFieldChoices;
     }

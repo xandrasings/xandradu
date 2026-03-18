@@ -14,9 +14,13 @@ class AirtableFieldAllReconcileAction
 {
     protected AirtableFieldReconcileAction $fieldReconcileAction;
 
+    protected AirtableFieldAllTrashAction $fieldAllTrashAction;
+
     public function __construct()
     {
         $this->fieldReconcileAction = app(AirtableFieldReconcileAction::class);
+
+        $this->fieldAllTrashAction = app(AirtableFieldAllTrashAction::class);
     }
 
     /**
@@ -37,14 +41,11 @@ class AirtableFieldAllReconcileAction
         });
 
         // TODO confirm no offset logic at play when table schema gets grabbed
-        $table->fields()
+        $trashableFields = $table->fields()
             ->whereNotNull('external_id')
             ->whereNotIn('id', $fields->pluck('id'))
-            ->get()
-            ->each(function (AirtableField $field) {
-                $field->delete();
-                Log::notice('deleted AirtableField.', ['field' => $field]);
-            });
+            ->get();
+        $this->fieldAllTrashAction->handle($trashableFields);
 
         return $fields;
     }

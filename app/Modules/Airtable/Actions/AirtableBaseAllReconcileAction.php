@@ -12,9 +12,13 @@ class AirtableBaseAllReconcileAction
 {
     protected AirtableBaseReconcileAction $baseReconcileAction;
 
+    protected AirtableBaseAllTrashAction $baseAllTrashAction;
+
     public function __construct()
     {
         $this->baseReconcileAction = app(AirtableBaseReconcileAction::class);
+
+        $this->baseAllTrashAction = app(AirtableBaseAllTrashAction::class);
     }
 
     /**
@@ -34,13 +38,11 @@ class AirtableBaseAllReconcileAction
             return $this->baseReconcileAction->handle($baseResourceResponseDto);
         });
 
-        AirtableBase::query()
+        $trashableBases = AirtableBase::query()
             ->whereNotNull('external_id')
             ->whereNotIn('id', $bases->pluck('id'))
-            ->get()->each(function (AirtableBase $base) {
-            $base->delete();
-            Log::notice('deleted AirtableBase.', ['base' => $base]);
-        });
+            ->get();
+        $this->baseAllTrashAction->handle($trashableBases);
 
         return $bases;
     }

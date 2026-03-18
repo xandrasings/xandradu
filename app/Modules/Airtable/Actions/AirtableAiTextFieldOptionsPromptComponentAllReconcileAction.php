@@ -5,6 +5,7 @@ namespace App\Modules\Airtable\Actions;
 use App\Modules\Airtable\Dtos\AirtableAiTextFieldOptionsPromptComponentResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableAiTextField;
 use App\Modules\Airtable\Models\AirtableAiTextFieldPromptComponent;
+use App\Modules\Airtable\Models\AirtableTable;
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -13,9 +14,13 @@ class AirtableAiTextFieldOptionsPromptComponentAllReconcileAction
 {
     protected AirtableAiTextFieldOptionsPromptComponentReconcileAction $aiTextFieldOptionsPromptComponentReconcileAction;
 
+    protected AirtableAiTextFieldPromptComponentAllTrashAction $aiTextFieldPromptComponentAllTrashAction;
+
     public function __construct()
     {
         $this->aiTextFieldOptionsPromptComponentReconcileAction = app(AirtableAiTextFieldOptionsPromptComponentReconcileAction::class);
+
+        $this->aiTextFieldPromptComponentAllTrashAction = app(AirtableAiTextFieldPromptComponentAllTrashAction::class);
     }
 
     /**
@@ -35,13 +40,10 @@ class AirtableAiTextFieldOptionsPromptComponentAllReconcileAction
             return $this->aiTextFieldOptionsPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextField);
         });
 
-        $aiTextField->promptComponents()
+        $trashableAiTextFieldPromptComponents =$aiTextField->promptComponents()
             ->whereNotIn('id', $aiTextFieldPromptComponents->pluck('id'))
-            ->get()
-            ->each(function (AirtableAiTextFieldPromptComponent $aiTextFieldPromptComponent) {
-                $aiTextFieldPromptComponent->delete();
-                Log::notice('deleted AirtableAiTextFieldPromptComponent.', ['aiTextFieldPromptComponent' => $aiTextFieldPromptComponent]);
-            });
+            ->get();
+        $this->aiTextFieldPromptComponentAllTrashAction->handle($trashableAiTextFieldPromptComponents);
 
         return $aiTextFieldPromptComponents;
     }

@@ -13,9 +13,13 @@ class AirtableSelectionsFieldOptionsChoiceAllReconcileAction
 {
     protected AirtableSelectionsFieldOptionsChoiceReconcileAction $selectionsFieldOptionsChoiceReconcileAction;
 
+    protected AirtableSelectionsFieldChoiceAllTrashAction $selectionsFieldChoiceAllTrashAction;
+
     public function __construct()
     {
         $this->selectionsFieldOptionsChoiceReconcileAction = app(AirtableSelectionsFieldOptionsChoiceReconcileAction::class);
+
+        $this->selectionsFieldChoiceAllTrashAction = app(AirtableSelectionsFieldChoiceAllTrashAction::class);
     }
 
     /**
@@ -35,14 +39,11 @@ class AirtableSelectionsFieldOptionsChoiceAllReconcileAction
             return $this->selectionsFieldOptionsChoiceReconcileAction->handle($selectionsFieldOptionsChoiceResourceResponseDto, $selectionsField);
         });
 
-        $selectionsField->choices()
+        $trashableSelectionsFieldChoices = $selectionsField->choices()
             ->whereNotNull('external_id')
             ->whereNotIn('id', $selectionsFieldChoices->pluck('id'))
-            ->get()
-            ->each(function (AirtableSelectionsFieldChoice $selectionsFieldChoice) {
-                $selectionsFieldChoice->delete();
-                Log::notice('deleted AirtableSelectionsFieldChoice.', ['selectionsFieldChoice' => $selectionsFieldChoice]);
-            });
+            ->get();
+        $this->selectionsFieldChoiceAllTrashAction->handle($trashableSelectionsFieldChoices);
 
         return $selectionsFieldChoices;
     }

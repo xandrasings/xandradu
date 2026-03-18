@@ -13,9 +13,13 @@ class AirtableTableAllReconcileAction
 {
     protected AirtableTableReconcileAction $tableReconcileAction;
 
+    protected AirtableTableAllTrashAction $tableAllTrashAction;
+
     public function __construct()
     {
         $this->tableReconcileAction = app(AirtableTableReconcileAction::class);
+
+        $this->tableAllTrashAction = app(AirtableTableAllTrashAction::class);
     }
 
     /**
@@ -36,14 +40,11 @@ class AirtableTableAllReconcileAction
         });
 
         // TODO confirm no offset logic at play when table schema gets grabbed
-        $base->tables()
+        $trashableTables = $base->tables()
             ->whereNotNull('external_id')
             ->whereNotIn('id', $tables->pluck('id'))
-            ->get()
-            ->each(function (AirtableTable $table) {
-            $table->delete();
-            Log::notice('deleted AirtableTable.', ['table' => $table]);
-        });
+            ->get();
+        $this->tableAllTrashAction->handle($trashableTables);
 
         return $tables;
     }
