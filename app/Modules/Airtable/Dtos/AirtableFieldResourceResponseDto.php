@@ -17,6 +17,8 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 #[MapName(SnakeCaseMapper::class)]
 abstract class AirtableFieldResourceResponseDto extends Data implements PropertyMorphableData
 {
+    public int $rank = 0;
+
     #[MapOutputName('external_id')]
     public string $id;
 

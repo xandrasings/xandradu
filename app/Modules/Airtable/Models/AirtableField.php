@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
  * @property int|null $table_id
+ * @property int $rank
  * @property string|null $external_id
  * @property string $name
  * @property string|null $description
@@ -61,6 +62,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereExternalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereRank($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereTableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereUpdatedAt($value)
@@ -73,6 +75,7 @@ class AirtableField extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'rank',
         'external_id',
         'name',
         'description',

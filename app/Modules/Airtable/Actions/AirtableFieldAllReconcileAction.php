@@ -28,6 +28,10 @@ class AirtableFieldAllReconcileAction
     {
         Log::info('executing AirtableFieldAllReconcileAction');
 
+        $fieldResourceResponseDtos->each(function (AirtableFieldResourceResponseDto $fieldResourceResponseDto, int $key) {
+            $fieldResourceResponseDto->rank = $key + 1;
+        });
+
         $fields = $fieldResourceResponseDtos->map(function ($fieldResourceResponseDto) use ($table) {
             return $this->fieldReconcileAction->handle($fieldResourceResponseDto, $table);
         });
