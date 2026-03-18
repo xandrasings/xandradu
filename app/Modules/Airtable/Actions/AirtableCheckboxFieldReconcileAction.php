@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableCheckboxFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableCheckboxField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,21 +13,15 @@ class AirtableCheckboxFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableCheckboxField
+    public function handle(AirtableCheckboxFieldResourceResponseDto $checkboxFieldResourceResponseDto, AirtableField $field):  AirtableCheckboxField
     {
-        Log::info('executing AirtableCheckboxFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-
-        if (!($fieldResourceResponseDto instanceof AirtableCheckboxFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableCheckboxFieldReconcileAction', ['checkboxFieldResourceResponseDto' => $checkboxFieldResourceResponseDto, 'field' => $field]);
 
         $checkboxField = $field->checkboxField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->toArray(),
+            $checkboxFieldResourceResponseDto->options->toArray(),
         );
-        Log::notice('created or updated AirtableCheckboxField', ['field' => $field, 'checkboxFieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableCheckboxField', ['checkboxField' => $checkboxField, 'checkboxFieldResourceResponseDto' => $checkboxFieldResourceResponseDto]);
 
         return $checkboxField;
     }

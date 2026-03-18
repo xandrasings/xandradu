@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableFormulaFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableFormulaField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,20 +13,15 @@ class AirtableFormulaFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableFormulaField
+    public function handle(AirtableFormulaFieldResourceResponseDto $formulaFieldResourceResponseDto, AirtableField $field):  AirtableFormulaField
     {
-        Log::info('executing AirtableFormulaFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableFormulaFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableFormulaFieldReconcileAction', ['formulaFieldResourceResponseDto' => $formulaFieldResourceResponseDto, 'field' => $field]);
 
         $formulaField = $field->formulaField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->toArray(),
+            $formulaFieldResourceResponseDto->options->toArray(),
         );
-        Log::notice('created or updated AirtableFormulaField', ['formulaField' => $formulaField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableFormulaField', ['formulaField' => $formulaField, 'formulaFieldResourceResponseDto' => $formulaFieldResourceResponseDto]);
 
         return $formulaField;
     }

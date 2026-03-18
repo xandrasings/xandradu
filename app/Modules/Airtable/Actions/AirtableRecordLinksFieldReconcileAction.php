@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableRecordLinksFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableRecordLinksField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,20 +13,15 @@ class AirtableRecordLinksFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableRecordLinksField
+    public function handle(AirtableRecordLinksFieldResourceResponseDto $recordLinksFieldResourceResponseDto, AirtableField $field):  AirtableRecordLinksField
     {
-        Log::info('executing AirtableRecordLinksFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableRecordLinksFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableRecordLinksFieldReconcileAction', ['recordLinksFieldResourceResponseDto' => $recordLinksFieldResourceResponseDto, 'field' => $field]);
 
         $recordLinksField = $field->recordLinksField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->toArray(),
+            $recordLinksFieldResourceResponseDto->options->toArray(),
         );
-        Log::notice('created or updated AirtableRecordLinksField', ['recordLinksField' => $recordLinksField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableRecordLinksField', ['recordLinksField' => $recordLinksField, 'recordLinksFieldResourceResponseDto' => $recordLinksFieldResourceResponseDto]);
 
         return $recordLinksField;
     }

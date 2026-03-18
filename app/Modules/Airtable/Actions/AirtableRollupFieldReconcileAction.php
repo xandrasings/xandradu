@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableRollupFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableRollupField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,20 +13,15 @@ class AirtableRollupFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableRollupField
+    public function handle(AirtableRollupFieldResourceResponseDto $rollupFieldResourceResponseDto, AirtableField $field):  AirtableRollupField
     {
-        Log::info('executing AirtableRollupFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableRollupFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableRollupFieldReconcileAction', ['rollupFieldResourceResponseDto' => $rollupFieldResourceResponseDto, 'field' => $field]);
 
         $rollupField = $field->rollupField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->toArray(),
+            $rollupFieldResourceResponseDto->options->toArray(),
         );
-        Log::notice('created or updated AirtableRollupField', ['rollupField' => $rollupField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableRollupField', ['rollupField' => $rollupField, 'rollupFieldResourceResponseDto' => $rollupFieldResourceResponseDto]);
 
         return $rollupField;
     }

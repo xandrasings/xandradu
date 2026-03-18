@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableButtonFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableButtonField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,19 +13,14 @@ class AirtableButtonFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableButtonField
+    public function handle(AirtableButtonFieldResourceResponseDto $buttonFieldResourceResponseDto, AirtableField $field):  AirtableButtonField
     {
-        Log::info('executing AirtableButtonFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableButtonFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableButtonFieldReconcileAction', ['buttonFieldResourceResponseDto' => $buttonFieldResourceResponseDto, 'field' => $field]);
 
         $buttonField = $field->buttonField()->updateOrCreate(
             [],
         );
-        Log::notice('created or updated AirtableButtonField', ['buttonField' => $buttonField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableButtonField', ['buttonField' => $buttonField, 'buttonFieldResourceResponseDto' => $buttonFieldResourceResponseDto]);
 
         return $buttonField;
     }

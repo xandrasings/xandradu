@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableCollaboratorFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableCollaboratorField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,19 +13,14 @@ class AirtableCollaboratorFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableCollaboratorField
+    public function handle(AirtableCollaboratorFieldResourceResponseDto $collaboratorFieldResourceResponseDto, AirtableField $field):  AirtableCollaboratorField
     {
-        Log::info('executing AirtableCollaboratorFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableCollaboratorFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableCollaboratorFieldReconcileAction', ['collaboratorFieldResourceResponseDto' => $collaboratorFieldResourceResponseDto, 'field' => $field]);
 
         $collaboratorField = $field->collaboratorField()->updateOrCreate(
             [],
         );
-        Log::notice('created or updated AirtableCollaboratorField', ['collaboratorField' => $collaboratorField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableCollaboratorField', ['collaboratorField' => $collaboratorField, 'collaboratorFieldResourceResponseDto' => $collaboratorFieldResourceResponseDto]);
 
         return $collaboratorField;
     }

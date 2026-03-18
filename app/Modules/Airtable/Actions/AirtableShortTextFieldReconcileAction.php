@@ -2,7 +2,6 @@
 
 namespace App\Modules\Airtable\Actions;
 
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Dtos\AirtableShortTextFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableField;
 use App\Modules\Airtable\Models\AirtableShortTextField;
@@ -14,19 +13,14 @@ class AirtableShortTextFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableShortTextField
+    public function handle(AirtableShortTextFieldResourceResponseDto $shortTextFieldResourceResponseDto, AirtableField $field):  AirtableShortTextField
     {
-        Log::info('executing AirtableShortTextFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableShortTextFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableShortTextFieldReconcileAction', ['shortTextFieldResourceResponseDto' => $shortTextFieldResourceResponseDto, 'field' => $field]);
 
         $shortTextField = $field->shortTextField()->updateOrCreate(
             []
         );
-        Log::notice('created or updated AirtableShortTextField', ['shortTextField' => $shortTextField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableShortTextField', ['shortTextField' => $shortTextField, 'shortTextFieldResourceResponseDto' => $shortTextFieldResourceResponseDto]);
 
         return $shortTextField;
     }

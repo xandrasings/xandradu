@@ -2,7 +2,6 @@
 
 namespace App\Modules\Airtable\Actions;
 
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Dtos\AirtableLongTextFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableField;
 use App\Modules\Airtable\Models\AirtableLongTextField;
@@ -14,19 +13,14 @@ class AirtableLongTextFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableLongTextField
+    public function handle(AirtableLongTextFieldResourceResponseDto $longTextFieldResourceResponseDto, AirtableField $field):  AirtableLongTextField
     {
-        Log::info('executing AirtableLongTextFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableLongTextFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableLongTextFieldReconcileAction', ['longTextFieldResourceResponseDto' => $longTextFieldResourceResponseDto, 'field' => $field]);
 
         $longTextField = $field->longTextField()->updateOrCreate(
             [],
         );
-        Log::notice('created or updated AirtableLongTextField', ['longTextField' => $longTextField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableLongTextField', ['longTextField' => $longTextField, 'longTextFieldResourceResponseDto' => $longTextFieldResourceResponseDto]);
 
         return $longTextField;
     }

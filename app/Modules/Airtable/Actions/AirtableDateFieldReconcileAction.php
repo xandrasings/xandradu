@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableDateFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableDateField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,20 +13,15 @@ class AirtableDateFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableDateField
+    public function handle(AirtableDateFieldResourceResponseDto $dateFieldResourceResponseDto, AirtableField $field):  AirtableDateField
     {
-        Log::info('executing AirtableDateFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableDateFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableDateFieldReconcileAction', ['dateFieldResourceResponseDto' => $dateFieldResourceResponseDto, 'field' => $field]);
 
         $dateField = $field->dateField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->dateFormat->only('format')->toArray(),
+            $dateFieldResourceResponseDto->options->dateFormat->only('format')->toArray(),
         );
-        Log::notice('created or updated AirtableDateField', ['dateField' => $dateField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableDateField', ['dateField' => $dateField, 'dateFieldResourceResponseDto' => $dateFieldResourceResponseDto]);
 
         return $dateField;
     }

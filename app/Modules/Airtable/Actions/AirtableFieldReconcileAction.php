@@ -159,6 +159,7 @@ class AirtableFieldReconcileAction
         );
         Log::notice('created or updated AirtableField', ['field' => $field, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
 
+        $fieldResourceResponseDto->type->validate($fieldResourceResponseDto);
         match ($fieldResourceResponseDto->type) {
             AirtableFieldTypeEnum::AI_TEXT => $this->aiTextFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldTypeEnum::ATTACHMENTS => $this->attachmentsFieldReconcileAction->handle($fieldResourceResponseDto, $field),
@@ -193,7 +194,6 @@ class AirtableFieldReconcileAction
             AirtableFieldTypeEnum::UPDATED_AT => $this->updatedAtFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldTypeEnum::UPDATED_BY => $this->updatedByFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldTypeEnum::URL => $this->urlFieldReconcileAction->handle($fieldResourceResponseDto, $field),
-            default => Log::error('Encountered an unrecognized Airtable field type.', ['field' => $field, 'fieldResourceResponseDto' => $fieldResourceResponseDto]),
         };
 
         return $field;

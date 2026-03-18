@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableSyncSourceFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableSyncSourceField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,20 +13,15 @@ class AirtableSyncSourceFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableSyncSourceField
+    public function handle(AirtableSyncSourceFieldResourceResponseDto $syncSourceFieldResourceResponseDto, AirtableField $field):  AirtableSyncSourceField
     {
-        Log::info('executing AirtableSyncSourceFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableSyncSourceFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableSyncSourceFieldReconcileAction', ['syncSourceFieldResourceResponseDto' => $syncSourceFieldResourceResponseDto, 'field' => $field]);
 
         $syncSourceField = $field->syncSourceField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->toArray(),
+            $syncSourceFieldResourceResponseDto->options->toArray(),
         );
-        Log::notice('created or updated AirtableSyncSourceField', ['syncSourceField' => $syncSourceField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableSyncSourceField', ['syncSourceField' => $syncSourceField, 'syncSourceFieldResourceResponseDto' => $syncSourceFieldResourceResponseDto]);
 
         return $syncSourceField;
     }

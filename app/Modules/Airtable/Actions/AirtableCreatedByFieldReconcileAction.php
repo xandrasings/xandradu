@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableCreatedByFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableCreatedByField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,19 +13,14 @@ class AirtableCreatedByFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableCreatedByField
+    public function handle(AirtableCreatedByFieldResourceResponseDto $createdByFieldResourceResponseDto, AirtableField $field):  AirtableCreatedByField
     {
-        Log::info('executing AirtableCreatedByFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableCreatedByFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableCreatedByFieldReconcileAction', ['createdByFieldResourceResponseDto' => $createdByFieldResourceResponseDto, 'field' => $field]);
 
         $createdByField = $field->createdByField()->updateOrCreate(
             [],
         );
-        Log::notice('created or updated AirtableCreatedByField', ['createdByField' => $createdByField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableCreatedByField', ['createdByField' => $createdByField, 'createdByFieldResourceResponseDto' => $createdByFieldResourceResponseDto]);
 
         return $createdByField;
     }

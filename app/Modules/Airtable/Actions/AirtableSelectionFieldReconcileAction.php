@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableSelectionFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableSelectionField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -21,21 +20,16 @@ class AirtableSelectionFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableSelectionField
+    public function handle(AirtableSelectionFieldResourceResponseDto $selectionFieldResourceResponseDto, AirtableField $field):  AirtableSelectionField
     {
-        Log::info('executing AirtableSelectionFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableSelectionFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableSelectionFieldReconcileAction', ['selectionFieldResourceResponseDto' => $selectionFieldResourceResponseDto, 'field' => $field]);
 
         $selectionField = $field->selectionField()->updateOrCreate(
             [],
         );
-        Log::notice('created or updated AirtableSelectionField', ['selectionField' => $selectionField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableSelectionField', ['selectionField' => $selectionField, 'selectionFieldResourceResponseDto' => $selectionFieldResourceResponseDto]);
 
-        $this->selectionFieldOptionsChoiceAllReconcileAction->handle($fieldResourceResponseDto->options->choices, $selectionField);
+        $this->selectionFieldOptionsChoiceAllReconcileAction->handle($selectionFieldResourceResponseDto->options->choices, $selectionField);
 
         return $selectionField;
     }

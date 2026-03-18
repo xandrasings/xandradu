@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableCountFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableCountField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,20 +13,15 @@ class AirtableCountFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableCountField
+    public function handle(AirtableCountFieldResourceResponseDto $countFieldResourceResponseDto, AirtableField $field):  AirtableCountField
     {
-        Log::info('executing AirtableCountFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableCountFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableCountFieldReconcileAction', ['countFieldResourceResponseDto' => $countFieldResourceResponseDto, 'field' => $field]);
 
         $countField = $field->countField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->toArray(),
+            $countFieldResourceResponseDto->options->toArray(),
         );
-        Log::notice('created or updated AirtableCountField', ['countField' => $countField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableCountField', ['countField' => $countField, 'countFieldResourceResponseDto' => $countFieldResourceResponseDto]);
 
         return $countField;
     }

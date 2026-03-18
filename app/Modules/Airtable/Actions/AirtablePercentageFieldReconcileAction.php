@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtablePercentageFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtablePercentageField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,20 +13,15 @@ class AirtablePercentageFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtablePercentageField
+    public function handle(AirtablePercentageFieldResourceResponseDto $percentageFieldResourceResponseDto, AirtableField $field):  AirtablePercentageField
     {
-        Log::info('executing AirtablePercentageFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtablePercentageFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtablePercentageFieldReconcileAction', ['percentageFieldResourceResponseDto' => $percentageFieldResourceResponseDto, 'field' => $field]);
 
         $percentageField = $field->percentageField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->toArray(),
+            $percentageFieldResourceResponseDto->options->toArray(),
         );
-        Log::notice('created or updated AirtablePercentageField', ['percentageField' => $percentageField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtablePercentageField', ['percentageField' => $percentageField, 'percentageFieldResourceResponseDto' => $percentageFieldResourceResponseDto]);
 
         return $percentageField;
     }

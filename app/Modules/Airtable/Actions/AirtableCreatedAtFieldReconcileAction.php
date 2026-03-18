@@ -2,9 +2,7 @@
 
 namespace App\Modules\Airtable\Actions;
 
-use App\Modules\Airtable\Dtos\AirtableCreatedAtFieldOptionsDateTimeResultResourceResponseDto;
 use App\Modules\Airtable\Dtos\AirtableCreatedAtFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableCreatedAtField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -22,22 +20,17 @@ class AirtableCreatedAtFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableCreatedAtField
+    public function handle(AirtableCreatedAtFieldResourceResponseDto $createdAtFieldResourceResponseDto, AirtableField $field):  AirtableCreatedAtField
     {
-        Log::info('executing AirtableCreatedAtFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableCreatedAtFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableCreatedAtFieldReconcileAction', ['createdAtFieldResourceResponseDto' => $createdAtFieldResourceResponseDto, 'field' => $field]);
 
         $createdAtField = $field->createdAtField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->result->options->dateFormat->only('format')->toArray(),
+            $createdAtFieldResourceResponseDto->options->result->options->dateFormat->only('format')->toArray(),
         );
-        Log::notice('created or updated AirtableCreatedAtField', ['createdAtField' => $createdAtField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableCreatedAtField', ['createdAtField' => $createdAtField, 'createdAtFieldResourceResponseDto' => $createdAtFieldResourceResponseDto]);
 
-        $this->dateTimeCreatedAtFieldAllReconcileAction->handle($fieldResourceResponseDto->options->result, $createdAtField);
+        $this->dateTimeCreatedAtFieldAllReconcileAction->handle($createdAtFieldResourceResponseDto->options->result, $createdAtField);
 
         return $createdAtField;
     }

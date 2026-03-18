@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableLookupFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableLookupField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,20 +13,15 @@ class AirtableLookupFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableLookupField
+    public function handle(AirtableLookupFieldResourceResponseDto $lookupFieldResourceResponseDto, AirtableField $field):  AirtableLookupField
     {
-        Log::info('executing AirtableLookupFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableLookupFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableLookupFieldReconcileAction', ['lookupFieldResourceResponseDto' => $lookupFieldResourceResponseDto, 'field' => $field]);
 
         $lookupField = $field->lookupField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->toArray(),
+            $lookupFieldResourceResponseDto->options->toArray(),
         );
-        Log::notice('created or updated AirtableLookupField', ['lookupField' => $lookupField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableLookupField', ['lookupField' => $lookupField, 'lookupFieldResourceResponseDto' => $lookupFieldResourceResponseDto]);
 
         return $lookupField;
     }

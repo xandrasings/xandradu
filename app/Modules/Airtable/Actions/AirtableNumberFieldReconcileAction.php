@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableNumberFieldResourceResponseDto;
-use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableNumberField;
 use App\Modules\Airtable\Models\AirtableField;
 use Exception;
@@ -14,20 +13,15 @@ class AirtableNumberFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableFieldResourceResponseDto $fieldResourceResponseDto, AirtableField $field):  AirtableNumberField
+    public function handle(AirtableNumberFieldResourceResponseDto $numberFieldResourceResponseDto, AirtableField $field):  AirtableNumberField
     {
-        Log::info('executing AirtableNumberFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
-
-        if (!($fieldResourceResponseDto instanceof AirtableNumberFieldResourceResponseDto)) {
-            Log::error('Wrong field type encountered.', ['fieldResourceResponseDto' => $fieldResourceResponseDto]);
-            throw new Exception('Wrong field type encountered.');
-        }
+        Log::info('executing AirtableNumberFieldReconcileAction', ['numberFieldResourceResponseDto' => $numberFieldResourceResponseDto, 'field' => $field]);
 
         $numberField = $field->numberField()->updateOrCreate(
             [],
-            $fieldResourceResponseDto->options->toArray(),
+            $numberFieldResourceResponseDto->options->toArray(),
         );
-        Log::notice('created or updated AirtableNumberField', ['numberField' => $numberField, 'fieldResourceResponseDto' => $fieldResourceResponseDto]);
+        Log::notice('created or updated AirtableNumberField', ['numberField' => $numberField, 'numberFieldResourceResponseDto' => $numberFieldResourceResponseDto]);
 
         return $numberField;
     }
