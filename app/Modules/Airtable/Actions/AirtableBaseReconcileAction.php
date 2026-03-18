@@ -14,7 +14,7 @@ class AirtableBaseReconcileAction
      */
     public function handle(AirtableBaseResourceResponseDto $baseResourceResponseDto): AirtableBase
     {
-        Log::info('executing AirtableBaseResourceResponseDto', ['baseResourceResponseDto' => $baseResourceResponseDto]);
+        Log::info('executing AirtableBaseReconcileAction', ['baseResourceResponseDto' => $baseResourceResponseDto]);
 
         $base = AirtableBase::updateOrCreate(
             $baseResourceResponseDto->only('id')->toArray(),

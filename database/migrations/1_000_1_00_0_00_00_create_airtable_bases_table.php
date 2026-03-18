@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('airtable_bases', function (Blueprint $table) {
             $table->id();
+            $table->unsignedSmallInteger('rank');
             $table->string('external_id', 32)->nullable();
             $table->string('name', 32);
             $table->timestamps();

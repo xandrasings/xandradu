@@ -26,6 +26,10 @@ class AirtableBaseAllReconcileAction
     {
         Log::info('executing AirtableBaseAllReconcileAction');
 
+        $baseResourceResponseDtos->each(function (AirtableBaseResourceResponseDto $baseResourceResponseDto, int $key) {
+            $baseResourceResponseDto->rank = $key + 1;
+        });
+
         $bases = $baseResourceResponseDtos->map(function (AirtableBaseResourceResponseDto $baseResourceResponseDto) {
             return $this->baseReconcileAction->handle($baseResourceResponseDto);
         });

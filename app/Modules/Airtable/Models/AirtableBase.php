@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
+ * @property int $rank
  * @property string|null $external_id
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBase whereExternalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBase whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBase whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBase whereRank($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBase whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBase withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableBase withoutTrashed()
@@ -34,6 +36,7 @@ class AirtableBase extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'rank',
         'external_id',
         'name',
     ];
