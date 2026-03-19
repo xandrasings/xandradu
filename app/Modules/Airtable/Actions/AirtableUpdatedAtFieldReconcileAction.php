@@ -15,11 +15,15 @@ class AirtableUpdatedAtFieldReconcileAction
 
     protected AirtableDateTimeUpdatedAtFieldReconcileAction $dateTimeUpdatedAtFieldReconcileAction;
 
+    protected AirtableUpdatedAtFieldFieldAllReconcileAction $updatedAtFieldFieldAllReconcileAction;
+
     public function __construct()
     {
         $this->dateUpdatedAtFieldReconcileAction = app(AirtableDateUpdatedAtFieldReconcileAction::class);
 
         $this->dateTimeUpdatedAtFieldReconcileAction = app(AirtableDateTimeUpdatedAtFieldReconcileAction::class);
+
+        $this->updatedAtFieldFieldAllReconcileAction = app(AirtableUpdatedAtFieldFieldAllReconcileAction::class);
     }
 
     /**
@@ -44,6 +48,8 @@ class AirtableUpdatedAtFieldReconcileAction
                 AirtableDateTimeTypeEnum::DATE_TIME => $this->dateTimeUpdatedAtFieldReconcileAction->handle($updatedAtFieldResourceResponseDto->options->result, $updatedAtField),
             };
         }
+
+        $this->updatedAtFieldFieldAllReconcileAction->handle($updatedAtFieldResourceResponseDto->options->referencedFieldIds, $updatedAtField);
 
         return $updatedAtField;
     }
