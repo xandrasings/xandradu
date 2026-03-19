@@ -4,6 +4,7 @@ namespace App\Modules\Airtable\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableAiTextField|null $aiTextField
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Airtable\Models\AirtableAiTextFieldFieldPromptComponent> $aiTextFieldFieldPromptComponents
+ * @property-read int|null $ai_text_field_field_prompt_components_count
  * @property-read \App\Modules\Airtable\Models\AirtableAttachmentsField|null $attachmentsField
  * @property-read \App\Modules\Airtable\Models\AirtableAutoNumberField|null $autoNumberField
  * @property-read \App\Modules\Airtable\Models\AirtableBarcodeField|null $barcodeField
@@ -50,6 +53,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Modules\Airtable\Models\AirtableSyncSourceField|null $syncSourceField
  * @property-read \App\Modules\Airtable\Models\AirtableTable|null $table
  * @property-read \App\Modules\Airtable\Models\AirtableUpdatedAtField|null $updatedAtField
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Airtable\Models\AirtableUpdatedAtFieldField> $updatedAtFieldField
+ * @property-read int|null $updated_at_field_field_count
  * @property-read \App\Modules\Airtable\Models\AirtableUpdatedByField|null $updatedByField
  * @property-read \App\Modules\Airtable\Models\AirtableUrlField|null $urlField
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField newModelQuery()
@@ -250,5 +255,15 @@ class AirtableField extends Model
     public function urlField(): HasOne
     {
         return $this->hasOne(AirtableUrlField::class, 'field_id');
+    }
+
+    public function aiTextFieldFieldPromptComponents(): HasMany
+    {
+        return $this->hasMany(AirtableAiTextFieldFieldPromptComponent::class, 'field_id');
+    }
+
+    public function updatedAtFieldField(): HasMany
+    {
+        return $this->hasMany(AirtableUpdatedAtFieldField::class, 'field_id');
     }
 }

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
  * @property-read \App\Modules\Airtable\Models\AirtableAiTextFieldPromptComponent|null $promptComponent
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldFieldPromptComponent newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldFieldPromptComponent newQuery()
@@ -39,5 +40,10 @@ class AirtableAiTextFieldFieldPromptComponent extends Model
     public function promptComponent(): BelongsTo
     {
         return $this->belongsTo(AirtableAiTextFieldPromptComponent::class, 'prompt_component_id');
+    }
+
+    public function field(): BelongsTo
+    {
+        return $this->belongsTo(AirtableField::class, 'field_id');
     }
 }

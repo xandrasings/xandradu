@@ -11,9 +11,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property int|null $field_id
  * @property string $format
+ * @property string $type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Modules\Airtable\Models\AirtableDateCreatedAtField|null $dateCreatedAtField
  * @property-read \App\Modules\Airtable\Models\AirtableDateTimeCreatedAtField|null $dateTimeCreatedAtField
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField newModelQuery()
@@ -25,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereFieldId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereFormat($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCreatedAtField withoutTrashed()

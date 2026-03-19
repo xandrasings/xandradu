@@ -18,14 +18,13 @@ class AirtableAiTextFieldFieldPromptComponentReconcileAction
     {
         Log::info('executing AirtableAiTextFieldFieldPromptComponentReconcileAction', ['aiTextFieldOptionsFieldPromptComponentResourceResponseDto' => $aiTextFieldOptionsFieldPromptComponentResourceResponseDto, 'aiTextFieldPromptComponent' => $aiTextFieldPromptComponent]);
 
-        $fieldExternalId = $aiTextFieldOptionsFieldPromptComponentResourceResponseDto->fieldId;
+        $fieldId = $aiTextFieldOptionsFieldPromptComponentResourceResponseDto->fieldId;
 
-        $field = AirtableField::where('external_id', $fieldExternalId)->first();
+        $field = AirtableField::where('external_id', $fieldId)->first();
         if (is_null($field)) {
-            Log::warning('Airtable Ai Text Field references an unrecognized field.');
+            Log::warning('AirtableAiTextField references an unrecognized field.');
         }
 
-        Log::notice('creating or updating AirtableAiTextFieldFieldPromptComponent', ['aiTextFieldPromptComponent' => $aiTextFieldPromptComponent, 'aiTextFieldOptionsFieldPromptComponentResourceResponseDto' => $aiTextFieldOptionsFieldPromptComponentResourceResponseDto, 'fieldExternalId' => $fieldExternalId, 'field'=>$field]);
         $aiTextFieldFieldPromptComponent = $aiTextFieldPromptComponent->fieldPromptComponent()->updateOrCreate(
             [],
             ['field_id' => is_null($field) ? null : $field->id],
