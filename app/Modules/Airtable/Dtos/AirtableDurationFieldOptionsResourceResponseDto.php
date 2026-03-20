@@ -16,5 +16,4 @@ class AirtableDurationFieldOptionsResourceResponseDto extends Data
     #[MapOutputName('format')]
     #[WithCast(EnumCast::class, type: AirtableDurationFormatEnum::class)]
     public AirtableDurationFormatEnum $durationFormat;
-
 }

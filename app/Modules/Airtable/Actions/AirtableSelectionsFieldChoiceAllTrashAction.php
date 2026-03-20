@@ -17,7 +17,8 @@ class AirtableSelectionsFieldChoiceAllTrashAction
     }
 
     /**
-     * @param Collection<AirtableSelectionsFieldChoice> $selectionsFieldChoices
+     * @param  Collection<AirtableSelectionsFieldChoice>  $selectionsFieldChoices
+     *
      * @throws Exception
      */
     public function handle(Collection $selectionsFieldChoices): void

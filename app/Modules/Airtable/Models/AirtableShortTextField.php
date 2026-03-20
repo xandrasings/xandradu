@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField onlyTrashed()
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableShortTextField extends Model

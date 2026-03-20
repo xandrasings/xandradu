@@ -3,8 +3,8 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableUpdatedAtFieldOptionsDateTimeResultResourceResponseDto;
-use App\Modules\Airtable\Models\AirtableUpdatedAtField;
 use App\Modules\Airtable\Models\AirtableDateTimeUpdatedAtField;
+use App\Modules\Airtable\Models\AirtableUpdatedAtField;
 use Exception;
 use Illuminate\Support\Facades\Log;
 

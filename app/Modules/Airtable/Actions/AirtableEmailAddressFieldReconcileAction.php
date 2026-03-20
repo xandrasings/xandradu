@@ -13,7 +13,7 @@ class AirtableEmailAddressFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableEmailAddressFieldResourceResponseDto $emailAddressFieldResourceResponseDto, AirtableField $field):  AirtableEmailAddressField
+    public function handle(AirtableEmailAddressFieldResourceResponseDto $emailAddressFieldResourceResponseDto, AirtableField $field): AirtableEmailAddressField
     {
         Log::info('executing AirtableEmailAddressFieldReconcileAction', ['emailAddressFieldResourceResponseDto' => $emailAddressFieldResourceResponseDto, 'field' => $field]);
 

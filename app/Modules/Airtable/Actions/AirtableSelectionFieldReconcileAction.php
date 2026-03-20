@@ -3,8 +3,8 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableSelectionFieldResourceResponseDto;
-use App\Modules\Airtable\Models\AirtableSelectionField;
 use App\Modules\Airtable\Models\AirtableField;
+use App\Modules\Airtable\Models\AirtableSelectionField;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -20,7 +20,7 @@ class AirtableSelectionFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableSelectionFieldResourceResponseDto $selectionFieldResourceResponseDto, AirtableField $field):  AirtableSelectionField
+    public function handle(AirtableSelectionFieldResourceResponseDto $selectionFieldResourceResponseDto, AirtableField $field): AirtableSelectionField
     {
         Log::info('executing AirtableSelectionFieldReconcileAction', ['selectionFieldResourceResponseDto' => $selectionFieldResourceResponseDto, 'field' => $field]);
 

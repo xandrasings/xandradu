@@ -7,6 +7,4 @@ use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class AirtableDateAndTimeFieldOptionsResourceResponseDto extends Data
-{
-}
+class AirtableDateAndTimeFieldOptionsResourceResponseDto extends Data {}

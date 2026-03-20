@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Modules\Airtable\Dtos;
+
 use App\Modules\Airtable\Enums\AirtableTimeFormatEnum;
 use App\Modules\Airtable\enums\AirtableTimeFormatNameEnum;
 use Spatie\LaravelData\Attributes\MapName;

@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableTableAllSyncDownAction
 {
-
     protected AirtableClient $client;
 
     protected AirtableTableAllReconcileAction $tableAllReconcileAction;

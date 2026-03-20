@@ -2,9 +2,6 @@
 
 namespace App\Modules\Airtable\Actions;
 
-
-
-
 use App\Modules\Airtable\Clients\AirtableClient;
 use App\Modules\Airtable\Dtos\AirtableBaseCreateRequestDto;
 use App\Modules\Airtable\Models\AirtableBase;
@@ -13,7 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableBaseCreateAction
 {
-
     protected AirtableClient $client;
 
     public function __construct()

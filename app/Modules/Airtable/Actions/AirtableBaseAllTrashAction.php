@@ -17,7 +17,8 @@ class AirtableBaseAllTrashAction
     }
 
     /**
-     * @param Collection<AirtableBase> $bases
+     * @param  Collection<AirtableBase>  $bases
+     *
      * @throws Exception
      */
     public function handle(Collection $bases): void

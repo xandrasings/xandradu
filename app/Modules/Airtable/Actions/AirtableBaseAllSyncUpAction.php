@@ -23,7 +23,7 @@ class AirtableBaseAllSyncUpAction
         Log::info('executing AirtableBaseSyncUpAllAction');
 
         AirtableBase::withTrashed()->get()
-            ->each( function (AirtableBase $base) {
+            ->each(function (AirtableBase $base) {
                 $this->baseManifestAction->handle($base);
             });
     }

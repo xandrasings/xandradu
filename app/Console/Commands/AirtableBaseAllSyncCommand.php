@@ -27,7 +27,7 @@ class AirtableBaseAllSyncCommand extends Command
      */
     public function handle()
     {
-        dispatch(new AirtableBaseAllSyncJob());
+        dispatch(new AirtableBaseAllSyncJob);
 
         print_r("CONSOLE COMMAND COMPLETED: $this->signature\n");
         Log::notice("CONSOLE COMMAND COMPLETED: $this->signature");

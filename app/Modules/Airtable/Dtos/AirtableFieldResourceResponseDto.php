@@ -47,11 +47,11 @@ abstract class AirtableFieldResourceResponseDto extends Data implements Property
             AirtableFieldTypeEnum::CREATED_AT => AirtableCreatedAtFieldResourceResponseDto::class,
             AirtableFieldTypeEnum::CREATED_BY => AirtableCreatedByFieldResourceResponseDto::class,
             AirtableFieldTypeEnum::CURRENCY => AirtableCurrencyFieldResourceResponseDto::class,
-            AirtableFieldTypeEnum::DATE  => AirtableDateFieldResourceResponseDto::class,
+            AirtableFieldTypeEnum::DATE => AirtableDateFieldResourceResponseDto::class,
             AirtableFieldTypeEnum::DATE_AND_TIME => AirtableDateAndTimeFieldResourceResponseDto::class,
             AirtableFieldTypeEnum::DURATION => AirtableDurationFieldResourceResponseDto::class,
             AirtableFieldTypeEnum::EMAIL_ADDRESS => AirtableEmailAddressFieldResourceResponseDto::class,
-            AirtableFieldTypeEnum::FORMULA  => AirtableFormulaFieldResourceResponseDto::class,
+            AirtableFieldTypeEnum::FORMULA => AirtableFormulaFieldResourceResponseDto::class,
             AirtableFieldTypeEnum::LONG_TEXT => AirtableLongTextFieldResourceResponseDto::class,
             AirtableFieldTypeEnum::LOOKUP => AirtableLookupFieldResourceResponseDto::class,
             AirtableFieldTypeEnum::NUMBER => AirtableNumberFieldResourceResponseDto::class,
@@ -66,7 +66,7 @@ abstract class AirtableFieldResourceResponseDto extends Data implements Property
             AirtableFieldTypeEnum::SHORT_TEXT => AirtableShortTextFieldResourceResponseDto::class,
             AirtableFieldTypeEnum::SYNC_SOURCE => AirtableSyncSourceFieldResourceResponseDto::class,
             AirtableFieldTypeEnum::UPDATED_AT => AirtableUpdatedAtFieldResourceResponseDto::class,
-            AirtableFieldTypeEnum::UPDATED_BY  => AirtableUpdatedByFieldResourceResponseDto::class,
+            AirtableFieldTypeEnum::UPDATED_BY => AirtableUpdatedByFieldResourceResponseDto::class,
             AirtableFieldTypeEnum::URL => AirtableUrlFieldResourceResponseDto::class
         };
     }

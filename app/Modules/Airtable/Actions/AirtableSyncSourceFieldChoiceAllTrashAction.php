@@ -17,7 +17,8 @@ class AirtableSyncSourceFieldChoiceAllTrashAction
     }
 
     /**
-     * @param Collection<AirtableSyncSourceFieldChoice> $syncSourceFieldChoices
+     * @param  Collection<AirtableSyncSourceFieldChoice>  $syncSourceFieldChoices
+     *
      * @throws Exception
      */
     public function handle(Collection $syncSourceFieldChoices): void

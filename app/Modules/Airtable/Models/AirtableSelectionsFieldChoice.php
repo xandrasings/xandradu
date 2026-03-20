@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableSelectionsField|null $selectionsField
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice onlyTrashed()
@@ -32,6 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableSelectionsFieldChoice extends Model

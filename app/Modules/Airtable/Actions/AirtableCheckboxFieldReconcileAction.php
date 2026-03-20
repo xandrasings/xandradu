@@ -13,7 +13,7 @@ class AirtableCheckboxFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableCheckboxFieldResourceResponseDto $checkboxFieldResourceResponseDto, AirtableField $field):  AirtableCheckboxField
+    public function handle(AirtableCheckboxFieldResourceResponseDto $checkboxFieldResourceResponseDto, AirtableField $field): AirtableCheckboxField
     {
         Log::info('executing AirtableCheckboxFieldReconcileAction', ['checkboxFieldResourceResponseDto' => $checkboxFieldResourceResponseDto, 'field' => $field]);
 

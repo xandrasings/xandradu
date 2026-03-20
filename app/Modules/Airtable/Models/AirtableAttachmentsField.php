@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAttachmentsField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAttachmentsField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAttachmentsField onlyTrashed()
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAttachmentsField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAttachmentsField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAttachmentsField withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableAttachmentsField extends Model

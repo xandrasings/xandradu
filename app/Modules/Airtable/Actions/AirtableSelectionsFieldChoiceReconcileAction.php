@@ -25,5 +25,4 @@ class AirtableSelectionsFieldChoiceReconcileAction
 
         return $selectionsFieldChoice;
     }
-
 }

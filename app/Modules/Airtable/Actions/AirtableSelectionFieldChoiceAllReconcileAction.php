@@ -23,8 +23,9 @@ class AirtableSelectionFieldChoiceAllReconcileAction
     }
 
     /**
-     * @param Collection<AirtableSelectionFieldOptionsChoiceResourceResponseDto> $selectionFieldOptionsChoiceResourceResponseDtos
+     * @param  Collection<AirtableSelectionFieldOptionsChoiceResourceResponseDto>  $selectionFieldOptionsChoiceResourceResponseDtos
      * @return Collection<AirtableSelectionFieldChoice>
+     *
      * @throws Exception
      */
     public function handle(Collection $selectionFieldOptionsChoiceResourceResponseDtos, AirtableSelectionField $selectionField): Collection

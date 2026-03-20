@@ -3,8 +3,8 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableRatingFieldResourceResponseDto;
-use App\Modules\Airtable\Models\AirtableRatingField;
 use App\Modules\Airtable\Models\AirtableField;
+use App\Modules\Airtable\Models\AirtableRatingField;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -13,7 +13,7 @@ class AirtableRatingFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableRatingFieldResourceResponseDto $ratingFieldResourceResponseDto, AirtableField $field):  AirtableRatingField
+    public function handle(AirtableRatingFieldResourceResponseDto $ratingFieldResourceResponseDto, AirtableField $field): AirtableRatingField
     {
         Log::info('executing AirtableRatingFieldReconcileAction', ['ratingFieldResourceResponseDto' => $ratingFieldResourceResponseDto, 'field' => $field]);
 

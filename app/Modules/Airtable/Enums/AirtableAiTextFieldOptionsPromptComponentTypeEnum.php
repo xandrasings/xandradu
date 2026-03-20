@@ -19,14 +19,14 @@ enum AirtableAiTextFieldOptionsPromptComponentTypeEnum: string
      */
     public function validate(AirtableAiTextFieldOptionsPromptComponentResourceResponseDto $aiTextFieldOptionsPromptComponentResourceResponseDto): void
     {
-        $isValid = match($this) {
+        $isValid = match ($this) {
             self::FIELD => $aiTextFieldOptionsPromptComponentResourceResponseDto instanceof AirtableAiTextFieldOptionsFieldPromptComponentResourceResponseDto,
             self::TEXT => $aiTextFieldOptionsPromptComponentResourceResponseDto instanceof AirtableAiTextFieldOptionsTextPromptComponentResourceResponseDto,
         };
 
-        if (!$isValid) {
-            Log::error("AirtableAiTextFieldOptionsPromptComponentResourceResponseDto type did not match subclass.", ['aiTextFieldOptionsPromptComponentResourceResponseDto' => $aiTextFieldOptionsPromptComponentResourceResponseDto, 'type' => $this]);
-            throw new Exception("AirtableAiTextFieldOptionsPromptComponentResourceResponseDto type did not match subclass.");
+        if (! $isValid) {
+            Log::error('AirtableAiTextFieldOptionsPromptComponentResourceResponseDto type did not match subclass.', ['aiTextFieldOptionsPromptComponentResourceResponseDto' => $aiTextFieldOptionsPromptComponentResourceResponseDto, 'type' => $this]);
+            throw new Exception('AirtableAiTextFieldOptionsPromptComponentResourceResponseDto type did not match subclass.');
         }
     }
 }

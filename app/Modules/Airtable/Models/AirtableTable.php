@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Modules\Airtable\Models\AirtableBase|null $base
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Airtable\Models\AirtableField> $fields
  * @property-read int|null $fields_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableTable newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableTable newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableTable onlyTrashed()
@@ -33,6 +34,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableTable whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableTable withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableTable withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableTable extends Model

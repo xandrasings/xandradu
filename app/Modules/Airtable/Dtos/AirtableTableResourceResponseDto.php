@@ -3,12 +3,12 @@
 namespace App\Modules\Airtable\Dtos;
 
 use App\Transformers\LengthyStringTransformer;
+use Illuminate\Support\Collection;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Attributes\WithTransformer;
 use Spatie\LaravelData\Data;
-use Illuminate\Support\Collection;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
@@ -27,7 +27,7 @@ class AirtableTableResourceResponseDto extends Data
     #[DataCollectionOf(AirtableFieldResourceResponseDto::class)]
     public Collection $fields;
 
-//        #[DataCollectionOf(AirtableViewResourceResponseDto::class)] TODO
-//        public Collection $views,
+    //        #[DataCollectionOf(AirtableViewResourceResponseDto::class)] TODO
+    //        public Collection $views,
 
 }

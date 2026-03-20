@@ -2,11 +2,15 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -16,64 +20,66 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $name
  * @property string|null $description
  * @property string $type
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Modules\Airtable\Models\AirtableAiTextField|null $aiTextField
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Airtable\Models\AirtableAiTextFieldFieldPromptComponent> $aiTextFieldFieldPromptComponents
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read AirtableAiTextField|null $aiTextField
+ * @property-read Collection<int, AirtableAiTextFieldFieldPromptComponent> $aiTextFieldFieldPromptComponents
  * @property-read int|null $ai_text_field_field_prompt_components_count
- * @property-read \App\Modules\Airtable\Models\AirtableAttachmentsField|null $attachmentsField
- * @property-read \App\Modules\Airtable\Models\AirtableAutoNumberField|null $autoNumberField
- * @property-read \App\Modules\Airtable\Models\AirtableBarcodeField|null $barcodeField
- * @property-read \App\Modules\Airtable\Models\AirtableButtonField|null $buttonField
- * @property-read \App\Modules\Airtable\Models\AirtableCheckboxField|null $checkboxField
- * @property-read \App\Modules\Airtable\Models\AirtableCollaboratorField|null $collaboratorField
- * @property-read \App\Modules\Airtable\Models\AirtableCollaboratorsField|null $collaboratorsField
- * @property-read \App\Modules\Airtable\Models\AirtableCountField|null $countField
- * @property-read \App\Modules\Airtable\Models\AirtableCreatedAtField|null $createdAtField
- * @property-read \App\Modules\Airtable\Models\AirtableCreatedByField|null $createdByField
- * @property-read \App\Modules\Airtable\Models\AirtableCurrencyField|null $currencyField
- * @property-read \App\Modules\Airtable\Models\AirtableDateAndTimeField|null $dateAndTimeField
- * @property-read \App\Modules\Airtable\Models\AirtableDateField|null $dateField
- * @property-read \App\Modules\Airtable\Models\AirtableDurationField|null $durationField
- * @property-read \App\Modules\Airtable\Models\AirtableEmailAddressField|null $emailAddressField
- * @property-read \App\Modules\Airtable\Models\AirtableFormulaField|null $formulaField
- * @property-read \App\Modules\Airtable\Models\AirtableLongTextField|null $longTextField
- * @property-read \App\Modules\Airtable\Models\AirtableLookupField|null $lookupField
- * @property-read \App\Modules\Airtable\Models\AirtableNumberField|null $numberField
- * @property-read \App\Modules\Airtable\Models\AirtablePercentageField|null $percentageField
- * @property-read \App\Modules\Airtable\Models\AirtablePhoneNumberField|null $phoneNumberField
- * @property-read \App\Modules\Airtable\Models\AirtableRatingField|null $ratingField
- * @property-read \App\Modules\Airtable\Models\AirtableRecordLinksField|null $recordLinksField
- * @property-read \App\Modules\Airtable\Models\AirtableRichTextField|null $richTextField
- * @property-read \App\Modules\Airtable\Models\AirtableRollupField|null $rollupField
- * @property-read \App\Modules\Airtable\Models\AirtableSelectionField|null $selectionField
- * @property-read \App\Modules\Airtable\Models\AirtableSelectionsField|null $selectionsField
- * @property-read \App\Modules\Airtable\Models\AirtableShortTextField|null $shortTextField
- * @property-read \App\Modules\Airtable\Models\AirtableSyncSourceField|null $syncSourceField
- * @property-read \App\Modules\Airtable\Models\AirtableTable|null $table
- * @property-read \App\Modules\Airtable\Models\AirtableUpdatedAtField|null $updatedAtField
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Airtable\Models\AirtableUpdatedAtFieldField> $updatedAtFieldField
+ * @property-read AirtableAttachmentsField|null $attachmentsField
+ * @property-read AirtableAutoNumberField|null $autoNumberField
+ * @property-read AirtableBarcodeField|null $barcodeField
+ * @property-read AirtableButtonField|null $buttonField
+ * @property-read AirtableCheckboxField|null $checkboxField
+ * @property-read AirtableCollaboratorField|null $collaboratorField
+ * @property-read AirtableCollaboratorsField|null $collaboratorsField
+ * @property-read AirtableCountField|null $countField
+ * @property-read AirtableCreatedAtField|null $createdAtField
+ * @property-read AirtableCreatedByField|null $createdByField
+ * @property-read AirtableCurrencyField|null $currencyField
+ * @property-read AirtableDateAndTimeField|null $dateAndTimeField
+ * @property-read AirtableDateField|null $dateField
+ * @property-read AirtableDurationField|null $durationField
+ * @property-read AirtableEmailAddressField|null $emailAddressField
+ * @property-read AirtableFormulaField|null $formulaField
+ * @property-read AirtableLongTextField|null $longTextField
+ * @property-read AirtableLookupField|null $lookupField
+ * @property-read AirtableNumberField|null $numberField
+ * @property-read AirtablePercentageField|null $percentageField
+ * @property-read AirtablePhoneNumberField|null $phoneNumberField
+ * @property-read AirtableRatingField|null $ratingField
+ * @property-read AirtableRecordLinksField|null $recordLinksField
+ * @property-read AirtableRichTextField|null $richTextField
+ * @property-read AirtableRollupField|null $rollupField
+ * @property-read AirtableSelectionField|null $selectionField
+ * @property-read AirtableSelectionsField|null $selectionsField
+ * @property-read AirtableShortTextField|null $shortTextField
+ * @property-read AirtableSyncSourceField|null $syncSourceField
+ * @property-read AirtableTable|null $table
+ * @property-read AirtableUpdatedAtField|null $updatedAtField
+ * @property-read Collection<int, AirtableUpdatedAtFieldField> $updatedAtFieldField
  * @property-read int|null $updated_at_field_field_count
- * @property-read \App\Modules\Airtable\Models\AirtableUpdatedByField|null $updatedByField
- * @property-read \App\Modules\Airtable\Models\AirtableUrlField|null $urlField
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereExternalId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereRank($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereTableId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableField withoutTrashed()
- * @mixin \Eloquent
+ * @property-read AirtableUpdatedByField|null $updatedByField
+ * @property-read AirtableUrlField|null $urlField
+ *
+ * @method static Builder<static>|AirtableField newModelQuery()
+ * @method static Builder<static>|AirtableField newQuery()
+ * @method static Builder<static>|AirtableField onlyTrashed()
+ * @method static Builder<static>|AirtableField query()
+ * @method static Builder<static>|AirtableField whereCreatedAt($value)
+ * @method static Builder<static>|AirtableField whereDeletedAt($value)
+ * @method static Builder<static>|AirtableField whereDescription($value)
+ * @method static Builder<static>|AirtableField whereExternalId($value)
+ * @method static Builder<static>|AirtableField whereId($value)
+ * @method static Builder<static>|AirtableField whereName($value)
+ * @method static Builder<static>|AirtableField whereRank($value)
+ * @method static Builder<static>|AirtableField whereTableId($value)
+ * @method static Builder<static>|AirtableField whereType($value)
+ * @method static Builder<static>|AirtableField whereUpdatedAt($value)
+ * @method static Builder<static>|AirtableField withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|AirtableField withoutTrashed()
+ *
+ * @mixin Eloquent
  */
 class AirtableField extends Model
 {

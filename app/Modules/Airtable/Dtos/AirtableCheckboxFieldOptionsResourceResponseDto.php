@@ -2,8 +2,8 @@
 
 namespace App\Modules\Airtable\Dtos;
 
-use App\Modules\Airtable\Enums\AirtableLimitedColorEnum;
 use App\Modules\Airtable\Enums\AirtableCheckboxIconEnum;
+use App\Modules\Airtable\Enums\AirtableLimitedColorEnum;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\EnumCast;

@@ -13,7 +13,7 @@ class AirtableDateFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableDateFieldResourceResponseDto $dateFieldResourceResponseDto, AirtableField $field):  AirtableDateField
+    public function handle(AirtableDateFieldResourceResponseDto $dateFieldResourceResponseDto, AirtableField $field): AirtableDateField
     {
         Log::info('executing AirtableDateFieldReconcileAction', ['dateFieldResourceResponseDto' => $dateFieldResourceResponseDto, 'field' => $field]);
 

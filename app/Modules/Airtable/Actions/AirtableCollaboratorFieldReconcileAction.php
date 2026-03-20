@@ -13,7 +13,7 @@ class AirtableCollaboratorFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableCollaboratorFieldResourceResponseDto $collaboratorFieldResourceResponseDto, AirtableField $field):  AirtableCollaboratorField
+    public function handle(AirtableCollaboratorFieldResourceResponseDto $collaboratorFieldResourceResponseDto, AirtableField $field): AirtableCollaboratorField
     {
         Log::info('executing AirtableCollaboratorFieldReconcileAction', ['collaboratorFieldResourceResponseDto' => $collaboratorFieldResourceResponseDto, 'field' => $field]);
 

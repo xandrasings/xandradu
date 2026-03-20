@@ -3,8 +3,8 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableRichTextFieldResourceResponseDto;
-use App\Modules\Airtable\Models\AirtableRichTextField;
 use App\Modules\Airtable\Models\AirtableField;
+use App\Modules\Airtable\Models\AirtableRichTextField;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -13,7 +13,7 @@ class AirtableRichTextFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableRichTextFieldResourceResponseDto $richTextFieldResourceResponseDto, AirtableField $field):  AirtableRichTextField
+    public function handle(AirtableRichTextFieldResourceResponseDto $richTextFieldResourceResponseDto, AirtableField $field): AirtableRichTextField
     {
         Log::info('executing AirtableRichTextFieldReconcileAction', ['richTextFieldResourceResponseDto' => $richTextFieldResourceResponseDto, 'field' => $field]);
 

@@ -13,7 +13,7 @@ class AirtableDurationFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableDurationFieldResourceResponseDto $durationFieldResourceResponseDto, AirtableField $field):  AirtableDurationField
+    public function handle(AirtableDurationFieldResourceResponseDto $durationFieldResourceResponseDto, AirtableField $field): AirtableDurationField
     {
         Log::info('executing AirtableDurationFieldReconcileAction', ['durationFieldResourceResponseDto' => $durationFieldResourceResponseDto, 'field' => $field]);
 

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateAndTimeField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateAndTimeField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateAndTimeField onlyTrashed()
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateAndTimeField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateAndTimeField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateAndTimeField withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableDateAndTimeField extends Model

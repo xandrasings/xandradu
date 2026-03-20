@@ -22,6 +22,7 @@ class LengthyStringTransformer implements Transformer
 
         if (strlen($value) > $this->length) {
             Log::warning('Encountered a length too long to persist.', ['value' => $value, 'property' => $property]);
+
             return substr($value, 0, $this->length);
         }
 

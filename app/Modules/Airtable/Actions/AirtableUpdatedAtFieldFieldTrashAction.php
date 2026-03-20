@@ -2,7 +2,6 @@
 
 namespace App\Modules\Airtable\Actions;
 
-use App\Modules\Airtable\Models\AirtableAiTextFieldPromptComponent;
 use App\Modules\Airtable\Models\AirtableUpdatedAtFieldField;
 use Exception;
 use Illuminate\Support\Facades\Log;

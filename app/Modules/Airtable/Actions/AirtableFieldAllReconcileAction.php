@@ -3,7 +3,6 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableFieldResourceResponseDto;
-use App\Modules\Airtable\Models\AirtableBase;
 use App\Modules\Airtable\Models\AirtableField;
 use App\Modules\Airtable\Models\AirtableTable;
 use Exception;
@@ -24,8 +23,9 @@ class AirtableFieldAllReconcileAction
     }
 
     /**
-     * @param Collection<AirtableFieldResourceResponseDto> $fieldResourceResponseDtos
+     * @param  Collection<AirtableFieldResourceResponseDto>  $fieldResourceResponseDtos
      * @return Collection<AirtableField>
+     *
      * @throws Exception
      */
     public function handle(Collection $fieldResourceResponseDtos, AirtableTable $table): Collection

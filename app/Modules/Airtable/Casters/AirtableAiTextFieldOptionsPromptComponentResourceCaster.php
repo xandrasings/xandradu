@@ -19,8 +19,9 @@ class AirtableAiTextFieldOptionsPromptComponentResourceCaster implements Cast
             } else {
                 $fieldId = data_get($item, 'field.fieldId');
                 if (is_null($fieldId)) {
-                    Log::warning('Failed to find fieldId in payload.', ['aiTextFieldOptionsPromptComponentResourceResponseDto'=>$item]);
+                    Log::warning('Failed to find fieldId in payload.', ['aiTextFieldOptionsPromptComponentResourceResponseDto' => $item]);
                 }
+
                 return AirtableAiTextFieldOptionsFieldPromptComponentResourceResponseDto::from(['rank' => 0, 'fieldId' => $fieldId, 'type' => AirtableAiTextFieldOptionsPromptComponentTypeEnum::FIELD]);
             }
         });

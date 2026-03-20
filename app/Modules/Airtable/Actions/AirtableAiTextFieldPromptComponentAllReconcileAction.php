@@ -23,8 +23,9 @@ class AirtableAiTextFieldPromptComponentAllReconcileAction
     }
 
     /**
-     * @param Collection<AirtableAiTextFieldOptionsPromptComponentResourceResponseDto> $aiTextFieldOptionsPromptComponentResourceResponseDtos
+     * @param  Collection<AirtableAiTextFieldOptionsPromptComponentResourceResponseDto>  $aiTextFieldOptionsPromptComponentResourceResponseDtos
      * @return Collection<AirtableAiTextFieldPromptComponent>
+     *
      * @throws Exception
      */
     public function handle(Collection $aiTextFieldOptionsPromptComponentResourceResponseDtos, AirtableAiTextField $aiTextField): Collection
@@ -39,7 +40,7 @@ class AirtableAiTextFieldPromptComponentAllReconcileAction
             return $this->aiTextFieldOptionsPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextField);
         });
 
-        $trashableAiTextFieldPromptComponents =$aiTextField->promptComponents()
+        $trashableAiTextFieldPromptComponents = $aiTextField->promptComponents()
             ->whereNotIn('id', $aiTextFieldPromptComponents->pluck('id'))
             ->get();
         $this->aiTextFieldPromptComponentAllTrashAction->handle($trashableAiTextFieldPromptComponents);

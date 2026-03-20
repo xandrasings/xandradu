@@ -13,7 +13,7 @@ class AirtableCurrencyFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableCurrencyFieldResourceResponseDto $currencyFieldResourceResponseDto, AirtableField $field):  AirtableCurrencyField
+    public function handle(AirtableCurrencyFieldResourceResponseDto $currencyFieldResourceResponseDto, AirtableField $field): AirtableCurrencyField
     {
         Log::info('executing AirtableCurrencyFieldReconcileAction', ['currencyFieldResourceResponseDto' => $currencyFieldResourceResponseDto, 'field' => $field]);
 

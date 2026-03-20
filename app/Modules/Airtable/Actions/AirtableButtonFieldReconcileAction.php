@@ -13,7 +13,7 @@ class AirtableButtonFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableButtonFieldResourceResponseDto $buttonFieldResourceResponseDto, AirtableField $field):  AirtableButtonField
+    public function handle(AirtableButtonFieldResourceResponseDto $buttonFieldResourceResponseDto, AirtableField $field): AirtableButtonField
     {
         Log::info('executing AirtableButtonFieldReconcileAction', ['buttonFieldResourceResponseDto' => $buttonFieldResourceResponseDto, 'field' => $field]);
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Modules\Airtable\Dtos;
+
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Data;

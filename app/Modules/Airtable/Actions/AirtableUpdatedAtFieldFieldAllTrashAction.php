@@ -17,7 +17,8 @@ class AirtableUpdatedAtFieldFieldAllTrashAction
     }
 
     /**
-     * @param Collection<AirtableUpdatedAtFieldField> $updatedAtFieldFields
+     * @param  Collection<AirtableUpdatedAtFieldField>  $updatedAtFieldFields
+     *
      * @throws Exception
      */
     public function handle(Collection $updatedAtFieldFields): void

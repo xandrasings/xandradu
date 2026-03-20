@@ -39,7 +39,8 @@ use App\Modules\Airtable\Dtos\AirtableUrlFieldResourceResponseDto;
 use Illuminate\Support\Facades\Log;
 use phpDocumentor\Reflection\Exception;
 
-enum AirtableFieldTypeEnum: string {
+enum AirtableFieldTypeEnum: string
+{
     case AI_TEXT = 'aiText';
 
     case ATTACHMENTS = 'multipleAttachments';
@@ -111,7 +112,7 @@ enum AirtableFieldTypeEnum: string {
      */
     public function validate(AirtableFieldResourceResponseDto $fieldResourceResponseDto): void
     {
-        $isValid = match($this) {
+        $isValid = match ($this) {
             self::AI_TEXT => $fieldResourceResponseDto instanceof AirtableAiTextFieldResourceResponseDto,
             self::ATTACHMENTS => $fieldResourceResponseDto instanceof AirtableAttachmentsFieldResourceResponseDto,
             self::AUTO_NUMBER => $fieldResourceResponseDto instanceof AirtableAutoNumberFieldResourceResponseDto,
@@ -147,9 +148,9 @@ enum AirtableFieldTypeEnum: string {
             self::URL => $fieldResourceResponseDto instanceof AirtableUrlFieldResourceResponseDto,
         };
 
-        if (!$isValid) {
-            Log::error("AirtableFieldResourceResponseDto type did not match subclass.", ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'type' => $this]);
-            throw new Exception("AirtableFieldResourceResponseDto type did not match subclass.");
+        if (! $isValid) {
+            Log::error('AirtableFieldResourceResponseDto type did not match subclass.', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'type' => $this]);
+            throw new Exception('AirtableFieldResourceResponseDto type did not match subclass.');
         }
     }
 }

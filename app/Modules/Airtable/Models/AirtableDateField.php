@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateField onlyTrashed()
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDateField withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableDateField extends Model
@@ -33,7 +35,7 @@ class AirtableDateField extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'format'
+        'format',
     ];
 
     public function field(): BelongsTo

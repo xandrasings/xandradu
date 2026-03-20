@@ -13,9 +13,8 @@ class AirtableBaseCreateRequestDto extends Data
 
         public string $workspaceId,
 
-        public array  $tables,
-    )
-    {}
+        public array $tables,
+    ) {}
 
     public static function fromModel(AirtableBase $base): self
     {
@@ -25,9 +24,9 @@ class AirtableBaseCreateRequestDto extends Data
                 'name' => 'dummy table',
                 'fields' => [
                     ['name' => 'dummy primary field', 'type' => 'singleLineText'],
-                    ['name' => 'dummy secondary field', 'type' => 'singleLineText']
-                ]
-            ]
+                    ['name' => 'dummy secondary field', 'type' => 'singleLineText'],
+                ],
+            ],
         ];
 
         return new self($base->name, config('services.airtable.workspace_id'), $tables);

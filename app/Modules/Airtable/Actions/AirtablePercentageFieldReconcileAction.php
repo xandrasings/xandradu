@@ -3,8 +3,8 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtablePercentageFieldResourceResponseDto;
-use App\Modules\Airtable\Models\AirtablePercentageField;
 use App\Modules\Airtable\Models\AirtableField;
+use App\Modules\Airtable\Models\AirtablePercentageField;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -13,7 +13,7 @@ class AirtablePercentageFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtablePercentageFieldResourceResponseDto $percentageFieldResourceResponseDto, AirtableField $field):  AirtablePercentageField
+    public function handle(AirtablePercentageFieldResourceResponseDto $percentageFieldResourceResponseDto, AirtableField $field): AirtablePercentageField
     {
         Log::info('executing AirtablePercentageFieldReconcileAction', ['percentageFieldResourceResponseDto' => $percentageFieldResourceResponseDto, 'field' => $field]);
 

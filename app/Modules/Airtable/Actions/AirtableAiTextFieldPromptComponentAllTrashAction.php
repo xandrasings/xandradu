@@ -17,7 +17,8 @@ class AirtableAiTextFieldPromptComponentAllTrashAction
     }
 
     /**
-     * @param Collection<AirtableAiTextFieldPromptComponent> $aiTextFieldPromptComponents
+     * @param  Collection<AirtableAiTextFieldPromptComponent>  $aiTextFieldPromptComponents
+     *
      * @throws Exception
      */
     public function handle(Collection $aiTextFieldPromptComponents): void

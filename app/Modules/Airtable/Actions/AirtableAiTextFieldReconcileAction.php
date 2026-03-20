@@ -20,7 +20,7 @@ class AirtableAiTextFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableAiTextFieldResourceResponseDto $aiTextFieldResourceResponseDto, AirtableField $field):  AirtableAiTextField
+    public function handle(AirtableAiTextFieldResourceResponseDto $aiTextFieldResourceResponseDto, AirtableField $field): AirtableAiTextField
     {
         Log::info('executing AirtableAiTextFieldReconcileAction', ['aiTextFieldResourceResponseDto' => $aiTextFieldResourceResponseDto, 'field' => $field]);
 

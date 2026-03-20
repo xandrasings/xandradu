@@ -21,5 +21,4 @@ class HeartbeatJob implements ShouldQueue
     {
         $this->heartbeatAction->handle();
     }
-
 }

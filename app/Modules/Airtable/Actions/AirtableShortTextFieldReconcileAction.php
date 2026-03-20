@@ -13,7 +13,7 @@ class AirtableShortTextFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableShortTextFieldResourceResponseDto $shortTextFieldResourceResponseDto, AirtableField $field):  AirtableShortTextField
+    public function handle(AirtableShortTextFieldResourceResponseDto $shortTextFieldResourceResponseDto, AirtableField $field): AirtableShortTextField
     {
         Log::info('executing AirtableShortTextFieldReconcileAction', ['shortTextFieldResourceResponseDto' => $shortTextFieldResourceResponseDto, 'field' => $field]);
 

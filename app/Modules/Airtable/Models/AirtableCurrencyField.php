@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField onlyTrashed()
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableCurrencyField extends Model
@@ -36,7 +38,7 @@ class AirtableCurrencyField extends Model
 
     protected $fillable = [
         'precision',
-        'symbol'
+        'symbol',
     ];
 
     public function field(): BelongsTo

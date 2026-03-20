@@ -6,6 +6,4 @@ use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class AirtableBarcodeFieldResourceResponseDto extends AirtableFieldResourceResponseDto
-{
-}
+class AirtableBarcodeFieldResourceResponseDto extends AirtableFieldResourceResponseDto {}

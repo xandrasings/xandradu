@@ -23,6 +23,7 @@ class AirtableUpdatedAtFieldFieldReconcileAction
         $field = AirtableField::where('external_id', $fieldId)->first();
         if (is_null($field)) {
             Log::warning('AirtableUpdatedAtField references an unrecognized field.');
+
             return null;
         }
 

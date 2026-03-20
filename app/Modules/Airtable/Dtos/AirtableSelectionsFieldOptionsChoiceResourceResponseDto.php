@@ -15,6 +15,7 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 class AirtableSelectionsFieldOptionsChoiceResourceResponseDto extends AirtableFieldResourceResponseDto
 {
     public int $rank = 0;
+
     #[MapOutputName('external_id')]
     public string $id;
 

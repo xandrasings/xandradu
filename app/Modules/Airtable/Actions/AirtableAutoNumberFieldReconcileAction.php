@@ -13,7 +13,7 @@ class AirtableAutoNumberFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableAutoNumberFieldResourceResponseDto $autoNumberFieldResourceResponseDto, AirtableField $field):  AirtableAutoNumberField
+    public function handle(AirtableAutoNumberFieldResourceResponseDto $autoNumberFieldResourceResponseDto, AirtableField $field): AirtableAutoNumberField
     {
         Log::info('executing AirtableAutoNumberFieldReconcileAction', ['autoNumberFieldResourceResponseDto' => $autoNumberFieldResourceResponseDto, 'field' => $field]);
 

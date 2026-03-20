@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableLookupField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableLookupField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableLookupField onlyTrashed()
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableLookupField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableLookupField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableLookupField withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableLookupField extends Model

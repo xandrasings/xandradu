@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField onlyTrashed()
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtablePercentageField withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtablePercentageField extends Model
@@ -33,7 +35,7 @@ class AirtablePercentageField extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'precision'
+        'precision',
     ];
 
     public function field(): BelongsTo

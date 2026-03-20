@@ -23,8 +23,9 @@ class AirtableTableAllReconcileAction
     }
 
     /**
-     * @param Collection<AirtableTableResourceResponseDto> $tableResourceResponseDtos
+     * @param  Collection<AirtableTableResourceResponseDto>  $tableResourceResponseDtos
      * @return Collection<AirtableTable>
+     *
      * @throws Exception
      */
     public function handle(Collection $tableResourceResponseDtos, AirtableBase $base): Collection

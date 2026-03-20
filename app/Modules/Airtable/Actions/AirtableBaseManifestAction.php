@@ -22,7 +22,7 @@ class AirtableBaseManifestAction
     {
         Log::info('executing AirtableBaseManifestAction', ['base' => $base]);
 
-        switch($base) {
+        switch ($base) {
             case $base->trashed():
                 Log::warning('Unable to delete base - airtable lacks this public API functionality.', ['base' => $base]);
                 break;

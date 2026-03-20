@@ -3,8 +3,8 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableSyncSourceFieldResourceResponseDto;
-use App\Modules\Airtable\Models\AirtableSyncSourceField;
 use App\Modules\Airtable\Models\AirtableField;
+use App\Modules\Airtable\Models\AirtableSyncSourceField;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -20,7 +20,7 @@ class AirtableSyncSourceFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableSyncSourceFieldResourceResponseDto $syncSourceFieldResourceResponseDto, AirtableField $field):  AirtableSyncSourceField
+    public function handle(AirtableSyncSourceFieldResourceResponseDto $syncSourceFieldResourceResponseDto, AirtableField $field): AirtableSyncSourceField
     {
         Log::info('executing AirtableSyncSourceFieldReconcileAction', ['syncSourceFieldResourceResponseDto' => $syncSourceFieldResourceResponseDto, 'field' => $field]);
 

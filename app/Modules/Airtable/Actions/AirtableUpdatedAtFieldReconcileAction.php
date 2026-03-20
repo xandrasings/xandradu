@@ -4,8 +4,8 @@ namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableUpdatedAtFieldResourceResponseDto;
 use App\Modules\Airtable\Enums\AirtableDateTimeTypeEnum;
-use App\Modules\Airtable\Models\AirtableUpdatedAtField;
 use App\Modules\Airtable\Models\AirtableField;
+use App\Modules\Airtable\Models\AirtableUpdatedAtField;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -29,7 +29,7 @@ class AirtableUpdatedAtFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableUpdatedAtFieldResourceResponseDto $updatedAtFieldResourceResponseDto, AirtableField $field):  AirtableUpdatedAtField
+    public function handle(AirtableUpdatedAtFieldResourceResponseDto $updatedAtFieldResourceResponseDto, AirtableField $field): AirtableUpdatedAtField
     {
         Log::info('executing AirtableUpdatedAtFieldReconcileAction', ['updatedAtFieldResourceResponseDto' => $updatedAtFieldResourceResponseDto, 'field' => $field]);
 
@@ -42,7 +42,7 @@ class AirtableUpdatedAtFieldReconcileAction
         );
         Log::notice('created or updated AirtableUpdatedAtField', ['updatedAtField' => $updatedAtField, 'updatedAtFieldResourceResponseDto' => $updatedAtFieldResourceResponseDto]);
 
-        if (!is_null($updatedAtFieldResourceResponseDto->options->result)) {
+        if (! is_null($updatedAtFieldResourceResponseDto->options->result)) {
             match ($updatedAtFieldResourceResponseDto->options->result->type) {
                 AirtableDateTimeTypeEnum::DATE => $this->dateUpdatedAtFieldReconcileAction->handle($updatedAtFieldResourceResponseDto->options->result, $updatedAtField),
                 AirtableDateTimeTypeEnum::DATE_TIME => $this->dateTimeUpdatedAtFieldReconcileAction->handle($updatedAtFieldResourceResponseDto->options->result, $updatedAtField),

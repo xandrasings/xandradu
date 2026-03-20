@@ -13,7 +13,7 @@ class AirtableCountFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableCountFieldResourceResponseDto $countFieldResourceResponseDto, AirtableField $field):  AirtableCountField
+    public function handle(AirtableCountFieldResourceResponseDto $countFieldResourceResponseDto, AirtableField $field): AirtableCountField
     {
         Log::info('executing AirtableCountFieldReconcileAction', ['countFieldResourceResponseDto' => $countFieldResourceResponseDto, 'field' => $field]);
 

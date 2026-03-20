@@ -25,7 +25,7 @@ class AirtableCreatedAtFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableCreatedAtFieldResourceResponseDto $createdAtFieldResourceResponseDto, AirtableField $field):  AirtableCreatedAtField
+    public function handle(AirtableCreatedAtFieldResourceResponseDto $createdAtFieldResourceResponseDto, AirtableField $field): AirtableCreatedAtField
     {
         Log::info('executing AirtableCreatedAtFieldReconcileAction', ['createdAtFieldResourceResponseDto' => $createdAtFieldResourceResponseDto, 'field' => $field]);
 

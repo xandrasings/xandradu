@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableSyncSourceField|null $syncSourceField
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice onlyTrashed()
@@ -32,6 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceFieldChoice withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableSyncSourceFieldChoice extends Model

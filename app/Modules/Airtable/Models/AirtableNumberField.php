@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableNumberField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableNumberField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableNumberField onlyTrashed()
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableNumberField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableNumberField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableNumberField withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableNumberField extends Model
@@ -33,7 +35,7 @@ class AirtableNumberField extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'precision'
+        'precision',
     ];
 
     public function field(): BelongsTo

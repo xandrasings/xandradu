@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField onlyTrashed()
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableDurationField withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableDurationField extends Model
@@ -33,7 +35,7 @@ class AirtableDurationField extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'format'
+        'format',
     ];
 
     public function field(): BelongsTo

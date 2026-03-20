@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableAiTextFieldPromptComponent|null $promptComponent
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldTextPromptComponent newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldTextPromptComponent newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldTextPromptComponent onlyTrashed()
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldTextPromptComponent whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldTextPromptComponent withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextFieldTextPromptComponent withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableAiTextFieldTextPromptComponent extends Model
@@ -33,7 +35,7 @@ class AirtableAiTextFieldTextPromptComponent extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'text'
+        'text',
     ];
 
     public function promptComponent(): BelongsTo

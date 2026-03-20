@@ -17,5 +17,4 @@ class AirtableCurrencyFieldOptionsResourceResponseDto extends Data
 
     #[WithTransformer(LengthyStringTransformer::class, length: 8)]
     public string $symbol;
-
 }

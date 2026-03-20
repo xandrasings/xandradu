@@ -13,7 +13,7 @@ class AirtableAttachmentsFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableAttachmentsFieldResourceResponseDto $attachmentsFieldResourceResponseDto, AirtableField $field):  AirtableAttachmentsField
+    public function handle(AirtableAttachmentsFieldResourceResponseDto $attachmentsFieldResourceResponseDto, AirtableField $field): AirtableAttachmentsField
     {
         Log::info('executing AirtableAttachmentsFieldReconcileAction', ['attachmentsFieldResourceResponseDto' => $attachmentsFieldResourceResponseDto, 'field' => $field]);
 

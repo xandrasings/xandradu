@@ -13,7 +13,7 @@ class AirtableLongTextFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableLongTextFieldResourceResponseDto $longTextFieldResourceResponseDto, AirtableField $field):  AirtableLongTextField
+    public function handle(AirtableLongTextFieldResourceResponseDto $longTextFieldResourceResponseDto, AirtableField $field): AirtableLongTextField
     {
         Log::info('executing AirtableLongTextFieldReconcileAction', ['longTextFieldResourceResponseDto' => $longTextFieldResourceResponseDto, 'field' => $field]);
 

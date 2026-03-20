@@ -9,9 +9,9 @@ class HeartbeatAction
 {
     public function handle(): void
     {
-        $datetime = new DateTimeImmutable();
+        $datetime = new DateTimeImmutable;
 
-        $datetimeString =  $datetime->format('Y-m-d H:i:s');
+        $datetimeString = $datetime->format('Y-m-d H:i:s');
 
         Log::notice("heartbeat! Alive at $datetimeString");
     }

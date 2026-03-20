@@ -7,6 +7,4 @@ use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class AirtableFormulaFieldOptionsResourceResponseDto extends Data
-{
-}
+class AirtableFormulaFieldOptionsResourceResponseDto extends Data {}

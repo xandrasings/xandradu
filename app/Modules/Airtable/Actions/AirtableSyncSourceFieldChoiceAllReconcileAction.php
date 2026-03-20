@@ -23,8 +23,9 @@ class AirtableSyncSourceFieldChoiceAllReconcileAction
     }
 
     /**
-     * @param Collection<AirtableSyncSourceFieldOptionsChoiceResourceResponseDto> $syncSourceFieldOptionsChoiceResourceResponseDtos
+     * @param  Collection<AirtableSyncSourceFieldOptionsChoiceResourceResponseDto>  $syncSourceFieldOptionsChoiceResourceResponseDtos
      * @return Collection<AirtableSyncSourceFieldChoice>
+     *
      * @throws Exception
      */
     public function handle(Collection $syncSourceFieldOptionsChoiceResourceResponseDtos, AirtableSyncSourceField $syncSourceField): Collection

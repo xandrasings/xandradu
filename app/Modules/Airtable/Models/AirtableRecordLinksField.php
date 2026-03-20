@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRecordLinksField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRecordLinksField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRecordLinksField onlyTrashed()
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRecordLinksField whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRecordLinksField withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRecordLinksField withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AirtableRecordLinksField extends Model
