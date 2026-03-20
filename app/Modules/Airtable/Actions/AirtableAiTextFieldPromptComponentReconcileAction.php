@@ -35,7 +35,6 @@ class AirtableAiTextFieldPromptComponentReconcileAction
         );
         Log::notice('created or updated AirtableAiTextFieldPromptComponent', ['aiTextFieldPromptComponent' => $aiTextFieldPromptComponent, 'aiTextFieldOptionsPromptComponentResourceResponseDto' => $aiTextFieldOptionsPromptComponentResourceResponseDto]);
 
-        $aiTextFieldOptionsPromptComponentResourceResponseDto->type->validate($aiTextFieldOptionsPromptComponentResourceResponseDto);
         match ($aiTextFieldOptionsPromptComponentResourceResponseDto->type) {
             AirtableAiTextFieldOptionsPromptComponentTypeEnum::FIELD => $this->aiTextFieldFieldPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextFieldPromptComponent),
             AirtableAiTextFieldOptionsPromptComponentTypeEnum::TEXT => $this->aiTextFieldTextPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextFieldPromptComponent),

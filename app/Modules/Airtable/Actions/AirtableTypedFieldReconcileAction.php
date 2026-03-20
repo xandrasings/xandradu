@@ -152,7 +152,6 @@ class AirtableTypedFieldReconcileAction
     {
         Log::info('executing AirtableTypedFieldReconcileAction', ['fieldResourceResponseDto' => $fieldResourceResponseDto, 'field' => $field]);
 
-        $fieldResourceResponseDto->type->validate($fieldResourceResponseDto);
         match ($fieldResourceResponseDto->type) {
             AirtableFieldTypeEnum::AI_TEXT => $this->aiTextFieldReconcileAction->handle($fieldResourceResponseDto, $field),
             AirtableFieldTypeEnum::ATTACHMENTS => $this->attachmentsFieldReconcileAction->handle($fieldResourceResponseDto, $field),
