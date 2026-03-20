@@ -21,15 +21,11 @@ class AirtableDateAndTimeFieldReconcileAction
             [],
             array_merge(
                 ['date_format' => $dateAndTimeFieldResourceResponseDto->options->dateFormat->format],
-//                $dateAndTimeFieldResourceResponseDto->options->dateFormat->only('format')->toArray(),
                 $dateAndTimeFieldResourceResponseDto->options->timeFormat->only('format')->toArray(),
                 $dateAndTimeFieldResourceResponseDto->options->only('timeZone')->toArray(),
             )
         );
         Log::notice('created or updated AirtableDateAndTimeField', ['dateAndTimeField' => $dateAndTimeField, 'dateAndTimeFieldResourceResponseDto' => $dateAndTimeFieldResourceResponseDto]);
-
-
-
 
         return $dateAndTimeField;
     }

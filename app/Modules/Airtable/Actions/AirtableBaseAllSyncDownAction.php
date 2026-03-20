@@ -3,6 +3,7 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Clients\AirtableClient;
+use App\Modules\Airtable\Jobs\AirtableTableAllSyncDownJob;
 use App\Modules\Airtable\Models\AirtableBase;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -13,15 +14,11 @@ class AirtableBaseAllSyncDownAction
 
     protected AirtableBaseAllReconcileAction $baseAllReconcileAction;
 
-    protected AirtableTableAllSyncDownAction $tableAllSyncDownAction;
-
     public function __construct()
     {
         $this->client = app(AirtableClient::class);
 
         $this->baseAllReconcileAction = app(AirtableBaseAllReconcileAction::class);
-
-        $this->tableAllSyncDownAction = app(AirtableTableAllSyncDownAction::class);
     }
 
     /**
@@ -37,7 +34,7 @@ class AirtableBaseAllSyncDownAction
         $activeExternalBases = $this->baseAllReconcileAction->handle($baseListResponseDto->bases);
 
         $activeExternalBases->each(function (AirtableBase $base) {
-            $this->tableAllSyncDownAction->handle($base);
+            dispatch(new AirtableTableAllSyncDownJob($base));
         });
     }
 }
