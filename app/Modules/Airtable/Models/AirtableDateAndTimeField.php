@@ -32,7 +32,11 @@ class AirtableDateAndTimeField extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'date_format',
+        'time_format',
+        'time_zone',
+    ];
 
     public function field(): BelongsTo
     {
