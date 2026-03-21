@@ -299,14 +299,4 @@ class AirtableField extends Model
     {
         return $this->hasOne(AirtableUrlField::class, 'field_id');
     }
-
-    public function aiTextFieldFieldPromptComponents(): HasMany
-    {
-        return $this->hasMany(AirtableAiTextFieldFieldPromptComponent::class, 'field_id');
-    }
-
-    public function updatedAtFieldField(): HasMany
-    {
-        return $this->hasMany(AirtableUpdatedAtFieldField::class, 'field_id');
-    }
 }
