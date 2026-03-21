@@ -17,7 +17,7 @@ class AirtableFieldAllTrashAction
     }
 
     /**
-     * @param  Collection<AirtableField>  $fields
+     * @param Collection<AirtableField> $fields
      *
      * @throws Exception
      */
@@ -25,8 +25,9 @@ class AirtableFieldAllTrashAction
     {
         Log::info('executing AirtableFieldAllTrashAction');
 
-        $fields->each(function (AirtableField $field) {
-            $this->fieldTrashAction->handle($field);
-        });
+        $fields
+            ->each(function (AirtableField $field) {
+                $this->fieldTrashAction->handle($field);
+            });
     }
 }

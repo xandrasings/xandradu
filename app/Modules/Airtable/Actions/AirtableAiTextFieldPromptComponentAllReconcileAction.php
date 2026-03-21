@@ -23,7 +23,7 @@ class AirtableAiTextFieldPromptComponentAllReconcileAction
     }
 
     /**
-     * @param  Collection<AirtableAiTextFieldOptionsPromptComponentResourceResponseDto>  $aiTextFieldOptionsPromptComponentResourceResponseDtos
+     * @param Collection<AirtableAiTextFieldOptionsPromptComponentResourceResponseDto> $aiTextFieldOptionsPromptComponentResourceResponseDtos
      * @return Collection<AirtableAiTextFieldPromptComponent>
      *
      * @throws Exception
@@ -32,13 +32,15 @@ class AirtableAiTextFieldPromptComponentAllReconcileAction
     {
         Log::info('executing AirtableAiTextFieldPromptComponentAllReconcileAction', ['aiTextFieldOptionsPromptComponentResourceResponseDtos' => $aiTextFieldOptionsPromptComponentResourceResponseDtos, 'aiTextField' => $aiTextField]);
 
-        $aiTextFieldOptionsPromptComponentResourceResponseDtos->each(function (AirtableAiTextFieldOptionsPromptComponentResourceResponseDto $aiTextFieldOptionsPromptComponentResourceResponseDto, int $key) {
-            $aiTextFieldOptionsPromptComponentResourceResponseDto->rank = $key + 1;
-        });
+        $aiTextFieldOptionsPromptComponentResourceResponseDtos
+            ->each(function (AirtableAiTextFieldOptionsPromptComponentResourceResponseDto $aiTextFieldOptionsPromptComponentResourceResponseDto, int $key) {
+                $aiTextFieldOptionsPromptComponentResourceResponseDto->rank = $key + 1;
+            });
 
-        $aiTextFieldPromptComponents = $aiTextFieldOptionsPromptComponentResourceResponseDtos->map(function (AirtableAiTextFieldOptionsPromptComponentResourceResponseDto $aiTextFieldOptionsPromptComponentResourceResponseDto) use ($aiTextField) {
-            return $this->aiTextFieldOptionsPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextField);
-        });
+        $aiTextFieldPromptComponents = $aiTextFieldOptionsPromptComponentResourceResponseDtos
+            ->map(function (AirtableAiTextFieldOptionsPromptComponentResourceResponseDto $aiTextFieldOptionsPromptComponentResourceResponseDto) use ($aiTextField) {
+                return $this->aiTextFieldOptionsPromptComponentReconcileAction->handle($aiTextFieldOptionsPromptComponentResourceResponseDto, $aiTextField);
+            });
 
         $trashableAiTextFieldPromptComponents = $aiTextField->promptComponents()
             ->whereNotIn('id', $aiTextFieldPromptComponents->pluck('id'))

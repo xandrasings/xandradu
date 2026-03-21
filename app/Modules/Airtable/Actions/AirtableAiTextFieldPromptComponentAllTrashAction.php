@@ -17,7 +17,7 @@ class AirtableAiTextFieldPromptComponentAllTrashAction
     }
 
     /**
-     * @param  Collection<AirtableAiTextFieldPromptComponent>  $aiTextFieldPromptComponents
+     * @param Collection<AirtableAiTextFieldPromptComponent> $aiTextFieldPromptComponents
      *
      * @throws Exception
      */
@@ -25,8 +25,9 @@ class AirtableAiTextFieldPromptComponentAllTrashAction
     {
         Log::info('executing AirtableAiTextFieldPromptComponentAllTrashAction');
 
-        $aiTextFieldPromptComponents->each(function (AirtableAiTextFieldPromptComponent $aiTextFieldPromptComponent) {
-            $this->aiTextFieldPromptComponentTrashAction->handle($aiTextFieldPromptComponent);
-        });
+        $aiTextFieldPromptComponents
+            ->each(function (AirtableAiTextFieldPromptComponent $aiTextFieldPromptComponent) {
+                $this->aiTextFieldPromptComponentTrashAction->handle($aiTextFieldPromptComponent);
+            });
     }
 }

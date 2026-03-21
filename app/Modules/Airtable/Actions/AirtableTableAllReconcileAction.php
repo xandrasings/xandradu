@@ -23,7 +23,7 @@ class AirtableTableAllReconcileAction
     }
 
     /**
-     * @param  Collection<AirtableTableResourceResponseDto>  $tableResourceResponseDtos
+     * @param Collection<AirtableTableResourceResponseDto> $tableResourceResponseDtos
      * @return Collection<AirtableTable>
      *
      * @throws Exception
@@ -32,13 +32,15 @@ class AirtableTableAllReconcileAction
     {
         Log::info('executing AirtableTableAllReconcileAction');
 
-        $tableResourceResponseDtos->each(function (AirtableTableResourceResponseDto $tableResourceResponseDto, int $key) {
-            $tableResourceResponseDto->rank = $key + 1;
-        });
+        $tableResourceResponseDtos
+            ->each(function (AirtableTableResourceResponseDto $tableResourceResponseDto, int $key) {
+                $tableResourceResponseDto->rank = $key + 1;
+            });
 
-        $tables = $tableResourceResponseDtos->map(function (AirtableTableResourceResponseDto $tableResourceResponseDto) use ($base) {
-            return $this->tableReconcileAction->handle($tableResourceResponseDto, $base);
-        });
+        $tables = $tableResourceResponseDtos
+            ->map(function (AirtableTableResourceResponseDto $tableResourceResponseDto) use ($base) {
+                return $this->tableReconcileAction->handle($tableResourceResponseDto, $base);
+            });
 
         // TODO confirm no offset logic at play when table schema gets grabbed
         $trashableTables = $base->tables()

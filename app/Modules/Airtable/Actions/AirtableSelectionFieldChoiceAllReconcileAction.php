@@ -23,7 +23,7 @@ class AirtableSelectionFieldChoiceAllReconcileAction
     }
 
     /**
-     * @param  Collection<AirtableSelectionFieldOptionsChoiceResourceResponseDto>  $selectionFieldOptionsChoiceResourceResponseDtos
+     * @param Collection<AirtableSelectionFieldOptionsChoiceResourceResponseDto> $selectionFieldOptionsChoiceResourceResponseDtos
      * @return Collection<AirtableSelectionFieldChoice>
      *
      * @throws Exception
@@ -32,13 +32,15 @@ class AirtableSelectionFieldChoiceAllReconcileAction
     {
         Log::info('executing AirtableSelectionFieldChoiceAllReconcileAction');
 
-        $selectionFieldOptionsChoiceResourceResponseDtos->each(function (AirtableSelectionFieldOptionsChoiceResourceResponseDto $selectionFieldOptionsChoiceResourceResponseDto, int $key) {
-            $selectionFieldOptionsChoiceResourceResponseDto->rank = $key + 1;
-        });
+        $selectionFieldOptionsChoiceResourceResponseDtos
+            ->each(function (AirtableSelectionFieldOptionsChoiceResourceResponseDto $selectionFieldOptionsChoiceResourceResponseDto, int $key) {
+                $selectionFieldOptionsChoiceResourceResponseDto->rank = $key + 1;
+            });
 
-        $selectionFieldChoices = $selectionFieldOptionsChoiceResourceResponseDtos->map(function (AirtableSelectionFieldOptionsChoiceResourceResponseDto $selectionFieldOptionsChoiceResourceResponseDto) use ($selectionField) {
-            return $this->selectionFieldChoiceReconcileAction->handle($selectionFieldOptionsChoiceResourceResponseDto, $selectionField);
-        });
+        $selectionFieldChoices = $selectionFieldOptionsChoiceResourceResponseDtos
+            ->map(function (AirtableSelectionFieldOptionsChoiceResourceResponseDto $selectionFieldOptionsChoiceResourceResponseDto) use ($selectionField) {
+                return $this->selectionFieldChoiceReconcileAction->handle($selectionFieldOptionsChoiceResourceResponseDto, $selectionField);
+            });
 
         $trashableSelectionFieldChoices = $selectionField->choices()
             ->whereNotNull('external_id')

@@ -25,8 +25,9 @@ class AirtableUpdatedAtFieldFieldAllTrashAction
     {
         Log::info('executing AirtableUpdatedAtFieldFieldAllTrashAction');
 
-        $updatedAtFieldFields->each(function (AirtableUpdatedAtFieldField $updatedAtFieldField) {
-            $this->updatedAtFieldFieldTrashAction->handle($updatedAtFieldField);
-        });
+        $updatedAtFieldFields
+            ->each(function (AirtableUpdatedAtFieldField $updatedAtFieldField) {
+                $this->updatedAtFieldFieldTrashAction->handle($updatedAtFieldField);
+            });
     }
 }

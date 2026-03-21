@@ -25,8 +25,9 @@ class AirtableBaseAllTrashAction
     {
         Log::info('executing AirtableBaseAllTrashAction');
 
-        $bases->each(function (AirtableBase $base) {
-            $this->baseTrashAction->handle($base);
-        });
+        $bases
+            ->each(function (AirtableBase $base) {
+                $this->baseTrashAction->handle($base);
+            });
     }
 }

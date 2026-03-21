@@ -13,17 +13,18 @@ class AirtableAiTextFieldOptionsPromptComponentResourceCaster implements Cast
 {
     public function cast(DataProperty $property, mixed $value, array $properties, $context): mixed
     {
-        return collect($value)->map(function ($item) {
-            if (is_string($item)) {
-                return AirtableAiTextFieldOptionsTextPromptComponentResourceResponseDto::from(['rank' => 1, 'text' => $item, 'type' => AirtableAiTextFieldOptionsPromptComponentTypeEnum::TEXT]);
-            } else {
-                $referencedFieldId = data_get($item, 'field.fieldId');
-                if (is_null($referencedFieldId)) {
-                    Log::warning('Failed to find fieldId in payload.', ['aiTextFieldOptionsPromptComponentResourceResponseDto' => $item]);
-                }
+        return collect($value)
+            ->map(function ($item) {
+                if (is_string($item)) {
+                    return AirtableAiTextFieldOptionsTextPromptComponentResourceResponseDto::from(['rank' => 1, 'text' => $item, 'type' => AirtableAiTextFieldOptionsPromptComponentTypeEnum::TEXT]);
+                } else {
+                    $referencedFieldId = data_get($item, 'field.fieldId');
+                    if (is_null($referencedFieldId)) {
+                        Log::warning('Failed to find fieldId in payload.', ['aiTextFieldOptionsPromptComponentResourceResponseDto' => $item]);
+                    }
 
-                return AirtableAiTextFieldOptionsFieldPromptComponentResourceResponseDto::from(['rank' => 0, 'referencedFieldId' => $referencedFieldId, 'type' => AirtableAiTextFieldOptionsPromptComponentTypeEnum::FIELD]);
-            }
-        });
+                    return AirtableAiTextFieldOptionsFieldPromptComponentResourceResponseDto::from(['rank' => 0, 'referencedFieldId' => $referencedFieldId, 'type' => AirtableAiTextFieldOptionsPromptComponentTypeEnum::FIELD]);
+                }
+            });
     }
 }

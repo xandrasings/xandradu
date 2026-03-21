@@ -25,8 +25,9 @@ class AirtableTableAllTrashAction
     {
         Log::info('executing AirtableTableAllTrashAction');
 
-        $tables->each(function (AirtableTable $table) {
-            $this->tableTrashAction->handle($table);
-        });
+        $tables
+            ->each(function (AirtableTable $table) {
+                $this->tableTrashAction->handle($table);
+            });
     }
 }

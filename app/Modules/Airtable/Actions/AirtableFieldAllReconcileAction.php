@@ -23,7 +23,7 @@ class AirtableFieldAllReconcileAction
     }
 
     /**
-     * @param  Collection<AirtableFieldResourceResponseDto>  $fieldResourceResponseDtos
+     * @param Collection<AirtableFieldResourceResponseDto> $fieldResourceResponseDtos
      * @return Collection<AirtableField>
      *
      * @throws Exception
@@ -32,13 +32,15 @@ class AirtableFieldAllReconcileAction
     {
         Log::info('executing AirtableFieldAllReconcileAction');
 
-        $fieldResourceResponseDtos->each(function (AirtableFieldResourceResponseDto $fieldResourceResponseDto, int $key) {
-            $fieldResourceResponseDto->rank = $key + 1;
-        });
+        $fieldResourceResponseDtos
+            ->each(function (AirtableFieldResourceResponseDto $fieldResourceResponseDto, int $key) {
+                $fieldResourceResponseDto->rank = $key + 1;
+            });
 
-        $fields = $fieldResourceResponseDtos->map(function ($fieldResourceResponseDto) use ($table) {
-            return $this->fieldReconcileAction->handle($fieldResourceResponseDto, $table);
-        });
+        $fields = $fieldResourceResponseDtos
+            ->map(function ($fieldResourceResponseDto) use ($table) {
+                return $this->fieldReconcileAction->handle($fieldResourceResponseDto, $table);
+            });
 
         // TODO confirm no offset logic at play when table schema gets grabbed
         $trashableFields = $table->fields()

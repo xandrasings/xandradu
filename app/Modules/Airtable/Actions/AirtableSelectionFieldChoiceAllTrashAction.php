@@ -17,7 +17,7 @@ class AirtableSelectionFieldChoiceAllTrashAction
     }
 
     /**
-     * @param  Collection<AirtableSelectionFieldChoice>  $selectionFieldChoices
+     * @param Collection<AirtableSelectionFieldChoice> $selectionFieldChoices
      *
      * @throws Exception
      */
@@ -25,8 +25,9 @@ class AirtableSelectionFieldChoiceAllTrashAction
     {
         Log::info('executing AirtableSelectionFieldChoiceAllTrashAction');
 
-        $selectionFieldChoices->each(function (AirtableSelectionFieldChoice $selectionFieldChoice) {
-            $this->selectionFieldChoiceTrashAction->handle($selectionFieldChoice);
-        });
+        $selectionFieldChoices
+            ->each(function (AirtableSelectionFieldChoice $selectionFieldChoice) {
+                $this->selectionFieldChoiceTrashAction->handle($selectionFieldChoice);
+            });
     }
 }

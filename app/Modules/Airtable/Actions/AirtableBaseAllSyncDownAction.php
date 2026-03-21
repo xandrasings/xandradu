@@ -33,8 +33,9 @@ class AirtableBaseAllSyncDownAction
 
         $activeExternalBases = $this->baseAllReconcileAction->handle($baseListResponseDto->bases);
 
-        $activeExternalBases->each(function (AirtableBase $base) {
-            dispatch(new AirtableTableAllSyncDownJob($base));
-        });
+        $activeExternalBases
+            ->each(function (AirtableBase $base) {
+                dispatch(new AirtableTableAllSyncDownJob($base));
+            });
     }
 }

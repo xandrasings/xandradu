@@ -23,7 +23,7 @@ class AirtableSyncSourceFieldChoiceAllReconcileAction
     }
 
     /**
-     * @param  Collection<AirtableSyncSourceFieldOptionsChoiceResourceResponseDto>  $syncSourceFieldOptionsChoiceResourceResponseDtos
+     * @param Collection<AirtableSyncSourceFieldOptionsChoiceResourceResponseDto> $syncSourceFieldOptionsChoiceResourceResponseDtos
      * @return Collection<AirtableSyncSourceFieldChoice>
      *
      * @throws Exception
@@ -32,13 +32,15 @@ class AirtableSyncSourceFieldChoiceAllReconcileAction
     {
         Log::info('executing AirtableSyncSourceFieldOptionsChoiceAllReconcileAction');
 
-        $syncSourceFieldOptionsChoiceResourceResponseDtos->each(function (AirtableSyncSourceFieldOptionsChoiceResourceResponseDto $syncSourceFieldOptionsChoiceResourceResponseDto, int $key) {
-            $syncSourceFieldOptionsChoiceResourceResponseDto->rank = $key + 1;
-        });
+        $syncSourceFieldOptionsChoiceResourceResponseDtos
+            ->each(function (AirtableSyncSourceFieldOptionsChoiceResourceResponseDto $syncSourceFieldOptionsChoiceResourceResponseDto, int $key) {
+                $syncSourceFieldOptionsChoiceResourceResponseDto->rank = $key + 1;
+            });
 
-        $syncSourceFieldChoices = $syncSourceFieldOptionsChoiceResourceResponseDtos->map(function (AirtableSyncSourceFieldOptionsChoiceResourceResponseDto $syncSourceFieldOptionsChoiceResourceResponseDto) use ($syncSourceField) {
-            return $this->syncSourceFieldChoiceReconcileAction->handle($syncSourceFieldOptionsChoiceResourceResponseDto, $syncSourceField);
-        });
+        $syncSourceFieldChoices = $syncSourceFieldOptionsChoiceResourceResponseDtos
+            ->map(function (AirtableSyncSourceFieldOptionsChoiceResourceResponseDto $syncSourceFieldOptionsChoiceResourceResponseDto) use ($syncSourceField) {
+                return $this->syncSourceFieldChoiceReconcileAction->handle($syncSourceFieldOptionsChoiceResourceResponseDto, $syncSourceField);
+            });
 
         $trashableSyncSourceFieldChoices = $syncSourceField->choices()
             ->whereNotNull('external_id')

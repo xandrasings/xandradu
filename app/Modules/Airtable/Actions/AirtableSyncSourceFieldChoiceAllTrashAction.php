@@ -25,8 +25,9 @@ class AirtableSyncSourceFieldChoiceAllTrashAction
     {
         Log::info('executing AirtableSyncSourceFieldChoiceAllTrashAction');
 
-        $syncSourceFieldChoices->each(function (AirtableSyncSourceFieldChoice $syncSourceFieldChoice) {
-            $this->syncSourceFieldChoiceTrashAction->handle($syncSourceFieldChoice);
-        });
+        $syncSourceFieldChoices
+            ->each(function (AirtableSyncSourceFieldChoice $syncSourceFieldChoice) {
+                $this->syncSourceFieldChoiceTrashAction->handle($syncSourceFieldChoice);
+            });
     }
 }

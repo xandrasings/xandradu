@@ -25,8 +25,9 @@ class AirtableSelectionsFieldChoiceAllTrashAction
     {
         Log::info('executing AirtableSelectionsFieldChoiceAllTrashAction');
 
-        $selectionsFieldChoices->each(function (AirtableSelectionsFieldChoice $selectionsFieldChoice) {
-            $this->selectionsFieldChoiceTrashAction->handle($selectionsFieldChoice);
-        });
+        $selectionsFieldChoices
+            ->each(function (AirtableSelectionsFieldChoice $selectionsFieldChoice) {
+                $this->selectionsFieldChoiceTrashAction->handle($selectionsFieldChoice);
+            });
     }
 }
