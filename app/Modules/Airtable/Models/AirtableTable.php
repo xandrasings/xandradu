@@ -57,6 +57,7 @@ class AirtableTable extends Model
 
     protected array $cascadeDeletes = [
         'fields',
+        'views'
     ];
 
     public function base(): BelongsTo
@@ -67,5 +68,10 @@ class AirtableTable extends Model
     public function fields(): HasMany
     {
         return $this->hasMany(AirtableField::class, 'table_id');
+    }
+
+    public function views(): HasMany
+    {
+        return $this->hasMany(AirtableView::class, 'table_id');
     }
 }

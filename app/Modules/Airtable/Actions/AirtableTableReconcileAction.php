@@ -12,9 +12,13 @@ class AirtableTableReconcileAction
 {
     protected AirtableFieldAllReconcileAction $fieldAllReconcileAction;
 
+    protected AirtableViewAllReconcileAction $viewAllReconcileAction;
+
     public function __construct()
     {
         $this->fieldAllReconcileAction = app(AirtableFieldAllReconcileAction::class);
+
+        $this->viewAllReconcileAction = app(AirtableViewAllReconcileAction::class);
     }
 
     /**
@@ -26,11 +30,13 @@ class AirtableTableReconcileAction
 
         $table = $base->tables()->updateOrCreate(
             $tableResourceResponseDto->only('id')->toArray(),
-            $tableResourceResponseDto->except('id', 'fields')->toArray(),
+            $tableResourceResponseDto->except('id', 'fields', 'views')->toArray(),
         );
         Log::notice('created or updated AirtableTable', ['table' => $table, 'tableResourceResponseDto' => $tableResourceResponseDto]);
 
         $this->fieldAllReconcileAction->handle($tableResourceResponseDto->fields, $table);
+
+        $this->viewAllReconcileAction->handle($tableResourceResponseDto->views, $table);
 
         return $table;
     }

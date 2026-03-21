@@ -42,7 +42,6 @@ class AirtableFieldAllReconcileAction
                 return $this->fieldReconcileAction->handle($fieldResourceResponseDto, $table);
             });
 
-        // TODO confirm no offset logic at play when table schema gets grabbed
         $trashableFields = $table->fields()
             ->whereNotNull('external_id')
             ->whereNotIn('id', $fields->pluck('id'))

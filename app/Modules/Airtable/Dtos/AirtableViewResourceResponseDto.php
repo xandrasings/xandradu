@@ -2,17 +2,18 @@
 
 namespace App\Modules\Airtable\Dtos;
 
+use App\Modules\Airtable\Enums\AirtableViewTypeEnum;
 use App\Transformers\LengthyStringTransformer;
-use Illuminate\Support\Collection;
-use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MapOutputName;
+use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Attributes\WithTransformer;
+use Spatie\LaravelData\Casts\EnumCast;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class AirtableTableResourceResponseDto extends Data
+class AirtableViewResourceResponseDto extends Data
 {
     public int $rank = 0;
 
@@ -22,12 +23,6 @@ class AirtableTableResourceResponseDto extends Data
     #[WithTransformer(LengthyStringTransformer::class, length: 32)]
     public string $name;
 
-    #[WithTransformer(LengthyStringTransformer::class, length: 2048)]
-    public ?string $description;
-
-    #[DataCollectionOf(AirtableFieldResourceResponseDto::class)]
-    public Collection $fields;
-
-    #[DataCollectionOf(AirtableViewResourceResponseDto::class)]
-    public Collection $views;
+    #[WithCast(EnumCast::class, type: AirtableViewTypeEnum::class)]
+    public AirtableViewTypeEnum $type;
 }
