@@ -20,8 +20,8 @@ class AirtableDateTimeCreatedAtFieldReconcileAction
         $dateTimeCreatedAtField = $createdAtField->dateTimeCreatedAtField()->updateOrCreate(
             [],
             array_merge(
-                $createdAtFieldOptionsDateTimeResultResourceResponseDto->options->timeFormat->only('format')->toArray(),
-                $createdAtFieldOptionsDateTimeResultResourceResponseDto->options->only('timeZone')->toArray()
+                $createdAtFieldOptionsDateTimeResultResourceResponseDto->options->timeFormat->toArray(),
+                $createdAtFieldOptionsDateTimeResultResourceResponseDto->options->except('dateFormat', 'timeFormat')->toArray()
             ),
         );
         Log::notice('created or updated AirtableDateTimeCreatedAtField', ['dateTimeCreatedAtField' => $dateTimeCreatedAtField, 'createdAtFieldOptionsDateTimeResultResourceResponseDto' => $createdAtFieldOptionsDateTimeResultResourceResponseDto]);

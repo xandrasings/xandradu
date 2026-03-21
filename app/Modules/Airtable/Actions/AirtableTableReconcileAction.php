@@ -26,7 +26,7 @@ class AirtableTableReconcileAction
 
         $table = $base->tables()->updateOrCreate(
             $tableResourceResponseDto->only('id')->toArray(),
-            $tableResourceResponseDto->except('id', 'primaryFieldId', 'fields')->toArray(),
+            $tableResourceResponseDto->except('id', 'fields')->toArray(),
         );
         Log::notice('created or updated AirtableTable', ['table' => $table, 'tableResourceResponseDto' => $tableResourceResponseDto]);
 

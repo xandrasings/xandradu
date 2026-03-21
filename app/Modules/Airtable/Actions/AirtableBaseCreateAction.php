@@ -27,7 +27,7 @@ class AirtableBaseCreateAction
         $baseCreateRequestDto = AirtableBaseCreateRequestDto::from($base);
         $baseCreateResponseDto = $this->client->createBase($baseCreateRequestDto);
 
-        $base->update($baseCreateResponseDto->only('id')->toArray());
+        $base->update($baseCreateResponseDto->except('tables')->toArray());
         Log::notice('updated AirtableBase with external_id', ['base' => $base, 'baseCreateResponseDto' => $baseCreateResponseDto]);
 
         // TODO deal with tables attribute

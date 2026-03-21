@@ -36,8 +36,8 @@ class AirtableUpdatedAtFieldReconcileAction
         $updatedAtField = $field->updatedAtField()->updateOrCreate(
             [],
             is_null($updatedAtFieldResourceResponseDto->options->result) ? [] : array_merge(
-                $updatedAtFieldResourceResponseDto->options->result->only('type')->toArray(),
-                $updatedAtFieldResourceResponseDto->options->result->options->dateFormat->only('format')->toArray()
+                $updatedAtFieldResourceResponseDto->options->result->except('options')->toArray(),
+                $updatedAtFieldResourceResponseDto->options->result->options->dateFormat->toArray()
             )
         );
         Log::notice('created or updated AirtableUpdatedAtField', ['updatedAtField' => $updatedAtField, 'updatedAtFieldResourceResponseDto' => $updatedAtFieldResourceResponseDto]);

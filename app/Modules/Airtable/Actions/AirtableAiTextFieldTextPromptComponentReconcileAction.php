@@ -19,7 +19,7 @@ class AirtableAiTextFieldTextPromptComponentReconcileAction
 
         $aiTextFieldTextPromptComponent = $aiTextFieldPromptComponent->textPromptComponent()->updateOrCreate(
             [],
-            $aiTextFieldOptionsTextPromptComponentResourceResponseDto->only('text')->toArray(),
+            $aiTextFieldOptionsTextPromptComponentResourceResponseDto->toArray(),
         );
         Log::notice('created or updated AirtableAiTextFieldTextPromptComponent', ['aiTextFieldPromptComponent' => $aiTextFieldPromptComponent, 'aiTextFieldPromptComponentResourceResponseDto' => $aiTextFieldOptionsTextPromptComponentResourceResponseDto]);
 

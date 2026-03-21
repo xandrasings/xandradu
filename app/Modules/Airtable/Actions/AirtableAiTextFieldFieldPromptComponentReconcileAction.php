@@ -5,7 +5,6 @@ namespace App\Modules\Airtable\Actions;
 use App\Modules\Airtable\Dtos\AirtableAiTextFieldOptionsFieldPromptComponentResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableAiTextFieldFieldPromptComponent;
 use App\Modules\Airtable\Models\AirtableAiTextFieldPromptComponent;
-use App\Modules\Airtable\Models\AirtableField;
 use Exception;
 use Illuminate\Support\Facades\Log;
 

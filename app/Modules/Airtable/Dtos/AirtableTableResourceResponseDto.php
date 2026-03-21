@@ -22,12 +22,7 @@ class AirtableTableResourceResponseDto extends Data
     #[WithTransformer(LengthyStringTransformer::class, length: 32)]
     public string $name;
 
-    public string $primaryFieldId; // TODO
-
     #[DataCollectionOf(AirtableFieldResourceResponseDto::class)]
     public Collection $fields;
-
-    //        #[DataCollectionOf(AirtableViewResourceResponseDto::class)] TODO
-    //        public Collection $views,
 
 }
