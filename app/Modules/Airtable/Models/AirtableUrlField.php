@@ -2,31 +2,34 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int|null $field_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read AirtableField|null $field
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableUrlField newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableUrlField newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableUrlField onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableUrlField query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableUrlField whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableUrlField whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableUrlField whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableUrlField whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableUrlField whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableUrlField withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableUrlField withoutTrashed()
+ * @method static Builder<static>|AirtableUrlField newModelQuery()
+ * @method static Builder<static>|AirtableUrlField newQuery()
+ * @method static Builder<static>|AirtableUrlField onlyTrashed()
+ * @method static Builder<static>|AirtableUrlField query()
+ * @method static Builder<static>|AirtableUrlField whereCreatedAt($value)
+ * @method static Builder<static>|AirtableUrlField whereDeletedAt($value)
+ * @method static Builder<static>|AirtableUrlField whereFieldId($value)
+ * @method static Builder<static>|AirtableUrlField whereId($value)
+ * @method static Builder<static>|AirtableUrlField whereUpdatedAt($value)
+ * @method static Builder<static>|AirtableUrlField withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|AirtableUrlField withoutTrashed()
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class AirtableUrlField extends Model
 {

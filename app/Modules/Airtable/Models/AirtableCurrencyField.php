@@ -2,35 +2,38 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int|null $field_id
  * @property int $precision
  * @property string $symbol
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read AirtableField|null $field
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField wherePrecision($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereSymbol($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableCurrencyField withoutTrashed()
+ * @method static Builder<static>|AirtableCurrencyField newModelQuery()
+ * @method static Builder<static>|AirtableCurrencyField newQuery()
+ * @method static Builder<static>|AirtableCurrencyField onlyTrashed()
+ * @method static Builder<static>|AirtableCurrencyField query()
+ * @method static Builder<static>|AirtableCurrencyField whereCreatedAt($value)
+ * @method static Builder<static>|AirtableCurrencyField whereDeletedAt($value)
+ * @method static Builder<static>|AirtableCurrencyField whereFieldId($value)
+ * @method static Builder<static>|AirtableCurrencyField whereId($value)
+ * @method static Builder<static>|AirtableCurrencyField wherePrecision($value)
+ * @method static Builder<static>|AirtableCurrencyField whereSymbol($value)
+ * @method static Builder<static>|AirtableCurrencyField whereUpdatedAt($value)
+ * @method static Builder<static>|AirtableCurrencyField withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|AirtableCurrencyField withoutTrashed()
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class AirtableCurrencyField extends Model
 {

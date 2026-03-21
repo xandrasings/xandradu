@@ -2,9 +2,12 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -12,27 +15,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $color
  * @property string $icon
  * @property int $max
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read AirtableField|null $field
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField whereColor($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField whereIcon($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField whereMax($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableRatingField withoutTrashed()
+ * @method static Builder<static>|AirtableRatingField newModelQuery()
+ * @method static Builder<static>|AirtableRatingField newQuery()
+ * @method static Builder<static>|AirtableRatingField onlyTrashed()
+ * @method static Builder<static>|AirtableRatingField query()
+ * @method static Builder<static>|AirtableRatingField whereColor($value)
+ * @method static Builder<static>|AirtableRatingField whereCreatedAt($value)
+ * @method static Builder<static>|AirtableRatingField whereDeletedAt($value)
+ * @method static Builder<static>|AirtableRatingField whereFieldId($value)
+ * @method static Builder<static>|AirtableRatingField whereIcon($value)
+ * @method static Builder<static>|AirtableRatingField whereId($value)
+ * @method static Builder<static>|AirtableRatingField whereMax($value)
+ * @method static Builder<static>|AirtableRatingField whereUpdatedAt($value)
+ * @method static Builder<static>|AirtableRatingField withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|AirtableRatingField withoutTrashed()
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class AirtableRatingField extends Model
 {

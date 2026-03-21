@@ -2,31 +2,34 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int|null $field_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read AirtableField|null $field
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableShortTextField withoutTrashed()
+ * @method static Builder<static>|AirtableShortTextField newModelQuery()
+ * @method static Builder<static>|AirtableShortTextField newQuery()
+ * @method static Builder<static>|AirtableShortTextField onlyTrashed()
+ * @method static Builder<static>|AirtableShortTextField query()
+ * @method static Builder<static>|AirtableShortTextField whereCreatedAt($value)
+ * @method static Builder<static>|AirtableShortTextField whereDeletedAt($value)
+ * @method static Builder<static>|AirtableShortTextField whereFieldId($value)
+ * @method static Builder<static>|AirtableShortTextField whereId($value)
+ * @method static Builder<static>|AirtableShortTextField whereUpdatedAt($value)
+ * @method static Builder<static>|AirtableShortTextField withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|AirtableShortTextField withoutTrashed()
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class AirtableShortTextField extends Model
 {

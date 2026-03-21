@@ -2,9 +2,12 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -13,28 +16,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $external_id
  * @property string $name
  * @property string|null $color
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Modules\Airtable\Models\AirtableSelectionsField|null $selectionsField
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read AirtableSelectionsField|null $selectionsField
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice whereColor($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice whereExternalId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice whereRank($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice whereSelectionsFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsFieldChoice withoutTrashed()
+ * @method static Builder<static>|AirtableSelectionsFieldChoice newModelQuery()
+ * @method static Builder<static>|AirtableSelectionsFieldChoice newQuery()
+ * @method static Builder<static>|AirtableSelectionsFieldChoice onlyTrashed()
+ * @method static Builder<static>|AirtableSelectionsFieldChoice query()
+ * @method static Builder<static>|AirtableSelectionsFieldChoice whereColor($value)
+ * @method static Builder<static>|AirtableSelectionsFieldChoice whereCreatedAt($value)
+ * @method static Builder<static>|AirtableSelectionsFieldChoice whereDeletedAt($value)
+ * @method static Builder<static>|AirtableSelectionsFieldChoice whereExternalId($value)
+ * @method static Builder<static>|AirtableSelectionsFieldChoice whereId($value)
+ * @method static Builder<static>|AirtableSelectionsFieldChoice whereName($value)
+ * @method static Builder<static>|AirtableSelectionsFieldChoice whereRank($value)
+ * @method static Builder<static>|AirtableSelectionsFieldChoice whereSelectionsFieldId($value)
+ * @method static Builder<static>|AirtableSelectionsFieldChoice whereUpdatedAt($value)
+ * @method static Builder<static>|AirtableSelectionsFieldChoice withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|AirtableSelectionsFieldChoice withoutTrashed()
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class AirtableSelectionsFieldChoice extends Model
 {
