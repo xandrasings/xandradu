@@ -1,7 +1,19 @@
-# Command Naming Scheme
+# Action Naming Scheme
 ### AllSync
-### SyncDown
 ### AllSyncDown
+- purpose
+    - get necessary external data for all records of a specific type belonging to the parent model or all records in general, and create or update or delete internal data as needed
+    - calls a client to get external
+    - calls Reconcile or AllReconcile actions as needed to make modifications to internal data
+    - calls other Sync actions if needed, generally triggered by a Job
+- name scheme
+    - named after the relevant Model
+- accepts
+    - a parent Model if it exists, if this is to be handled by parent, or nothing if we are meant to sync down all records in the external system
+- throws
+    - Exceptions as needed
+- returns
+    - void
 ### SyncUp
 ### AllSyncUp
 ### Reconcile
