@@ -30,6 +30,5 @@ class AirtableTableAllSyncDownAction
         $tableResourceListResponseDto = $this->client->listTables($base->external_id);
 
         $this->tableAllReconcileAction->handle($tableResourceListResponseDto->tables, $base);
-
     }
 }

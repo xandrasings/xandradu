@@ -13,13 +13,13 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $ai_text_field_id
+ * @property int $ai_text_field_id
  * @property int $rank
  * @property string $type
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read AirtableAiTextField|null $aiTextField
+ * @property-read AirtableAiTextField $aiTextField
  * @property-read AirtableAiTextFieldFieldPromptComponent|null $fieldPromptComponent
  * @property-read AirtableAiTextFieldTextPromptComponent|null $textPromptComponent
  *

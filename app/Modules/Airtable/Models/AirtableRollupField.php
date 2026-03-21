@@ -11,11 +11,13 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $field_id
+ * @property int $field_id
+ * @property int|null $referenced_field_id
+ * @property int|null $targeted_field_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read AirtableField|null $field
+ * @property-read AirtableField $field
  *
  * @method static Builder<static>|AirtableRollupField newModelQuery()
  * @method static Builder<static>|AirtableRollupField newQuery()
@@ -25,6 +27,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableRollupField whereDeletedAt($value)
  * @method static Builder<static>|AirtableRollupField whereFieldId($value)
  * @method static Builder<static>|AirtableRollupField whereId($value)
+ * @method static Builder<static>|AirtableRollupField whereReferencedFieldId($value)
+ * @method static Builder<static>|AirtableRollupField whereTargetedFieldId($value)
  * @method static Builder<static>|AirtableRollupField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableRollupField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableRollupField withoutTrashed()

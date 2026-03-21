@@ -5,17 +5,15 @@ namespace App\Modules\Airtable\Models;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $table_id
+ * @property int $table_id
  * @property int $rank
  * @property string|null $external_id
  * @property string $name
@@ -25,8 +23,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableAiTextField|null $aiTextField
- * @property-read Collection<int, AirtableAiTextFieldFieldPromptComponent> $aiTextFieldFieldPromptComponents
- * @property-read int|null $ai_text_field_field_prompt_components_count
  * @property-read AirtableAttachmentsField|null $attachmentsField
  * @property-read AirtableAutoNumberField|null $autoNumberField
  * @property-read AirtableBarcodeField|null $barcodeField
@@ -56,10 +52,8 @@ use Illuminate\Support\Carbon;
  * @property-read AirtableSelectionsField|null $selectionsField
  * @property-read AirtableShortTextField|null $shortTextField
  * @property-read AirtableSyncSourceField|null $syncSourceField
- * @property-read AirtableTable|null $table
+ * @property-read AirtableTable $table
  * @property-read AirtableUpdatedAtField|null $updatedAtField
- * @property-read Collection<int, AirtableUpdatedAtFieldField> $updatedAtFieldField
- * @property-read int|null $updated_at_field_field_count
  * @property-read AirtableUpdatedByField|null $updatedByField
  * @property-read AirtableUrlField|null $urlField
  *

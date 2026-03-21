@@ -11,12 +11,12 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $prompt_component_id
+ * @property int $prompt_component_id
  * @property string $text
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read AirtableAiTextFieldPromptComponent|null $promptComponent
+ * @property-read AirtableAiTextFieldPromptComponent $promptComponent
  *
  * @method static Builder<static>|AirtableAiTextFieldTextPromptComponent newModelQuery()
  * @method static Builder<static>|AirtableAiTextFieldTextPromptComponent newQuery()

@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableFormulaFieldReconcileAction
 {
-
     protected AirtableFormulaFieldFieldAllReconcileAction $formulaFieldFieldAllReconcileAction;
 
     public function __construct()

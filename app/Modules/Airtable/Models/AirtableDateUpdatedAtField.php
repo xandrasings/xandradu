@@ -11,11 +11,11 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $updated_at_field_id
+ * @property int $updated_at_field_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read AirtableUpdatedAtField|null $field
+ * @property-read AirtableUpdatedAtField $field
  *
  * @method static Builder<static>|AirtableDateUpdatedAtField newModelQuery()
  * @method static Builder<static>|AirtableDateUpdatedAtField newQuery()

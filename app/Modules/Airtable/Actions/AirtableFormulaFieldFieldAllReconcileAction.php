@@ -3,8 +3,8 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableReferencedFieldIdResourceResponseDto;
-use App\Modules\Airtable\Models\AirtableSelectionFieldChoice;
 use App\Modules\Airtable\Models\AirtableFormulaField;
+use App\Modules\Airtable\Models\AirtableSelectionFieldChoice;
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;

@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $selections_field_id
+ * @property int $selections_field_id
  * @property int $rank
  * @property string|null $external_id
  * @property string $name
@@ -19,7 +19,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read AirtableSelectionsField|null $selectionsField
+ * @property-read AirtableSelectionsField $selectionsField
  *
  * @method static Builder<static>|AirtableSelectionsFieldChoice newModelQuery()
  * @method static Builder<static>|AirtableSelectionsFieldChoice newQuery()

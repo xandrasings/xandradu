@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $field_id
+ * @property int $field_id
  * @property string|null $format
  * @property string|null $type
  * @property Carbon|null $created_at
@@ -23,7 +23,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $deleted_at
  * @property-read AirtableDateTimeUpdatedAtField|null $dateTimeUpdatedAtField
  * @property-read AirtableDateUpdatedAtField|null $dateUpdatedAtField
- * @property-read AirtableField|null $field
+ * @property-read AirtableField $field
  * @property-read Collection<int, AirtableUpdatedAtFieldField> $referencedFields
  * @property-read int|null $referenced_fields_count
  *

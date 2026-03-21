@@ -21,8 +21,8 @@ class AirtableFieldRetrieveAction
 
         $fields = AirtableField::where('external_id', $externalId)->get();
 
-        if (sizeof($fields) > 1) {
-            Throw new Exception('Too many matching records found');
+        if (count($fields) > 1) {
+            throw new Exception('Too many matching records found');
         }
 
         if ($fields->isEmpty()) {

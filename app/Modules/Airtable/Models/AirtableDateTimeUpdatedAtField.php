@@ -11,13 +11,13 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $updated_at_field_id
+ * @property int $updated_at_field_id
  * @property string $time_format
  * @property string $time_zone
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read AirtableUpdatedAtField|null $field
+ * @property-read AirtableUpdatedAtField $field
  *
  * @method static Builder<static>|AirtableDateTimeUpdatedAtField newModelQuery()
  * @method static Builder<static>|AirtableDateTimeUpdatedAtField newQuery()

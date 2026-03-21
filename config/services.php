@@ -62,5 +62,5 @@ return [
 
     'spaces' => [
         'endpoint' => env('SPACES_ENDPOINT'),
-    ]
+    ],
 ];

@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $sync_source_field_id
+ * @property int $sync_source_field_id
  * @property int $rank
  * @property string|null $external_id
  * @property string $name
@@ -19,7 +19,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read AirtableSyncSourceField|null $syncSourceField
+ * @property-read AirtableSyncSourceField $syncSourceField
  *
  * @method static Builder<static>|AirtableSyncSourceFieldChoice newModelQuery()
  * @method static Builder<static>|AirtableSyncSourceFieldChoice newQuery()

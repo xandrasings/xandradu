@@ -14,11 +14,11 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $field_id
+ * @property int $field_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read AirtableField|null $field
+ * @property-read AirtableField $field
  * @property-read Collection<int, AirtableAiTextFieldPromptComponent> $promptComponents
  * @property-read int|null $prompt_components_count
  *

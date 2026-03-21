@@ -14,14 +14,15 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $base_id
+ * @property int $base_id
  * @property int $rank
  * @property string|null $external_id
  * @property string $name
+ * @property string|null $description
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read AirtableBase|null $base
+ * @property-read AirtableBase $base
  * @property-read Collection<int, AirtableField> $fields
  * @property-read int|null $fields_count
  *
@@ -32,6 +33,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableTable whereBaseId($value)
  * @method static Builder<static>|AirtableTable whereCreatedAt($value)
  * @method static Builder<static>|AirtableTable whereDeletedAt($value)
+ * @method static Builder<static>|AirtableTable whereDescription($value)
  * @method static Builder<static>|AirtableTable whereExternalId($value)
  * @method static Builder<static>|AirtableTable whereId($value)
  * @method static Builder<static>|AirtableTable whereName($value)

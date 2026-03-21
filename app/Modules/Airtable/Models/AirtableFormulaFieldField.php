@@ -11,26 +11,26 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
- * @property int|null $updated_at_field_id
+ * @property int $formula_field_id
  * @property int|null $referenced_field_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
+ * @property-read AirtableFormulaField $formulaField
  * @property-read AirtableField|null $referencedField
- * @property-read AirtableUpdatedAtField|null $updatedAtField
  *
- * @method static Builder<static>|AirtableUpdatedAtFieldField newModelQuery()
- * @method static Builder<static>|AirtableUpdatedAtFieldField newQuery()
- * @method static Builder<static>|AirtableUpdatedAtFieldField onlyTrashed()
- * @method static Builder<static>|AirtableUpdatedAtFieldField query()
- * @method static Builder<static>|AirtableUpdatedAtFieldField whereCreatedAt($value)
- * @method static Builder<static>|AirtableUpdatedAtFieldField whereDeletedAt($value)
- * @method static Builder<static>|AirtableUpdatedAtFieldField whereId($value)
- * @method static Builder<static>|AirtableUpdatedAtFieldField whereReferencedFieldId($value)
- * @method static Builder<static>|AirtableUpdatedAtFieldField whereUpdatedAt($value)
- * @method static Builder<static>|AirtableUpdatedAtFieldField whereUpdatedAtFieldId($value)
- * @method static Builder<static>|AirtableUpdatedAtFieldField withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|AirtableUpdatedAtFieldField withoutTrashed()
+ * @method static Builder<static>|AirtableFormulaFieldField newModelQuery()
+ * @method static Builder<static>|AirtableFormulaFieldField newQuery()
+ * @method static Builder<static>|AirtableFormulaFieldField onlyTrashed()
+ * @method static Builder<static>|AirtableFormulaFieldField query()
+ * @method static Builder<static>|AirtableFormulaFieldField whereCreatedAt($value)
+ * @method static Builder<static>|AirtableFormulaFieldField whereDeletedAt($value)
+ * @method static Builder<static>|AirtableFormulaFieldField whereFormulaFieldId($value)
+ * @method static Builder<static>|AirtableFormulaFieldField whereId($value)
+ * @method static Builder<static>|AirtableFormulaFieldField whereReferencedFieldId($value)
+ * @method static Builder<static>|AirtableFormulaFieldField whereUpdatedAt($value)
+ * @method static Builder<static>|AirtableFormulaFieldField withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|AirtableFormulaFieldField withoutTrashed()
  *
  * @mixin Eloquent
  */
