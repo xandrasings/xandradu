@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('airtable_updated_at_field_fields', function (Blueprint $table) {
             $table->id();
             $table->foreignId('updated_at_field_id')->nullable()->constrained(table: 'airtable_updated_at_fields')->cascadeOnDelete();
-            $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->nullOnDelete();
+            $table->foreignId('referenced_field_id')->nullable()->constrained(table: 'airtable_fields')->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

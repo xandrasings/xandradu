@@ -33,8 +33,8 @@ class AirtableUpdatedAtFieldFieldAllReconcileAction
         Log::info('executing AirtableUpdatedAtFieldFieldAllReconcileAction');
 
         $updatedAtFieldFields = $updatedAtFieldOptionsFieldResourceResponseDtos
-            ->map(function (AirtableUpdatedAtFieldOptionsFieldResourceResponseDto $fieldId) use ($updatedAtField) {
-                return $this->updatedAtFieldFieldReconcileAction->handle($fieldId, $updatedAtField);
+            ->map(function (AirtableUpdatedAtFieldOptionsFieldResourceResponseDto $updatedAtFieldOptionsFieldResourceResponseDto) use ($updatedAtField) {
+                return $this->updatedAtFieldFieldReconcileAction->handle($updatedAtFieldOptionsFieldResourceResponseDto, $updatedAtField);
             })
             ->filter();
 

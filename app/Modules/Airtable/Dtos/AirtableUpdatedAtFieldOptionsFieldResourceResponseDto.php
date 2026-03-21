@@ -9,5 +9,5 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 #[MapName(SnakeCaseMapper::class)]
 class AirtableUpdatedAtFieldOptionsFieldResourceResponseDto extends Data
 {
-    public string $fieldId;
+    public string $referencedFieldId;
 }

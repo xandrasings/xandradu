@@ -8,5 +8,5 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 #[MapName(SnakeCaseMapper::class)]
 class AirtableAiTextFieldOptionsFieldPromptComponentResourceResponseDto extends AirtableAiTextFieldOptionsPromptComponentResourceResponseDto
 {
-    public ?string $fieldId;
+    public ?string $referencedFieldId;
 }

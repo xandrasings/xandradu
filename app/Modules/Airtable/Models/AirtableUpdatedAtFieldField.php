@@ -39,7 +39,7 @@ class AirtableUpdatedAtFieldField extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'field_id',
+        'referenced_field_id',
     ];
 
     public function updatedAtField(): BelongsTo

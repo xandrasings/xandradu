@@ -18,19 +18,17 @@ class AirtableUpdatedAtFieldFieldReconcileAction
     {
         Log::info('executing AirtableUpdatedAtFieldFieldReconcileAction', ['updatedAtFieldOptionsFieldResourceResponseDto' => $updatedAtFieldOptionsFieldResourceResponseDto, 'updatedAtField' => $updatedAtField]);
 
-        $fieldId = $updatedAtFieldOptionsFieldResourceResponseDto->fieldId;
-
-        $field = AirtableField::where('external_id', $fieldId)->first();
-        if (is_null($field)) {
+        $referencedField = AirtableField::where('external_id', $updatedAtFieldOptionsFieldResourceResponseDto->referencedFieldId)->first();
+        if (is_null($referencedField)) {
             Log::warning('AirtableUpdatedAtField references an unrecognized field.');
 
             return null;
         }
 
         $updatedAtFieldField = $updatedAtField->fields()->updateOrCreate(
-            ['field_id' => $field->id],
+            ['referenced_field_id' => $referencedField->id],
         );
-        Log::notice('created or updated AirtableUpdatedAtFieldField', ['updatedAtFieldField' => $updatedAtFieldField, 'fieldId' => $updatedAtFieldOptionsFieldResourceResponseDto]);
+        Log::notice('created or updated AirtableUpdatedAtFieldField', ['updatedAtFieldField' => $updatedAtFieldField, 'updatedAtFieldOptionsFieldResourceResponseDto' => $updatedAtFieldOptionsFieldResourceResponseDto]);
 
         return $updatedAtFieldField;
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('airtable_ai_text_field_prompt_components', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ai_text_field_id')->nullable()->constrained(table: 'airtable_ai_text_fields', indexName: 'airtable_ai_text_field_components_ai_text_field_id_foreign')->cascadeOnDelete();
+            $table->foreignId('ai_text_field_id')->nullable()->constrained(table: 'airtable_ai_text_fields', indexName: 'airtable_ai_field_components_ai_text_field_id_foreign')->cascadeOnDelete();
             $table->unsignedTinyInteger('rank');
             $table->string('type', 8);
             $table->timestamps();

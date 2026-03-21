@@ -32,7 +32,9 @@ class AirtableCountField extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'referenced_field_id',
+    ];
 
     public function field(): BelongsTo
     {

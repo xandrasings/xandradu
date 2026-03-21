@@ -17,12 +17,12 @@ class AirtableAiTextFieldOptionsPromptComponentResourceCaster implements Cast
             if (is_string($item)) {
                 return AirtableAiTextFieldOptionsTextPromptComponentResourceResponseDto::from(['rank' => 1, 'text' => $item, 'type' => AirtableAiTextFieldOptionsPromptComponentTypeEnum::TEXT]);
             } else {
-                $fieldId = data_get($item, 'field.fieldId');
-                if (is_null($fieldId)) {
+                $referencedFieldId = data_get($item, 'field.fieldId');
+                if (is_null($referencedFieldId)) {
                     Log::warning('Failed to find fieldId in payload.', ['aiTextFieldOptionsPromptComponentResourceResponseDto' => $item]);
                 }
 
-                return AirtableAiTextFieldOptionsFieldPromptComponentResourceResponseDto::from(['rank' => 0, 'fieldId' => $fieldId, 'type' => AirtableAiTextFieldOptionsPromptComponentTypeEnum::FIELD]);
+                return AirtableAiTextFieldOptionsFieldPromptComponentResourceResponseDto::from(['rank' => 0, 'referencedFieldId' => $referencedFieldId, 'type' => AirtableAiTextFieldOptionsPromptComponentTypeEnum::FIELD]);
             }
         });
     }
