@@ -2,6 +2,7 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -23,8 +24,8 @@ use Illuminate\Support\Carbon;
  * @property-read AirtableDateTimeUpdatedAtField|null $dateTimeUpdatedAtField
  * @property-read AirtableDateUpdatedAtField|null $dateUpdatedAtField
  * @property-read AirtableField|null $field
- * @property-read Collection<int, AirtableUpdatedAtFieldField> $fields
- * @property-read int|null $fields_count
+ * @property-read Collection<int, AirtableUpdatedAtFieldField> $referencedFields
+ * @property-read int|null $referenced_fields_count
  *
  * @method static Builder<static>|AirtableUpdatedAtField newModelQuery()
  * @method static Builder<static>|AirtableUpdatedAtField newQuery()
@@ -44,11 +45,17 @@ use Illuminate\Support\Carbon;
  */
 class AirtableUpdatedAtField extends Model
 {
-    use SoftDeletes;
+    use CascadeSoftDeletes, SoftDeletes;
 
     protected $fillable = [
         'format',
         'type',
+    ];
+
+    protected array $cascadeDeletes = [
+        'dateTimeUpdatedAtField',
+        'dateUpdatedAtField',
+        'referencedFields',
     ];
 
     public function field(): BelongsTo
@@ -66,7 +73,7 @@ class AirtableUpdatedAtField extends Model
         return $this->hasOne(AirtableDateUpdatedAtField::class, 'updated_at_field_id');
     }
 
-    public function fields(): HasMany
+    public function referencedFields(): HasMany
     {
         return $this->hasMany(AirtableUpdatedAtFieldField::class, 'updated_at_field_id');
     }

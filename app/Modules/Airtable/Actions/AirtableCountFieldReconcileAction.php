@@ -28,7 +28,6 @@ class AirtableCountFieldReconcileAction
         );
         Log::notice('created or updated AirtableCountField', ['countField' => $countField, 'countFieldResourceResponseDto' => $countFieldResourceResponseDto]);
 
-
         return $countField;
     }
 }

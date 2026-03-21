@@ -12,11 +12,11 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property int|null $updated_at_field_id
- * @property int|null $field_id
+ * @property int|null $referenced_field_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read AirtableField|null $field
+ * @property-read AirtableField|null $referencedField
  * @property-read AirtableUpdatedAtField|null $updatedAtField
  *
  * @method static Builder<static>|AirtableUpdatedAtFieldField newModelQuery()
@@ -25,8 +25,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableUpdatedAtFieldField query()
  * @method static Builder<static>|AirtableUpdatedAtFieldField whereCreatedAt($value)
  * @method static Builder<static>|AirtableUpdatedAtFieldField whereDeletedAt($value)
- * @method static Builder<static>|AirtableUpdatedAtFieldField whereFieldId($value)
  * @method static Builder<static>|AirtableUpdatedAtFieldField whereId($value)
+ * @method static Builder<static>|AirtableUpdatedAtFieldField whereReferencedFieldId($value)
  * @method static Builder<static>|AirtableUpdatedAtFieldField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableUpdatedAtFieldField whereUpdatedAtFieldId($value)
  * @method static Builder<static>|AirtableUpdatedAtFieldField withTrashed(bool $withTrashed = true)
@@ -47,7 +47,7 @@ class AirtableUpdatedAtFieldField extends Model
         return $this->belongsTo(AirtableUpdatedAtField::class, 'updated_at_field_id');
     }
 
-    public function field(): BelongsTo
+    public function referencedField(): BelongsTo
     {
         return $this->belongsTo(AirtableField::class, 'field_id');
     }

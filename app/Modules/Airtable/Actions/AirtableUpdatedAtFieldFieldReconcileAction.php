@@ -25,7 +25,7 @@ class AirtableUpdatedAtFieldFieldReconcileAction
             return null;
         }
 
-        $updatedAtFieldField = $updatedAtField->fields()->updateOrCreate(
+        $updatedAtFieldField = $updatedAtField->referencedFields()->updateOrCreate(
             ['referenced_field_id' => $referencedField->id],
         );
         Log::notice('created or updated AirtableUpdatedAtFieldField', ['updatedAtFieldField' => $updatedAtFieldField, 'updatedAtFieldOptionsFieldResourceResponseDto' => $updatedAtFieldOptionsFieldResourceResponseDto]);

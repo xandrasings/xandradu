@@ -2,40 +2,49 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int|null $field_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Airtable\Models\AirtableSyncSourceFieldChoice> $choices
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, AirtableSyncSourceFieldChoice> $choices
  * @property-read int|null $choices_count
- * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ * @property-read AirtableField|null $field
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceField newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceField newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceField onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceField query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceField whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceField whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceField whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceField whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceField whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceField withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSyncSourceField withoutTrashed()
+ * @method static Builder<static>|AirtableSyncSourceField newModelQuery()
+ * @method static Builder<static>|AirtableSyncSourceField newQuery()
+ * @method static Builder<static>|AirtableSyncSourceField onlyTrashed()
+ * @method static Builder<static>|AirtableSyncSourceField query()
+ * @method static Builder<static>|AirtableSyncSourceField whereCreatedAt($value)
+ * @method static Builder<static>|AirtableSyncSourceField whereDeletedAt($value)
+ * @method static Builder<static>|AirtableSyncSourceField whereFieldId($value)
+ * @method static Builder<static>|AirtableSyncSourceField whereId($value)
+ * @method static Builder<static>|AirtableSyncSourceField whereUpdatedAt($value)
+ * @method static Builder<static>|AirtableSyncSourceField withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|AirtableSyncSourceField withoutTrashed()
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class AirtableSyncSourceField extends Model
 {
-    use SoftDeletes;
+    use CascadeSoftDeletes, SoftDeletes;
 
     protected $fillable = [];
+
+    protected array $cascadeDeletes = [
+        'choices',
+    ];
 
     public function field(): BelongsTo
     {

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -83,7 +84,7 @@ use Illuminate\Support\Carbon;
  */
 class AirtableField extends Model
 {
-    use SoftDeletes;
+    use CascadeSoftDeletes, SoftDeletes;
 
     protected $fillable = [
         'rank',
@@ -91,6 +92,42 @@ class AirtableField extends Model
         'name',
         'description',
         'type',
+    ];
+
+    protected array $cascadeDeletes = [
+        'aiTextField',
+        'attachmentsField',
+        'autoNumberField',
+        'barcodeField',
+        'buttonField',
+        'checkboxField',
+        'collaboratorField',
+        'collaboratorsField',
+        'countField',
+        'createdAtField',
+        'createdByField',
+        'currencyField',
+        'dateField',
+        'dateAndTimeField',
+        'durationField',
+        'emailAddressField',
+        'formulaField',
+        'longTextField',
+        'lookupField',
+        'numberField',
+        'percentageField',
+        'phoneNumberField',
+        'ratingField',
+        'recordLinksField',
+        'richTextField',
+        'rollupField',
+        'selectionField',
+        'selectionsField',
+        'shortTextField',
+        'syncSourceField',
+        'updatedAtField',
+        'updatedByField',
+        'urlField',
     ];
 
     public function table(): BelongsTo

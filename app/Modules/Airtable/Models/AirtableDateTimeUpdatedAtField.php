@@ -17,7 +17,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read AirtableUpdatedAtField|null $field
+ * @property-read \App\Modules\Airtable\Models\AirtableUpdatedAtField|null $field
  *
  * @method static Builder<static>|AirtableDateTimeUpdatedAtField newModelQuery()
  * @method static Builder<static>|AirtableDateTimeUpdatedAtField newQuery()

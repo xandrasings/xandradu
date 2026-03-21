@@ -38,7 +38,7 @@ class AirtableUpdatedAtFieldFieldAllReconcileAction
             })
             ->filter();
 
-        $trashableUpdatedAtFieldFields = $updatedAtField->fields()
+        $trashableUpdatedAtFieldFields = $updatedAtField->referencedFields()
             ->whereNotIn('id', $updatedAtFieldFields->pluck('id'))
             ->get();
         $this->updatedAtFieldFieldAllTrashAction->handle($trashableUpdatedAtFieldFields);

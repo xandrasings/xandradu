@@ -2,40 +2,49 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int|null $field_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Airtable\Models\AirtableSelectionsFieldChoice> $choices
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, AirtableSelectionsFieldChoice> $choices
  * @property-read int|null $choices_count
- * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
+ * @property-read AirtableField|null $field
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableSelectionsField withoutTrashed()
+ * @method static Builder<static>|AirtableSelectionsField newModelQuery()
+ * @method static Builder<static>|AirtableSelectionsField newQuery()
+ * @method static Builder<static>|AirtableSelectionsField onlyTrashed()
+ * @method static Builder<static>|AirtableSelectionsField query()
+ * @method static Builder<static>|AirtableSelectionsField whereCreatedAt($value)
+ * @method static Builder<static>|AirtableSelectionsField whereDeletedAt($value)
+ * @method static Builder<static>|AirtableSelectionsField whereFieldId($value)
+ * @method static Builder<static>|AirtableSelectionsField whereId($value)
+ * @method static Builder<static>|AirtableSelectionsField whereUpdatedAt($value)
+ * @method static Builder<static>|AirtableSelectionsField withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|AirtableSelectionsField withoutTrashed()
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class AirtableSelectionsField extends Model
 {
-    use SoftDeletes;
+    use CascadeSoftDeletes, SoftDeletes;
 
     protected $fillable = [];
+
+    protected array $cascadeDeletes = [
+        'choices',
+    ];
 
     public function field(): BelongsTo
     {

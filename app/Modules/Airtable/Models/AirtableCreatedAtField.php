@@ -2,6 +2,7 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -40,11 +41,16 @@ use Illuminate\Support\Carbon;
  */
 class AirtableCreatedAtField extends Model
 {
-    use SoftDeletes;
+    use CascadeSoftDeletes, SoftDeletes;
 
     protected $fillable = [
         'format',
         'type',
+    ];
+
+    protected array $cascadeDeletes = [
+        'dateTimeCreatedAtField',
+        'dateCreatedAtField',
     ];
 
     public function field(): BelongsTo

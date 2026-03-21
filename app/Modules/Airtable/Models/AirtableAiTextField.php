@@ -2,40 +2,49 @@
 
 namespace App\Modules\Airtable\Models;
 
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int|null $field_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Modules\Airtable\Models\AirtableField|null $field
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Airtable\Models\AirtableAiTextFieldPromptComponent> $promptComponents
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read AirtableField|null $field
+ * @property-read Collection<int, AirtableAiTextFieldPromptComponent> $promptComponents
  * @property-read int|null $prompt_components_count
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextField newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextField newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextField onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextField query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextField whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextField whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextField whereFieldId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextField whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextField whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextField withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AirtableAiTextField withoutTrashed()
+ * @method static Builder<static>|AirtableAiTextField newModelQuery()
+ * @method static Builder<static>|AirtableAiTextField newQuery()
+ * @method static Builder<static>|AirtableAiTextField onlyTrashed()
+ * @method static Builder<static>|AirtableAiTextField query()
+ * @method static Builder<static>|AirtableAiTextField whereCreatedAt($value)
+ * @method static Builder<static>|AirtableAiTextField whereDeletedAt($value)
+ * @method static Builder<static>|AirtableAiTextField whereFieldId($value)
+ * @method static Builder<static>|AirtableAiTextField whereId($value)
+ * @method static Builder<static>|AirtableAiTextField whereUpdatedAt($value)
+ * @method static Builder<static>|AirtableAiTextField withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|AirtableAiTextField withoutTrashed()
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class AirtableAiTextField extends Model
 {
-    use SoftDeletes;
+    use CascadeSoftDeletes, SoftDeletes;
 
     protected $fillable = [];
+
+    protected array $cascadeDeletes = [
+        'promptComponents',
+    ];
 
     public function field(): BelongsTo
     {
