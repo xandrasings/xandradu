@@ -23,7 +23,7 @@ class AirtableUpdatedAtFieldFieldAllReconcileAction
     }
 
     /**
-     * @param Collection<AirtableUpdatedAtFieldOptionsFieldResourceResponseDto> $updatedAtFieldOptionsFieldResourceResponseDtos
+     * @param  Collection<AirtableUpdatedAtFieldOptionsFieldResourceResponseDto>  $updatedAtFieldOptionsFieldResourceResponseDtos
      * @return Collection<AirtableSelectionFieldChoice>
      *
      * @throws Exception

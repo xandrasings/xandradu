@@ -23,7 +23,7 @@ class AirtableFieldAllReconcileAction
     }
 
     /**
-     * @param Collection<AirtableFieldResourceResponseDto> $fieldResourceResponseDtos
+     * @param  Collection<AirtableFieldResourceResponseDto>  $fieldResourceResponseDtos
      * @return Collection<AirtableField>
      *
      * @throws Exception

@@ -23,7 +23,7 @@ class AirtableAiTextFieldPromptComponentAllReconcileAction
     }
 
     /**
-     * @param Collection<AirtableAiTextFieldOptionsPromptComponentResourceResponseDto> $aiTextFieldOptionsPromptComponentResourceResponseDtos
+     * @param  Collection<AirtableAiTextFieldOptionsPromptComponentResourceResponseDto>  $aiTextFieldOptionsPromptComponentResourceResponseDtos
      * @return Collection<AirtableAiTextFieldPromptComponent>
      *
      * @throws Exception

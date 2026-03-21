@@ -17,7 +17,7 @@ class AirtableFieldAllTrashAction
     }
 
     /**
-     * @param Collection<AirtableField> $fields
+     * @param  Collection<AirtableField>  $fields
      *
      * @throws Exception
      */

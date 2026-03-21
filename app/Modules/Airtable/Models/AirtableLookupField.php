@@ -12,6 +12,8 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property int|null $field_id
+ * @property int|null $referenced_field_id
+ * @property int|null $targeted_field_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
@@ -25,6 +27,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableLookupField whereDeletedAt($value)
  * @method static Builder<static>|AirtableLookupField whereFieldId($value)
  * @method static Builder<static>|AirtableLookupField whereId($value)
+ * @method static Builder<static>|AirtableLookupField whereReferencedFieldId($value)
+ * @method static Builder<static>|AirtableLookupField whereTargetedFieldId($value)
  * @method static Builder<static>|AirtableLookupField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableLookupField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableLookupField withoutTrashed()
@@ -35,7 +39,10 @@ class AirtableLookupField extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'referenced_field_id',
+        'targeted_field_id',
+    ];
 
     public function field(): BelongsTo
     {
