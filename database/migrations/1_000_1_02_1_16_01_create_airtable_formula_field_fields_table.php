@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('airtable_formula_fields', function (Blueprint $table) {
+        Schema::create('airtable_formula_field_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->cascadeOnDelete();
-            $table->string('formula', 2048);
+            $table->foreignId('formula_field_id')->nullable()->constrained(table: 'airtable_formula_fields')->cascadeOnDelete();
+            $table->foreignId('referenced_field_id')->nullable()->constrained(table: 'airtable_fields')->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('airtable_formula_fields');
+        Schema::dropIfExists('airtable_formula_field_fields');
     }
 };

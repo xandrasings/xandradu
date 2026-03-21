@@ -2,8 +2,7 @@
 
 namespace App\Modules\Airtable\Actions;
 
-use App\Modules\Airtable\Dtos\AirtableUpdatedAtFieldOptionsFieldResourceResponseDto;
-use App\Modules\Airtable\Models\AirtableField;
+use App\Modules\Airtable\Dtos\AirtableReferencedFieldIdResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableUpdatedAtField;
 use App\Modules\Airtable\Models\AirtableUpdatedAtFieldField;
 use Exception;
@@ -21,11 +20,11 @@ class AirtableUpdatedAtFieldFieldReconcileAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableUpdatedAtFieldOptionsFieldResourceResponseDto $updatedAtFieldOptionsFieldResourceResponseDto, AirtableUpdatedAtField $updatedAtField): ?AirtableUpdatedAtFieldField
+    public function handle(AirtableReferencedFieldIdResourceResponseDto $referencedFieldIdResourceResponseDto, AirtableUpdatedAtField $updatedAtField): ?AirtableUpdatedAtFieldField
     {
-        Log::info('executing AirtableUpdatedAtFieldFieldReconcileAction', ['updatedAtFieldOptionsFieldResourceResponseDto' => $updatedAtFieldOptionsFieldResourceResponseDto, 'updatedAtField' => $updatedAtField]);
+        Log::info('executing AirtableUpdatedAtFieldFieldReconcileAction', ['updatedAtFieldOptionsFieldResourceResponseDto' => $referencedFieldIdResourceResponseDto, 'updatedAtField' => $updatedAtField]);
 
-        $referencedField = $this->retrieveAction->handle($updatedAtFieldOptionsFieldResourceResponseDto->referencedFieldId);
+        $referencedField = $this->retrieveAction->handle($referencedFieldIdResourceResponseDto->referencedFieldId);
         if (is_null($referencedField)) {
             Log::warning('AirtableUpdatedAtField references an unrecognized field.');
 
@@ -35,7 +34,7 @@ class AirtableUpdatedAtFieldFieldReconcileAction
         $updatedAtFieldField = $updatedAtField->referencedFields()->updateOrCreate(
             ['referenced_field_id' => $referencedField->id],
         );
-        Log::notice('created or updated AirtableUpdatedAtFieldField', ['updatedAtFieldField' => $updatedAtFieldField, 'updatedAtFieldOptionsFieldResourceResponseDto' => $updatedAtFieldOptionsFieldResourceResponseDto]);
+        Log::notice('created or updated AirtableUpdatedAtFieldField', ['updatedAtFieldField' => $updatedAtFieldField, 'updatedAtFieldOptionsFieldResourceResponseDto' => $referencedFieldIdResourceResponseDto]);
 
         return $updatedAtFieldField;
     }

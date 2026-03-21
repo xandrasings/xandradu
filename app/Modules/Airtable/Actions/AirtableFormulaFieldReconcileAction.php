@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableFormulaFieldReconcileAction
 {
+
+    protected AirtableFormulaFieldFieldAllReconcileAction $formulaFieldFieldAllReconcileAction;
+
+    public function __construct()
+    {
+        $this->formulaFieldFieldAllReconcileAction = app(AirtableFormulaFieldFieldAllReconcileAction::class);
+    }
+
     /**
      * @throws Exception
      */
@@ -19,9 +27,11 @@ class AirtableFormulaFieldReconcileAction
 
         $formulaField = $field->formulaField()->updateOrCreate(
             [],
-            $formulaFieldResourceResponseDto->options->toArray(),
+            $formulaFieldResourceResponseDto->options->except('isValid', 'referencedFieldIds')->toArray(),
         );
         Log::notice('created or updated AirtableFormulaField', ['formulaField' => $formulaField, 'formulaFieldResourceResponseDto' => $formulaFieldResourceResponseDto]);
+
+        $this->formulaFieldFieldAllReconcileAction->handle($formulaFieldResourceResponseDto->options->referencedFieldIds, $formulaField);
 
         return $formulaField;
     }

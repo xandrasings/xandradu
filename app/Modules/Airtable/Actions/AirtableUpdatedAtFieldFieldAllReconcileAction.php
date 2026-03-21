@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Actions;
 
-use App\Modules\Airtable\Dtos\AirtableUpdatedAtFieldOptionsFieldResourceResponseDto;
+use App\Modules\Airtable\Dtos\AirtableReferencedFieldIdResourceResponseDto;
 use App\Modules\Airtable\Models\AirtableSelectionFieldChoice;
 use App\Modules\Airtable\Models\AirtableUpdatedAtField;
 use Exception;
@@ -23,18 +23,18 @@ class AirtableUpdatedAtFieldFieldAllReconcileAction
     }
 
     /**
-     * @param  Collection<AirtableUpdatedAtFieldOptionsFieldResourceResponseDto>  $updatedAtFieldOptionsFieldResourceResponseDtos
+     * @param  Collection<AirtableReferencedFieldIdResourceResponseDto>  $referencedFieldIdResourceResponseDtos
      * @return Collection<AirtableSelectionFieldChoice>
      *
      * @throws Exception
      */
-    public function handle(Collection $updatedAtFieldOptionsFieldResourceResponseDtos, AirtableUpdatedAtField $updatedAtField): Collection
+    public function handle(Collection $referencedFieldIdResourceResponseDtos, AirtableUpdatedAtField $updatedAtField): Collection
     {
         Log::info('executing AirtableUpdatedAtFieldFieldAllReconcileAction');
 
-        $updatedAtFieldFields = $updatedAtFieldOptionsFieldResourceResponseDtos
-            ->map(function (AirtableUpdatedAtFieldOptionsFieldResourceResponseDto $updatedAtFieldOptionsFieldResourceResponseDto) use ($updatedAtField) {
-                return $this->updatedAtFieldFieldReconcileAction->handle($updatedAtFieldOptionsFieldResourceResponseDto, $updatedAtField);
+        $updatedAtFieldFields = $referencedFieldIdResourceResponseDtos
+            ->map(function (AirtableReferencedFieldIdResourceResponseDto $referencedFieldIdResourceResponseDto) use ($updatedAtField) {
+                return $this->updatedAtFieldFieldReconcileAction->handle($referencedFieldIdResourceResponseDto, $updatedAtField);
             })
             ->filter();
 

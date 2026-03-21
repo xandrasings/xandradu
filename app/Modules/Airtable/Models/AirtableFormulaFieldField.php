@@ -34,7 +34,7 @@ use Illuminate\Support\Carbon;
  *
  * @mixin Eloquent
  */
-class AirtableUpdatedAtFieldField extends Model
+class AirtableFormulaFieldField extends Model
 {
     use SoftDeletes;
 
@@ -42,9 +42,9 @@ class AirtableUpdatedAtFieldField extends Model
         'referenced_field_id',
     ];
 
-    public function updatedAtField(): BelongsTo
+    public function formulaField(): BelongsTo
     {
-        return $this->belongsTo(AirtableUpdatedAtField::class, 'updated_at_field_id');
+        return $this->belongsTo(AirtableFormulaField::class, 'formula_field_id');
     }
 
     public function referencedField(): BelongsTo

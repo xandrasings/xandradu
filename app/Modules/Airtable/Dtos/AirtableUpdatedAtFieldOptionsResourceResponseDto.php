@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Dtos;
 
-use App\Modules\Airtable\Casters\AirtableUpdatedAtFieldOptionsFieldResourceCaster;
+use App\Modules\Airtable\Casters\AirtableReferencedFieldIdsResourceCaster;
 use App\Transformers\AssertTrueTransformer;
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
@@ -18,8 +18,8 @@ class AirtableUpdatedAtFieldOptionsResourceResponseDto extends Data
     #[WithTransformer(AssertTrueTransformer::class)]
     public bool $isValid;
 
-    #[WithCast(AirtableUpdatedAtFieldOptionsFieldResourceCaster::class)]
-    #[DataCollectionOf(AirtableUpdatedAtFieldOptionsFieldResourceResponseDto::class)]
+    #[WithCast(AirtableReferencedFieldIdsResourceCaster::class)]
+    #[DataCollectionOf(AirtableReferencedFieldIdResourceResponseDto::class)]
     public Collection $referencedFieldIds;
 
     public ?AirtableUpdatedAtFieldOptionsResultResourceResponseDto $result;

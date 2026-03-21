@@ -6,6 +6,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
@@ -35,10 +36,17 @@ class AirtableFormulaField extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'formula'
+    ];
 
     public function field(): BelongsTo
     {
         return $this->belongsTo(AirtableField::class, 'field_id');
+    }
+
+    public function referencedFields(): HasMany
+    {
+        return $this->hasMany(AirtableFormulaFieldField::class, 'formula_field_id');
     }
 }
