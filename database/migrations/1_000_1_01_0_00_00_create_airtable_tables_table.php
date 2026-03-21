@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('rank');
             $table->string('external_id', 32)->nullable();
             $table->string('name', 32);
+            $table->string('description', 2048)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

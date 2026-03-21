@@ -22,7 +22,9 @@ class AirtableTableResourceResponseDto extends Data
     #[WithTransformer(LengthyStringTransformer::class, length: 32)]
     public string $name;
 
+    #[WithTransformer(LengthyStringTransformer::class, length: 2048)]
+    public ?string $description;
+
     #[DataCollectionOf(AirtableFieldResourceResponseDto::class)]
     public Collection $fields;
-
 }

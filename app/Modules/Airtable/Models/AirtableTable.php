@@ -50,6 +50,7 @@ class AirtableTable extends Model
         'rank',
         'external_id',
         'name',
+        'description',
     ];
 
     protected array $cascadeDeletes = [
