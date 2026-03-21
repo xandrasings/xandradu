@@ -35,7 +35,10 @@ class AirtableRollupField extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'referenced_field_id',
+        'targeted_field_id',
+    ];
 
     public function field(): BelongsTo
     {

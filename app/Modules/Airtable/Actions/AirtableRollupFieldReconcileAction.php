@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableRollupFieldReconcileAction
 {
+    protected AirtableFieldRetrieveAction $retrieveAction;
+
+    public function __construct()
+    {
+        $this->retrieveAction = app(AirtableFieldRetrieveAction::class);
+    }
+
     /**
      * @throws Exception
      */
@@ -17,9 +24,22 @@ class AirtableRollupFieldReconcileAction
     {
         Log::info('executing AirtableRollupFieldReconcileAction', ['rollupFieldResourceResponseDto' => $rollupFieldResourceResponseDto, 'field' => $field]);
 
+        $referencedField = $this->retrieveAction->handle($rollupFieldResourceResponseDto->options->recordLinkFieldId);
+        if (is_null($referencedField)) {
+            Log::warning('AirtableRollupField references an unrecognized field.');
+        }
+
+        $targetedField = $this->retrieveAction->handle($rollupFieldResourceResponseDto->options->fieldIdInLinkedTable);
+        if (is_null($targetedField)) {
+            Log::warning('AirtableRollupField references an unrecognized field.');
+        }
+
         $rollupField = $field->rollupField()->updateOrCreate(
             [],
-            $rollupFieldResourceResponseDto->options->toArray(),
+            [
+                'referenced_field_id' => is_null($referencedField) ? null : $referencedField->id,
+                'targeted_field_id' => is_null($targetedField) ? null : $targetedField->id,
+            ],
         );
         Log::notice('created or updated AirtableRollupField', ['rollupField' => $rollupField, 'rollupFieldResourceResponseDto' => $rollupFieldResourceResponseDto]);
 
