@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('airtable_barcode_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->cascadeOnDelete();
+            $table->foreignId('field_id')->constrained(table: 'airtable_fields')->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

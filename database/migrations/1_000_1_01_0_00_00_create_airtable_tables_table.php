@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('airtable_tables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('base_id')->nullable()->constrained(table: 'airtable_bases')->cascadeOnDelete();
+            $table->foreignId('base_id')->constrained(table: 'airtable_bases')->cascadeOnDelete();
             $table->unsignedSmallInteger('rank');
             $table->string('external_id', 32)->nullable();
             $table->string('name', 32);

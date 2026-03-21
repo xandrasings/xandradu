@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('airtable_date_time_updated_at_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('updated_at_field_id')->nullable()->constrained(table: 'airtable_updated_at_fields')->cascadeOnDelete();
+            $table->foreignId('updated_at_field_id')->constrained(table: 'airtable_updated_at_fields')->cascadeOnDelete();
             $table->string('time_format', 8);
             $table->string('time_zone', 32);
             $table->timestamps();

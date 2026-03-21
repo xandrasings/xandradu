@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('airtable_selection_field_choices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('selection_field_id')->nullable()->constrained(table: 'airtable_selection_fields')->cascadeOnDelete();
+            $table->foreignId('selection_field_id')->constrained(table: 'airtable_selection_fields')->cascadeOnDelete();
             $table->unsignedSmallInteger('rank');
             $table->string('external_id', 32)->nullable();
             $table->string('name', 64);

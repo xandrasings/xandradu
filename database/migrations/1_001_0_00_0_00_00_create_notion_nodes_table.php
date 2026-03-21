@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('notion_nodes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('parent_id')->nullable()->constrained(table: 'notion_nodes')->cascadeOnDelete();
+            $table->foreignId('parent_id')->constrained(table: 'notion_nodes')->cascadeOnDelete();
             $table->integer('rank')->default(0);
             $table->integer('step')->default(0);
             $table->timestamps();

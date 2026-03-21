@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('airtable_date_created_at_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('created_at_field_id')->nullable()->constrained(table: 'airtable_created_at_fields')->cascadeOnDelete();
+            $table->foreignId('created_at_field_id')->constrained(table: 'airtable_created_at_fields')->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('airtable_currency_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('field_id')->nullable()->constrained(table: 'airtable_fields')->cascadeOnDelete();
+            $table->foreignId('field_id')->constrained(table: 'airtable_fields')->cascadeOnDelete();
             $table->unsignedTinyInteger('precision');
             $table->string('symbol', 8);
             $table->timestamps();

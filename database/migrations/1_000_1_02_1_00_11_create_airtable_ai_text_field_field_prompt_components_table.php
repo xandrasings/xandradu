@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('airtable_ai_text_field_field_prompt_components', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('prompt_component_id')->nullable()->constrained(table: 'airtable_ai_text_field_prompt_components', indexName: 'airtable_ai_field_field_components_ai_text_field_id_foreign')->cascadeOnDelete();
+            $table->foreignId('prompt_component_id')->constrained(table: 'airtable_ai_text_field_prompt_components', indexName: 'airtable_ai_field_field_components_ai_text_field_id_foreign')->cascadeOnDelete();
             $table->foreignId('referenced_field_id')->nullable()->constrained(table: 'airtable_fields', indexName: 'airtable_ai_field_field_components_referenced_field_id_foreign')->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();

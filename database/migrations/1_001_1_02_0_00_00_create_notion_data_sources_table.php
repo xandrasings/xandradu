@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('rank')->default(0);
             $table->string('external_id', 32)->nullable();
             $table->string('title', 32)->nullable();
-            $table->foreignId('icon_id')->nullable()->constrained(table: 'stored_files')->cascadeOnDelete();
+            $table->foreignId('icon_id')->constrained(table: 'stored_files')->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });
