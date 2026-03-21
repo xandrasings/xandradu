@@ -3,8 +3,8 @@
 namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Dtos\AirtableViewResourceResponseDto;
-use App\Modules\Airtable\Models\AirtableView;
 use App\Modules\Airtable\Models\AirtableTable;
+use App\Modules\Airtable\Models\AirtableView;
 use Exception;
 use Illuminate\Support\Facades\Log;
 

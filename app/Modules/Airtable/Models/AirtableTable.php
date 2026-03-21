@@ -25,6 +25,10 @@ use Illuminate\Support\Carbon;
  * @property-read AirtableBase $base
  * @property-read Collection<int, AirtableField> $fields
  * @property-read int|null $fields_count
+ * @property-read Collection<int, AirtableRecord> $records
+ * @property-read int|null $records_count
+ * @property-read Collection<int, AirtableView> $views
+ * @property-read int|null $views_count
  *
  * @method static Builder<static>|AirtableTable newModelQuery()
  * @method static Builder<static>|AirtableTable newQuery()
@@ -57,7 +61,8 @@ class AirtableTable extends Model
 
     protected array $cascadeDeletes = [
         'fields',
-        'views'
+        'views',
+        'records',
     ];
 
     public function base(): BelongsTo
@@ -73,5 +78,10 @@ class AirtableTable extends Model
     public function views(): HasMany
     {
         return $this->hasMany(AirtableView::class, 'table_id');
+    }
+
+    public function records(): HasMany
+    {
+        return $this->hasMany(AirtableRecord::class, 'table_id');
     }
 }
