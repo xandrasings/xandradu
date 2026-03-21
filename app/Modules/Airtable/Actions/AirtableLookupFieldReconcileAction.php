@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableLookupFieldReconcileAction
 {
+    protected AirtableFieldRetrieveAction $retrieveAction;
+
+    public function __construct()
+    {
+        $this->retrieveAction = app(AirtableFieldRetrieveAction::class);
+    }
+
     /**
      * @throws Exception
      */
@@ -17,12 +24,12 @@ class AirtableLookupFieldReconcileAction
     {
         Log::info('executing AirtableLookupFieldReconcileAction', ['lookupFieldResourceResponseDto' => $lookupFieldResourceResponseDto, 'field' => $field]);
 
-        $referencedField = AirtableField::where('external_id', $lookupFieldResourceResponseDto->options->recordLinkFieldId)->first();
+        $referencedField = $this->retrieveAction->handle($lookupFieldResourceResponseDto->options->recordLinkFieldId);
         if (is_null($referencedField)) {
             Log::warning('AirtableLookupField references an unrecognized field.');
         }
 
-        $targetedField = AirtableField::where('external_id', $lookupFieldResourceResponseDto->options->fieldIdInLinkedTable)->first();
+        $targetedField = $this->retrieveAction->handle($lookupFieldResourceResponseDto->options->fieldIdInLinkedTable);
         if (is_null($targetedField)) {
             Log::warning('AirtableLookupField references an unrecognized field.');
         }

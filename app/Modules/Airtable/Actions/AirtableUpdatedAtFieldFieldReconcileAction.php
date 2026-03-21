@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableUpdatedAtFieldFieldReconcileAction
 {
+    protected AirtableFieldRetrieveAction $retrieveAction;
+
+    public function __construct()
+    {
+        $this->retrieveAction = app(AirtableFieldRetrieveAction::class);
+    }
+
     /**
      * @throws Exception
      */
@@ -18,7 +25,7 @@ class AirtableUpdatedAtFieldFieldReconcileAction
     {
         Log::info('executing AirtableUpdatedAtFieldFieldReconcileAction', ['updatedAtFieldOptionsFieldResourceResponseDto' => $updatedAtFieldOptionsFieldResourceResponseDto, 'updatedAtField' => $updatedAtField]);
 
-        $referencedField = AirtableField::where('external_id', $updatedAtFieldOptionsFieldResourceResponseDto->referencedFieldId)->first();
+        $referencedField = $this->retrieveAction->handle($updatedAtFieldOptionsFieldResourceResponseDto->referencedFieldId);
         if (is_null($referencedField)) {
             Log::warning('AirtableUpdatedAtField references an unrecognized field.');
 

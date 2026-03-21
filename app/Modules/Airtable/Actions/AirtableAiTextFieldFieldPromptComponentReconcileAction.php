@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableAiTextFieldFieldPromptComponentReconcileAction
 {
+    protected AirtableFieldRetrieveAction $retrieveAction;
+
+    public function __construct()
+    {
+        $this->retrieveAction = app(AirtableFieldRetrieveAction::class);
+    }
+
     /**
      * @throws Exception
      */
@@ -18,7 +25,7 @@ class AirtableAiTextFieldFieldPromptComponentReconcileAction
     {
         Log::info('executing AirtableAiTextFieldFieldPromptComponentReconcileAction', ['aiTextFieldOptionsFieldPromptComponentResourceResponseDto' => $aiTextFieldOptionsFieldPromptComponentResourceResponseDto, 'aiTextFieldPromptComponent' => $aiTextFieldPromptComponent]);
 
-        $referencedField = AirtableField::where('external_id', $aiTextFieldOptionsFieldPromptComponentResourceResponseDto->referencedFieldId)->first();
+        $referencedField = $this->retrieveAction->handle($aiTextFieldOptionsFieldPromptComponentResourceResponseDto->referencedFieldId);
         if (is_null($referencedField)) {
             Log::warning('AirtableAiTextField references an unrecognized field.');
         }

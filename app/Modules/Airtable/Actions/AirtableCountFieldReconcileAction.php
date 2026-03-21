@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableCountFieldReconcileAction
 {
+    protected AirtableFieldRetrieveAction $retrieveAction;
+
+    public function __construct()
+    {
+        $this->retrieveAction = app(AirtableFieldRetrieveAction::class);
+    }
+
     /**
      * @throws Exception
      */
@@ -17,7 +24,7 @@ class AirtableCountFieldReconcileAction
     {
         Log::info('executing AirtableCountFieldReconcileAction', ['countFieldResourceResponseDto' => $countFieldResourceResponseDto, 'field' => $field]);
 
-        $referencedField = AirtableField::where('external_id', $countFieldResourceResponseDto->options->recordLinkFieldId)->first();
+        $referencedField = $this->retrieveAction->handle($countFieldResourceResponseDto->options->recordLinkFieldId);
         if (is_null($referencedField)) {
             Log::warning('AirtableCountField references an unrecognized field.');
         }
