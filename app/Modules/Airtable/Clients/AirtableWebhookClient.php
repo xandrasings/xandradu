@@ -38,7 +38,8 @@ class AirtableWebhookClient
         $response = Http::withToken($token)->post($url, $webhookCreateRequestDto);
 
         if ($response->failed()) {
-            throw new Exception("api to airtable endpoint $url failed with response {$response->getStatusCode()}", ['response body', $response->body()]);
+            Log::error("api to airtable endpoint $url failed with response {$response->getStatusCode()}", ['response body', $response->body()]);
+            throw new Exception("api to airtable endpoint $url failed with response {$response->getStatusCode()}");
         }
 
         return AirtableWebhookCreateResponseDto::from($response->getBody());
