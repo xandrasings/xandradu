@@ -11,7 +11,7 @@ class AirtableController extends Controller
 {
     public function handleWebhook(Request $request): JsonResponse
     {
-        Log::notice("received Airtable webhook.", [$request->json()]);
+        Log::notice("received Airtable webhook.", [$request]);
 
         return response()->json([
             'status' => 'success',
