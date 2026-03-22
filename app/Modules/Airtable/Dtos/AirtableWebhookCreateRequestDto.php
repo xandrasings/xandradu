@@ -11,7 +11,7 @@ class AirtableWebhookCreateRequestDto extends Data
     public AirtableWebhookSpecificationResourceRequestDto $specification;
 
     public function __construct() {
-        $this->notificationUrl = config('services.airtable.workspace_id');
+        $this->notificationUrl = config('services.airtable.notification_url');
         $this->specification = new AirtableWebhookSpecificationResourceRequestDto();
     }
 }
