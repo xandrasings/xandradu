@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('base_id')->constrained(table: 'airtable_bases')->cascadeOnDelete();
             $table->string('external_id', 32)->nullable();
-            $table->string('mac_secret', 2048)->nullable();
+            $table->string('encoded_mac_secret', 2048)->nullable();
             $table->dateTime('expires_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

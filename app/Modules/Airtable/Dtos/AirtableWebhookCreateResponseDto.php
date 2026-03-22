@@ -2,12 +2,10 @@
 
 namespace App\Modules\Airtable\Dtos;
 
-use App\Transformers\DecodeBase64StringTransformer;
 use DateTime;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Attributes\WithCast;
-use Spatie\LaravelData\Attributes\WithTransformer;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
@@ -22,7 +20,6 @@ class AirtableWebhookCreateResponseDto extends Data
     #[MapOutputName('external_id')]
     public string $id;
 
-    #[MapOutputName('mac_secret')]
-    #[WithTransformer(DecodeBase64StringTransformer::class)]
+    #[MapOutputName('encoded_mac_secret')]
     public string $macSecretBase64;
 }

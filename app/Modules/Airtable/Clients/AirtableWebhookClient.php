@@ -2,7 +2,6 @@
 
 namespace App\Modules\Airtable\Clients;
 
-use App\Modules\Airtable\Dtos\AirtableBaseCreateResponseDto;
 use App\Modules\Airtable\Dtos\AirtableWebhookCreateRequestDto;
 use App\Modules\Airtable\Dtos\AirtableWebhookCreateResponseDto;
 use Exception;
