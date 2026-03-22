@@ -2,6 +2,7 @@
 
 namespace App\Modules\Airtable\Clients;
 
+use App\Modules\Airtable\Dtos\AirtableBaseCreateResponseDto;
 use App\Modules\Airtable\Dtos\AirtableWebhookCreateRequestDto;
 use App\Modules\Airtable\Dtos\AirtableWebhookCreateResponseDto;
 use Exception;
@@ -42,6 +43,8 @@ class AirtableWebhookClient
             throw new Exception("api to airtable endpoint $url failed with response {$response->getStatusCode()}");
         }
 
-        return AirtableWebhookCreateResponseDto::from($response->getBody());
+        Log::notice('call results',['json'=>$response->json(), 'body'=>$response->body()]);
+
+        return AirtableWebhookCreateResponseDto::from($response->body());
     }
 }
