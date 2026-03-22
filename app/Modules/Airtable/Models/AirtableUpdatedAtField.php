@@ -26,7 +26,6 @@ use Illuminate\Support\Carbon;
  * @property-read AirtableField $field
  * @property-read Collection<int, AirtableUpdatedAtFieldField> $referencedFields
  * @property-read int|null $referenced_fields_count
- *
  * @method static Builder<static>|AirtableUpdatedAtField newModelQuery()
  * @method static Builder<static>|AirtableUpdatedAtField newQuery()
  * @method static Builder<static>|AirtableUpdatedAtField onlyTrashed()
@@ -40,7 +39,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableUpdatedAtField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableUpdatedAtField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableUpdatedAtField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableUpdatedAtField extends Model

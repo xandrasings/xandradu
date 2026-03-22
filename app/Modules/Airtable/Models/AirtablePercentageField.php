@@ -17,7 +17,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableField $field
- *
  * @method static Builder<static>|AirtablePercentageField newModelQuery()
  * @method static Builder<static>|AirtablePercentageField newQuery()
  * @method static Builder<static>|AirtablePercentageField onlyTrashed()
@@ -30,7 +29,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtablePercentageField whereUpdatedAt($value)
  * @method static Builder<static>|AirtablePercentageField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtablePercentageField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtablePercentageField extends Model

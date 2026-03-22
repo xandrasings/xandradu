@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Dtos;
 
-use App\Transformers\LengthyStringTransformer;
+use App\Transformers\ShortenLengthyStringTransformer;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\Validation\Between;
 use Spatie\LaravelData\Attributes\WithTransformer;
@@ -15,6 +15,6 @@ class AirtableCurrencyFieldOptionsResourceResponseDto extends Data
     #[Between(0, 7)]
     public int $precision;
 
-    #[WithTransformer(LengthyStringTransformer::class, length: 8)]
+    #[WithTransformer(ShortenLengthyStringTransformer::class, length: 8)]
     public string $symbol;
 }

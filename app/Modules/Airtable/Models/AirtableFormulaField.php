@@ -21,7 +21,6 @@ use Illuminate\Support\Carbon;
  * @property-read AirtableField $field
  * @property-read Collection<int, AirtableFormulaFieldField> $referencedFields
  * @property-read int|null $referenced_fields_count
- *
  * @method static Builder<static>|AirtableFormulaField newModelQuery()
  * @method static Builder<static>|AirtableFormulaField newQuery()
  * @method static Builder<static>|AirtableFormulaField onlyTrashed()
@@ -34,7 +33,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableFormulaField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableFormulaField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableFormulaField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableFormulaField extends Model

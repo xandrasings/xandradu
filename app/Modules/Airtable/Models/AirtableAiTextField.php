@@ -21,7 +21,6 @@ use Illuminate\Support\Carbon;
  * @property-read AirtableField $field
  * @property-read Collection<int, AirtableAiTextFieldPromptComponent> $promptComponents
  * @property-read int|null $prompt_components_count
- *
  * @method static Builder<static>|AirtableAiTextField newModelQuery()
  * @method static Builder<static>|AirtableAiTextField newQuery()
  * @method static Builder<static>|AirtableAiTextField onlyTrashed()
@@ -33,7 +32,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableAiTextField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableAiTextField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableAiTextField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableAiTextField extends Model

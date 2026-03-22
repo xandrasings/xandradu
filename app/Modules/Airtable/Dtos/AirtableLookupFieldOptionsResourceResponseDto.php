@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Dtos;
 
-use App\Transformers\AssertTrueTransformer;
+use App\Transformers\AssertTrueBooleanTransformer;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Attributes\WithTransformer;
@@ -12,7 +12,7 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 #[MapName(SnakeCaseMapper::class)]
 class AirtableLookupFieldOptionsResourceResponseDto extends Data
 {
-    #[WithTransformer(AssertTrueTransformer::class)]
+    #[WithTransformer(AssertTrueBooleanTransformer::class)]
     public bool $isValid;
 
     #[MapOutputName('referenced_field_id')]

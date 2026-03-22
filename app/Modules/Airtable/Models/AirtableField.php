@@ -56,7 +56,6 @@ use Illuminate\Support\Carbon;
  * @property-read AirtableUpdatedAtField|null $updatedAtField
  * @property-read AirtableUpdatedByField|null $updatedByField
  * @property-read AirtableUrlField|null $urlField
- *
  * @method static Builder<static>|AirtableField newModelQuery()
  * @method static Builder<static>|AirtableField newQuery()
  * @method static Builder<static>|AirtableField onlyTrashed()
@@ -73,7 +72,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableField extends Model

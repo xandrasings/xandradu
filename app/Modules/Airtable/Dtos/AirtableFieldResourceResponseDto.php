@@ -3,7 +3,7 @@
 namespace App\Modules\Airtable\Dtos;
 
 use App\Modules\Airtable\Enums\AirtableFieldTypeEnum;
-use App\Transformers\LengthyStringTransformer;
+use App\Transformers\ShortenLengthyStringTransformer;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Attributes\PropertyForMorph;
@@ -22,10 +22,10 @@ abstract class AirtableFieldResourceResponseDto extends Data implements Property
     #[MapOutputName('external_id')]
     public string $id;
 
-    #[WithTransformer(LengthyStringTransformer::class, length: 32)]
+    #[WithTransformer(ShortenLengthyStringTransformer::class, length: 32)]
     public string $name;
 
-    #[WithTransformer(LengthyStringTransformer::class, length: 256)]
+    #[WithTransformer(ShortenLengthyStringTransformer::class, length: 256)]
     public ?string $description;
 
     #[PropertyForMorph]

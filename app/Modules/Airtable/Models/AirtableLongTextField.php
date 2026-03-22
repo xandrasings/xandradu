@@ -16,7 +16,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableField $field
- *
  * @method static Builder<static>|AirtableLongTextField newModelQuery()
  * @method static Builder<static>|AirtableLongTextField newQuery()
  * @method static Builder<static>|AirtableLongTextField onlyTrashed()
@@ -28,7 +27,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableLongTextField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableLongTextField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableLongTextField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableLongTextField extends Model

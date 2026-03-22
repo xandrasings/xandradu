@@ -41,7 +41,9 @@ return [
         'bearer_token' => env('AIRTABLE_BEARER_TOKEN'),
         'workspace_id' => env('AIRTABLE_WORKSPACE_ID'),
         'bases_path' => env('AIRTABLE_BASES_PATH'),
+        'webhooks_path' => env('AIRTABLE_WEBHOOKS_PATH'),
         'tables_path' => env('AIRTABLE_TABLES_PATH'),
+        'notification_url' => env('AIRTABLE_NOTIFICATION_URL'),
     ],
 
     'notion' => [

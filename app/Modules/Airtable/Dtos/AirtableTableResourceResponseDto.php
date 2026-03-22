@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Dtos;
 
-use App\Transformers\LengthyStringTransformer;
+use App\Transformers\ShortenLengthyStringTransformer;
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\MapName;
@@ -19,10 +19,10 @@ class AirtableTableResourceResponseDto extends Data
     #[MapOutputName('external_id')]
     public string $id;
 
-    #[WithTransformer(LengthyStringTransformer::class, length: 32)]
+    #[WithTransformer(ShortenLengthyStringTransformer::class, length: 32)]
     public string $name;
 
-    #[WithTransformer(LengthyStringTransformer::class, length: 2048)]
+    #[WithTransformer(ShortenLengthyStringTransformer::class, length: 2048)]
     public ?string $description;
 
     #[DataCollectionOf(AirtableFieldResourceResponseDto::class)]

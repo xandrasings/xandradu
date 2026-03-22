@@ -21,7 +21,6 @@ use Illuminate\Support\Carbon;
  * @property-read Collection<int, AirtableSyncSourceFieldChoice> $choices
  * @property-read int|null $choices_count
  * @property-read AirtableField $field
- *
  * @method static Builder<static>|AirtableSyncSourceField newModelQuery()
  * @method static Builder<static>|AirtableSyncSourceField newQuery()
  * @method static Builder<static>|AirtableSyncSourceField onlyTrashed()
@@ -33,7 +32,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableSyncSourceField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableSyncSourceField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableSyncSourceField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableSyncSourceField extends Model

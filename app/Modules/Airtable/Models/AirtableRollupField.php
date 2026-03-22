@@ -18,7 +18,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableField $field
- *
  * @method static Builder<static>|AirtableRollupField newModelQuery()
  * @method static Builder<static>|AirtableRollupField newQuery()
  * @method static Builder<static>|AirtableRollupField onlyTrashed()
@@ -32,7 +31,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableRollupField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableRollupField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableRollupField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableRollupField extends Model

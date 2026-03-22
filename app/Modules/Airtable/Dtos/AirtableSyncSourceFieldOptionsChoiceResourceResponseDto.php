@@ -3,7 +3,7 @@
 namespace App\Modules\Airtable\Dtos;
 
 use App\Modules\Airtable\Enums\AirtableExtendedColorEnum;
-use App\Transformers\LengthyStringTransformer;
+use App\Transformers\ShortenLengthyStringTransformer;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Attributes\WithCast;
@@ -19,7 +19,7 @@ class AirtableSyncSourceFieldOptionsChoiceResourceResponseDto extends AirtableFi
     #[MapOutputName('external_id')]
     public string $id;
 
-    #[WithTransformer(LengthyStringTransformer::class, length: 64)]
+    #[WithTransformer(ShortenLengthyStringTransformer::class, length: 64)]
     public string $name;
 
     #[WithCast(EnumCast::class, type: AirtableExtendedColorEnum::class)]

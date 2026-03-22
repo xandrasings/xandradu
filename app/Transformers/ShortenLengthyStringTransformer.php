@@ -7,7 +7,7 @@ use Spatie\LaravelData\Support\DataProperty;
 use Spatie\LaravelData\Support\Transformation\TransformationContext;
 use Spatie\LaravelData\Transformers\Transformer;
 
-class LengthyStringTransformer implements Transformer
+class ShortenLengthyStringTransformer implements Transformer
 {
     protected string $length;
 

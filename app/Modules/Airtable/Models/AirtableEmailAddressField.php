@@ -16,7 +16,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableField $field
- *
  * @method static Builder<static>|AirtableEmailAddressField newModelQuery()
  * @method static Builder<static>|AirtableEmailAddressField newQuery()
  * @method static Builder<static>|AirtableEmailAddressField onlyTrashed()
@@ -28,7 +27,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableEmailAddressField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableEmailAddressField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableEmailAddressField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableEmailAddressField extends Model

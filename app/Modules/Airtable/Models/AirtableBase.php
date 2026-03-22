@@ -21,7 +21,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $deleted_at
  * @property-read Collection<int, AirtableTable> $tables
  * @property-read int|null $tables_count
- *
+ * @property-read Collection<int, AirtableWebhook> $webhooks
+ * @property-read int|null $webhooks_count
  * @method static Builder<static>|AirtableBase newModelQuery()
  * @method static Builder<static>|AirtableBase newQuery()
  * @method static Builder<static>|AirtableBase onlyTrashed()
@@ -35,7 +36,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableBase whereUpdatedAt($value)
  * @method static Builder<static>|AirtableBase withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableBase withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableBase extends Model
@@ -50,10 +50,16 @@ class AirtableBase extends Model
 
     protected array $cascadeDeletes = [
         'tables',
+        'webhooks',
     ];
 
     public function tables(): HasMany
     {
         return $this->hasMany(AirtableTable::class, 'base_id');
+    }
+
+    public function webhooks(): HasMany
+    {
+        return $this->hasMany(AirtableWebhook::class, 'base_id');
     }
 }

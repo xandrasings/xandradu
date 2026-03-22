@@ -18,7 +18,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableField $field
- *
  * @method static Builder<static>|AirtableCheckboxField newModelQuery()
  * @method static Builder<static>|AirtableCheckboxField newQuery()
  * @method static Builder<static>|AirtableCheckboxField onlyTrashed()
@@ -32,7 +31,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableCheckboxField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableCheckboxField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableCheckboxField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableCheckboxField extends Model

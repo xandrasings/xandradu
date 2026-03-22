@@ -29,7 +29,6 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $records_count
  * @property-read Collection<int, AirtableView> $views
  * @property-read int|null $views_count
- *
  * @method static Builder<static>|AirtableTable newModelQuery()
  * @method static Builder<static>|AirtableTable newQuery()
  * @method static Builder<static>|AirtableTable onlyTrashed()
@@ -45,7 +44,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableTable whereUpdatedAt($value)
  * @method static Builder<static>|AirtableTable withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableTable withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableTable extends Model

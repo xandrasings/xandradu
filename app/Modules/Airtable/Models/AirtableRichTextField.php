@@ -16,7 +16,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableField $field
- *
  * @method static Builder<static>|AirtableRichTextField newModelQuery()
  * @method static Builder<static>|AirtableRichTextField newQuery()
  * @method static Builder<static>|AirtableRichTextField onlyTrashed()
@@ -28,7 +27,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableRichTextField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableRichTextField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableRichTextField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableRichTextField extends Model

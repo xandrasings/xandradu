@@ -21,7 +21,6 @@ use Illuminate\Support\Carbon;
  * @property-read Collection<int, AirtableSelectionFieldChoice> $choices
  * @property-read int|null $choices_count
  * @property-read AirtableField $field
- *
  * @method static Builder<static>|AirtableSelectionField newModelQuery()
  * @method static Builder<static>|AirtableSelectionField newQuery()
  * @method static Builder<static>|AirtableSelectionField onlyTrashed()
@@ -33,7 +32,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableSelectionField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableSelectionField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableSelectionField withoutTrashed()
- *
  * @mixin Eloquent
  */
 class AirtableSelectionField extends Model
