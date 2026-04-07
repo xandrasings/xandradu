@@ -14,9 +14,8 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 class AirtableWebhookCreateResponseDto extends Data
 {
     #[MapOutputName('expires_at')]
-    #[WithCast(DateTimeInterfaceCast::class, format: DATE_ATOM)]
-
-    public ?DateTime $expirationDate;
+    #[WithCast(DateTimeInterfaceCast::class)]
+    public ?DateTime $expirationTime;
 
     #[MapOutputName('external_id')]
     public string $id;
