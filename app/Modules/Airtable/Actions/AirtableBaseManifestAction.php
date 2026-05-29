@@ -2,17 +2,19 @@
 
 namespace App\Modules\Airtable\Actions;
 
+use App\Modules\Airtable\Clients\AirtableClient;
+use App\Modules\Airtable\Dtos\AirtableBaseCreateRequestDto;
 use App\Modules\Airtable\Models\AirtableBase;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
 class AirtableBaseManifestAction
 {
-    protected AirtableBaseCreateAction $baseCreateAction;
+    protected AirtableClient $client;
 
     public function __construct()
     {
-        $this->baseCreateAction = app(AirtableBaseCreateAction::class);
+        $this->client = app(AirtableClient::class);
     }
 
     /**
@@ -22,16 +24,12 @@ class AirtableBaseManifestAction
     {
         Log::info('executing AirtableBaseManifestAction', ['base' => $base]);
 
-        switch ($base) {
-            case $base->trashed():
-                Log::warning('Unable to delete base - airtable lacks this public API functionality.', ['base' => $base]);
-                break;
-            case is_null($base->external_id):
-                $this->baseCreateAction->handle($base);
-                break;
-            default:
-                Log::warning('Unable to update base - airtable lacks this public API functionality.', ['base' => $base]);
-                break;
-        }
+        $baseCreateRequestDto = AirtableBaseCreateRequestDto::from($base);
+        $baseCreateResponseDto = $this->client->createBase($baseCreateRequestDto);
+
+        $base->update($baseCreateResponseDto->except('tables')->toArray());
+        Log::notice('updated AirtableBase with external_id', ['base' => $base, 'baseCreateResponseDto' => $baseCreateResponseDto]);
+
+        // TODO deal with tables attribute
     }
 }

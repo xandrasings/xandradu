@@ -94,4 +94,20 @@
 - returns
     - the target Model
 ### Create
+- purpose
+- name scheme
+- accepts
+- throws
+- returns
+### Express
+- purpose
+- name scheme
+- accepts
+- throws
+- returns
 ### Manifest
+- purpose
+- name scheme
+- accepts
+- throws
+- returns

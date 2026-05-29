@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableBaseAllSyncUpAction
 {
-    protected AirtableBaseManifestAction $baseManifestAction;
+    protected AirtableBaseExpressAction $baseExpressAction;
 
     public function __construct()
     {
-        $this->baseManifestAction = app(AirtableBaseManifestAction::class);
+        $this->baseExpressAction = app(AirtableBaseExpressAction::class);
     }
 
     /**
@@ -20,11 +20,11 @@ class AirtableBaseAllSyncUpAction
      */
     public function handle(): void
     {
-        Log::info('executing AirtableBaseSyncUpAllAction');
+        Log::info('executing AirtableBaseAllSyncUpAction');
 
         AirtableBase::withTrashed()->get()
             ->each(function (AirtableBase $base) {
-                $this->baseManifestAction->handle($base);
+                $this->baseExpressAction->handle($base);
             });
     }
 }
