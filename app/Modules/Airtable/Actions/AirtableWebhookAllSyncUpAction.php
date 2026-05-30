@@ -9,23 +9,29 @@ use Illuminate\Support\Facades\Log;
 
 class AirtableWebhookAllSyncUpAction
 {
-    protected AirtableWebhookManifestAction $webhookManifestAction;
+    protected AirtableWebhookCreateAction $webhookCreateAction;
+
+    protected AirtableWebhookRefreshAction $webhookRefreshAction;
 
     public function __construct()
     {
-        $this->webhookManifestAction = app(AirtableWebhookManifestAction::class);
+        $this->webhookCreateAction = app(AirtableWebhookCreateAction::class);
+        $this->webhookRefreshAction = app(AirtableWebhookRefreshAction::class);
     }
 
     /**
      * @throws Exception
      */
-    public function handle(): void
+    public function handle(AirtableBase $base): void
     {
-        Log::info('executing AirtableWebhookSyncUpAllAction');
+        Log::info('executing AirtableWebhookAllSyncUpAction');
 
-        AirtableWebhook::withTrashed()->get()
-            ->each(function (AirtableWebhook $webhook) {
-                $this->webhookManifestAction->handle($webhook);
+        if ($base->webhooks->isEmpty()) {
+            $this->webhookCreateAction->handle($base);
+        } else {
+            $base->webhooks->each(function (AirtableWebhook $webhook) {
+                $this->webhookRefreshAction->handle($webhook);
             });
+        }
     }
 }

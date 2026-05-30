@@ -11,7 +11,7 @@ use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class AirtableWebhookCreateResponseDto extends Data
+class AirtableWebhookResourceResponseDto extends Data
 {
     #[MapOutputName('external_id')]
     public string $id;
@@ -19,7 +19,4 @@ class AirtableWebhookCreateResponseDto extends Data
     #[MapOutputName('expires_at')]
     #[WithCast(DateTimeInterfaceCast::class, format: "Y-m-d\TH:i:s.u\Z")]
     public ?DateTime $expirationTime;
-
-    #[MapOutputName('encoded_mac_secret')]
-    public string $macSecretBase64;
 }

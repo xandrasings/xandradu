@@ -4,7 +4,7 @@ namespace App\Modules\Airtable\Actions;
 
 use App\Modules\Airtable\Clients\AirtableWebhookClient;
 use App\Modules\Airtable\Dtos\AirtableWebhookCreateRequestDto;
-use App\Modules\Airtable\Models\AirtableWebhook;
+use App\Modules\Airtable\Models\AirtableBase;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -20,13 +20,13 @@ class AirtableWebhookCreateAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableWebhook $webhook): void // TODO
+    public function handle(AirtableBase $base): void // TODO
     {
         Log::info('executing AirtableWebhookCreateAction'); // TODO , ['webhook' => $webhook]
 
-        $webhookCreateResponseDto = $this->client->createWebhook(new AirtableWebhookCreateRequestDto(), $webhook->base->external_id);
+        $webhookCreateResponseDto = $this->client->createWebhook(new AirtableWebhookCreateRequestDto, $base->external_id);
 
-        $webhook->update($webhookCreateResponseDto->toArray());
-        Log::notice('updated AirtableWebhook with external_id', ['webhook' => $webhook, 'webhookCreateResponseDto' => $webhookCreateResponseDto]);
+        $webhook = $base->webhooks()->create($webhookCreateResponseDto->toArray());
+        Log::notice('created AirtableWebhook', ['webhook' => $webhook, 'webhookCreateResponseDto' => $webhookCreateResponseDto]);
     }
 }

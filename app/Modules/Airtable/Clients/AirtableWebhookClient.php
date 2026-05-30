@@ -4,6 +4,8 @@ namespace App\Modules\Airtable\Clients;
 
 use App\Modules\Airtable\Dtos\AirtableWebhookCreateRequestDto;
 use App\Modules\Airtable\Dtos\AirtableWebhookCreateResponseDto;
+use App\Modules\Airtable\Dtos\AirtableWebhookRefreshResponseDto;
+use App\Modules\Airtable\Dtos\AirtableWebhookResourceListResponseDto;
 use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -29,6 +31,24 @@ class AirtableWebhookClient
     /**
      * @throws Exception
      */
+    public function listWebhooks(string $baseExternalId): AirtableWebhookResourceListResponseDto
+    {
+        $url = "$this->baseUrl$this->basesPath/$baseExternalId$this->webhooksPath";
+        $token = $this->bearerToken;
+
+        Log::notice("GET call to $url");
+        $response = Http::withToken($token)->get($url);
+
+        if ($response->failed()) {
+            throw new Exception("api to airtable endpoint $url failed with response {$response->getStatusCode()}", ['response body', $response->body()]);
+        }
+
+        return AirtableWebhookResourceListResponseDto::from($response->json());
+    }
+
+    /**
+     * @throws Exception
+     */
     public function createWebhook(AirtableWebhookCreateRequestDto $webhookCreateRequestDto, string $baseExternalId): AirtableWebhookCreateResponseDto
     {
         $url = "$this->baseUrl$this->basesPath/$baseExternalId$this->webhooksPath";
@@ -42,8 +62,29 @@ class AirtableWebhookClient
             throw new Exception("api to airtable endpoint $url failed with response {$response->getStatusCode()}");
         }
 
-        Log::notice('call results',['json'=>$response->json(), 'body'=>$response->body()]);
+        Log::notice('call results', ['json' => $response->json(), 'body' => $response->body()]);
 
         return AirtableWebhookCreateResponseDto::from($response->body());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function refreshWebhook(string $baseExternalId, string $webhookExternalId): AirtableWebhookRefreshResponseDto
+    {
+        $url = "$this->baseUrl$this->basesPath/$baseExternalId$this->webhooksPath/$webhookExternalId/refresh";
+        $token = $this->bearerToken;
+
+        Log::notice("POST call to $url", ['webhookExternalId' => $webhookExternalId, 'baseExternalId' => $baseExternalId]);
+        $response = Http::withToken($token)->post($url);
+
+        if ($response->failed()) {
+            Log::error("api to airtable endpoint $url failed with response {$response->getStatusCode()}", ['response body', $response->body()]);
+            throw new Exception("api to airtable endpoint $url failed with response {$response->getStatusCode()}");
+        }
+
+        Log::notice('call results', ['json' => $response->json(), 'body' => $response->body()]);
+
+        return AirtableWebhookRefreshResponseDto::from($response->body());
     }
 }

@@ -8,7 +8,8 @@ class AirtableWebhookSpecificationResourceRequestDto extends Data
 {
     public AirtableWebhookSpecificationOptionsResourceRequestDto $options;
 
-    public function __construct() {
-        $this->options = new AirtableWebhookSpecificationOptionsResourceRequestDto();
+    public function __construct()
+    {
+        $this->options = new AirtableWebhookSpecificationOptionsResourceRequestDto;
     }
 }

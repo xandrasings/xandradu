@@ -10,5 +10,5 @@ class AirtableWebhookSpecificationOptionsFiltersResourceRequestDto extends Data
         'tableMetadata',
         'tableFields',
         'tableData',
-        ];
+    ];
 }

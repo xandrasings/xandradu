@@ -2,7 +2,7 @@
 
 namespace App\Modules\Airtable\Jobs;
 
-use App\Modules\Airtable\Actions\AirtableWebhookAllSyncUpAction;
+use App\Modules\Airtable\Actions\AirtableWebhookAllSyncDownAction;
 use App\Modules\Airtable\Models\AirtableBase;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,17 +11,17 @@ use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class AirtableWebhookAllSyncUpJob implements ShouldQueue
+class AirtableWebhookAllSyncDownJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected AirtableWebhookAllSyncUpAction $webhookAllSyncUpAction;
+    protected AirtableWebhookAllSyncDownAction $webhookAllSyncDownAction;
 
     protected AirtableBase $base;
 
     public function __construct(AirtableBase $base)
     {
-        $this->webhookAllSyncUpAction = app(AirtableWebhookAllSyncUpAction::class);
+        $this->webhookAllSyncDownAction = app(AirtableWebhookAllSyncDownAction::class);
         $this->base = $base;
     }
 
@@ -30,6 +30,6 @@ class AirtableWebhookAllSyncUpJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $this->webhookAllSyncUpAction->handle($this->base);
+        $this->webhookAllSyncDownAction->handle($this->base);
     }
 }
