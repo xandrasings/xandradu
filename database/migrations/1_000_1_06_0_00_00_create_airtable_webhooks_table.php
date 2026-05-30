@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('airtable_webhooks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('base_id')->constrained(table: 'airtable_bases')->cascadeOnDelete();
-            $table->string('external_id', 32)->nullable();
+            $table->string('external_id', 32);
             $table->string('encoded_mac_secret', 2048)->nullable();
             $table->dateTime('expires_at')->nullable();
             $table->timestamps();
