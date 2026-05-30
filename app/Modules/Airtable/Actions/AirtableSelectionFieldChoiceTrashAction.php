@@ -13,7 +13,7 @@ class AirtableSelectionFieldChoiceTrashAction
      */
     public function handle(AirtableSelectionFieldChoice $selectionFieldChoice): void
     {
-        Log::info('executing AirtableSelectionFieldChoiceTrashAction');
+        Log::info('executing AirtableSelectionFieldChoiceTrashAction', ['selectionFieldChoice' => $selectionFieldChoice]);
 
         $selectionFieldChoice->rank = 0;
         $selectionFieldChoice->save();

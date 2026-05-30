@@ -23,7 +23,7 @@ class AirtableWebhookAllTrashAction
      */
     public function handle(Collection $webhooks): void
     {
-        Log::info('executing AirtableWebhookAllTrashAction');
+        Log::info('executing AirtableWebhookAllTrashAction', ['webhooks' => $webhooks]);
 
         $webhooks
             ->each(function (AirtableWebhook $webhook) {

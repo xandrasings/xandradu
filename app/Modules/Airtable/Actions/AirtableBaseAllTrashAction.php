@@ -23,7 +23,7 @@ class AirtableBaseAllTrashAction
      */
     public function handle(Collection $bases): void
     {
-        Log::info('executing AirtableBaseAllTrashAction');
+        Log::info('executing AirtableBaseAllTrashAction', ['bases' => $bases]);
 
         $bases
             ->each(function (AirtableBase $base) {

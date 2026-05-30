@@ -13,7 +13,7 @@ class AirtableUpdatedAtFieldFieldTrashAction
      */
     public function handle(AirtableUpdatedAtFieldField $updatedAtFieldField): void
     {
-        Log::info('executing AirtableUpdatedAtFieldFieldTrashAction');
+        Log::info('executing AirtableUpdatedAtFieldFieldTrashAction', ['updatedAtFieldField' => $updatedAtFieldField]);
 
         $updatedAtFieldField->delete();
         Log::notice('deleted AirtableUpdatedAtFieldField.', ['updatedAtFieldField' => $updatedAtFieldField]);

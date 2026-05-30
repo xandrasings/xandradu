@@ -23,7 +23,7 @@ class AirtableAiTextFieldPromptComponentAllTrashAction
      */
     public function handle(Collection $aiTextFieldPromptComponents): void
     {
-        Log::info('executing AirtableAiTextFieldPromptComponentAllTrashAction');
+        Log::info('executing AirtableAiTextFieldPromptComponentAllTrashAction', ['aiTextFieldPromptComponents' => $aiTextFieldPromptComponents]);
 
         $aiTextFieldPromptComponents
             ->each(function (AirtableAiTextFieldPromptComponent $aiTextFieldPromptComponent) {

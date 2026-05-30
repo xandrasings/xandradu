@@ -25,7 +25,7 @@ class AirtableWebhookAllSyncDownAction
      */
     public function handle(AirtableBase $base): void
     {
-        Log::info('executing AirtableWebhookAllSyncDownAction');
+        Log::info('executing AirtableWebhookAllSyncDownAction', ['base' => $base]);
 
         $webhookResourceListResponseDto = $this->client->listWebhooks($base->external_id);
 

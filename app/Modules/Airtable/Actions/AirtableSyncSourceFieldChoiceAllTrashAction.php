@@ -23,7 +23,7 @@ class AirtableSyncSourceFieldChoiceAllTrashAction
      */
     public function handle(Collection $syncSourceFieldChoices): void
     {
-        Log::info('executing AirtableSyncSourceFieldChoiceAllTrashAction');
+        Log::info('executing AirtableSyncSourceFieldChoiceAllTrashAction', ['syncSourceFieldChoices' => $syncSourceFieldChoices]);
 
         $syncSourceFieldChoices
             ->each(function (AirtableSyncSourceFieldChoice $syncSourceFieldChoice) {

@@ -30,7 +30,7 @@ class AirtableWebhookAllReconcileAction
      */
     public function handle(Collection $webhookResourceResponseDtos, AirtableBase $base): Collection
     {
-        Log::info('executing AirtableWebhookAllReconcileAction');
+        Log::info('executing AirtableWebhookAllReconcileAction', ['webhookResourceResponseDtos' => $webhookResourceResponseDtos, '$base' => $base]);
 
         $webhooks = $webhookResourceResponseDtos
             ->map(function (AirtableWebhookResourceResponseDto $webhookResourceResponseDto) use ($base) {

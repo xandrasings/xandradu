@@ -13,7 +13,7 @@ class AirtableViewTrashAction
      */
     public function handle(AirtableView $view): void
     {
-        Log::info('executing AirtableViewTrashAction');
+        Log::info('executing AirtableViewTrashAction', ['view' => $view]);
 
         $view->rank = 0;
         $view->save();

@@ -30,7 +30,7 @@ class AirtableFieldAllReconcileAction
      */
     public function handle(Collection $fieldResourceResponseDtos, AirtableTable $table): Collection
     {
-        Log::info('executing AirtableFieldAllReconcileAction');
+        Log::info('executing AirtableFieldAllReconcileAction', ['fieldResourceResponseDtos' => $fieldResourceResponseDtos, '$table' => $table]);
 
         $fieldResourceResponseDtos
             ->each(function (AirtableFieldResourceResponseDto $fieldResourceResponseDto, int $key) {

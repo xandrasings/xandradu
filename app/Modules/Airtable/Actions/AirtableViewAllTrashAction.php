@@ -23,7 +23,7 @@ class AirtableViewAllTrashAction
      */
     public function handle(Collection $views): void
     {
-        Log::info('executing AirtableViewAllTrashAction');
+        Log::info('executing AirtableViewAllTrashAction', ['views' => $views]);
 
         $views
             ->each(function (AirtableView $view) {

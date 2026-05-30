@@ -13,7 +13,7 @@ class AirtableAiTextFieldPromptComponentTrashAction
      */
     public function handle(AirtableAiTextFieldPromptComponent $aiTextFieldPromptComponent): void
     {
-        Log::info('executing AirtableAiTextFieldPromptComponentTrashAction');
+        Log::info('executing AirtableAiTextFieldPromptComponentTrashAction', ['aiTextFieldPromptComponent' => $aiTextFieldPromptComponent]);
 
         $aiTextFieldPromptComponent->rank = 0;
         $aiTextFieldPromptComponent->save();

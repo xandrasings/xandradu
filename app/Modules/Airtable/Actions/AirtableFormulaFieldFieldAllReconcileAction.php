@@ -30,7 +30,7 @@ class AirtableFormulaFieldFieldAllReconcileAction
      */
     public function handle(Collection $referencedFieldIdResourceResponseDtos, AirtableFormulaField $formulaField): Collection
     {
-        Log::info('executing AirtableFormulaFieldFieldAllReconcileAction');
+        Log::info('executing AirtableFormulaFieldFieldAllReconcileAction', ['referencedFieldIdResourceResponseDtos' => $referencedFieldIdResourceResponseDtos, '$formulaField' => $formulaField]);
 
         $formulaFieldFields = $referencedFieldIdResourceResponseDtos
             ->map(function (AirtableReferencedFieldIdResourceResponseDto $referencedFieldIdResourceResponseDto) use ($formulaField) {

@@ -20,9 +20,9 @@ class AirtableWebhookCreateAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableBase $base): void // TODO
+    public function handle(AirtableBase $base): void
     {
-        Log::info('executing AirtableWebhookCreateAction'); // TODO , ['webhook' => $webhook]
+        Log::info('executing AirtableWebhookCreateAction', ['base' => $base]);
 
         $webhookCreateResponseDto = $this->client->createWebhook(new AirtableWebhookCreateRequestDto, $base->external_id);
 

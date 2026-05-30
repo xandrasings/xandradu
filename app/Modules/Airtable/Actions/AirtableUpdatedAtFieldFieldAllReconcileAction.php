@@ -30,7 +30,7 @@ class AirtableUpdatedAtFieldFieldAllReconcileAction
      */
     public function handle(Collection $referencedFieldIdResourceResponseDtos, AirtableUpdatedAtField $updatedAtField): Collection
     {
-        Log::info('executing AirtableUpdatedAtFieldFieldAllReconcileAction');
+        Log::info('executing AirtableUpdatedAtFieldFieldAllReconcileAction', ['referencedFieldIdResourceResponseDtos' => $referencedFieldIdResourceResponseDtos, '$updatedAtField' => $updatedAtField]);
 
         $updatedAtFieldFields = $referencedFieldIdResourceResponseDtos
             ->map(function (AirtableReferencedFieldIdResourceResponseDto $referencedFieldIdResourceResponseDto) use ($updatedAtField) {

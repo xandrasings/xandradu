@@ -13,7 +13,7 @@ class AirtableFieldTrashAction
      */
     public function handle(AirtableField $field): void
     {
-        Log::info('executing AirtableFieldTrashAction');
+        Log::info('executing AirtableFieldTrashAction', ['field' => $field]);
 
         $field->rank = 0;
         $field->save();

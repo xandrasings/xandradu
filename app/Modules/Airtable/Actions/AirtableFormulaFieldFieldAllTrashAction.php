@@ -23,7 +23,7 @@ class AirtableFormulaFieldFieldAllTrashAction
      */
     public function handle(Collection $formulaFieldFields): void
     {
-        Log::info('executing AirtableFormulaFieldFieldAllTrashAction');
+        Log::info('executing AirtableFormulaFieldFieldAllTrashAction', ['formulaFieldFields' => $formulaFieldFields]);
 
         $formulaFieldFields
             ->each(function (AirtableFormulaFieldField $formulaFieldField) {

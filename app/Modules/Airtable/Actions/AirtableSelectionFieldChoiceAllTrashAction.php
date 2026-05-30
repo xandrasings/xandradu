@@ -23,7 +23,7 @@ class AirtableSelectionFieldChoiceAllTrashAction
      */
     public function handle(Collection $selectionFieldChoices): void
     {
-        Log::info('executing AirtableSelectionFieldChoiceAllTrashAction');
+        Log::info('executing AirtableSelectionFieldChoiceAllTrashAction', ['selectionFieldChoices' => $selectionFieldChoices]);
 
         $selectionFieldChoices
             ->each(function (AirtableSelectionFieldChoice $selectionFieldChoice) {

@@ -13,7 +13,7 @@ class AirtableRecordTrashAction
      */
     public function handle(AirtableRecord $record): void
     {
-        Log::info('executing AirtableRecordTrashAction');
+        Log::info('executing AirtableRecordTrashAction', ['record' => $record]);
 
         $record->delete();
         Log::notice('deleted AirtableRecord.', ['record' => $record]);

@@ -13,7 +13,7 @@ class AirtableSyncSourceFieldChoiceTrashAction
      */
     public function handle(AirtableSyncSourceFieldChoice $syncSourceFieldChoice): void
     {
-        Log::info('executing AirtableSyncSourceFieldChoiceTrashAction');
+        Log::info('executing AirtableSyncSourceFieldChoiceTrashAction', ['syncSourceFieldChoice' => $syncSourceFieldChoice]);
 
         $syncSourceFieldChoice->rank = 0;
         $syncSourceFieldChoice->save();

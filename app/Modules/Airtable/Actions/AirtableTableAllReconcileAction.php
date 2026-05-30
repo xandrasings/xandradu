@@ -30,7 +30,7 @@ class AirtableTableAllReconcileAction
      */
     public function handle(Collection $tableResourceResponseDtos, AirtableBase $base): Collection
     {
-        Log::info('executing AirtableTableAllReconcileAction');
+        Log::info('executing AirtableTableAllReconcileAction', ['base' => $base]);
 
         $tableResourceResponseDtos
             ->each(function (AirtableTableResourceResponseDto $tableResourceResponseDto, int $key) {

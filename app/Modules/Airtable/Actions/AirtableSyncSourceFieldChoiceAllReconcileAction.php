@@ -30,7 +30,7 @@ class AirtableSyncSourceFieldChoiceAllReconcileAction
      */
     public function handle(Collection $syncSourceFieldOptionsChoiceResourceResponseDtos, AirtableSyncSourceField $syncSourceField): Collection
     {
-        Log::info('executing AirtableSyncSourceFieldOptionsChoiceAllReconcileAction');
+        Log::info('executing AirtableSyncSourceFieldOptionsChoiceAllReconcileAction', ['syncSourceFieldOptionsChoiceResourceResponseDtos' => $syncSourceFieldOptionsChoiceResourceResponseDtos, '$syncSourceField' => $syncSourceField]);
 
         $syncSourceFieldOptionsChoiceResourceResponseDtos
             ->each(function (AirtableSyncSourceFieldOptionsChoiceResourceResponseDto $syncSourceFieldOptionsChoiceResourceResponseDto, int $key) {

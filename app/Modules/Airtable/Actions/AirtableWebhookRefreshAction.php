@@ -19,9 +19,9 @@ class AirtableWebhookRefreshAction
     /**
      * @throws Exception
      */
-    public function handle(AirtableWebhook $webhook): void // TODO
+    public function handle(AirtableWebhook $webhook): void
     {
-        Log::info('executing AirtableWebhookRefreshAction'); // TODO , ['webhook' => $webhook]
+        Log::info('executing AirtableWebhookRefreshAction', ['webhook' => $webhook]);
 
         $webhookRefreshResponseDto = $this->client->refreshWebhook($webhook->base->external_id, $webhook->external_id);
 

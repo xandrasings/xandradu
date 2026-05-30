@@ -13,7 +13,7 @@ class AirtableTableTrashAction
      */
     public function handle(AirtableTable $table): void
     {
-        Log::info('executing AirtableTableTrashAction');
+        Log::info('executing AirtableTableTrashAction', ['table' => $table]);
 
         $table->rank = 0;
         $table->save();

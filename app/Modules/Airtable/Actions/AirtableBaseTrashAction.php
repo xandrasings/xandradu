@@ -13,7 +13,7 @@ class AirtableBaseTrashAction
      */
     public function handle(AirtableBase $base): void
     {
-        Log::info('executing AirtableBaseTrashAction');
+        Log::info('executing AirtableBaseTrashAction', ['base' => $base]);
 
         $base->rank = 0;
         $base->save();

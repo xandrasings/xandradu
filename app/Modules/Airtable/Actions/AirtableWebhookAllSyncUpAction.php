@@ -24,7 +24,7 @@ class AirtableWebhookAllSyncUpAction
      */
     public function handle(AirtableBase $base): void
     {
-        Log::info('executing AirtableWebhookAllSyncUpAction');
+        Log::info('executing AirtableWebhookAllSyncUpAction', ['base' => $base]);
 
         if ($base->webhooks->isEmpty()) {
             $this->webhookCreateAction->handle($base);

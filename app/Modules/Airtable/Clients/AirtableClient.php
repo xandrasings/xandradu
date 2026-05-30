@@ -35,7 +35,7 @@ class AirtableClient
     /**
      * @throws Exception
      */
-    public function listBases(): AirtableBaseListResponseDto
+    public function listBases(): AirtableBaseListResponseDto // TODO resource name scheme?
     {
         $url = "$this->baseUrl$this->metaPath$this->basesPath";
         $token = $this->bearerToken;
@@ -65,7 +65,7 @@ class AirtableClient
             throw new Exception("api to airtable endpoint $url failed with response {$response->getStatusCode()}", ['response body', $response->body()]);
         }
 
-        Log::notice('call results',['json'=>$response->json(), 'body'=>$response->body()]);
+        Log::notice('call results', ['json' => $response->json(), 'body' => $response->body()]);
 
         return AirtableBaseCreateResponseDto::from($response->body());
     }

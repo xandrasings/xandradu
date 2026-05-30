@@ -13,7 +13,7 @@ class AirtableFormulaFieldFieldTrashAction
      */
     public function handle(AirtableFormulaFieldField $formulaFieldField): void
     {
-        Log::info('executing AirtableFormulaFieldFieldTrashAction');
+        Log::info('executing AirtableFormulaFieldFieldTrashAction', ['formulaFieldField' => $formulaFieldField]);
 
         $formulaFieldField->delete();
         Log::notice('deleted AirtableFormulaFieldField.', ['formulaFieldField' => $formulaFieldField]);

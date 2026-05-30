@@ -25,7 +25,7 @@ class AirtableRecordAllSyncDownAction
      */
     public function handle(AirtableTable $table): void
     {
-        Log::info('executing AirtableRecordAllSyncDownAction');
+        Log::info('executing AirtableRecordAllSyncDownAction', ['table' => $table]);
 
         $recordListResponseDto = $this->client->listRecords($table->base->external_id, $table->external_id);
 

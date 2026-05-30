@@ -23,7 +23,7 @@ class AirtableRecordAllTrashAction
      */
     public function handle(Collection $records): void
     {
-        Log::info('executing AirtableRecordAllTrashAction');
+        Log::info('executing AirtableRecordAllTrashAction', ['records' => $records]);
 
         $records
             ->each(function (AirtableRecord $record) {

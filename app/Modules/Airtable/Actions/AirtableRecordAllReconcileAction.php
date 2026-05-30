@@ -30,7 +30,7 @@ class AirtableRecordAllReconcileAction
      */
     public function handle(Collection $recordResourceResponseDtos, AirtableTable $table): Collection
     {
-        Log::info('executing AirtableRecordAllReconcileAction');
+        Log::info('executing AirtableRecordAllReconcileAction', ['recordResourceResponseDtos' => $recordResourceResponseDtos, '$table' => $table]);
 
         $records = $recordResourceResponseDtos
             ->map(function (AirtableRecordResourceResponseDto $recordResourceResponseDto) use ($table) {

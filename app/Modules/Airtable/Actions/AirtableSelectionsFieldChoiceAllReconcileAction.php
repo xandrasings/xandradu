@@ -30,7 +30,7 @@ class AirtableSelectionsFieldChoiceAllReconcileAction
      */
     public function handle(Collection $selectionsFieldOptionsChoiceResourceResponseDtos, AirtableSelectionsField $selectionsField): Collection
     {
-        Log::info('executing AirtableSelectionsFieldChoiceAllReconcileAction');
+        Log::info('executing AirtableSelectionsFieldChoiceAllReconcileAction', ['selectionsFieldOptionsChoiceResourceResponseDtos' => $selectionsFieldOptionsChoiceResourceResponseDtos, '$selectionsField' => $selectionsField]);
 
         $selectionsFieldOptionsChoiceResourceResponseDtos
             ->each(function (AirtableSelectionsFieldOptionsChoiceResourceResponseDto $selectionsFieldOptionsChoiceResourceResponseDto, int $key) {
