@@ -16,6 +16,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableField $field
+ *
  * @method static Builder<static>|AirtableCollaboratorsField newModelQuery()
  * @method static Builder<static>|AirtableCollaboratorsField newQuery()
  * @method static Builder<static>|AirtableCollaboratorsField onlyTrashed()
@@ -27,6 +28,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableCollaboratorsField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableCollaboratorsField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableCollaboratorsField withoutTrashed()
+ *
  * @mixin Eloquent
  */
 class AirtableCollaboratorsField extends Model

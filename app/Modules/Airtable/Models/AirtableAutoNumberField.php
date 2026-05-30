@@ -16,6 +16,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableField $field
+ *
  * @method static Builder<static>|AirtableAutoNumberField newModelQuery()
  * @method static Builder<static>|AirtableAutoNumberField newQuery()
  * @method static Builder<static>|AirtableAutoNumberField onlyTrashed()
@@ -27,6 +28,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableAutoNumberField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableAutoNumberField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableAutoNumberField withoutTrashed()
+ *
  * @mixin Eloquent
  */
 class AirtableAutoNumberField extends Model

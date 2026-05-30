@@ -23,6 +23,7 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $tables_count
  * @property-read Collection<int, AirtableWebhook> $webhooks
  * @property-read int|null $webhooks_count
+ *
  * @method static Builder<static>|AirtableBase newModelQuery()
  * @method static Builder<static>|AirtableBase newQuery()
  * @method static Builder<static>|AirtableBase onlyTrashed()
@@ -36,6 +37,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableBase whereUpdatedAt($value)
  * @method static Builder<static>|AirtableBase withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableBase withoutTrashed()
+ *
  * @mixin Eloquent
  */
 class AirtableBase extends Model

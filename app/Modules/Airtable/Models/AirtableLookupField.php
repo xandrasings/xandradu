@@ -18,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableField $field
+ *
  * @method static Builder<static>|AirtableLookupField newModelQuery()
  * @method static Builder<static>|AirtableLookupField newQuery()
  * @method static Builder<static>|AirtableLookupField onlyTrashed()
@@ -31,6 +32,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableLookupField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableLookupField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableLookupField withoutTrashed()
+ *
  * @mixin Eloquent
  */
 class AirtableLookupField extends Model

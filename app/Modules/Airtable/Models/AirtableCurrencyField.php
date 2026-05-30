@@ -18,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableField $field
+ *
  * @method static Builder<static>|AirtableCurrencyField newModelQuery()
  * @method static Builder<static>|AirtableCurrencyField newQuery()
  * @method static Builder<static>|AirtableCurrencyField onlyTrashed()
@@ -31,6 +32,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableCurrencyField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableCurrencyField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableCurrencyField withoutTrashed()
+ *
  * @mixin Eloquent
  */
 class AirtableCurrencyField extends Model

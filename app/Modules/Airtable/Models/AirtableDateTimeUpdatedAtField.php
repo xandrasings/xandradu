@@ -18,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableUpdatedAtField $field
+ *
  * @method static Builder<static>|AirtableDateTimeUpdatedAtField newModelQuery()
  * @method static Builder<static>|AirtableDateTimeUpdatedAtField newQuery()
  * @method static Builder<static>|AirtableDateTimeUpdatedAtField onlyTrashed()
@@ -31,6 +32,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableDateTimeUpdatedAtField whereUpdatedAtFieldId($value)
  * @method static Builder<static>|AirtableDateTimeUpdatedAtField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableDateTimeUpdatedAtField withoutTrashed()
+ *
  * @mixin Eloquent
  */
 class AirtableDateTimeUpdatedAtField extends Model

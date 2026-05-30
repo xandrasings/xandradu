@@ -19,6 +19,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read AirtableField $field
+ *
  * @method static Builder<static>|AirtableRatingField newModelQuery()
  * @method static Builder<static>|AirtableRatingField newQuery()
  * @method static Builder<static>|AirtableRatingField onlyTrashed()
@@ -33,6 +34,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|AirtableRatingField whereUpdatedAt($value)
  * @method static Builder<static>|AirtableRatingField withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|AirtableRatingField withoutTrashed()
+ *
  * @mixin Eloquent
  */
 class AirtableRatingField extends Model
