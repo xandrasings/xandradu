@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Airtable\Jobs\AirtableBaseAllSyncJob;
+use App\Modules\Airtable\Jobs\AirtableWebhookAllSyncJob;
 use App\Modules\Core\Jobs\HeartbeatJob;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
@@ -12,4 +13,6 @@ Artisan::command('inspire', function () {
 
 Schedule::job(new HeartbeatJob)->everyMinute();
 
-Schedule::job(new AirtableBaseAllSyncJob)->daily();
+Schedule::job(new AirtableBaseAllSyncJob)->monthly();
+
+Schedule::job(new AirtableWebhookAllSyncJob)->dailyAt("20:00");
