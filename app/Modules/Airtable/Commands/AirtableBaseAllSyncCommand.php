@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Modules\Airtable\Commands;
 
 use App\Modules\Airtable\Jobs\AirtableBaseAllSyncJob;
 use Illuminate\Console\Command;
@@ -13,14 +13,14 @@ class AirtableBaseAllSyncCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:airtable-base-all-sync-command';
+    protected $signature = 'airtable:base-all-sync-command';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Run job to sync Airtable';
+    protected $description = 'Run job to sync Airtable contents';
 
     /**
      * Execute the console command.
