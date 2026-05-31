@@ -13,6 +13,6 @@ Artisan::command('inspire', function () {
 
 Schedule::job(new HeartbeatJob)->everyMinute();
 
-Schedule::job(new AirtableBaseAllSyncJob)->monthly();
+Schedule::job(new AirtableBaseAllSyncJob)->dailyAt('07:00');
 
-Schedule::job(new AirtableWebhookAllSyncJob)->dailyAt("20:00");
+Schedule::job(new AirtableWebhookAllSyncJob)->dailyAt('08:00');

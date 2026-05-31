@@ -13,7 +13,7 @@ class AirtableBaseAllSyncCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'airtable:base-all-sync-command';
+    protected $signature = 'airtable:base-all-sync';
 
     /**
      * The console command description.
