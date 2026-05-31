@@ -3,7 +3,9 @@
 namespace App\Modules\Airtable\Jobs;
 
 use App\Modules\Airtable\Actions\AirtableRecordAllSyncDownAction;
+use App\Modules\Airtable\Middleware\AirtableApiRateLimited;
 use App\Modules\Airtable\Models\AirtableTable;
+use Carbon\CarbonInterface;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -31,5 +33,15 @@ class AirtableRecordAllSyncDownJob implements ShouldQueue
     public function handle(): void
     {
         $this->recordAllSyncDownAction->handle($this->table);
+    }
+
+    public function middleware(): array
+    {
+        return [new AirtableApiRateLimited($this->attempts())];
+    }
+
+    public function retryUntil(): CarbonInterface
+    {
+        return now()->addHours(2);
     }
 }

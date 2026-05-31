@@ -26,7 +26,7 @@ class AirtableBaseReconcileAction
 
         $base = $this->retrieveAction->handle($baseResourceResponseDto->id);
 
-        if(is_null($base)){
+        if (is_null($base)) {
             $base = AirtableBase::create($baseResourceResponseDto->toArray());
             Log::notice('created AirtableBase', ['base' => $base, 'baseResourceResponseDto' => $baseResourceResponseDto]);
 
