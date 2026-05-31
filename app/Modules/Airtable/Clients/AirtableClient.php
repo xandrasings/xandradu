@@ -65,8 +65,6 @@ class AirtableClient
             throw new Exception("api to airtable endpoint $url failed with response {$response->getStatusCode()}", ['response body', $response->body()]);
         }
 
-        Log::notice('call results', ['json' => $response->json(), 'body' => $response->body()]);
-
         return AirtableBaseCreateResponseDto::from($response->body());
     }
 
